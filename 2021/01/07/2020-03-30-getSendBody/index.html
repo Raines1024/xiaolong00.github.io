@@ -1,0 +1,488 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/comm/favicon.png">
+  <link rel="icon" type="image/png" href="/img/comm/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  <title>谁说 HTTP GET 就不能通过 Body 来发送数据呢？ - Hexo</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>小龙的跋涉</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="谁说 HTTP GET 就不能通过 Body 来发送数据呢？">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-01-07 09:28" pubdate>
+        2021年1月7日 上午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.7k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      23
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">谁说 HTTP GET 就不能通过 Body 来发送数据呢？</h1>
+            
+            <div class="markdown-body">
+              <h2 id="转载地址"><a href="#转载地址" class="headerlink" title="转载地址"></a>转载地址</h2><p><a target="_blank" rel="noopener" href="https://yanbin.blog/why-http-get-cannot-sent-data-with-reuqest-body/">https://yanbin.blog/why-http-get-cannot-sent-data-with-reuqest-body/</a><br>当我们被问及 HTTP 的 GET 与 POST 两种请求方式的区别的时候，很多答案是说 GET 的数据须通过 URL 以 Query Parameter 来传送，而 POST 可以通过请求体来发送数据，所以因 URL 的受限，往往 GET 无法发送太多的字符。这个回答好比在启用了 HTTPS 时，GET 请求 URL 中的参数仍然是明文传输的一样。<br>GET 果真不能通过 Request Body 来传送数据吗？非也。如此想法多半是因循着网页中 form 的 method 属性只有 get 与 post 两种而来。因为把 form 的 method 设置为 post, 表单数据会放在 body 中，而 method 为 get(默认值) 时, 提交时浏览器会把表单中的字符拼接到 action 的 URL 后作为 query parameter 传送。于是乎就有了这么一种假像：HTTP GET 必须通过 URL 的查询参数来发送数据。<br>其实 HTTP 规范并未规定说 GET 就不能发送 body 数据，在 RFC GET 中只是说  </p>
+<blockquote>
+<p>The GET method means retrieve whatever information (in the form of an entity) is identified by the Request-URI.</p>
+</blockquote>
+<p>只是说 GET 意味着通过 URI 来识别资源。</p>
+<p>我也是本着传统上对 GET 与 POST 区别的误解很多年，今天突然意识到 GET 应该可以使用 body, 况且 HTTP 本身是一个纯文本的协议。没有测试就没有 100% 的发言权，所以做了如下的测试。</p>
+<p>在 rfc7231 中对 GET 的说明明确了  </p>
+<blockquote>
+<p>A payload within a GET request message has no defined semantics;<br>sending a payload body on a GET request might cause some existing<br>implementations to reject the request.  </p>
+</blockquote>
+<h2 id="四种常见的-POST-提交数据方式"><a href="#四种常见的-POST-提交数据方式" class="headerlink" title="四种常见的 POST 提交数据方式"></a>四种常见的 POST 提交数据方式</h2><p>转载自： <a target="_blank" rel="noopener" href="https://imququ.com/post/four-ways-to-post-data-in-http.html">https://imququ.com/post/four-ways-to-post-data-in-http.html</a>  </p>
+<p>HTTP/1.1 协议规定的 HTTP 请求方法有 OPTIONS、GET、HEAD、POST、PUT、DELETE、TRACE、CONNECT 这几种。其中 POST 一般用来向服务端提交数据，本文主要讨论 POST 提交数据的几种方式。<br>我们知道，HTTP 协议是以 ASCII 码传输，建立在 TCP/IP 协议之上的应用层规范。规范把 HTTP 请求分为三个部分：请求行、请求头、消息主体。类似于下面这样：  </p>
+<figure class="highlight oxygene"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs oxygene">&lt;<span class="hljs-function"><span class="hljs-keyword">method</span>&gt; &lt;<span class="hljs-title">request</span>-<span class="hljs-title">URL</span>&gt; &lt;<span class="hljs-title">version</span>&gt;</span><br><span class="hljs-function">&lt;<span class="hljs-title">headers</span>&gt;</span><br><span class="hljs-function"></span><br><span class="hljs-function">&lt;<span class="hljs-title">entity</span>-<span class="hljs-title">body</span>&gt;</span><br></code></pre></td></tr></table></figure>
+<p>协议规定 POST 提交的数据必须放在消息主体（entity-body）中，但协议并没有规定数据必须使用什么编码方式。实际上，开发者完全可以自己决定消息主体的格式，只要最后发送的 HTTP 请求满足上面的格式就可以。<br>但是，数据发送出去，还要服务端解析成功才有意义。一般服务端语言如 php、python 等，以及它们的 framework，都内置了自动解析常见数据格式的功能。服务端通常是根据请求头（headers）中的 Content-Type 字段来获知请求中的消息主体是用何种方式编码，再对主体进行解析。所以说到 POST 提交数据方案，包含了 Content-Type 和消息主体编码方式两部分。下面就正式开始介绍它们。  </p>
+<ul>
+<li>application/x-www-form-urlencoded<br>这应该是最常见的 POST 提交数据的方式了。浏览器的原生 <form> 表单，如果不设置 enctype 属性，那么最终就会以 application/x-www-form-urlencoded 方式提交数据。请求类似于下面这样（无关的请求头在本文中都省略掉了）：  </li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs"><span class="hljs-keyword">POST</span> <span class="hljs-string">http://www.example.com</span> <span class="hljs-meta">HTTP/1.1</span><br><span class="hljs-attribute">Content-Type</span><span class="hljs-punctuation">: </span>application/x-www-form-urlencoded;charset=utf-8<br><br>title=test&amp;sub%5B%5D=1&amp;sub%5B%5D=2&amp;sub%5B%5D=3<br></code></pre></td></tr></table></figure>
+<p>首先，Content-Type 被指定为 application/x-www-form-urlencoded；其次，提交的数据按照 key1=val1&amp;key2=val2 的方式进行编码，key 和 val 都进行了 URL 转码。大部分服务端语言都对这种方式有很好的支持。   </p>
+<ul>
+<li>multipart/form-data<br>这又是一个常见的 POST 数据提交的方式。我们使用表单上传文件时，必须让 <form> 表单的 enctype 等于 multipart/form-data。   </li>
+<li>application/json<br>application/json 这个 Content-Type 作为响应头大家肯定不陌生。实际上，现在越来越多的人把它作为请求头，用来告诉服务端消息主体是序列化后的 JSON 字符串。由于 JSON 规范的流行，除了低版本 IE 之外的各大浏览器都原生支持 JSON.stringify，服务端语言也都有处理 JSON 的函数，使用 JSON 不会遇上什么麻烦。<br>JSON 格式支持比键值对复杂得多的结构化数据，这一点也很有用。<br>这种方案，可以方便的提交复杂的结构化数据，特别适合 RESTful 的接口。各大抓包工具如 Chrome 自带的开发者工具、Firebug、Fiddler，都会以树形结构展示 JSON 数据，非常友好。  </li>
+<li>text/xml<br>它是一种使用 HTTP 作为传输协议，XML 作为编码方式的远程调用规范。典型的 XML-RPC 请求是这样的：</li>
+</ul>
+<figure class="highlight dust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs dust"><span class="xml">POST http://www.example.com HTTP/1.1 </span><br><span class="xml">Content-Type: text/xml</span><br><br><span class="xml"><span class="hljs-meta">&lt;?xml version=&quot;1.0&quot;?&gt;</span></span><br><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">methodCall</span>&gt;</span></span><br><span class="xml">    <span class="hljs-tag">&lt;<span class="hljs-name">methodName</span>&gt;</span>examples.getStateName<span class="hljs-tag">&lt;/<span class="hljs-name">methodName</span>&gt;</span></span><br><span class="xml">    <span class="hljs-tag">&lt;<span class="hljs-name">params</span>&gt;</span></span><br><span class="xml">        <span class="hljs-tag">&lt;<span class="hljs-name">param</span>&gt;</span></span><br><span class="xml">            <span class="hljs-tag">&lt;<span class="hljs-name">value</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">i4</span>&gt;</span>41<span class="hljs-tag">&lt;/<span class="hljs-name">i4</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">value</span>&gt;</span></span><br><span class="xml">        <span class="hljs-tag">&lt;/<span class="hljs-name">param</span>&gt;</span></span><br><span class="xml">    <span class="hljs-tag">&lt;/<span class="hljs-name">params</span>&gt;</span></span><br><span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-name">methodCall</span>&gt;</span></span><br></code></pre></td></tr></table></figure>
+<h2 id="实战"><a href="#实战" class="headerlink" title="实战"></a>实战</h2><h3 id="在一个-Spring-Boot-Web-项目中创建的-GET-请求-API"><a href="#在一个-Spring-Boot-Web-项目中创建的-GET-请求-API" class="headerlink" title="在一个 Spring Boot Web 项目中创建的 GET 请求 API"></a>在一个 Spring Boot Web 项目中创建的 GET 请求 API</h3><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-meta">@RestController</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">DemoController</span> </span>&#123;<br>    <span class="hljs-meta">@RequestMapping</span>(value = <span class="hljs-string">&quot;/getSendBody&quot;</span>, method = RequestMethod.GET)<br>    <span class="hljs-keyword">public</span> <span class="hljs-built_in">String</span> <span class="hljs-function"><span class="hljs-title">getRequest</span>(<span class="hljs-params"><span class="hljs-meta">@RequestParam</span>(<span class="hljs-string">&quot;id&quot;</span>) <span class="hljs-built_in">String</span> id,<span class="hljs-meta">@RequestBody</span> Person body</span>)</span> &#123;<br>        <span class="hljs-keyword">return</span> id+<span class="hljs-string">&quot;|&quot;</span>+body.toString();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>Person实体类</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs less"><span class="hljs-variable">@Data</span><br><span class="hljs-variable">@ToString</span><br>public class Person implements Serializable &#123;<br>    <span class="hljs-selector-tag">private</span> <span class="hljs-selector-tag">Integer</span> <span class="hljs-selector-tag">age</span>;<br>    <span class="hljs-selector-tag">private</span> <span class="hljs-selector-tag">String</span> <span class="hljs-selector-tag">name</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h3 id="Postman测试"><a href="#Postman测试" class="headerlink" title="Postman测试"></a>Postman测试</h3><p>路径：<a target="_blank" rel="noopener" href="http://localhost:8080/getSendBody?id=123">http://localhost:8080/getSendBody?id=123</a><br>选择Postman中body，选择raw，选择JSON，输入如下：</p>
+<blockquote>
+<p>{“name”:”Raines”}</p>
+</blockquote>
+<p>返回</p>
+<blockquote>
+<p>123|Person(age=null, name=Raines)</p>
+</blockquote>
+<h3 id="curl测试"><a href="#curl测试" class="headerlink" title="curl测试"></a>curl测试</h3><p>命令行输入命令：  </p>
+<blockquote>
+<p>curl -v -X GET -H ‘Content-Type: application/json’ <a target="_blank" rel="noopener" href="http://127.0.0.1:8080/getSendBody/?id%5C=123">http://127.0.0.1:8080/getSendBody\?id\=123</a> -d ‘{“name”:”sd”}’</p>
+</blockquote>
+<p>返回   </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs plain">*   Trying 127.0.0.1...<br>* TCP_NODELAY set<br>* Connected to 127.0.0.1 (127.0.0.1) port 8080 (#0)<br>&gt; GET &#x2F;getSendBody?id&#x3D;123 HTTP&#x2F;1.1<br>&gt; Host: 127.0.0.1:8080<br>&gt; User-Agent: curl&#x2F;7.64.1<br>&gt; Accept: *&#x2F;*<br>&gt; Content-Type: application&#x2F;json<br>&gt; Content-Length: 13<br>&gt;<br>* upload completely sent off: 13 out of 13 bytes<br>&lt; HTTP&#x2F;1.1 200<br>&lt; Content-Type: text&#x2F;plain;charset&#x3D;UTF-8<br>&lt; Content-Length: 59<br>&lt; Date: Mon, 30 Mar 2020 02:48:51 GMT<br>&lt;<br>* Connection #0 to host 127.0.0.1 left intact<br>123|Person(age&#x3D;null, name&#x3D;sd)* Closing connection 0<br></code></pre></td></tr></table></figure>
+<h4 id="curl参数解释"><a href="#curl参数解释" class="headerlink" title="curl参数解释"></a>curl参数解释</h4><ul>
+<li>-v    可以看到详细的请求响应数据，请求头的 Content-Length 都是 13, 即 {“name”:”sd”} 的长度，它们确实是在 Request Body 中，服务端接送 GET 来的 body 数据也没有半点问题。  </li>
+<li>-X GET    指定 request 请求方式  </li>
+<li>-H    ‘key:value’指定请求头 header 键值对</li>
+<li>-d/–data <data>  HTTP POST方式传送数据</li>
+</ul>
+<h4 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h4><p>curl 命令, 需要用 -X 指定为 GET 请求，否则 curl 在使用 -d 发送 body 数据时自动切换为 POST 请求</p>
+<h2 id="HTTP-规范链接"><a href="#HTTP-规范链接" class="headerlink" title="HTTP 规范链接"></a>HTTP 规范链接</h2><p><a target="_blank" rel="noopener" href="https://tools.ietf.org/html/rfc7235">https://tools.ietf.org/html/rfc7235</a></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>虽然 GET 请求可以通过 body 发送数据，但并不推荐通过body传参。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/blog/">blog</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/01/07/2020-03-28-redisImplLock/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Redis实现分布式锁（Java语言实现）</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/01/07/2020-03-30-swapMoneyCount/">
+                        <span class="hidden-mobile">递归介绍(二）：换零钱方式的统计--树形递归</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://xiaolong00.github.io/about" target="_blank" rel="nofollow noopener"><span>Raines blog</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>use hexo Fluid theme</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

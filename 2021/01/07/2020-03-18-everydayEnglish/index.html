@@ -1,0 +1,586 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/comm/favicon.png">
+  <link rel="icon" type="image/png" href="/img/comm/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  <title>每日英语 - Hexo</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>小龙的跋涉</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="每日英语">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-01-07 09:28" pubdate>
+        2021年1月7日 上午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      3.3k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      44
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">每日英语</h1>
+            
+            <div class="markdown-body">
+              <h3 id="单词"><a href="#单词" class="headerlink" title="单词"></a>单词</h3><figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><code class="hljs scss">sticking  <span class="hljs-selector-attr">[&#x27;stɪkɪŋ]</span><br>    adj. 粘的；有粘性的<br>    v. 刺入；伸出；（非正式）使支付；粘住；坚持；（非正式）接受（stick 的现在分词）<br>budget  <span class="hljs-selector-attr">[ˈbʌdʒɪt]</span><br>    n. 预算，预算费<br>    vt. 安排，预定；把…编入预算<br>    vi. 编预算，做预算<br>    adj. 廉价的<br>seem  <span class="hljs-selector-attr">[siːm]</span><br>    vi. 似乎；像是；装作<br>    n. (Seem)人名；(英)西姆<br>blow  <span class="hljs-selector-attr">[bləʊ]</span><br>    v. （风）吹；吹奏；喘气；吹气；喘息；擤（鼻子）；熔化，烧断；炸开；泄露；突然离开；浪费（钱、机会）；（古）开花；（苍蝇）产卵于；（鲸鱼）喷水；把……搞糟；鸣（汽车喇叭）；吹制（玻璃）；把蛋黄和蛋清从蛋壳中吹出<br>    n. 吹；打击，猛击；挫折；强风；擤鼻子；（非正式）爵士乐演奏；（非正式）大麻；（炼钢用语）吹炼；（古）开花，开花期<br>    int. 哎呀（表示厌烦）<br>also  <span class="hljs-selector-attr">[ˈɔːlsəʊ]</span><br>    adv. 也；而且；同样<br>    conj. 并且；另外<br>    n. (Also)人名；(罗)阿尔索<br>when  <span class="hljs-selector-attr">[wen]</span><br>    adv. 什么时候；什么情况下；什么场合下；（用于时间的表达方式之后）在那时，其时；当时，当场<br>    pron. 什么时候；何时<br>    conj. 在……时候；在……之后；在任何……时候；一……就； 考虑到，既然；虽然，然而，可是<br>    n. 时间，时候；日期；场合<br>careful  <span class="hljs-selector-attr">[ˈkeəfl]</span><br>    adj. 仔细的，小心的<br>even  <span class="hljs-selector-attr">[&#x27;i:vən]</span><br>    adv. 甚至，即使；愈加，还；实际上<br>    adj. 平坦的；平稳的；相等的；均衡的；偶数的；同样大小的；平分的；平局的；镇静的<br>    v. 使平坦；使相等<br>    n. （诗、文）黄昏，傍晚<br>    n. (Even) （挪、美）埃旺（人名）<br>without  <span class="hljs-selector-attr">[wɪˈðaʊt]</span><br>    prep. 没有；不和……在一起；不带；在……外部<br>    adv. 没有，缺乏；在外面<br>    conj. 不那样的话；除非<br>    n. 外部，外面<br>emergency  <span class="hljs-selector-attr">[ɪˈmɜːdʒənsi]</span><br>    n. 紧急情况；突发事件；非常时刻<br>    adj. 紧急的；备用的<br>fund  <span class="hljs-selector-attr">[fʌnd]</span><br>    n. 基金；资金；存款<br>    vt. 投资；资助<br>    n. (Fund)人名；(德)丰德<br>unexpected  <span class="hljs-selector-attr">[ˌʌnɪkˈspektɪd]</span><br>    adj. 意外的，想不到的<br>expenses  <span class="hljs-selector-attr">[ɪk&#x27;spensɪs]</span><br>    n. 费用（expense的复数形式）；<span class="hljs-selector-attr">[会计]</span> 开支<br>    v. 向…收取费用；被花掉（expense的第三人称单数形式）<br>medical  <span class="hljs-selector-attr">[ˈmedɪkl]</span><br>    adj. 医学的；药的；内科的<br>    n. 医生；体格检查<br>working  <span class="hljs-selector-attr">[ˈwɜːkɪŋ]</span><br>    adj. 有工作的；从事普通工作的；工作上的；可行的；初步的；基本够用的；能运转的；（机器部件）操作的<br>    n. （机器、系统等的）运作；工作，干活；矿，作业区；班次；操纵；计算过程<br>    v. 工作；影响；受雇于；使卖力干活；争取（work 的现在分词）<br>    n. (Working) （美）沃金（人名）<br><br></code></pre></td></tr></table></figure>
+<h3 id="月光族该如何补救"><a href="#月光族该如何补救" class="headerlink" title="月光族该如何补救?"></a>月光族该如何补救?</h3><p>There are months when sticking to your budget seems very easy.<br>There are also months when you manage to blow your budget even when you have been careful with your money.<br>一年中有几个月，把生活成本控制在预算之内还是很容易的。<br>但还有几个月，即使你精打细算，最终还是超支了。  </p>
+<pre><code>(There are months when) sticking to (your budget seems very easy).   
+       有几个月            坚持         你的预算似乎很容易。
+manage to do sth.  成功地做到（了）某事，是有明确结果的。
+(There are also months when) (you manage to blow your budget) even when (you have been careful with your money).   
+    也有几个月                   你最终超出你的预算               即使          你用钱很小心</code></pre>
+<p>If you are working without an emergency fund, any unexpected expenses like a medical bill can blow your budget at the beginning of the month.<br>如果你没有一笔应急资金，任何意想不到的开支（比如医疗费用）都可能在月初就超出你的预算。   </p>
+<pre><code>If you are working (without an emergency fund), (any unexpected expenses) (like a medical bill) can (blow your budget) at (the beginning of the month).  
+如果你                 没有一笔应急资金    ，           任何意想不到的开支         比如医疗费用         可能    超出你的预算      在        月初。  </code></pre>
+<p>It is stressful to realize that you are out of money and still have several days or even weeks until you get paid again.<br>当你意识到自己已经没钱了，而且还有几天甚至几周的时间才能拿到工资时，你会感到压力重重。   </p>
+<pre><code>stressful  [ˈstresfl]    
+    adj. 紧张的；有压力的 
+realize  [ˈriːəlaɪz]   
+    vt. 实现；认识到；了解；将某物卖得，把(证券等)变成现钱；变卖 
+still  [stɪl]
+    adv. 仍然；更；静止地
+    adj. 静止的，不动的；寂静的，平静的；不起泡的
+    n. 寂静；剧照；蒸馏室
+    conj. 仍然；但是；尽管如此
+    vt. 蒸馏；使…静止；使…平静下来
+    vi. 静止；平静；蒸馏
+    n. (Still)人名；(英、芬、瑞典)斯蒂尔；(德)施蒂尔
+several  [ˈsevrəl]
+    adj. 几个的；各自的
+    pron. 几个；数个
+until  [ənˈtɪl]
+    conj. 到……时，直到……为止
+    prep. 到……时，直到……为止
+paid  [peɪd]
+    v. 支付；付清（pay 的过去式和过去分词）
+    adj. （工作）有薪酬的；（假期）带薪的；受雇用的；薪水（高或低）的
+    n. (Paid) （美）排德（人名）
+It is stressful to realize that (you are out of money) and still (have several days or even weeks) until (you get paid again).  
+ 这是有压力的        认识到          你没钱了                  仍然    有几个或者几周                     直到     你再次获得薪水。</code></pre>
+<p>If you have blown your budget, you need to reduce the amount of money that you spend each day.<br>如果你的预算已经超支了，你需要减少每天的开销。  </p>
+<pre><code>blown  [bləʊn]
+    adj. （非正式）配有涡轮增压器的
+    v. （风）吹（blow 的过去分词）
+need  [niːd]
+    v. 必须，需要；（表示应该或不得不做）有必要
+    n. 需要，必须； 特别需要，迫切要求；欲望；（食物、钱或生活来源的）短缺，缺乏；必需品；贫困（或困难）的处境
+reduce  [rɪˈdjuːs]
+    vt. 减少；降低；使处于；把…分解
+    vi. 减少；缩小；归纳为
+spend  [spend]
+    vt. 度过，消磨（时光）；花费；浪费；用尽
+    vi. 花钱；用尽，耗尽
+    n. 预算
+If you have (blown your budget), you need to (reduce the amount of money) that (you spend each day).   
+             花光你的预算           你需要       减少钱数                            你每日的花费</code></pre>
+<p>Depending on how tight your budget is, you may need to stop all spending completely.<br>这取决于你的预算有多紧张，有可能你需要完全停止所有支出。  </p>
+<pre><code>depending  [di&#39;pendiŋ]
+    v. 依赖；信任（depend的ing形式）
+how  [haʊ]
+    adv. 如何；多少；多么
+    n. 方法；方式
+    conj. 如何
+    n. (How)人名；(英)豪
+tight  [taɪt]
+    adj. 紧的；密封的；绷紧的；麻烦的；严厉的；没空的；吝啬的
+    adv. 紧紧地；彻底地
+    n. (Tight)人名；(英)泰特
+may  [meɪ]
+    aux. 可以，能够；可能，也许；祝，愿；会，能
+completely  [kəmˈpliːtli]
+    adv. 完全地，彻底地；完整地
+Depending on how tight your budget is, you may need to (stop all spending completely).  
+                                                          完成停止所有花费</code></pre>
+<p>You should bring your lunch from home and do everything you can to really reduce the amount that you spend on food.<br>你应该从家里带午餐，尽你所能来减少你在食物上的开支。  </p>
+<pre><code>everything  [ˈevriθɪŋ]
+    pron. 每件事物，（有关的）一切，万事；形势，情况；最重要的东西
+    n. (Everything) （印、美、澳）艾维辛（人名）
+really  [ˈriːəli]
+    adv. 实际上，事实上；真正地，真实地；真的吗？（表语气）
+do everything you can to do sth  尽你所能的去做,you can 是修饰everything的  
+You should (bring your lunch from home) and (do everything you can to) really (reduce the amount that you spend on food).  
+             从家里带来你的午餐                  尽你所能的去做                       减少你在食物上的花费。</code></pre>
+<p>It is important to think about necessities versus luxuries at this point. If it is a luxury, then you need to skip it for the rest of the month.<br>这时候考虑必需品和奢侈品是很重要的。如果是奢侈品，那么你需要在这个月剩下的时间里跳过它。  </p>
+<pre><code>important  [ɪmˈpɔːtnt]
+    adj. 重要的，重大的；有地位的；有权力的
+necessities  [nə&#39;sɛsəti]
+    n. 必需品（necessity的复数）
+versus  [ˈvɜːsəs]
+    prep. 对，对抗；与……相对，与……相比
+luxuries
+    n. 奢侈品（luxury的复数形式）
+point  [pɔɪnt]
+    n. 要点；得分；标点；[机] 尖端
+    vt. 指向；弄尖；加标点于
+    vi. 表明；指向
+    n. (Point)人名；(法)普安
+then  [ðen]
+    adv. 然后；那么；于是；当时；此外
+    n. (Then)人名；(德)特恩
+skip  [skɪp]
+    vi. 跳跃；跳绳；遗漏；跳读
+    vt. 跳过；遗漏
+    n. 跳跃；跳读
+    n. (Skip)人名；(英)斯基普
+rest  [rest]
+    v. （使）休息；（使）运动员暂时离队；（使）倚靠；被搁置；（遗体或尸体）安葬于；让（土地）休耕；（原告或被告）完成向法庭提出证据（或辩论）；归属于；保持不变
+    n. 休息；睡眠；静止；休止；休止符；（演说中的）停顿；（诗句中的）停顿；休息处；支架；剩余部分；其余的人（或物）；（器官或组织的）一小碎块；（网球）对打
+    n. (Rest) （美）雷斯特（人名）
+It is important to think about necessities versus luxuries at this point. If it is a luxury, then you need to skip it for the rest of the month.
+</code></pre>
+<p>You should even work on reducing the amount that you would normally spend on necessities. This can make a big difference in how long it takes you to recover from a financial mistake.<br>你甚至应该努力减少日常生活必需品的开支。这将会对你从财务错误中恢复过来的时间有很大的影响。  </p>
+<p>You may also want to consider selling some things to raise extra cash, taking on extra hours or picking up part-time work to cover the difference.</p>
+<p>你也可以考虑卖掉一些东西来筹集额外的资金，加班或者兼职来弥补差额。</p>
+<p>01 Should I Use a Credit Card?</p>
+<p>我应该用信用卡吗？</p>
+<p>This is a tricky situation. It is not a good idea to use a credit card, but if you are choosing between not eating at all for the rest of the month or using your credit card to buy groceries, then it is better to eat.</p>
+<p>这是一个棘手的情况。使用信用卡并不是一个好主意，但是如果你要在这个月剩下的时间里选择完全不吃东西或者用信用卡购买食品杂货，最好还是选择吃东西吧。</p>
+<p>However, this means that you are buying inexpensive items, you are not eating out and you are doing everything you can to reduce the amount that you are spending.</p>
+<p>然而，这意味着你买的是便宜的东西，没有在外面吃饭，你正在尽一切努力减少你的消费。</p>
+<p>You should not eat out on the credit card, and you should not be using it to go to the movies.</p>
+<p>你不应该在外面用信用卡吃饭，也不应该用信用卡去看电影。</p>
+<p>You do not need to wrack up big bills to travel for entertainment reasons when you are in this situation. You should also have a clear plan on how you are going to pay this off in the next month or two.</p>
+<p>当你处于这种情况时，你不需要为了娱乐去旅行而花费大笔的钱。你还应该有一个明确的计划，你将如何在接下来的一两个月内还清这笔钱。</p>
+<p>02 How Can I Stop This From Happening Again?</p>
+<p>我如何阻止这种事情再次发生呢？</p>
+<p>If you find yourself in a pattern where you consistently run out of money or blow your budget at the beginning of the month, you need to work to change your situation.</p>
+<p>如果你发现自己在月初总是没有钱或花光预算，你需要努力改变现状。</p>
+<p>If it is something like a car repair or an unexpected expense, then an emergency fund should solve your problem.</p>
+<p>如果是修车或意外开支，那么应急基金应该能解决你的问题。</p>
+<p>This allows you to cover the expense without affecting the rest of your budget.</p>
+<p>这允许你在不影响你其余部分预算的情况下支付费用。</p>
+<p>If you find this happening all of the time, you need to consider whether or not you have spending issues that you need to address.</p>
+<p>如果你发现这种情况经常发生，你需要考虑一下是否有需要解决的消费问题。</p>
+<p>You also need to consider if your budget is actually working. Often people who struggle this way do not have a budget at all.</p>
+<p>你还需要考虑你的预算是否真的有效。通常这样挣扎的人根本没有预算。</p>
+<p>03 Why Does My Budget Never Seem to Work?</p>
+<p>为什么我的预算似乎从来没有起作用？</p>
+<p>If you are having a hard time following your budget, you may be facing a few different issues.</p>
+<p>如果你在预算上有困难，你可能会面临一些不同的问题。</p>
+<p>The first thing you need to consider is if you set your budget categories at a realistic level.</p>
+<p>你需要考虑的第一件事是你是否把预算类别设置在一个现实的水平。</p>
+<p>When you first set up a budget you may arbitrarily decide that you can get by with spending only $100.00 a week on food.</p>
+<p>当你第一次制定预算时，你可能随随便便地就决定每周只花100美元买食物。</p>
+<p>However, if up to this point you have been spending $200.00 a week, this is a big difference and you may not be able to do it.</p>
+<p>然而，如果到目前为止你一周花了200美元，这是一个很大的差额，你可能无法做到。</p>
+<p>You may want to try cutting back gradually until you reach your goal.</p>
+<p>你可能想要尝试逐渐削减直到达到你的目标。</p>
+<p>You may also be having a hard time tracking your expenses. This means that you are overspending in certain categories like entertainment and then you are out of money when it is time to buy groceries.</p>
+<p>你可能也很难记录你的开销。这意味着你在某些领域如娱乐上花费过多，当你需要购买日用品的时候你就没钱了。</p>
+<p>Finally, you may have an income issue where you simply do not make enough to cover your necessities or your lifestyle.</p>
+<p>最后，你可能会有收入问题，你挣的钱不足以支付你的生活必需品或生活方式。</p>
+<p>You will need to cut back your spending and work on raising your income.</p>
+<p>你需要削减开支，还要努力提高你的收入。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/blog/">blog</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/01/07/2020-03-17-everydayEnglish/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">每日英语</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/01/07/2020-04-16-threadPark/">
+                        <span class="hidden-mobile">线程阻塞与唤醒</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://xiaolong00.github.io/about" target="_blank" rel="nofollow noopener"><span>Raines blog</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>use hexo Fluid theme</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>
