@@ -259,17 +259,20 @@ sadf
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/01/07/2020-12-22-springboot/">工作中的Spring</a>
+        <a href="/2021/01/07/2020-11-25-flink1/">Flink入门</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/01/07/2020-12-22-springboot/">
+        <a href="/2021/01/07/2020-11-25-flink1/">
           
           
             
           
-          Springboot项目上传大文件所需配置application.properties配置：spring.servlet.multipart.max-file-size=128MBspring.servlet.multipart.max-request-size=128MBspring.servlet.multipart.enabled=true
-
+          安装Flink安装查看 Java 的版本号，推荐使用 Java 8。java -version
+下载Flinkhttps://flink.apache.org/downloads.html
+解压tar -xzf *.tgz
+检查安装flink –version
+运行进入flink主目录，执行  ./bin/start-cluster.sh进入web页面查看：http://localhost:808
         </a>
       </p>
 
@@ -277,7 +280,7 @@ sadf
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-01-07 09:28" pubdate>
+            <time datetime="2021-01-07 09:30" pubdate>
               2021-01-07
             </time>
           </div>
@@ -301,16 +304,16 @@ sadf
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/01/07/2020-11-25-flink5/">Flink之Data transformation(转换)</a>
+        <a href="/2021/01/07/2020-03-18-everydayEnglish/">每日英语</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/01/07/2020-11-25-flink5/">
+        <a href="/2021/01/07/2020-03-18-everydayEnglish/">
           
           
             
           
-          Flink 应用程序结构1、Source: 数据源，Flink 在流处理和批处理上的 source 大概有 4 类：基于本地集合的 source、基于文件的 source、基于网络套接字的 source、自定义的 source。自定义的 source 常见的有 Apache kafka、Amazon Kinesis Streams、RabbitMQ、Twitter Streaming API、Ap
+          单词12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758sticking  [&#x27;stɪkɪŋ]    adj. 粘的；有粘性的    v. 刺入；伸出；（非正式）使支付；粘住；坚持；（非正式）接受（stick 的现在分词）bud
         </a>
       </p>
 
@@ -318,7 +321,7 @@ sadf
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-01-07 09:28" pubdate>
+            <time datetime="2021-01-07 09:30" pubdate>
               2021-01-07
             </time>
           </div>
@@ -342,20 +345,17 @@ sadf
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/01/07/2020-12-30-design4/">单例模式</a>
+        <a href="/2021/01/07/2020-03-26-recursion/">递归介绍(一）：线性递归、线性迭代、树形递归</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/01/07/2020-12-30-design4/">
+        <a href="/2021/01/07/2020-03-26-recursion/">
           
           
             
           
-          简介单例模式确保一个类只有一个实例，并提供一个全局访问点。
-实现
-使用”急切”创建实例（饿汉式）在JVM加载类时创建单例。保证了线程安全。
-
-12345678910public class Singleton &#123;    //静态初始化	private static Singleton uniqueInstance = new Singleton(); 	private Singleton
+          以计算阶乘(n!)为例解释线性递归和线性迭代线性递归思路：对于一个正整数n，n!就等于 n*(n-1)!代码：  
+1234567public static int fuctorial(int n)&#123;    if (n == 1)&#123;        return 1;    &#125;else &#123;        return n * fuctorial(n-1);  
         </a>
       </p>
 
@@ -363,7 +363,7 @@ sadf
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-01-07 09:28" pubdate>
+            <time datetime="2021-01-07 09:30" pubdate>
               2021-01-07
             </time>
           </div>
@@ -387,17 +387,21 @@ sadf
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/01/07/2020-12-30-JetBrainsActivate/">JetBrains 开发IDE 2020.4 以下版本最新全家桶系列产品激活破解方法</a>
+        <a href="/2021/01/07/2020-03-27-runtimeDataArea/">Java运行时数据区</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/01/07/2020-12-30-JetBrainsActivate/">
+        <a href="/2021/01/07/2020-03-27-runtimeDataArea/">
           
           
             
           
-          简介2020-11-26日更新通知，jetbrains-agent这个项目停止了！但现在zhile.io大佬提供了一个新的思路方法大家可以试下！感谢zhile.io大佬这么多年的辛苦工作，希望大家也能理解！  
-新的思路方法Jetbrains家的产品有一个很良心的地方，他会允许你试用30天（这个数字写死在代码里了）以评估是否你真的需要为它而付费。但很多时候会出现一种情况：IDE并不能按照我们实际的
+          Java运行时数据区线程共享的数据区方法区（非堆）–堆的一个逻辑部分存储已被虚拟机加载的类型信息、常量、静态变量、即时编译器编译后的代码缓存等。  
+
+运行时常量池运行时常量池是方法区的一部分，存放编译器生成的各种字面量与符号引用。  
+
+堆存放对象实例和数组可扩展：-Xmx和-Xms设定  
+线程隔离的数据区（线程私有的内存）Java虚拟机栈栈帧：局部变量表、操作数栈、动态连接、方法接口等。  
         </a>
       </p>
 
@@ -405,7 +409,7 @@ sadf
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-01-07 09:28" pubdate>
+            <time datetime="2021-01-07 09:30" pubdate>
               2021-01-07
             </time>
           </div>
@@ -429,22 +433,16 @@ sadf
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/01/07/2020-12-29-design3/">工厂模式</a>
+        <a href="/2021/01/07/2020-03-28-aopIntroduce/">AOP介绍</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/01/07/2020-12-29-design3/">
+        <a href="/2021/01/07/2020-03-28-aopIntroduce/">
           
           
             
           
-          简介工厂方法和抽象工厂模式可以将对象的创建封装起来，以便于得到更松耦合、更有弹性的设计。
-工厂方法模式定义了一个创建对象的接口，但由子类决定要实例化的类是哪一个。工厂方法让类把实例化推迟到子类。
-抽象工厂模式提供一个接口，用于创建相关或依赖对象的家族，而不需要明确指定具体类。
-要点
-所有的工厂都是用来封装对象的创建。  
-工厂方法使用继承：把对象的创建委托给子类，子类实现工厂方法来创建对象。
-抽象
+          基础AOP中 @Before @After @AfterThrowing @AfterReturning 的执行顺序123456789101112131415public Object invoke(Object proxy, Method method, Object[] args) throws Throwable &#123;   Object result;   try &#123;   
         </a>
       </p>
 
@@ -452,7 +450,7 @@ sadf
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-01-07 09:28" pubdate>
+            <time datetime="2021-01-07 09:30" pubdate>
               2021-01-07
             </time>
           </div>
@@ -476,16 +474,19 @@ sadf
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/01/07/2020-12-26-pyparallel/">python 多进程初探</a>
+        <a href="/2021/01/07/2020-03-28-redisImplIdmpotent/">Redis实现幂等性接口（Java语言实现）</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/01/07/2020-12-26-pyparallel/">
+        <a href="/2021/01/07/2020-03-28-redisImplIdmpotent/">
           
           
             
           
-          简介
+          基础准备幂等性接口概念任意多次执行所产生的影响均与一次执行的影响相同。按照这个含义，最终的含义就是：对数据库的影响只能是一次性的，不能重复处理。  
+如何保证其幂等性，通常有以下手段：
+数据库建立唯一性索引，可以保证最终插入数据库的只有一条数据    
+token机制，每次接口请求前先获取一个token，然后再下次请求的时候在请求的header体中加上这个token，后台进行验证，如果验证通过删除
         </a>
       </p>
 
@@ -493,7 +494,7 @@ sadf
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-01-07 09:28" pubdate>
+            <time datetime="2021-01-07 09:30" pubdate>
               2021-01-07
             </time>
           </div>
@@ -517,18 +518,19 @@ sadf
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/01/07/2020-12-23-design2/">装饰者模式</a>
+        <a href="/2021/01/07/2020-03-28-redisImplLock/">Redis实现分布式锁（Java语言实现）</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/01/07/2020-12-23-design2/">
+        <a href="/2021/01/07/2020-03-28-redisImplLock/">
           
           
             
           
-          简介装饰器模式（Decorator Pattern）允许向一个现有的对象添加新的功能，同时又不改变其结构。装饰者模式动态地将责任附加到对象上，若要扩展功能，装饰者提供了比继承更有弹性的替代方案。  
-类图Componet每个组件（ConcreteComponent）都可以单独使用，或者被装饰者包起来使用
-实现定义抽象组件（超类）123456789101112131415161718192021pa
+          基础准备Redis简介Redis是一个Key-Value存储系统。   
+Redis命令参考http://redisdoc.com  
+使用set函数的NX参数实现分布式锁对于java中想操作redis，好的方式是使用jedis，首先pom中引入依赖（使用Jedis 2.9.3版本）：   
+1234&lt;dependency&gt;    &lt;groupId&gt;redis.client
         </a>
       </p>
 
@@ -536,7 +538,7 @@ sadf
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-01-07 09:28" pubdate>
+            <time datetime="2021-01-07 09:30" pubdate>
               2021-01-07
             </time>
           </div>
@@ -560,17 +562,16 @@ sadf
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/01/07/hello-world/">Hello World</a>
+        <a href="/2021/01/07/2020-03-30-getSendBody/">谁说 HTTP GET 就不能通过 Body 来发送数据呢？</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/01/07/hello-world/">
+        <a href="/2021/01/07/2020-03-30-getSendBody/">
           
           
             
           
-          Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Quick
+          转载地址https://yanbin.blog/why-http-get-cannot-sent-data-with-reuqest-body/当我们被问及 HTTP 的 GET 与 POST 两种请求方式的区别的时候，很多答案是说 GET 的数据须通过 URL 以 Query Parameter 来传送，而 POST 可以通过请求体来发送数据，所以因 URL 的受限，往往 GET 无法发送太多的
         </a>
       </p>
 
@@ -578,11 +579,18 @@ Quick
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-01-07 09:28" pubdate>
+            <time datetime="2021-01-07 09:30" pubdate>
               2021-01-07
             </time>
           </div>
         
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/blog/">blog</a>
+            
+          </div>
         
         
       </div>

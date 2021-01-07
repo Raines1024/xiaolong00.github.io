@@ -228,7 +228,7 @@
             
             <div class="markdown-body">
               <h2 id="redis、nginx"><a href="#redis、nginx" class="headerlink" title="redis、nginx"></a>redis、nginx</h2><h2 id="redis-通配符-批量删除key"><a href="#redis-通配符-批量删除key" class="headerlink" title="redis 通配符 批量删除key"></a>redis 通配符 批量删除key</h2><h3 id="redis-模糊搜索前缀为FILE的key"><a href="#redis-模糊搜索前缀为FILE的key" class="headerlink" title="redis 模糊搜索前缀为FILE的key"></a>redis 模糊搜索前缀为FILE的key</h3><p>./redis-cli keys “FILE*”  </p>
-<h3 id="Redis-中-DEL指令支持多个key作为参数进行删除但不支持通配符，无法通过通配符批量删除key，不过我们可以借助Linux的管道和-xargs-指令来完成这个动作。"><a href="#Redis-中-DEL指令支持多个key作为参数进行删除但不支持通配符，无法通过通配符批量删除key，不过我们可以借助Linux的管道和-xargs-指令来完成这个动作。" class="headerlink" title="Redis 中 DEL指令支持多个key作为参数进行删除但不支持通配符，无法通过通配符批量删除key，不过我们可以借助Linux的管道和 xargs 指令来完成这个动作。"></a>Redis 中 DEL指令支持多个key作为参数进行删除但不支持通配符，无法通过通配符批量删除key，不过我们可以借助Linux的管道和 xargs 指令来完成这个动作。</h3><p>比如要删除所有以FILE开头的key 可以这样实现：<br>[root@dev_opayredis src]# ./redis-cli keys “FILE*”     </p>
+<h3 id="Redis-中-DEL指令支持多个key作为参数进行删除但不支持通配符，无法通过通配符批量删除key，不过我们可以借助Linux的管道和-xargs-指令来完成这个动作。"><a href="#Redis-中-DEL指令支持多个key作为参数进行删除但不支持通配符，无法通过通配符批量删除key，不过我们可以借助Linux的管道和-xargs-指令来完成这个动作。" class="headerlink" title="Redis 中 DEL指令支持多个key作为参数进行删除但不支持通配符，无法通过通配符批量删除key，不过我们可以借助Linux的管道和 xargs 指令来完成这个动作。"></a>Redis 中 DEL指令支持多个key作为参数进行删除但不支持通配符，无法通过通配符批量删除key，不过我们可以借助Linux的管道和 xargs 指令来完成这个动作。</h3><p>比如要<strong>删除</strong>所有以FILE开头的key 可以这样实现：<br>[root@dev_opayredis src]# ./redis-cli keys “FILE*”     </p>
 <ol>
 <li>“user1”    </li>
 <li>“user2”<br>[root@dev_opayredis src]# ./redis-cli keys “FILE*” | xargs ./redis-cli del<br>(integer) 2<br>删除成功   </li>

@@ -181,19 +181,19 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/01/07/2020-12-21-design1/">观察者模式</a>
+        <a href="/2021/01/07/2020-03-30-swapMoneyCount/">递归介绍(二）：换零钱方式的统计--树形递归</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/01/07/2020-12-21-design1/">
+        <a href="/2021/01/07/2020-03-30-swapMoneyCount/">
           
           
             
           
-          创建被观察对象抽象主题接口
-对观察者的操作。必需功能有观察者的注册、删除以及主题状态发生改变时通知观察者
+          实例：换零钱方式的统计问题给了50美分、25美分、10美分、5美分、1美分的硬币，将1美元换成零钱，一共有多少种不同方式？给定了任意数量的现金，写一个程序，计算出所有换零钱方式的种数。  
+思考过程假定我们所考虑的可用硬币类型种类排了某种顺序，于是有了下面的关系：将总数为a的现金换成n种硬币的不同方法的数目等于：  
 
-1234567891011121314151617181920212223242526package watch;/** * 主题 */public interface Subject &#123;    /**     * 注册观察者     * @param o 观察者     */  
+将现金数a换成除第一种硬币之外的所有其他硬币的不同方式数目，加上  将现金数a
         </a>
       </p>
 
@@ -201,7 +201,7 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-01-07 09:28" pubdate>
+            <time datetime="2021-01-07 09:30" pubdate>
               2021-01-07
             </time>
           </div>
@@ -225,17 +225,17 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/01/07/2020-12-09-mvnshade/">maven-shade-plugin入门指南</a>
+        <a href="/2021/01/07/2020-03-30-whyLearnComputerScience/"></a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/01/07/2020-12-09-mvnshade/">
+        <a href="/2021/01/07/2020-03-30-whyLearnComputerScience/">
           
           
             
           
-          有时候，需要将复杂的项目，包括各种xml文件属性文件， 类， jar等等打包到一个可以执行的jar包中， 然后用java -jar  xxx.jar 来运行项目，这样简单方便，特别是在编写一些测试工具时，尤为重要。但是经常发现打包后的项目无法启动， 其中一大类是您项目有问题， 但是这个相对好解决。通过 maven-shade-plugin 生成的jar包，它包含所有的依赖 jar 包。
-使用配置 
+          转载地址https://teachyourselfcs.com/中文翻译地址https://github.com/keithnull/TeachYourselfCS-CN/blob/master/TeachYourselfCS-CN.md  
+先挖个坑，以后再补
         </a>
       </p>
 
@@ -243,7 +243,46 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-01-07 09:28" pubdate>
+            <time datetime="2021-01-07 09:30" pubdate>
+              2021-01-07
+            </time>
+          </div>
+        
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/01/07/2020-04-02-Jenkins/">Jenkins使用</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/01/07/2020-04-02-Jenkins/">
+          
+          
+            
+          
+          Docker+Jenkins从入门到放弃
+手动安装dockerhttps://www.cnblogs.com/hellxz/p/11044012.html   
+Docker镜像源修改https://blog.csdn.net/jixuju/article/details/80158493  
+运行jenkins  
+
+123456789docker run \  -u root \  --rm 
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-01-07 09:30" pubdate>
               2021-01-07
             </time>
           </div>
@@ -267,16 +306,17 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/01/07/2020-12-03-flink/">搭建Flink-1.11.2集群</a>
+        <a href="/2021/01/07/2020-04-07-highFunction/">用高阶函数做抽象</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/01/07/2020-12-03-flink/">
+        <a href="/2021/01/07/2020-04-07-highFunction/">
           
           
             
           
-          以Flink on YARN模式启动把 Flink 运行在 YARN 上有两种方式，第一种方式是建立一个长期运行的 Flink YARN Session，然后向这个 Session 提交 Flink Job，多个任务同时运行时会共享资源。第二种方式是为单个任务启动一个 Flink 集群，这个任务会独占 Flink 集群的所有资源，任务结束即代表集群被回收。另外，Flink on YARN 模式需要
+          以计算数值为例定义过程计算数值定义过程，做某些行为的封装
+12345678910111213141516171819202122232425262728293031public class SumCount &#123;    /**     * 计算从a到b各整数之和     */    public int sumIntegers(int a, int b) &#123;        if 
         </a>
       </p>
 
@@ -284,7 +324,7 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-01-07 09:28" pubdate>
+            <time datetime="2021-01-07 09:30" pubdate>
               2021-01-07
             </time>
           </div>
@@ -308,19 +348,20 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/01/07/2020-12-02-bigdataBuild/">搭建Hadoop-2.9.2集群</a>
+        <a href="/2021/01/07/2020-04-16-threadPark/">线程阻塞与唤醒</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/01/07/2020-12-02-bigdataBuild/">
+        <a href="/2021/01/07/2020-04-16-threadPark/">
           
           
             
           
-          准备在安装 Hadoop 之前，请确认集群的每台机器上均安装 JDK，以及搭配环境变量。
-添加Java环境变量vim ~/.bash_profile  
+          线程阻塞与唤醒方式一（@Deprecated）早期JAVA采用suspend()、resume()对线程进行阻塞与唤醒，但这种方式产生死锁的风险很大，因为线程被挂起以后不会释放锁，可能与其他线程、主线程产生死锁，suspend 它会一直保持对锁的占有，一直到其他的线程调用resume方法，它才能继续向下执行。   
 
-123456789101112131415# Java EnvironmentJAVA_HOME=/usr/java/latestJRE_HOME=$&#123;JAVA_HOME&#125;/jreCLASSPATH=.:$&#123;JAV
+演示 suspend 方法为什么被弃用  
+
+1).独占：因为 suspend 
         </a>
       </p>
 
@@ -328,7 +369,7 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-01-07 09:28" pubdate>
+            <time datetime="2021-01-07 09:30" pubdate>
               2021-01-07
             </time>
           </div>
@@ -352,19 +393,16 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/01/07/2020-11-25-ssh/">两台CentOS服务器配置ssh无密码登陆</a>
+        <a href="/2021/01/07/2020-04-27-pythonIntroduction/">Python入门</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/01/07/2020-11-25-ssh/">
+        <a href="/2021/01/07/2020-04-27-pythonIntroduction/">
           
           
             
           
-          两台CentOS服务器配置ssh无密码登陆问题：两台CentOS服务器，IP分别为192.168.1.11、192.168.1.12（下面用11、12简称两台服务器），在12上配置test用户ssh无需要密码即可登陆11的root用户。解决
-用test用户登陆12
-ssh-keygen -t rsa生成密码
-在/home/test/.ssh下生成了密钥对：id_rsa为私钥，id_rsa.pub为
+          翻到以前阅读过的博客的一段话关于学习新知识我有一点心得体会想与你分享。我在学习新知识的时候会遵循一个5-20-2法则，用5分钟的时间了解这个新知识的特点、应用场景、要解决的问题；用20分钟理解它的主要设计原理、核心思想和思路；再花2个小时看关键的设计细节，尝试使用或者做一个demo。如果5分钟不能搞懂它要解决的问题，我就会放弃；20分钟没有理解它的设计思路，我也会放弃；2个小时还上不了手，我也会放
         </a>
       </p>
 
@@ -372,7 +410,7 @@ ssh-keygen -t rsa生成密码
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-01-07 09:28" pubdate>
+            <time datetime="2021-01-07 09:30" pubdate>
               2021-01-07
             </time>
           </div>
@@ -396,19 +434,19 @@ ssh-keygen -t rsa生成密码
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/01/07/2020-11-25-jdgui/">JD-GUI反编译工具使用</a>
+        <a href="/2021/01/07/2020-05-17-duansheliexpr/">《简叔的70个断舍离》片段</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/01/07/2020-11-25-jdgui/">
+        <a href="/2021/01/07/2020-05-17-duansheliexpr/">
           
           
             
           
-          从服务器下载jar到本地sz *.jar
-解压jar包解压jar包至文件夹
-下载JD-GUI反编译工具打开JD-GUI，选择.class文件后打开
+          简叔的70个断舍离
+成年人要懂得所有获得都有代价，所有失去也都有收获。  妄想一切好的都给我，一切坏的都离开我。这本身就有问题。  我不要焦虑，不要抑郁，不要贫困，不要疾病，不要死，不要有青春痘，夏天不要热，冬天不要冷，好东西不要贵，好女人不要太难追。  总是和大自然作对，大自然不折腾你折腾谁呢？  想进就进，想退就退。进退自如，不为所扰。
 
+1.只要开始张嘴说话，就要先肯定，然后委婉地提出意见。
         </a>
       </p>
 
@@ -416,7 +454,7 @@ ssh-keygen -t rsa生成密码
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-01-07 09:28" pubdate>
+            <time datetime="2021-01-07 09:30" pubdate>
               2021-01-07
             </time>
           </div>
@@ -440,20 +478,17 @@ ssh-keygen -t rsa生成密码
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/01/07/2020-11-25-hdfsShell/">HDFS常用Shell操作</a>
+        <a href="/2021/01/07/2020-06-02-everydayEnglish/">北欧教育模式，为何深受世界推崇？</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/01/07/2020-11-25-hdfsShell/">
+        <a href="/2021/01/07/2020-06-02-everydayEnglish/">
           
           
             
           
-          HDFS常用Shell操作列出文件目录：hadoop fs -ls 目录路径
-查看HDFS根目录下的目录：hadoop fs -ls /
-递归查看HDFS根目录下的目录：hadoop fs -lsr /
-
-在HDFS中创建文件夹：hadoop fs -mkdir 文件夹名称上传文件到HDFS中：hadoop fs -put 本地源路径 目标存放路径将本地系统中的一个log文件上传到di文件夹中：h
+          This Is How Scandinavia Got Great  斯堪的纳维亚国家崛起的原因长期以来，北欧在各项社会指标中名列前茅，被视为发达国家的标杆。有文章认为，北欧社会的幸福和平等，源于其全民化的教育制度。那么，这种教育制度有什么特征？它适合在其他地方推广吗？一起来听今天的讲解。   
+By David BrooksAlmost everybody admires the Nordic 
         </a>
       </p>
 
@@ -461,7 +496,7 @@ ssh-keygen -t rsa生成密码
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-01-07 09:28" pubdate>
+            <time datetime="2021-01-07 09:30" pubdate>
               2021-01-07
             </time>
           </div>
@@ -485,19 +520,23 @@ ssh-keygen -t rsa生成密码
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/01/07/2020-03-20-javaAsync/">《Java异步编程实战》读书笔记</a>
+        <a href="/2021/01/07/2020-06-03-shellLearn/">Shell使用</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/01/07/2020-03-20-javaAsync/">
+        <a href="/2021/01/07/2020-06-03-shellLearn/">
           
           
             
           
-          Java异步编程实战 (Java核心技术系列)
-使用Future确实可以获取异步任务的执行结果，但是获取其结果还是会阻塞调用线程的，并没有实现完全异步化处理，所以在JDK8中提供了CompletableFuture来弥补其缺点。CompletableFuture类允许以非阻塞方式和基于通知的方式处理结果，其通过设置回调函数方式，让主线程彻底解放出来，实现了实际意义上的异步处理。
+          zsh与bash切换
+zsh切换为bashchsh -s /bin/bash  
+bash切换为zshchsh -s /bin/zsh  
 
-在Java中实现
+查看当前运行的 Shellecho $SHELL  
+查看当前的 Linux 系统安装的所有 Shellcat /etc/shells
+Bash 变量env命令或printenv命令，可以显示所有环境变量。  
+12345678910111213141516
         </a>
       </p>
 
@@ -505,7 +544,7 @@ ssh-keygen -t rsa生成密码
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-01-07 09:28" pubdate>
+            <time datetime="2021-01-07 09:30" pubdate>
               2021-01-07
             </time>
           </div>
@@ -529,16 +568,17 @@ ssh-keygen -t rsa生成密码
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/01/07/2020-04-16-future/">基于JDK中的 Future 实现异步编程</a>
+        <a href="/2021/01/07/2020-06-06-sqlLearn/">Mysql必知必会</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/01/07/2020-04-16-future/">
+        <a href="/2021/01/07/2020-06-06-sqlLearn/">
           
           
             
           
-          使用FutureTask进行异步计算FutureTask介绍FutureTask代表了一个可被取消的异步计算任务，该类实现了Future接口，比如提供了启动和取消任务、查询任务是否完成、获取计算结果的接口。FutureTask任务的结果只有当任务完成后才能获取，并且只能通过get系列方法获取，当结果还没出来时，线程调用get系列方法会被阻塞。另外，一旦任务被执行完成，任务将不能重启，除非运行时使用
+          查询有两条或者两条以上的数据  –先分组，在统计select a.code from ldcode a where 1=1 GROUP BY a.code HAVING COUNT(a.code)&gt; 1
+为什么要用where 1=1？之前一直不太明白，sql语句里为什么要写where 1=1 巴拉巴拉巴拉提升某种执行效率？其实，1=1 是永恒成立的，意思无条件的，也就是说在SQL语句中有没有
         </a>
       </p>
 
@@ -546,49 +586,7 @@ ssh-keygen -t rsa生成密码
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-01-07 09:28" pubdate>
-              2021-01-07
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/blog/">blog</a>
-            
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/01/07/2020-04-13-tomatoWork/">《番茄工作法》读书笔记</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/01/07/2020-04-13-tomatoWork/">
-          
-          
-            
-          
-          番茄工作法  https://book.douban.com/subject/34820460/感悟困惑
-问题：根据番茄工作法中一个番茄时间不可分割的法则，倘若中间因为处理某些突发事件而中断的番茄钟，是不可把其当作一个番茄钟的。然而这样会导致预估的番茄钟与实际完成的番茄钟对应无法对应。譬如我预估整理笔记并发布到博客为两个番茄钟，然而第二个番茄钟即将完成之际因突发事件中断，且此时笔记已整理完成，然此
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-01-07 09:28" pubdate>
+            <time datetime="2021-01-07 09:30" pubdate>
               2021-01-07
             </time>
           </div>

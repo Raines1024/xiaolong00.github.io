@@ -181,19 +181,21 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/01/07/2020-03-30-swapMoneyCount/">递归介绍(二）：换零钱方式的统计--树形递归</a>
+        <a href="/2021/01/07/2020-01-09-springbootRedis/">SpringBoot中使用Redis</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/01/07/2020-03-30-swapMoneyCount/">
+        <a href="/2021/01/07/2020-01-09-springbootRedis/">
           
           
             
           
-          实例：换零钱方式的统计问题给了50美分、25美分、10美分、5美分、1美分的硬币，将1美元换成零钱，一共有多少种不同方式？给定了任意数量的现金，写一个程序，计算出所有换零钱方式的种数。  
-思考过程假定我们所考虑的可用硬币类型种类排了某种顺序，于是有了下面的关系：将总数为a的现金换成n种硬币的不同方法的数目等于：  
-
-将现金数a换成除第一种硬币之外的所有其他硬币的不同方式数目，加上  将现金数a
+          一、引入依赖： 
+    &lt;!-- redis --&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-boot-starter-data-redis&lt;/artifactId&gt;
+   
         </a>
       </p>
 
@@ -201,7 +203,7 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-01-07 09:28" pubdate>
+            <time datetime="2021-01-07 09:30" pubdate>
               2021-01-07
             </time>
           </div>
@@ -225,17 +227,18 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/01/07/2020-03-30-whyLearnComputerScience/"></a>
+        <a href="/2021/01/07/2020-01-09-timeComplex/">算法的时间复杂度</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/01/07/2020-03-30-whyLearnComputerScience/">
+        <a href="/2021/01/07/2020-01-09-timeComplex/">
           
           
             
           
-          转载地址https://teachyourselfcs.com/中文翻译地址https://github.com/keithnull/TeachYourselfCS-CN/blob/master/TeachYourselfCS-CN.md  
-先挖个坑，以后再补
+          基本概念算法的时间复杂度，用来度量算法的运行时间，记作: T(n) = O(f(n))。它表示随着 输入大小n 的增大，算法执行需要的时间的增长速度可以用 f(n) 来描述。
+那么当我们拿到算法的执行次数函数 T(n) 之后怎么得到算法的时间复杂度呢？
+1.我们知道常数项对函数的增长速度影响并不大，所以当 T(n) = c，c 为一个常数的时候，我们说这个算法的时间复杂度为 O(1)；如果 T(n
         </a>
       </p>
 
@@ -243,46 +246,7 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-01-07 09:28" pubdate>
-              2021-01-07
-            </time>
-          </div>
-        
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/01/07/2020-04-02-Jenkins/">Jenkins使用</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/01/07/2020-04-02-Jenkins/">
-          
-          
-            
-          
-          Docker+Jenkins从入门到放弃
-手动安装dockerhttps://www.cnblogs.com/hellxz/p/11044012.html   
-Docker镜像源修改https://blog.csdn.net/jixuju/article/details/80158493  
-运行jenkins  
-
-123456789docker run \  -u root \  --rm 
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-01-07 09:28" pubdate>
+            <time datetime="2021-01-07 09:30" pubdate>
               2021-01-07
             </time>
           </div>
@@ -306,17 +270,18 @@ Docker镜像源修改https://blog.csdn.net/jixuju/article/details/80158493
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/01/07/2020-04-07-highFunction/">用高阶函数做抽象</a>
+        <a href="/2021/01/07/2020-01-09-viewpoint/">观点</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/01/07/2020-04-07-highFunction/">
+        <a href="/2021/01/07/2020-01-09-viewpoint/">
           
           
             
           
-          以计算数值为例定义过程计算数值定义过程，做某些行为的封装
-12345678910111213141516171819202122232425262728293031public class SumCount &#123;    /**     * 计算从a到b各整数之和     */    public int sumIntegers(int a, int b) &#123;        if 
+          “996工作制”如何影响你自己的职业生涯？“996工作制”对个人的影响，包括如下几个方面：
+◇压缩了员工的业余时间——因此也就减少了你的自学【时间】
+　　人的精力是有限的，而不是能仅靠意志就能不断延续的。推荐一本书《精力管理》，精力的开销建议大家通过机会成本来严加控制，以求达到精力的价值最大化。（“机会成本”，通俗地说就是：把某项资源投入某种特定用途后所放弃的在其他用途中该项资源所能获得的利益。）
         </a>
       </p>
 
@@ -324,7 +289,107 @@ Docker镜像源修改https://blog.csdn.net/jixuju/article/details/80158493
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-01-07 09:28" pubdate>
+            <time datetime="2021-01-07 09:30" pubdate>
+              2021-01-07
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/blog/">blog</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/01/07/2020-01-10-manualMavenJar/">Maven手动导入jar包</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/01/07/2020-01-10-manualMavenJar/">
+          
+          
+            
+          
+          一、pom文件依赖配置
+   &lt;dependency&gt;
+        &lt;groupId&gt;com.oracle&lt;/groupId&gt;
+        &lt;artifactId&gt;ojdbc6&lt;/artifactId&gt;
+        &lt;version&gt;11.2.0.3&lt;/version&gt;
+    &lt;/depende
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-01-07 09:30" pubdate>
+              2021-01-07
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/blog/">blog</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/01/07/2020-01-10-sqlView/">Sql VIEW（视图）</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/01/07/2020-01-10-sqlView/">
+          
+          
+            
+          
+          什么是视图？
+在 SQL 中，视图是基于 SQL 语句的结果集的可视化的表。
+视图是虚拟的表，本身不包含数据，也就不能对其进行索引操作。
+对视图的操作和对普通表的操作一样。
+
+视图的优点：
+简化复杂的 SQL 操作，比如复杂的连接；
+只使用实际表的一部分数据；
+通过只给用户访问视图的权限，保证数据的安全性；
+更改数据格式和表示。
+
+视图的写法eg：
+CREATE VIEW myview AS
+SE
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-01-07 09:30" pubdate>
               2021-01-07
             </time>
           </div>
@@ -360,7 +425,7 @@ Docker镜像源修改https://blog.csdn.net/jixuju/article/details/80158493
           基本资料
 姓名：刘晓龙 
 性别：男  
-电子邮箱：&#114;&#x75;&#121;&#x69;&#108;&#x69;&#117;&#x63;&#x68;&#105;&#108;&#x64;&#64;&#x67;&#109;&#x61;&#105;&#108;&#46;&#x63;&#111;&#x6d;
+电子邮箱：&#x72;&#117;&#x79;&#105;&#x6c;&#x69;&#x75;&#x63;&#x68;&#105;&#x6c;&#x64;&#64;&#x67;&#109;&#x61;&#x69;&#108;&#46;&#x63;&#x6f;&#x6d;
 
 技能
 非常熟练使用Java编程语言，IntelliJ IDEA工具，深入理解OOP编程
@@ -371,7 +436,7 @@ Docker镜像源修改https://blog.csdn.net/jixuju/article/details/80158493
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-01-07 09:28" pubdate>
+            <time datetime="2021-01-07 09:30" pubdate>
               2021-01-07
             </time>
           </div>
@@ -395,19 +460,22 @@ Docker镜像源修改https://blog.csdn.net/jixuju/article/details/80158493
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/01/07/2020-01-01-booksPlan1/">1月阅读计划</a>
+        <a href="/2021/01/07/2020-01-17-classRelation/">IDEA查看类关系图</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/01/07/2020-01-01-booksPlan1/">
+        <a href="/2021/01/07/2020-01-17-classRelation/">
           
           
             
           
-          也就突然觉得，把阅读计划记录下来，不至于追忆往事，只剩唏嘘，对已有益，对人无害，利大于弊。
-新年新气象，阅读需要立个flag：除了某本书不值得再读下去，否则一本书的再次阅读的时间间隔不要超过3天；不同时阅读超过3本书（不包括相似性及高的技术性书籍）。
-已完成《软技能：代码之外的生存指南》《我们内心的冲突》医生最想最想让你做的事有钱人和你想的不一样预读书籍：《HeadFirst设计模式》
-《反脆弱》
+          idea-mac-查看类关系图
+看继承关系
+     快捷键 control + h查看hierarchy,只能查看向上向下继承关系，而不能看实现了哪些接口。
+     右键选择Diagrams（也可以使用快捷键command+alt+u，更快捷），然后显示
+
+看接口的实现关系
+     command + alt + B会显示出跟这个接口有关系的类。 然后加command+all，鼠标弄开，然后
         </a>
       </p>
 
@@ -415,7 +483,7 @@ Docker镜像源修改https://blog.csdn.net/jixuju/article/details/80158493
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-01-07 09:28" pubdate>
+            <time datetime="2021-01-07 09:30" pubdate>
               2021-01-07
             </time>
           </div>
@@ -439,21 +507,23 @@ Docker镜像源修改https://blog.csdn.net/jixuju/article/details/80158493
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/01/07/2020-03-08-spark/">Spark环境搭建及helloCount</a>
+        <a href="/2021/01/07/2020-01-18-heartClash/">《我们内心的冲突》读书笔记</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/01/07/2020-03-08-spark/">
+        <a href="/2021/01/07/2020-01-18-heartClash/">
           
           
             
           
-          环境centos查看centos版本rpm -q centos-release  
-更换centos默认镜像库163链接[http://mirrors.163.com/.help/centos.html]  
+          冲突特征
+典型特征，其中之一就是，会产生自怨自怜的想法，总感觉自己“很弱小”“很无助”“很卑微”“很可怜”“很软弱”。
 
-首先备份/etc/yum.repos.d/CentOS-Base.repo  
+第二个特征就是理所应当地认为自己不如别人。他会觉得所有人都比他优秀，比他有魅力，比他聪明，比他素质高，比他有价值。
 
-mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d
+这类人的第三个典型特征，也是他讨好别人的一个体现，就是他会有意识地用别人对他的态度，来定义自己的价值。
+
+他们会无意识地通过突出一种倾向，而将其他与之相矛盾的倾
         </a>
       </p>
 
@@ -461,7 +531,7 @@ mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-01-07 09:28" pubdate>
+            <time datetime="2021-01-07 09:30" pubdate>
               2021-01-07
             </time>
           </div>
@@ -485,22 +555,16 @@ mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/01/07/2020-03-07-memoryCount/">Java中对象占用内存大小计算</a>
+        <a href="/2021/01/07/2020-01-20-javaOfferComeon/">《Offer来了：Java面试核心知识点精讲（原理篇）》读书笔记</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/01/07/2020-03-07-memoryCount/">
+        <a href="/2021/01/07/2020-01-20-javaOfferComeon/">
           
           
             
           
-          回顾byte与bit1个字节占8位bit：位，比特。信息的最小单位，二进制数中的一个位数(二进制位)，其值为“0”或“1”；byte: 字节。计算机文件大小的基本计算单位
-原码：正数本身，负数，正数对应的二进制最高位为1(负)。  
-反码：正数本身，负数，符号位不变，其余各位取反。  
-补码：正数本身，负数：反码+1。  
-0的反码、补码都为零。  
-
-注意:Java中的char占两个字节，而c语
+          JVMJVM的运行机制多线程JVM的内存区域JVM的运行时内存垃圾回收与算法Java中的4种引用类型分代收集算法和分区收集算法垃圾收集器Java网络编程模型JVM的类加载机制Java基础集合异常分类及处理反射机制注解内部类泛型序列化Java并发编程Java线程的创建方式线程池的工作原理5种常用的线程池线程的生命周期线程的基本方法Java中的锁线程上下文切换Java阻塞队列Java并发关键字多线程如
         </a>
       </p>
 
@@ -508,7 +572,7 @@ mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-01-07 09:28" pubdate>
+            <time datetime="2021-01-07 09:30" pubdate>
               2021-01-07
             </time>
           </div>
@@ -532,22 +596,16 @@ mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/01/07/2020-03-06-computerCount/">计算机进制计算</a>
+        <a href="/2021/01/07/2020-01-20-scalaStarted/">Scala入门</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/01/07/2020-03-06-computerCount/">
+        <a href="/2021/01/07/2020-01-20-scalaStarted/">
           
           
             
           
-          Java基本数据类型Java语言提供了八种基本类型。六种数字类型（四个整数型，两个浮点型），一种字符类型，还有一种布尔型。  
-byte：
-byte 数据类型是8位、有符号的，以二进制补码表示的整数；  
-最小值是 -128（-2^7）；  
-最大值是 127（2^7-1）；  
-默认值是 0；  
-byte 类型用在大型数组中节约空间，主要代替整数，因为 byte 变量占用的空间只有 int 类
+          
         </a>
       </p>
 
@@ -555,62 +613,7 @@ byte 类型用在大型数组中节约空间，主要代替整数，因为 byte 
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-01-07 09:28" pubdate>
-              2021-01-07
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/blog/">blog</a>
-            
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/01/07/2020-03-04-dockerLearn/">docker入门（一）</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/01/07/2020-03-04-dockerLearn/">
-          
-          
-            
-          
-          安装docker
-官网步骤安装  
-yum安装yum install docker  
-
-
-启动systemctl start docker  
-查看安装的docker版本docker version  
-
-
-https://www.cnblogs.com/hellxz/p/11044012.html
-
-springboot初使用目录结构.
-├── pom.xml
-└── src
-    └── 
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-01-07 09:28" pubdate>
+            <time datetime="2021-01-07 09:30" pubdate>
               2021-01-07
             </time>
           </div>
