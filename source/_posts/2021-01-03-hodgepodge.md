@@ -13,7 +13,7 @@ tags: 工作
 ### redis 模糊搜索前缀为FILE的key
 ./redis-cli keys "FILE*"  
 ### Redis 中 DEL指令支持多个key作为参数进行删除但不支持通配符，无法通过通配符批量删除key，不过我们可以借助Linux的管道和 xargs 指令来完成这个动作。
-比如要删除所有以FILE开头的key 可以这样实现：    
+比如要**删除**所有以FILE开头的key 可以这样实现：    
 [root@dev_opayredis src]# ./redis-cli keys "FILE*"     
 1) "user1"    
 2) "user2"      
