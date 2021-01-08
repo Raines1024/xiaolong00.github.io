@@ -181,16 +181,19 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/01/08/2020-06-07-k8s/">kubernetes入门实战</a>
+        <a href="/2021/01/08/2020-11-25-jdgui/">JD-GUI反编译工具使用</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/01/08/2020-06-07-k8s/">
+        <a href="/2021/01/08/2020-11-25-jdgui/">
           
           
             
           
-          docker回顾创建一个简单的Node.js应用123456789101112const http = require(&#x27;http&#x27;);const os = require(&#x27;os&#x27;);console.log(&quot;Kubia server starting...&quot;);var handler = function(request,respon
+          从服务器下载jar到本地sz *.jar
+解压jar包解压jar包至文件夹
+下载JD-GUI反编译工具打开JD-GUI，选择.class文件后打开
+
         </a>
       </p>
 
@@ -198,7 +201,7 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-01-08 01:38" pubdate>
+            <time datetime="2021-01-08 01:59" pubdate>
               2021-01-08
             </time>
           </div>
@@ -222,17 +225,19 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/01/08/2020-06-06-sqlLearn/">Mysql必知必会</a>
+        <a href="/2021/01/08/2020-11-25-ssh/">两台CentOS服务器配置ssh无密码登陆</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/01/08/2020-06-06-sqlLearn/">
+        <a href="/2021/01/08/2020-11-25-ssh/">
           
           
             
           
-          查询有两条或者两条以上的数据  –先分组，在统计select a.code from ldcode a where 1=1 GROUP BY a.code HAVING COUNT(a.code)&gt; 1
-为什么要用where 1=1？之前一直不太明白，sql语句里为什么要写where 1=1 巴拉巴拉巴拉提升某种执行效率？其实，1=1 是永恒成立的，意思无条件的，也就是说在SQL语句中有没有
+          两台CentOS服务器配置ssh无密码登陆问题：两台CentOS服务器，IP分别为192.168.1.11、192.168.1.12（下面用11、12简称两台服务器），在12上配置test用户ssh无需要密码即可登陆11的root用户。解决
+用test用户登陆12
+ssh-keygen -t rsa生成密码
+在/home/test/.ssh下生成了密钥对：id_rsa为私钥，id_rsa.pub为
         </a>
       </p>
 
@@ -240,7 +245,7 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-01-08 01:38" pubdate>
+            <time datetime="2021-01-08 01:59" pubdate>
               2021-01-08
             </time>
           </div>
@@ -264,23 +269,19 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/01/08/2020-06-03-shellLearn/">Shell使用</a>
+        <a href="/2021/01/08/2020-12-02-bigdataBuild/">搭建Hadoop-2.9.2集群</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/01/08/2020-06-03-shellLearn/">
+        <a href="/2021/01/08/2020-12-02-bigdataBuild/">
           
           
             
           
-          zsh与bash切换
-zsh切换为bashchsh -s /bin/bash  
-bash切换为zshchsh -s /bin/zsh  
+          准备在安装 Hadoop 之前，请确认集群的每台机器上均安装 JDK，以及搭配环境变量。
+添加Java环境变量vim ~/.bash_profile  
 
-查看当前运行的 Shellecho $SHELL  
-查看当前的 Linux 系统安装的所有 Shellcat /etc/shells
-Bash 变量env命令或printenv命令，可以显示所有环境变量。  
-12345678910111213141516
+123456789101112131415# Java EnvironmentJAVA_HOME=/usr/java/latestJRE_HOME=$&#123;JAVA_HOME&#125;/jreCLASSPATH=.:$&#123;JAV
         </a>
       </p>
 
@@ -288,7 +289,7 @@ Bash 变量env命令或printenv命令，可以显示所有环境变量。
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-01-08 01:38" pubdate>
+            <time datetime="2021-01-08 01:59" pubdate>
               2021-01-08
             </time>
           </div>
@@ -312,17 +313,16 @@ Bash 变量env命令或printenv命令，可以显示所有环境变量。
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/01/08/2020-06-02-everydayEnglish/">北欧教育模式，为何深受世界推崇？</a>
+        <a href="/2021/01/08/2020-12-03-flink/">搭建Flink-1.11.2集群</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/01/08/2020-06-02-everydayEnglish/">
+        <a href="/2021/01/08/2020-12-03-flink/">
           
           
             
           
-          This Is How Scandinavia Got Great  斯堪的纳维亚国家崛起的原因长期以来，北欧在各项社会指标中名列前茅，被视为发达国家的标杆。有文章认为，北欧社会的幸福和平等，源于其全民化的教育制度。那么，这种教育制度有什么特征？它适合在其他地方推广吗？一起来听今天的讲解。   
-By David BrooksAlmost everybody admires the Nordic 
+          以Flink on YARN模式启动把 Flink 运行在 YARN 上有两种方式，第一种方式是建立一个长期运行的 Flink YARN Session，然后向这个 Session 提交 Flink Job，多个任务同时运行时会共享资源。第二种方式是为单个任务启动一个 Flink 集群，这个任务会独占 Flink 集群的所有资源，任务结束即代表集群被回收。另外，Flink on YARN 模式需要
         </a>
       </p>
 
@@ -330,7 +330,7 @@ By David BrooksAlmost everybody admires the Nordic
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-01-08 01:38" pubdate>
+            <time datetime="2021-01-08 01:59" pubdate>
               2021-01-08
             </time>
           </div>
@@ -354,19 +354,17 @@ By David BrooksAlmost everybody admires the Nordic
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/01/08/2020-05-17-duansheliexpr/">《简叔的70个断舍离》片段</a>
+        <a href="/2021/01/08/2020-12-09-mvnshade/">maven-shade-plugin入门指南</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/01/08/2020-05-17-duansheliexpr/">
+        <a href="/2021/01/08/2020-12-09-mvnshade/">
           
           
             
           
-          简叔的70个断舍离
-成年人要懂得所有获得都有代价，所有失去也都有收获。  妄想一切好的都给我，一切坏的都离开我。这本身就有问题。  我不要焦虑，不要抑郁，不要贫困，不要疾病，不要死，不要有青春痘，夏天不要热，冬天不要冷，好东西不要贵，好女人不要太难追。  总是和大自然作对，大自然不折腾你折腾谁呢？  想进就进，想退就退。进退自如，不为所扰。
-
-1.只要开始张嘴说话，就要先肯定，然后委婉地提出意见。
+          有时候，需要将复杂的项目，包括各种xml文件属性文件， 类， jar等等打包到一个可以执行的jar包中， 然后用java -jar  xxx.jar 来运行项目，这样简单方便，特别是在编写一些测试工具时，尤为重要。但是经常发现打包后的项目无法启动， 其中一大类是您项目有问题， 但是这个相对好解决。通过 maven-shade-plugin 生成的jar包，它包含所有的依赖 jar 包。
+使用配置 
         </a>
       </p>
 
@@ -374,7 +372,7 @@ By David BrooksAlmost everybody admires the Nordic
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-01-08 01:38" pubdate>
+            <time datetime="2021-01-08 01:59" pubdate>
               2021-01-08
             </time>
           </div>
@@ -398,16 +396,19 @@ By David BrooksAlmost everybody admires the Nordic
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/01/08/2020-04-27-pythonIntroduction/">Python入门</a>
+        <a href="/2021/01/08/2020-12-21-design1/">观察者模式</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/01/08/2020-04-27-pythonIntroduction/">
+        <a href="/2021/01/08/2020-12-21-design1/">
           
           
             
           
-          翻到以前阅读过的博客的一段话关于学习新知识我有一点心得体会想与你分享。我在学习新知识的时候会遵循一个5-20-2法则，用5分钟的时间了解这个新知识的特点、应用场景、要解决的问题；用20分钟理解它的主要设计原理、核心思想和思路；再花2个小时看关键的设计细节，尝试使用或者做一个demo。如果5分钟不能搞懂它要解决的问题，我就会放弃；20分钟没有理解它的设计思路，我也会放弃；2个小时还上不了手，我也会放
+          创建被观察对象抽象主题接口
+对观察者的操作。必需功能有观察者的注册、删除以及主题状态发生改变时通知观察者
+
+1234567891011121314151617181920212223242526package watch;/** * 主题 */public interface Subject &#123;    /**     * 注册观察者     * @param o 观察者     */  
         </a>
       </p>
 
@@ -415,7 +416,7 @@ By David BrooksAlmost everybody admires the Nordic
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-01-08 01:38" pubdate>
+            <time datetime="2021-01-08 01:59" pubdate>
               2021-01-08
             </time>
           </div>
@@ -439,20 +440,17 @@ By David BrooksAlmost everybody admires the Nordic
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/01/08/2020-04-16-threadPark/">线程阻塞与唤醒</a>
+        <a href="/2021/01/08/2020-12-22-springboot/">工作中的Spring</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/01/08/2020-04-16-threadPark/">
+        <a href="/2021/01/08/2020-12-22-springboot/">
           
           
             
           
-          线程阻塞与唤醒方式一（@Deprecated）早期JAVA采用suspend()、resume()对线程进行阻塞与唤醒，但这种方式产生死锁的风险很大，因为线程被挂起以后不会释放锁，可能与其他线程、主线程产生死锁，suspend 它会一直保持对锁的占有，一直到其他的线程调用resume方法，它才能继续向下执行。   
+          Springboot项目上传大文件所需配置application.properties配置：spring.servlet.multipart.max-file-size=128MBspring.servlet.multipart.max-request-size=128MBspring.servlet.multipart.enabled=true
 
-演示 suspend 方法为什么被弃用  
-
-1).独占：因为 suspend 
         </a>
       </p>
 
@@ -460,7 +458,7 @@ By David BrooksAlmost everybody admires the Nordic
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-01-08 01:38" pubdate>
+            <time datetime="2021-01-08 01:59" pubdate>
               2021-01-08
             </time>
           </div>
@@ -484,17 +482,18 @@ By David BrooksAlmost everybody admires the Nordic
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/01/08/2020-04-07-highFunction/">用高阶函数做抽象</a>
+        <a href="/2021/01/08/2020-12-23-design2/">装饰者模式</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/01/08/2020-04-07-highFunction/">
+        <a href="/2021/01/08/2020-12-23-design2/">
           
           
             
           
-          以计算数值为例定义过程计算数值定义过程，做某些行为的封装
-12345678910111213141516171819202122232425262728293031public class SumCount &#123;    /**     * 计算从a到b各整数之和     */    public int sumIntegers(int a, int b) &#123;        if 
+          简介装饰器模式（Decorator Pattern）允许向一个现有的对象添加新的功能，同时又不改变其结构。装饰者模式动态地将责任附加到对象上，若要扩展功能，装饰者提供了比继承更有弹性的替代方案。  
+类图Componet每个组件（ConcreteComponent）都可以单独使用，或者被装饰者包起来使用
+实现定义抽象组件（超类）123456789101112131415161718192021pa
         </a>
       </p>
 
@@ -502,7 +501,7 @@ By David BrooksAlmost everybody admires the Nordic
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-01-08 01:38" pubdate>
+            <time datetime="2021-01-08 01:59" pubdate>
               2021-01-08
             </time>
           </div>
@@ -526,21 +525,16 @@ By David BrooksAlmost everybody admires the Nordic
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/01/08/2020-04-02-Jenkins/">Jenkins使用</a>
+        <a href="/2021/01/08/2020-12-26-pyparallel/">python 多进程初探</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/01/08/2020-04-02-Jenkins/">
+        <a href="/2021/01/08/2020-12-26-pyparallel/">
           
           
             
           
-          Docker+Jenkins从入门到放弃
-手动安装dockerhttps://www.cnblogs.com/hellxz/p/11044012.html   
-Docker镜像源修改https://blog.csdn.net/jixuju/article/details/80158493  
-运行jenkins  
-
-123456789docker run \  -u root \  --rm 
+          简介
         </a>
       </p>
 
@@ -548,7 +542,7 @@ Docker镜像源修改https://blog.csdn.net/jixuju/article/details/80158493
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-01-08 01:38" pubdate>
+            <time datetime="2021-01-08 01:59" pubdate>
               2021-01-08
             </time>
           </div>
@@ -572,17 +566,22 @@ Docker镜像源修改https://blog.csdn.net/jixuju/article/details/80158493
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/01/08/2020-03-30-whyLearnComputerScience/"></a>
+        <a href="/2021/01/08/2020-12-29-design3/">工厂模式</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/01/08/2020-03-30-whyLearnComputerScience/">
+        <a href="/2021/01/08/2020-12-29-design3/">
           
           
             
           
-          转载地址https://teachyourselfcs.com/中文翻译地址https://github.com/keithnull/TeachYourselfCS-CN/blob/master/TeachYourselfCS-CN.md  
-先挖个坑，以后再补
+          简介工厂方法和抽象工厂模式可以将对象的创建封装起来，以便于得到更松耦合、更有弹性的设计。
+工厂方法模式定义了一个创建对象的接口，但由子类决定要实例化的类是哪一个。工厂方法让类把实例化推迟到子类。
+抽象工厂模式提供一个接口，用于创建相关或依赖对象的家族，而不需要明确指定具体类。
+要点
+所有的工厂都是用来封装对象的创建。  
+工厂方法使用继承：把对象的创建委托给子类，子类实现工厂方法来创建对象。
+抽象
         </a>
       </p>
 
@@ -590,11 +589,18 @@ Docker镜像源修改https://blog.csdn.net/jixuju/article/details/80158493
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-01-08 01:38" pubdate>
+            <time datetime="2021-01-08 01:59" pubdate>
               2021-01-08
             </time>
           </div>
         
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/blog/">blog</a>
+            
+          </div>
         
         
       </div>
