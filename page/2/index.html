@@ -181,6 +181,85 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
+        <a href="/2021/01/08/2020-12-21-design1/">观察者模式</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/01/08/2020-12-21-design1/">
+          
+          
+            
+          
+          创建被观察对象抽象主题接口
+对观察者的操作。必需功能有观察者的注册、删除以及主题状态发生改变时通知观察者
+
+1234567891011121314151617181920212223242526package watch;/** * 主题 */public interface Subject &#123;    /**     * 注册观察者     * @param o 观察者     */  
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-01-08 01:38" pubdate>
+              2021-01-08
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/blog/">blog</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/01/08/hello-world/">Hello World</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/01/08/hello-world/">
+          
+          
+            
+          
+          Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
+Quick
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-01-08 01:38" pubdate>
+              2021-01-08
+            </time>
+          </div>
+        
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
         <a href="/2021/01/08/2020-12-03-flink/">搭建Flink-1.11.2集群</a>
       </h1>
 
@@ -198,7 +277,7 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-01-08 00:09" pubdate>
+            <time datetime="2021-01-08 01:38" pubdate>
               2021-01-08
             </time>
           </div>
@@ -242,7 +321,7 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-01-08 00:09" pubdate>
+            <time datetime="2021-01-08 01:38" pubdate>
               2021-01-08
             </time>
           </div>
@@ -286,7 +365,7 @@ ssh-keygen -t rsa生成密码
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-01-08 00:09" pubdate>
+            <time datetime="2021-01-08 01:38" pubdate>
               2021-01-08
             </time>
           </div>
@@ -330,7 +409,7 @@ ssh-keygen -t rsa生成密码
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-01-08 00:09" pubdate>
+            <time datetime="2021-01-08 01:38" pubdate>
               2021-01-08
             </time>
           </div>
@@ -375,7 +454,7 @@ ssh-keygen -t rsa生成密码
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-01-08 00:09" pubdate>
+            <time datetime="2021-01-08 01:38" pubdate>
               2021-01-08
             </time>
           </div>
@@ -416,7 +495,7 @@ ssh-keygen -t rsa生成密码
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-01-08 00:09" pubdate>
+            <time datetime="2021-01-08 01:38" pubdate>
               2021-01-08
             </time>
           </div>
@@ -440,19 +519,17 @@ ssh-keygen -t rsa生成密码
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/01/08/2020-03-20-javaAsync/">《Java异步编程实战》读书笔记</a>
+        <a href="/2021/01/08/2020-11-25-flink4/">Flink之Data Sink 实战</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/01/08/2020-03-20-javaAsync/">
+        <a href="/2021/01/08/2020-11-25-flink4/">
           
           
             
           
-          Java异步编程实战 (Java核心技术系列)
-使用Future确实可以获取异步任务的执行结果，但是获取其结果还是会阻塞调用线程的，并没有实现完全异步化处理，所以在JDK8中提供了CompletableFuture来弥补其缺点。CompletableFuture类允许以非阻塞方式和基于通知的方式处理结果，其通过设置回调函数方式，让主线程彻底解放出来，实现了实际意义上的异步处理。
-
-在Java中实现
+          前言接上节Data Source 实战，Source 就是数据的来源，中间的Compute其实就是Flink干的事情，可以做一系列的操作，操作完后就把计算后的数据结果 Sink 到某个地方。（可以是 MySQL、ElasticSearch、Kafka、Cassandra 等）。趁热打铁干起来！
+Flink 从 Kafka topic 中获取数据并写入mysql的 demo工具类往 kafka to
         </a>
       </p>
 
@@ -460,7 +537,7 @@ ssh-keygen -t rsa生成密码
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-01-08 00:09" pubdate>
+            <time datetime="2021-01-08 01:38" pubdate>
               2021-01-08
             </time>
           </div>
@@ -484,18 +561,18 @@ ssh-keygen -t rsa生成密码
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/01/08/2020-06-03-everydayEnglish/">封城下的外卖骑手：运送着希望的“无名之辈”</a>
+        <a href="/2021/01/08/2020-11-25-flink3/">Flink之Data Source 实战</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/01/08/2020-06-03-everydayEnglish/">
+        <a href="/2021/01/08/2020-11-25-flink3/">
           
           
             
           
-          In a City Under Lockdown, Hope Arrives by Motorbike  封城下的外卖骑手：运送着希望的“无名之辈”平日里，外卖骑手无处不在，但也总被忽视；而在疫情之下的武汉，他们是许多市民与外界的唯一连接，构成了这座城市的动脉。本篇文章，讲述了一位外卖员的故事，他的工作既支撑着武汉的“生命线”，同时也在靠这份收入维持一家人的生计。
-By Vivian Wang
-D
+          Flink 从 Kafka topic 中获取数据的 demo安装并运行 FLink 和 Kafka
+Flink见Flink入门
+Kafka启动ZooKeeper： bin/zookeeper-server-start.sh config/zookeeper.properties启动Kafka Broker： bin/kafka-server-start.sh config/server.prop
         </a>
       </p>
 
@@ -503,90 +580,7 @@ D
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-01-08 00:09" pubdate>
-              2021-01-08
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/blog/">blog</a>
-            
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/01/08/2020-04-16-future/">基于JDK中的 Future 实现异步编程</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/01/08/2020-04-16-future/">
-          
-          
-            
-          
-          使用FutureTask进行异步计算FutureTask介绍FutureTask代表了一个可被取消的异步计算任务，该类实现了Future接口，比如提供了启动和取消任务、查询任务是否完成、获取计算结果的接口。FutureTask任务的结果只有当任务完成后才能获取，并且只能通过get系列方法获取，当结果还没出来时，线程调用get系列方法会被阻塞。另外，一旦任务被执行完成，任务将不能重启，除非运行时使用
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-01-08 00:09" pubdate>
-              2021-01-08
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/blog/">blog</a>
-            
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/01/08/2020-04-13-tomatoWork/">《番茄工作法》读书笔记</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/01/08/2020-04-13-tomatoWork/">
-          
-          
-            
-          
-          番茄工作法  https://book.douban.com/subject/34820460/感悟困惑
-问题：根据番茄工作法中一个番茄时间不可分割的法则，倘若中间因为处理某些突发事件而中断的番茄钟，是不可把其当作一个番茄钟的。然而这样会导致预估的番茄钟与实际完成的番茄钟对应无法对应。譬如我预估整理笔记并发布到博客为两个番茄钟，然而第二个番茄钟即将完成之际因突发事件中断，且此时笔记已整理完成，然此
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-01-08 00:09" pubdate>
+            <time datetime="2021-01-08 01:38" pubdate>
               2021-01-08
             </time>
           </div>
