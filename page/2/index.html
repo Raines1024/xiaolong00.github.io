@@ -181,6 +181,226 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
+        <a href="/2021/01/08/2020-12-30-design4/">单例模式</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/01/08/2020-12-30-design4/">
+          
+          
+            
+          
+          简介单例模式确保一个类只有一个实例，并提供一个全局访问点。
+实现
+使用”急切”创建实例（饿汉式）在JVM加载类时创建单例。保证了线程安全。
+
+12345678910public class Singleton &#123;    //静态初始化	private static Singleton uniqueInstance = new Singleton(); 	private Singleton
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-01-08 09:27" pubdate>
+              2021-01-08
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/blog/">blog</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/01/08/2020-03-27-runtimeDataArea/">Java运行时数据区</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/01/08/2020-03-27-runtimeDataArea/">
+          
+          
+            
+          
+          Java运行时数据区线程共享的数据区方法区（非堆）–堆的一个逻辑部分存储已被虚拟机加载的类型信息、常量、静态变量、即时编译器编译后的代码缓存等。  
+
+运行时常量池运行时常量池是方法区的一部分，存放编译器生成的各种字面量与符号引用。  
+
+堆存放对象实例和数组可扩展：-Xmx和-Xms设定  
+线程隔离的数据区（线程私有的内存）Java虚拟机栈栈帧：局部变量表、操作数栈、动态连接、方法接口等。  
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-01-08 09:27" pubdate>
+              2021-01-08
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/blog/">blog</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/01/08/2020-03-28-aopIntroduce/">AOP介绍</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/01/08/2020-03-28-aopIntroduce/">
+          
+          
+            
+          
+          基础AOP中 @Before @After @AfterThrowing @AfterReturning 的执行顺序123456789101112131415public Object invoke(Object proxy, Method method, Object[] args) throws Throwable &#123;   Object result;   try &#123;   
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-01-08 09:27" pubdate>
+              2021-01-08
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/blog/">blog</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/01/08/2020-03-28-redisImplIdmpotent/">Redis实现幂等性接口（Java语言实现）</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/01/08/2020-03-28-redisImplIdmpotent/">
+          
+          
+            
+          
+          基础准备幂等性接口概念任意多次执行所产生的影响均与一次执行的影响相同。按照这个含义，最终的含义就是：对数据库的影响只能是一次性的，不能重复处理。  
+如何保证其幂等性，通常有以下手段：
+数据库建立唯一性索引，可以保证最终插入数据库的只有一条数据    
+token机制，每次接口请求前先获取一个token，然后再下次请求的时候在请求的header体中加上这个token，后台进行验证，如果验证通过删除
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-01-08 09:27" pubdate>
+              2021-01-08
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/blog/">blog</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/01/08/2020-03-28-redisImplLock/">Redis实现分布式锁（Java语言实现）</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/01/08/2020-03-28-redisImplLock/">
+          
+          
+            
+          
+          基础准备Redis简介Redis是一个Key-Value存储系统。   
+Redis命令参考http://redisdoc.com  
+使用set函数的NX参数实现分布式锁对于java中想操作redis，好的方式是使用jedis，首先pom中引入依赖（使用Jedis 2.9.3版本）：   
+1234&lt;dependency&gt;    &lt;groupId&gt;redis.client
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-01-08 09:27" pubdate>
+              2021-01-08
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/blog/">blog</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
         <a href="/2021/01/08/2020-03-30-getSendBody/">谁说 HTTP GET 就不能通过 Body 来发送数据呢？</a>
       </h1>
 
@@ -198,7 +418,51 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-01-08 01:59" pubdate>
+            <time datetime="2021-01-08 09:27" pubdate>
+              2021-01-08
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/blog/">blog</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/01/08/2020-03-30-swapMoneyCount/">递归介绍(二）：换零钱方式的统计--树形递归</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/01/08/2020-03-30-swapMoneyCount/">
+          
+          
+            
+          
+          实例：换零钱方式的统计问题给了50美分、25美分、10美分、5美分、1美分的硬币，将1美元换成零钱，一共有多少种不同方式？给定了任意数量的现金，写一个程序，计算出所有换零钱方式的种数。  
+思考过程假定我们所考虑的可用硬币类型种类排了某种顺序，于是有了下面的关系：将总数为a的现金换成n种硬币的不同方法的数目等于：  
+
+将现金数a换成除第一种硬币之外的所有其他硬币的不同方式数目，加上  将现金数a
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-01-08 09:27" pubdate>
               2021-01-08
             </time>
           </div>
@@ -240,7 +504,7 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-01-08 01:59" pubdate>
+            <time datetime="2021-01-08 09:27" pubdate>
               2021-01-08
             </time>
           </div>
@@ -279,7 +543,7 @@ Docker镜像源修改https://blog.csdn.net/jixuju/article/details/80158493
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-01-08 01:59" pubdate>
+            <time datetime="2021-01-08 09:27" pubdate>
               2021-01-08
             </time>
           </div>
@@ -321,269 +585,7 @@ Docker镜像源修改https://blog.csdn.net/jixuju/article/details/80158493
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-01-08 01:59" pubdate>
-              2021-01-08
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/blog/">blog</a>
-            
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/01/08/2020-04-16-threadPark/">线程阻塞与唤醒</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/01/08/2020-04-16-threadPark/">
-          
-          
-            
-          
-          线程阻塞与唤醒方式一（@Deprecated）早期JAVA采用suspend()、resume()对线程进行阻塞与唤醒，但这种方式产生死锁的风险很大，因为线程被挂起以后不会释放锁，可能与其他线程、主线程产生死锁，suspend 它会一直保持对锁的占有，一直到其他的线程调用resume方法，它才能继续向下执行。   
-
-演示 suspend 方法为什么被弃用  
-
-1).独占：因为 suspend 
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-01-08 01:59" pubdate>
-              2021-01-08
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/blog/">blog</a>
-            
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/01/08/2020-04-27-pythonIntroduction/">Python入门</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/01/08/2020-04-27-pythonIntroduction/">
-          
-          
-            
-          
-          翻到以前阅读过的博客的一段话关于学习新知识我有一点心得体会想与你分享。我在学习新知识的时候会遵循一个5-20-2法则，用5分钟的时间了解这个新知识的特点、应用场景、要解决的问题；用20分钟理解它的主要设计原理、核心思想和思路；再花2个小时看关键的设计细节，尝试使用或者做一个demo。如果5分钟不能搞懂它要解决的问题，我就会放弃；20分钟没有理解它的设计思路，我也会放弃；2个小时还上不了手，我也会放
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-01-08 01:59" pubdate>
-              2021-01-08
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/blog/">blog</a>
-            
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/01/08/2020-05-17-duansheliexpr/">《简叔的70个断舍离》片段</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/01/08/2020-05-17-duansheliexpr/">
-          
-          
-            
-          
-          简叔的70个断舍离
-成年人要懂得所有获得都有代价，所有失去也都有收获。  妄想一切好的都给我，一切坏的都离开我。这本身就有问题。  我不要焦虑，不要抑郁，不要贫困，不要疾病，不要死，不要有青春痘，夏天不要热，冬天不要冷，好东西不要贵，好女人不要太难追。  总是和大自然作对，大自然不折腾你折腾谁呢？  想进就进，想退就退。进退自如，不为所扰。
-
-1.只要开始张嘴说话，就要先肯定，然后委婉地提出意见。
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-01-08 01:59" pubdate>
-              2021-01-08
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/blog/">blog</a>
-            
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/01/08/2020-06-02-everydayEnglish/">北欧教育模式，为何深受世界推崇？</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/01/08/2020-06-02-everydayEnglish/">
-          
-          
-            
-          
-          This Is How Scandinavia Got Great  斯堪的纳维亚国家崛起的原因长期以来，北欧在各项社会指标中名列前茅，被视为发达国家的标杆。有文章认为，北欧社会的幸福和平等，源于其全民化的教育制度。那么，这种教育制度有什么特征？它适合在其他地方推广吗？一起来听今天的讲解。   
-By David BrooksAlmost everybody admires the Nordic 
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-01-08 01:59" pubdate>
-              2021-01-08
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/blog/">blog</a>
-            
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/01/08/2020-06-03-shellLearn/">Shell使用</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/01/08/2020-06-03-shellLearn/">
-          
-          
-            
-          
-          zsh与bash切换
-zsh切换为bashchsh -s /bin/bash  
-bash切换为zshchsh -s /bin/zsh  
-
-查看当前运行的 Shellecho $SHELL  
-查看当前的 Linux 系统安装的所有 Shellcat /etc/shells
-Bash 变量env命令或printenv命令，可以显示所有环境变量。  
-12345678910111213141516
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-01-08 01:59" pubdate>
-              2021-01-08
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/blog/">blog</a>
-            
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/01/08/2020-06-06-sqlLearn/">Mysql必知必会</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/01/08/2020-06-06-sqlLearn/">
-          
-          
-            
-          
-          查询有两条或者两条以上的数据  –先分组，在统计select a.code from ldcode a where 1=1 GROUP BY a.code HAVING COUNT(a.code)&gt; 1
-为什么要用where 1=1？之前一直不太明白，sql语句里为什么要写where 1=1 巴拉巴拉巴拉提升某种执行效率？其实，1=1 是永恒成立的，意思无条件的，也就是说在SQL语句中有没有
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-01-08 01:59" pubdate>
+            <time datetime="2021-01-08 09:27" pubdate>
               2021-01-08
             </time>
           </div>
@@ -758,5 +760,5 @@ Bash 变量env命令或printenv命令，可以显示所有环境变量。
 
 
 
-</body>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"live2d-widget-model-wanko"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.7},"log":false});</script></body>
 </html>
