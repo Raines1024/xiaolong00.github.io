@@ -1,0 +1,572 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/comm/favicon.png">
+  <link rel="icon" type="image/png" href="/img/comm/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  <title>《软技能：代码之外的生存指南》读书笔记 - Hexo</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>小龙的跋涉</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="《软技能：代码之外的生存指南》读书笔记">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-01-08 00:09" pubdate>
+        2021年1月8日 凌晨
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      8.9k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      89
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">《软技能：代码之外的生存指南》读书笔记</h1>
+            
+            <div class="markdown-body">
+              <h2 id="为了能够掌握一门技术，需要了解以下三个要点。"><a href="#为了能够掌握一门技术，需要了解以下三个要点。" class="headerlink" title="为了能够掌握一门技术，需要了解以下三个要点。"></a>为了能够掌握一门技术，需要了解以下三个要点。</h2><ol>
+<li>如何开始——要想开始使用自己所学的，我需要掌握哪些基本知识？</li>
+<li>学科范围——我现在学的东西有多宏大？我应该怎么做？在开始阶段，我不需要了解每个细节，但是如果我能对该学科的轮廓有大致的了解，那么将来我就能发现更多细节。</li>
+<li>基础知识——不止在开始阶段，要想使用一项特定的技术，我需要了解基本的用户案例和最常见的问题，也需要知道自己学的哪20%就能满足80%的日常应用。<br>熟知了这三个关键点后，我可以高效地学习一门技术，无需通晓全部细节。我发现，如果我了解三项主题——如何开始，我能做什么，以及相关基础知识，那么我就能随着学习深入学会所需的其他知识。如果我想提前掌握所有知识，那只是在浪费时间，因为真正重要的内容会湮没在那些细枝末节中。这种新方法能让我关注重点。</li>
+</ol>
+<h2 id="学什么和怎样学？"><a href="#学什么和怎样学？" class="headerlink" title="学什么和怎样学？"></a>学什么和怎样学？</h2><h3 id="“十步学习法”的基本思想："><a href="#“十步学习法”的基本思想：" class="headerlink" title="“十步学习法”的基本思想："></a>“十步学习法”的基本思想：</h3><p>要对自己要学的内容有个基本的了解——了解自己不知道什么就足矣。然后，利用这些信息勾勒出学习的范围，即需要学哪些内容，以及学成之后又会获得什么。依靠这些知识，你可以找出各种资源（不局限于书）来帮助自己学习。最后，你可以创建自己的学习计划，列出要去学习哪些相关课程，筛选学习材料，只保留能帮助自己达成目标的优质内容。</p>
+<h3 id="十步学习法体系"><a href="#十步学习法体系" class="headerlink" title="十步学习法体系"></a>十步学习法体系</h3><p>对于“十步学习法”的前六个步骤，你需要集中精力完成足够多的前期调研，确保自己明确知道要学哪些内容，以及如何确认自己已达成目标。你还将学到如何挑选最好的资源来帮自己实现目标、制订学习计划。</p>
+<h4 id="第一步：了解全局"><a href="#第一步：了解全局" class="headerlink" title="第一步：了解全局"></a>第一步：了解全局</h4><p>你根本不知道自己不知道<br>在深入探究某个主题之前至少要对其有所了解，这一点非常重要。这样你才能弄清自己到底要学什么，找出最好的学习方式。  </p>
+<h4 id="第二步：确定范围"><a href="#第二步：确定范围" class="headerlink" title="第二步：确定范围"></a>第二步：确定范围</h4><p>根据自己的学习理由运用自己在上一步中获得的信息从一个几乎无边界的主题中明确一个清晰且聚焦的学习范围。</p>
+<h4 id="第三步：定义目标"><a href="#第三步：定义目标" class="headerlink" title="第三步：定义目标"></a>第三步：定义目标</h4><p>你想从自己的学习经历中获得什么决定了你的成功标准是什么。请确保你能借此在学习结束后评估自己是否达成了目标。好的成功标准也能让你向着既定目标不断前进。</p>
+<h4 id="第四步：寻找资源"><a href="#第四步：寻找资源" class="headerlink" title="第四步：寻找资源"></a>第四步：寻找资源</h4><p>要尝试收集到多种多样的资源以帮助你学习，而不是只读一本关于这一主题的书，先获得尽可能多的不同类型的资源。</p>
+<h4 id="第五步：创建学习计划"><a href="#第五步：创建学习计划" class="headerlink" title="第五步：创建学习计划"></a>第五步：创建学习计划</h4><p>你需要创建自己的学习路径。把它看作自己写书时候的大纲。事实上，当你大功告成的时候，你会发现自己的学习路径可能与一本书的目录非常相似。你基本上就是完成一系列的模块，直到最后达成目标。</p>
+<h4 id="第六步：筛选资源"><a href="#第六步：筛选资源" class="headerlink" title="第六步：筛选资源"></a>第六步：筛选资源</h4><p>对现有资源进行筛选，从中选出最能帮助你实现自己的目标的资源。<br>找出哪些内容能够覆盖你的学习计划。你还应当看看评论，试着找出品质最高的资源。</p>
+<h4 id="第七步到第十步：循环往复"><a href="#第七步到第十步：循环往复" class="headerlink" title="第七步到第十步：循环往复"></a>第七步到第十步：循环往复</h4><p>步骤7到步骤10的目标是通过“学习—实践—掌握—教授”（LDLT）的方式真正领会知识。<br>你从掌握恰到好处可以开始的基础知识开始，然后通过操作来学习，同时也通过自我探索收集问题。<br>之后，你掌握了足够多的有用的知识。最后，你能将自己学到的教给他人，以此来弥补自己在学习过程中的不足，同时通过深入思考巩固知识。</p>
+<h5 id="第七步：开始学习，浅尝辄止"><a href="#第七步：开始学习，浅尝辄止" class="headerlink" title="第七步：开始学习，浅尝辄止"></a>第七步：开始学习，浅尝辄止</h5><p>这一步的关键在于过犹不及。你会很容易就失去自控力，开始消化计划学习中列出的所有资源。但是，你会发现，如果你能经受住这样的诱惑，你会取得更大的成就。你要专注于掌握自己所需的、能在下一步动手操作的最小量的知识。<br>你可以浏览参考材料，或者每章的摘要，或者各种简介，这些信息足以让你对自己要做什么有基本的认识。</p>
+<h5 id="第八步：动手操作，边玩边学"><a href="#第八步：动手操作，边玩边学" class="headerlink" title="第八步：动手操作，边玩边学"></a>第八步：动手操作，边玩边学</h5><p>现在，考虑一下我在这里建议的方法。你无需提前了解全部内容，你要做的首要的一件事情就是亲自操作和亲身体验。<br>采用这种方法，你通过探索和实践进行学习。在操作的过程中，你的大脑自然地产生各种问题：<br>它是如何工作的？如果我这么做，会发生什么？我该如何解决这个问题？这些问题引导着你走向真正重要的方向。<br>当回过头寻找问题的答案的时，不只是这些问题迎刃而解，而且你记得的东西比你学习的东西要多得多，因为你所学到的都是对你很重要的东西。</p>
+<h5 id="第九步：全面掌握，学以致用"><a href="#第九步：全面掌握，学以致用" class="headerlink" title="第九步：全面掌握，学以致用"></a>第九步：全面掌握，学以致用</h5><p>为了有效利用自己选择的资料，为上一步产生的问题寻求答案，阅读文字、观看视频、与他人交流都是必要手段。这能让你沉浸在学习材料中，尽可能地汲取知识。<br>最后，千万不要忘了，你在第三步中定义的成功标准。试着把自己正在学习的内容与最终目标关联起来。你掌握的每个模块，都应该以某种方式推动你向着终极目标前进。</p>
+<h5 id="第10步：乐为人师，融会贯通"><a href="#第10步：乐为人师，融会贯通" class="headerlink" title="第10步：乐为人师，融会贯通"></a>第10步：乐为人师，融会贯通</h5><p>在现实中，你只需要超前别人一步，就可以成为他们的老师。有时候，比学生超前太多的“专家”反而不能得心应手地“教”，因为他们无法与学生产生共鸣。他们忘了初学者是什么样子，很容易专注于他们认为简单的细节。<br>走出自己的舒适区，将自己学到的知识教给别人。要想确定你确实掌握了某些知识，这是唯一的办法；同时，在你将自己所学介绍给他人时，这也是查缺补漏的好办法。<br>知识短板会阻碍你进步。准确识别它们的最佳方式之一就是看看自己在哪些工作上花费了大量的时间，或者一直进行重复性劳动。<br>时刻都要试图了解自己不理解或不清楚的事物。你可以维护一份清单，列出自己需要去研究或者自己不清楚的所有事物，追踪有哪些主题总是不断出现在这个清单上。你会惊讶地发现这份清单的增长速度有多快。你只要对自己坦诚：如果遇到不理解的知识，不需要马上就学会，但是一定要把它添加到清单中，这样你至少可以找出自己的知识短板。<br>我们总是倾向于掩饰自己的短板，而且我们也总是太忙，忙到无暇去填补它们。结果，我们要么不能真正明白自己在做什么，要么为了避开自己的短板而采取低效的方法。</p>
+<h2 id="怎么寻找你的知识短板？"><a href="#怎么寻找你的知识短板？" class="headerlink" title="怎么寻找你的知识短板？"></a>怎么寻找你的知识短板？</h2><ul>
+<li>在哪些工作上花费时间最多？  </li>
+<li>可以改进的重复性劳动  </li>
+<li>自己没有完全理解的东西  </li>
+<li>你回答不出来的面试题<br>我的生产力提升计划的基本思路就是，我把一周的时间分配给一个一个用时不超过两小时的小任务。我使用看板来安排自己的一周活动。看板是一个简单的白板，它有几个列，你可以轻松地在各列之间移动任务项。在敏捷方法的世界里，看板通常还包含展示这些任务项所处的不同状态，典型的状态有“未启动”“进行中”和“已完成”。但是在我的看板中，每一列就是一周中的每一天。在工作时我会使用番茄工作法来保持专注，并且用番茄工作法估算和衡量每一项任务要花多长时间。  </li>
+<li>季度计划<br>我的计划都是从“季度”开始的。我把我的一年分成4个季度，每个季度3个月。在做季度计划时，我会尽力列出我想在本季度完成的每一个大项目，我还会制订一些较小的目标。我会思考我在每一周或每一天分别完成哪些工作。这份计划通常会用一份列表来完成。我也会创建一个宏观计划，将本季度我想要完成的工作列入其中。这让我清楚地了解自己的主要目标是什么，也知道该如何实现它。同时，它还会让我保持专注。</li>
+<li>月计划<br>每个月的第一天我会打印出当月的月历，并且规划出每天要完成的工作。此时我并不能做到非常精确，但是我可以根据当月天数和之前的完成情况，粗略估算出当月我能够完成多少工作。我会简单地从季度计划中挑选任务，看看有哪些任务可以写入月历。</li>
+<li>周计划<br>每周一的早晨，我会做我的周计划。我原来使用名为Trello（<a target="_blank" rel="noopener" href="http://trello.com)的工具作为看板来组织我一周的工作,但最近我一直在用kanbanflow(http//simpleprogrammer.com/ss-kanbanflow%EF%BC%89%E5%88%9B%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E7%9C%8B%E6%9D%BF%EF%BC%8C%E5%9B%A0%E4%B8%BAKanbanflow%E6%9C%89%E4%B8%80%E4%B8%AA%E5%86%85%E7%BD%AE%E7%9A%84%E7%95%AA%E8%8C%84%E9%92%9F%E5%AE%9A%E6%97%B6%E5%99%A8%E3%80%82%E6%88%91%E7%9A%84%E7%9C%8B%E6%9D%BF%E4%B8%8A%E4%B8%8D%E4%BB%85%E4%B8%80%E5%91%A8%E5%86%85%E7%9A%84%E6%AF%8F%E4%B8%80%E5%A4%A9%E9%83%BD%E6%9C%89%E4%B8%80%E5%88%97%EF%BC%8C%E8%BF%98%E6%9C%89%E4%B8%80%E5%88%97%E6%A0%87%E6%B3%A8%E4%B8%BA%E2%80%9C%E4%BB%8A%E5%A4%A9%E2%80%9D%EF%BC%8C%E5%88%97%E5%87%BA%E6%88%91%E5%BD%93%E5%A4%A9%E8%A6%81%E5%AE%8C%E6%88%90%E7%9A%84%E4%BB%BB%E5%8A%A1%EF%BC%9B%E8%BF%98%E6%9C%89%E4%B8%80%E5%88%97%E6%A0%87%E6%B3%A8%E4%B8%BA%E2%80%9C%E5%AE%8C%E6%88%90%E2%80%9D%EF%BC%8C%E5%88%97%E5%87%BA%E6%88%91%E5%B7%B2%E7%BB%8F%E5%AE%8C%E6%88%90%E7%9A%84%E4%BB%BB%E5%8A%A1%EF%BC%9B%E8%BF%98%E6%9C%89%E4%B8%80%E5%88%97%E6%A0%87%E6%B3%A8%E4%B8%BA%E2%80%9C%E4%B8%8B%E5%91%A8%E2%80%9D%EF%BC%8C%E6%88%91%E4%BC%9A%E6%8A%8A%E6%89%80%E6%9C%89%E8%BF%99%E5%91%A8%E5%86%85%E6%9C%AA%E5%AE%8C%E6%88%90%E7%9A%84%E4%BB%BB%E5%8A%A1%E4%BB%A5%E5%8F%8A%E6%88%91%E7%9F%A5%E9%81%93%E4%B8%8B%E5%91%A8%E5%BF%85%E9%A1%BB%E8%A6%81%E5%81%9A%E7%9A%84%E4%BA%8B%E6%83%85%E6%94%BE%E8%BF%9B%E5%8E%BB%EF%BC%8C%E4%BB%A5%E5%85%8D%E8%87%AA%E5%B7%B1%E5%BF%98%E8%AE%B0%E3%80%82">http://trello.com）的工具作为看板来组织我一周的工作，但最近我一直在用Kanbanflow（http://simpleprogrammer.com/ss-kanbanflow）创建自己的看板，因为Kanbanflow有一个内置的番茄钟定时器。我的看板上不仅一周内的每一天都有一列，还有一列标注为“今天”，列出我当天要完成的任务；还有一列标注为“完成”，列出我已经完成的任务；还有一列标注为“下周”，我会把所有这周内未完成的任务以及我知道下周必须要做的事情放进去，以免自己忘记。</a></li>
+</ul>
+<h2 id="番茄工作法"><a href="#番茄工作法" class="headerlink" title="番茄工作法"></a>番茄工作法</h2><p>它的基本思路是：你规划出打算一天之内完成的工作，然后设置一个时长25分钟的定时器，去完成计划中的第一项任务；在这25分钟之内，你只专注于这一项任务，心无旁骛。一旦有干扰，可以用各种方法屏蔽掉干扰，但是通常你要努力保证自己完全不被打扰。总之，你不希望自己的专注的工作状态被打断。在25分钟结束的时候，设置一个5分钟的定时器，休息一下。这就是所谓的一个“番茄钟”。每4个番茄钟后，你都需要休息一会儿，通常为15分钟。<br>留意自己每天完成了几个番茄钟，估算某项任务要用掉几个番茄钟。番茄工作法只有被当作估算和评估工作的工具使用时，才能发挥它的真正威力。通过跟踪自己在一天内完成了多少个番茄钟，以及为每天要完成的番茄钟的数量设定目标，你瞬间有能力去真正评估自己每日工作的努力程度，也能知晓自己的工作能力。<br>使用番茄工作法，你可以把每周看作是由有限个番茄钟组成的。想在每周完成一定数量的任务？你要搞清楚自己一周能工作多少个番茄钟，并相应地设置任务的优先级。通过计算自己完成的番茄钟的数量，可以确切知道自己一周完成了多少任务，也就不会觉得自己没完成足够量的任务。如果你没能完成自己设定的任务，但是却用完了足够数量的番茄钟，那么问题就不是工作量是否饱满，而是给某个任务项设置的优先级是否正确。  </p>
+<ul>
+<li>有一个大问题一直困扰着我：<br>我总为自己没有做更多的事情而感到内疚。这与我一天完成多少工作无关，就好像我永远不能放松似的。我总觉得自己应该在做事，以至于坐下来玩游戏（我最喜欢的消遣之一）时我都无法享受其中，因为我觉得自己在浪费时间，我本应该做更多的工作。也许你也有同感。<br>这个问题的根源在于，你无法准确地评估每天到底自己完成了多少任务，也没有为自己每天到底要完成多少任务设定明确的目标。也许，像我一样，你也试图通过列出一份每日任务清单来解决这一问题。这看起来似乎是一个好主意，但是，当你完成某些任务耗费的时间比你预计的要长的时候，你将备受打击。就算你每天累得像狗一样，还是无法完成清单上的任务，所以即使你竭尽全力还是觉得自己很失败。这可真令人很沮丧。<br>我们不一定能够控制完成一项任务到底需要多少时间，但是我们可以控制自己这一天中愿意为某项任务（或某些任务）花多少时间。如果你努力工作一整天，就会感觉很好；如果在这一天中你工作松懈却又完成了列表中的所有任务，那只不过是因为任务比预期的简单而已，你还真不应该为此而沾沾自喜。制订任务列表全凭主观臆断，每天能够专注完成的工作量才是最重要的。<br>这正是番茄工作法的真谛之所在。当你在一天中为自己设置了x个番茄钟的工作目标（这一目标你完全可控）并且达成的时候，你就可以知道自己一天到底可以完成多少工作，这会让自己感觉良好，更重要的是，还能让自己放松身心。  </li>
+</ul>
+<hr>
+<h2 id="定额工作法"><a href="#定额工作法" class="headerlink" title="定额工作法"></a>定额工作法</h2><p>要想确保自己在追求目标的道路上获得持续的进展，唯一的方法就是确立一个明确的目标，规定自己要在预先确定的时间段内需要取得多大的进展。长期坚持这么做，我就能随着时间的推移度量并标记自己的进度。我可以确切知道自己在给定的一段时间内能够完成的工作量。</p>
+<h2 id="定额工作法的规则"><a href="#定额工作法的规则" class="headerlink" title="定额工作法的规则"></a>定额工作法的规则</h2><ul>
+<li>挑选一项重复性任务。</li>
+<li>明确有效时限，在此期间该任务被重复执行。</li>
+<li>明确在给定的有效时限内该任务应该完成的次数的定额。</li>
+<li>给自己承诺：一定要达成定额。</li>
+<li>调整。调高或者调低定额，但是不能在有效时间段之内调整。</li>
+</ul>
+<h2 id="要不要多任务并行"><a href="#要不要多任务并行" class="headerlink" title="要不要多任务并行"></a>要不要多任务并行</h2><ul>
+<li>比起在不同时间段分别处理相关任务，批量处理相关任务拥有两大优点。第一，你不会打破自己对正在处理的大任务的专注。第二，你会更专注于自己平常没有足够的时间进入专注状态去处理的任务。回复1封邮件不会让你有充分的时间专注于这一任务，但是集中回复20封电子邮件就可以把你带入专注模式。</li>
+<li>停止任何并非真正的多任务并行的多任务并行。每天力争在一个时间段内只做一件事。番茄工作法对此有很大帮助。</li>
+<li>一次性批量处理小任务，而不是每天或每周里做许多次。</li>
+<li>找出能够真正实现多任务并行的领域。真正的多任务并行是做到同时处理两项任务，而不是在任务间切换，任何不需要耗费脑力的活动都可以跟其他活动结合起来。只要进行任何需要耗费脑力的活动，就将其与体育运动结合起来。</li>
+</ul>
+<h2 id="职业倦怠"><a href="#职业倦怠" class="headerlink" title="职业倦怠"></a>职业倦怠</h2><h2 id="什么是职业倦怠？"><a href="#什么是职业倦怠？" class="headerlink" title="什么是职业倦怠？"></a>什么是职业倦怠？</h2><p>提高生产力的最大障碍之一就是身体和心理上的倦怠。项目刚开始的时候，我们总是热情高涨、精力旺盛，但是一段时间之后，即便我们再有激情，一想到它们也会让我们反胃。</p>
+<h2 id="为什么会产生倦怠？"><a href="#为什么会产生倦怠？" class="headerlink" title="为什么会产生倦怠？"></a>为什么会产生倦怠？</h2><p>新鲜感消退之后，现实就会浮现。  </p>
+<h2 id="怎样解决职业倦怠？"><a href="#怎样解决职业倦怠？" class="headerlink" title="怎样解决职业倦怠？"></a>怎样解决职业倦怠？</h2><ul>
+<li>下次开始新项目的时候，下定决心：你一定会完成，或者完全掌握。设定规则和约束条件，强迫自己穿过那堵不可避免的墙。</li>
+<li>如果你正面临职业生涯或者个人生活中的一堵墙，试着去穿越它。想想在墙的另一侧会有怎样的收获等着你。想象自己的动机和兴趣终将获得回报。</li>
+<li>制定自己的定额工作，每进一寸，便是欢喜。</li>
+</ul>
+<h2 id="时间是怎样被浪费掉的"><a href="#时间是怎样被浪费掉的" class="headerlink" title="时间是怎样被浪费掉的"></a>时间是怎样被浪费掉的</h2><p><strong>你不能把每天的每一分钟都充分利用起来，这个目标太不现实了。但是，你可以弄清楚自己在哪儿浪费的时间最多，并消除它们。</strong></p>
+<h2 id="停止看电视"><a href="#停止看电视" class="headerlink" title="停止看电视"></a>停止看电视</h2><ul>
+<li>看电视的最大问题就是，花在收看电视上的时间并没有获得任何实际收益。</li>
+<li>看电视不仅浪费时间，还会以你察觉不到的方式影响你的认知能力。电视节目把所有问题都“短路”了，让你不经过自己大脑的任何思考就把一切都安排好。从消费习惯到世界观，你的一切都受电视的直接影响。电视看得越多，你越会放弃对自己的思想和行为的控制。电视简直就是彻底地操控了你的生活。</li>
+<li>我决定减少看电视的时间，一次只看一个节目。我不再看直播或者录播，而是直接整季购买自己想看的节目。我在自己想看电视，或者有空的时候才看。我不再被那些电视节目和周播的剧集牵着鼻子走。（现在我还会偶尔买一整季的电视节目，把它们当作电影看。）</li>
+</ul>
+<ul>
+<li>社交媒体（微信，QQ）  </li>
+<li>购物（淘宝，当当）  </li>
+<li>新闻网站</li>
+<li>不必要的会议</li>
+<li>烹饪</li>
+<li>玩电子游戏（尤其是网络游戏）</li>
+<li>工间喝咖啡休息</li>
+<li>*这些时间你本可以用来工作或者做一些更富有成效的事情。**<br>跟踪你的时间：精心地跟踪一下自己的时间花费情况。获取精确的数字，了解每天的每小时你都是怎样花掉的。看看数据，找出你最大的2～3个时间杀手。<br>此处推荐一个iphone的App：时间块。它能够让你明确每天的时间是怎样花掉的。</li>
+</ul>
+<p><em>烹饪、工间喝咖啡休息或者其他你喜欢做的事情是在浪费时间吗？</em><br>也是也不是。答案取决于你为什么做这些事情。为了享受快乐有意识地做这些事情，就不是浪费时间，只要你是因为喜欢才特意做这些事情，而不是为了逃避自己应该完成的实际工作。<br>我曾经把玩电子游戏视为浪费时间，但是我喜欢玩电子游戏。这是否意味着我要完全放弃玩电子游戏呢？不是的。但是，当我有任务需要完成的时候，我就不能玩电子游戏。我不能用玩电子游戏来逃避自己本该完成的工作。<br>同样的原则也适用于烹饪。也许你喜欢烹饪，为自己制作健康美食。如果是这样，那就太棒了。但是，如果你不特别喜欢烹饪，却要耗费大量时间来准备简单的一餐，那你就需要找出其他的健康饮食的方法来减少用于烹饪的时间。<br>我的目的不是让你抛弃生活中的喜好，只是确保你没有把时间浪费在一些没必要做或者不那么喜欢做的事情上，或者吞噬掉你所有业余时间的事情上。</p>
+<h2 id="惯例的重要性"><a href="#惯例的重要性" class="headerlink" title="惯例的重要性"></a>惯例的重要性</h2><p><strong>生产力的真正秘诀在于：长期坚持做一些小事。每天你做什么样的决定塑造着未来的你。</strong></p>
+<h2 id="创建一个惯例"><a href="#创建一个惯例" class="headerlink" title="创建一个惯例"></a>创建一个惯例</h2><p>一个好的惯例始于一个大的目标。一旦挑选好了大目标，接下来就要弄清楚怎样才能每天或每周前进，最终实现目标。</p>
+<h3 id="参考借鉴一下作者的惯例"><a href="#参考借鉴一下作者的惯例" class="headerlink" title="参考借鉴一下作者的惯例"></a>参考借鉴一下作者的惯例</h3><p>7:00 am<br>锻炼（跑步或者举重）<br>8:00 am<br>吃早餐（周一、周三、周五，早餐食谱A；周二、周四，早餐食谱B）<br>9:00 am<br>开始工作，并且挑选最重要的工作做<br>11:00 am<br>检查和回复邮件<br>12:00 am<br>吃午餐（周一、周二、周三、周四，自己做午餐；周五，外出吃午餐）<br>1:00 pm<br>专业开发时间（研究新技术，提高技能）<br>1:30 pm<br>做第二重要的工作，开会或其他<br>5:30 pm<br>为明天的任务做好计划，记录今天完成的工<br>6:30 pm<br>晚餐<br>7:00 pm<br>陪孩子做游戏<br>9:00 pm<br>读书<br>11:00 pm<br>睡觉<br><strong>选择一个大目标，以每个工作日为单位制订例行安排。计算一下，如果你每天都朝着这个目标前进，一年下来你会取得多大的成就。</strong></p>
+<h2 id="培养习惯"><a href="#培养习惯" class="headerlink" title="培养习惯"></a>培养习惯</h2><h2 id="习惯与惯例"><a href="#习惯与惯例" class="headerlink" title="习惯与惯例"></a>习惯与惯例</h2><p>培养和养成良好的习惯可以让你不需要刻意努力就保持很高的生产效率。如同惯例可以帮我们缓慢而坚定地每次只砌好一块砖，最终建起一面巨大的墙一样，习惯也可以通过日积月累的努力，让我们前进或者后退。二者最大的区别在于，惯例是我们可以控制的，而习惯却不受我们控制。  </p>
+<h2 id="了解习惯"><a href="#了解习惯" class="headerlink" title="了解习惯"></a>了解习惯</h2><p>习惯主要由三个要素构成：暗示，惯例和奖励。</p>
+<ul>
+<li>暗示是导致习惯被触发的某样东西。它可能是某一天的某个特定时刻、某种形式的社交场合、某个特定的环境或者其他任何东西。例如，只要我们进入电影院，我们就获得了买爆米花的暗示。  </li>
+<li>惯例就是你做的事情，也就是习惯的本质。惯例可能是抽烟、跑步，也可能是在检查代码之前运行所有的单元测试。</li>
+<li>奖励就是让习惯真正保持下去的“锚”。这是一种你从执行习惯中获得的良好感觉。奖励可能只是一种满足感，或者是你在《魔兽世界》里升级时的那一声“叮”，再或者是你喜欢的那道点心的甜蜜味道。<br>我们的大脑非常善于养成习惯。<br>可变化的奖励要比已知的标准奖励更让人着迷。不知道自己是否能得到奖励或者不知道奖励有多大，会形成一种很坏的习惯，即公认的“上瘾”。<br>你可能已经有数百个自己没有觉察到的习惯。  <h2 id="找出坏习惯，改掉"><a href="#找出坏习惯，改掉" class="headerlink" title="找出坏习惯，改掉"></a>找出坏习惯，改掉</h2>完全抛弃坏习惯做起来相当困难。我很难抵挡它的诱惑，并且一半的时间里当我按照习惯做事时我都没有意识到自己在这么做。习惯是自发的。但是，与完全抛弃习惯不同，我可以改变惯例。<br>要找出坏习惯，最好的办法就是设法找到日常生活中令你感到内疚的事情或惯例。什么事情你想停下来却又总是推迟到另一天？</li>
+<li>试着从小事做起。选一个你找出来的坏习惯，不要试图马上就改变它。相反，尽量找出这个习惯被什么触发，你这么做有什么表现，以及是什么奖励激励你产生冲动要这样做。</li>
+<li>努力找出是否有别的惯例可以代替当前这个为了某个习惯正在执行的惯例。如果可能的话，尽量寻找那些会带来相似的奖励甚至相同类型的奖励的事情。</li>
+<li>强迫自己坚持足够长的时间，以使新习惯取代旧习惯。<br>挑选一项你的坏习惯，试着把它转变为好习惯。在开始做之前，先在自己脑海中设想一下从现在起一周之后、一个月之后、乃至于一年之后你会有什么成果。<h2 id="分解任务：如何吃掉一头大象"><a href="#分解任务：如何吃掉一头大象" class="headerlink" title="分解任务：如何吃掉一头大象"></a>分解任务：如何吃掉一头大象</h2></li>
+</ul>
+<p><em>要吃掉一头大象，每次吃一口。</em><br>造成拖延的首要原因之一，同时也是造成生产力低下的祸根，就是总是在感慨一个问题：好忙啊，问题好大啊……实际上，你并没有真正试着去解决问题。当我们从任务的全貌来审视任务的时候，它们看起来比真实情况都要大，并且更吓人。通过将大任务分解为小任务，你会发现自己更有动力去完成它们，也更加稳妥地向着目标前进。<br>大型任务是一种智力挑战，与小任务相比，大任务更可能导致拖延，通常描述也更少，更容易出错，也更难估算完成时间。  </p>
+<h3 id="如何分解任务"><a href="#如何分解任务" class="headerlink" title="如何分解任务"></a>如何分解任务</h3><ul>
+<li>首先需要明确完成这项任务需要哪些步骤。</li>
+<li>把大任务分解为小任务的时候，务必确保每个小任务都有一个明确的目标。</li>
+</ul>
+<h2 id="努力工作的价值，以及为什么你总是逃避努力工作"><a href="#努力工作的价值，以及为什么你总是逃避努力工作" class="headerlink" title="努力工作的价值，以及为什么你总是逃避努力工作"></a>努力工作的价值，以及为什么你总是逃避努力工作</h2><ul>
+<li>事情的真相是，如果想真切地看到自己行动的成果，我们必须自愿努力工作。如果你想看到成果，你就必须要学会坐下来，做好自己并不想做的工作——并且要坚持不懈。</li>
+<li>你必须认识到，工作最终必须要被完成，所以还不如现在就做，而不是拖到以后；你必须认识到，你要想实现目标，要想发挥出自己的全部潜力，唯一的途径就是自愿咬紧牙关、硬着头皮、开始工作。</li>
+</ul>
+<h2 id="任何行动都比不采取行动好"><a href="#任何行动都比不采取行动好" class="headerlink" title="任何行动都比不采取行动好"></a>任何行动都比不采取行动好</h2><h2 id="为什么选择拒绝采取行动"><a href="#为什么选择拒绝采取行动" class="headerlink" title="为什么选择拒绝采取行动"></a>为什么选择拒绝采取行动</h2><p>我们明知道应该采取行动的时候却选择拒绝采取行动，恐惧可能是最大的原因。恐惧出错，恐惧把事情搞砸了，恐惧后果不可估量或失败，恐惧改变，恐惧做不一样的事情。很少有人会后悔自己基于所掌握的最好的知识采取的行动，但是很多人会后悔自己没有采取行动。他们错失机会，只因为过分害羞、谨慎或者犹豫，让他们裹足不前，无所作为。</p>
+<h2 id="不采取行动会发生什么？"><a href="#不采取行动会发生什么？" class="headerlink" title="不采取行动会发生什么？"></a>不采取行动会发生什么？</h2><p>有多少次你在面临选择的时候，你拖延时间不肯解决——实际上，如果你愿意采取行动，可能5分钟内就能解决。有多少次当你面临选择的时候，因为还没有找到最佳的解决方案，或者害怕作出错误的决定，所以你选择了什么都不做？又有多少小时、多少年因为你不采取行动而白白浪费？<br>无论你在逃避什么，无论是什么在困扰着你，都不要拒绝采取行动。当下就是行动的时刻。当下就是决策的时刻。</p>
+<h2 id="可能发生的最坏情况是什么？"><a href="#可能发生的最坏情况是什么？" class="headerlink" title="可能发生的最坏情况是什么？"></a>可能发生的最坏情况是什么？</h2><p>你发现自己错了，转而采取其他的行动。很多时候，你需要试错好多次之后才能找出正确的行动方向。在任何行动上耽误的时间越长，完成整个试错过程找出正确方向的用时也就越长。<br>有时候，当你完全不确定要做什么的时候，最好的行动就是做一些事情，然后在前进途中再调整方向。  </p>
+<ul>
+<li>现在要怎么做？</li>
+<li>阻拦我采取行动的障碍是什么？  </li>
+<li>如果我需要做出选择，我的选择会是什么？我要从哪些选项中做出选择？  </li>
+<li>做出了错误的选择会导致的最坏结果是什么？   </li>
+<li>如果我选择失误，我可以退回去选择其他选项吗？这么做的代价高吗？  </li>
+<li>选择之间的区别是否很大？我能选择可以立即采取行动的次优方案吗？  </li>
+<li>我当前面临的问题有助于自我发现吗？如果开始我采取一些行动，在我发现正确的行动之前，还能进行调整吗？  </li>
+<li>如果我不采取行动，会发生什么？会有什么代价？是浪费时间，错过机会，还是损失金钱？</li>
+</ul>
+<h2 id="怎样支配你的薪水"><a href="#怎样支配你的薪水" class="headerlink" title="怎样支配你的薪水"></a>怎样支配你的薪水</h2><h2 id="拒绝短期思维"><a href="#拒绝短期思维" class="headerlink" title="拒绝短期思维"></a>拒绝短期思维</h2><p>我们生活开销正好达到甚至超过我们的收入。这种财务方面的短期思维方式从来都不会让我们成功，因为我们挣的越多，花的也越多。</p>
+<h2 id="资产与负债"><a href="#资产与负债" class="headerlink" title="资产与负债"></a>资产与负债</h2><p>建立长远的理财思维，考虑物品的实际开销，而不是根据你每个月的收入多少来确定花销多少。<br>资产，是指实用价值高于维护成本的东西。也就意味着，一样东西如果有资格被定义为“资产”，必须能够带来比自身成本更高的价值。<br>负债，是指成本高于带来的价值的东西。也就是说，要保有“负债”，你不得不往外掏钱，但是你永远也拿不回来与自己掏出的钱一样多的钱。<br>任何能把钱装在你口袋里的东西才是资产，而任何需要你把钱从口袋里掏出来的东西都是负债。</p>
+<h2 id="健身"><a href="#健身" class="headerlink" title="健身"></a>健身</h2><ul>
+<li>每周逐步地增加你的跑步距离。开始你只需要短时间地走路或跑步，等训练计划结束时，你就能够跑完完整的5 km（尽管增长幅度不总是逐步的）。</li>
+</ul>
+<h2 id="信念"><a href="#信念" class="headerlink" title="信念"></a>信念</h2><ul>
+<li>那些想要改变自己信念、控制自己想法的人们，通过积极的正念可以将其想要的变为现实。</li>
+<li>如果想改变自己的态度，你就必须改变自己的想法。如果想改变自己的想法，你就必须转变自己的思维模式。你的思维模式是由你的习惯决定的，因此我们可以追溯到改变你生活中处理任何关键事情所采用的主要方式——养成一个习惯。但是，如何养成积极思考的习惯呢？大多数情况下，使用养成其他任何习惯的方法就能养成这个习惯——通过坚定地、持续不断地、有意识地重复做一件事情，直到由潜意识来掌握大局。</li>
+<li>如果你相信一件事能成功，只要坚持并强化这个信念，最终它就会变成现实。<h3 id="推荐书籍"><a href="#推荐书籍" class="headerlink" title="推荐书籍"></a>推荐书籍</h3>《人性的弱点》<br>《心里控制方法》<br>《代码大全》<br>《代码整洁之道》  <h2 id="积极面对失败"><a href="#积极面对失败" class="headerlink" title="积极面对失败"></a>积极面对失败</h2></li>
+</ul>
+<p><em>在生活中，也许你能学会让你更成功的所有技能，但是如果你缺少持之以恒这个重要的技能，一切都将是毫无意义的，因为那样的话刚一遇到麻烦你就会放弃——生活中我们都会面对很多麻烦。</em></p>
+<h3 id="为什么我们总是害怕失败？"><a href="#为什么我们总是害怕失败？" class="headerlink" title="为什么我们总是害怕失败？"></a>为什么我们总是害怕失败？</h3><ul>
+<li>畏惧失败似乎是大多数人的本能。人都喜欢做自己擅长的事情，逃避做那些自己不能胜任的或是缺乏技能的事情。我们似乎与生俱来就畏惧失败。</li>
+<li>害怕失败是基于保护脆弱的自尊的想法。或许我们害怕失败就是因为我们太过将失败归咎于个人，我们认为在特定领域下的失败是个人价值的流逝。</li>
+<li>失败并不是被打败，失败是通往成功的必经之路，它能带领我们离成功越来越近，首先不要害怕去尝试</li>
+</ul>
+<ul>
+<li>学会拥抱失败、期待失败、接受失败，并准备直面失败。失败并不能定义你的价值而你对待失败的态度恰恰才能说明你的价值 *</li>
+<li><ul>
+<li>那些你过去已经被告知的关于“你该如何生活”的狭窄的、笔直的道路，如你要取得好成绩、尽量不要搞砸了、上大学、找份工作然后安心工作50多年直到退休吧……并不是你可以走下去的唯一道路。当然，你也可以继续沿着过去被告知的那条道路前进，只要你愿意；不过，如果你正在读这本书，我相信你已经意识到，生活原本要比你所厌恶的朝九晚五的工作丰富多彩得多。 **<h2 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h2></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>学习和吸收信息的新方法，给了你足够的信心去超越自我。</li>
+<li>更有成效，更谨慎地管理和善用你的时间，并且能够激励你看到努力工作的价值，并付诸于实践。</li>
+<li>以某种方式去健身，更好地照顾自己的身体健康。</li>
+<li>意志力是多么强大、多么重要，你的头脑可以作为一种工具，要么推动你前进，要么在你来不及做出反应、来不及应用自己所学的时候就摧毁你的前程。你有能力成为你想成为的人，你也可以通过积极思考和坚持到底的力量重新塑造自己。</li>
+</ul>
+<p>至此，此书已阅读完成，暂告一段落，开始下一本书的征程。 -2020/1/18</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/blog/">blog</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/01/08/2020-01-09-idle/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">闲散颂</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/01/08/2020-02-06-weirdBehavior/">
+                        <span class="hidden-mobile">《怪诞行为学》系列读书笔记</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://xiaolong00.github.io/about" target="_blank" rel="nofollow noopener"><span>Raines blog</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>use hexo Fluid theme</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,583 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/comm/favicon.png">
+  <link rel="icon" type="image/png" href="/img/comm/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  <title>《怪诞行为学》系列读书笔记 - Hexo</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>小龙的跋涉</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="《怪诞行为学》系列读书笔记">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-01-08 00:09" pubdate>
+        2021年1月8日 凌晨
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      7k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      70
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">《怪诞行为学》系列读书笔记</h1>
+            
+            <div class="markdown-body">
+              <h2 id="出版社：中信出版集团"><a href="#出版社：中信出版集团" class="headerlink" title="出版社：中信出版集团"></a>出版社：中信出版集团</h2><h2 id="系列一：《怪诞行为学：可预测的非理性》片段"><a href="#系列一：《怪诞行为学：可预测的非理性》片段" class="headerlink" title="系列一：《怪诞行为学：可预测的非理性》片段"></a>系列一：《怪诞行为学：可预测的非理性》片段</h2><ul>
+<li><p>要想从中乃至从社会科学的总体上获取真正价值，对读者而言更重要的是，要花点儿时间想一想如何把实验里所确认的人类行为原理应用到你们的生活中去。我建议你们每读过一章后稍事停顿，考虑一下实验中揭示出的原理能让你在生活中有所得，还是有所失，更重要的是，在你有了对人类本性的新认识之后，将如何改变自己的行为。我们真正要探索的也正在于此。</p>
+</li>
+<li><p>人们很少做不加对比的选择。我们的心里并没有一个“内部价值计量器”来告诉我们某种物品真正的价值是多少。相反，我们关注的是这种物品与其他物品的相对优劣，以此来估算其价值。</p>
+</li>
+<li><p>富人嫉妒的是比自己更富有的人。</p>
+</li>
+<li><p>这就是相对论带来的问题——我们用相对的方法看待我们的决定，就近与现成的其他选择做比较。两支钢笔的差价使价格较低的钢笔的相对优势远远高于另一支，这个明显的答案让我们决定多花15分钟节省7美元。同时，两套西装的差价使那套价格较低的西装的相对优势显得很小，我们就愿意多花那7美元。</p>
+</li>
+<li><p>像这样拓宽视野不太容易，因为凭相对因素做决定是我们自然的思考方式。</p>
+</li>
+<li><p>一旦参与者愿意出价买某物，他们此后购买同类产品时就也会参照他第一次决定的出价（锚）做决定。 这也就是我们所谓的“任意的一致”。首次的出价大都是“任意”的，并可能受到任意问题答案的影响；可是一旦这些价格在我们的大脑中得到确立，它形成的便不仅是我们对某一产品的出价意愿，还包括我们对其他有关产品的出价意愿（这使它们一致）。</p>
+</li>
+<li><p>锚具有持续效应，对当前的价格是这样，对将来的价格也是如此。</p>
+</li>
+<li><p>基于其他人的行为来推断某事物的好坏，以决定我们是否仿效，这就是“羊群效应”。</p>
+</li>
+<li><p>从个人生活来说，我们有能力积极改进自己的非理性行为。我们可以从认识自己的脆弱开始。比如你打算买一个超薄手机（带300万像素、8倍变焦的数码摄像头），或者每天买一杯4美元的极品咖啡。你可以首先从质疑这种习惯开始。它是怎么开始的？同时，问一下自己，你能从中获取多大的快感。这一快感真的就如同你预期的那么大？你能不能把预算压低一点儿，更好地把省下的钱用在别处？事实上，你做一切事情都应该进行自我训练，质疑自己一再重复的行为。在手机的问题上，你能否从超薄型后退一步，减少点儿花费，把一部分钱用在别的地方？说到咖啡——不要问今天你想喝哪种极品混合咖啡，自问一下，你真的应该养成动辄来杯高价咖啡的习惯吗？</p>
+</li>
+<li><p>我们对价格变化的敏感度，实际在很大程度上可能是两种因素共同作用的结果——我们对过去价格的记忆，以及我们想与过去决定保持一致的欲望，根本不是对我们真正偏好或需求大小的体现。</p>
+</li>
+<li><p>免费最大的问题在于，它引诱你在它和另一件商品之间挣扎——并引导我们做出不明智的决定。举一个例子，假如你想去运动用品店买一双白袜子，就是后跟有结实的夹层，前面镶金线的那种。一刻钟以后，你从店里出来，手里拿的却不是你想买的那种袜子，而是另一双你一点儿也不喜欢的便宜货（后跟没有夹层，前面也没镶金线），但是它附赠一双免费袜子。在这个例子里，你放弃了更好的选择，买回了你原先不想要的东西，这完全是免费的诱惑！</p>
+</li>
+<li><p>多数交易都有有利的一面和不利的一面，但免费使我们忘记了不利的一面。免费给我们造成一种情绪冲动，让我们误认为免费的物品的价值大大高于它的事实价值。为什么？我认为这是由于人类本能地惧怕损失。免费的真正诱惑力是与这种惧怕心理联系在一起的。我们选择某一免费的物品不会有显而易见的损失，但是假如我们选择的物品是不免费的，那就会有风险，可能做出错误决定，可能蒙受损失。于是，如果让我们选择，我们就会尽量朝免费的方向去找。</p>
+</li>
+<li><p>零成本的吸引力不仅仅局限于现金交易。不管是物物交换还是现金交易，免费就像地心引力一样，实在让我们难以抗拒。</p>
+</li>
+<li><p>免费同样适用于时间领域。我们花在一件事上的时间，说到底，是从另一件事上转移过来的。如果我们花上45分钟排队等候品尝免费冰激凌的味道，或者花半个小时填一张长长的表格来领取一点儿回报，那我们就没法用这些时间去干别的事。</p>
+</li>
+<li><p>是怎么一回事？零美元怎么会比30美元更有吸引力？这是因为，提到了钱的问题，律师们用的是市场规范，认为报酬与他们的实际工资标准相比太少。没提到钱的问题时，他们用的是社会规范，所以他们愿意贡献时间。那么，为什么他们不干脆接受30美元，然后把自己假想为拿了30美元补贴的义工呢？这是因为，一旦市场规范进入我们的考虑之中，社会规范就随之而去了。</p>
+</li>
+<li><p>这些结果说明，如果要让市场规范起作用，提钱就足够了（即使不是现金）。</p>
+</li>
+<li><p>如果想把这段关系保持在社会规范之内，远离市场规范，那么这就是你必须付出的代价。</p>
+</li>
+<li><p>一个以社会规范为特征，一个以市场规范为特征。我们对这两个世界实行不同的规范标准。不仅如此，把市场规范引入社会规范，就如同我们前面所看到的，这违反了社会规范并且伤害了社会关系。一旦发生这样的错误，社会关系将难以恢复。</p>
+</li>
+<li><p>一旦社会规范与市场规范发生碰撞，社会规范就会退出。换言之，社会规范很难重建。一旦这朵盛开的玫瑰从枝头落下（一旦社会规范被市场规范打败）它就很难再发挥任何效力。</p>
+</li>
+<li><p>在非兴奋状态下，他们并不知道自己在兴奋状态下会怎样。预防、保护、节制以及道德感在雷达屏幕上全都消失了。他们没有能力预测激情会把他们改变到何种程度。</p>
+</li>
+<li><p>这些平素的好人都认为了解自己，但是在情绪极度亢奋时，一下子或一念之差，一切都变了。</p>
+</li>
+<li><p>抗拒诱惑困难，身陷诱惑之中与之斗争更困难。</p>
+</li>
+<li><p>拖沓问题人皆有之，那些认识到并承认自己弱点的人能够更好地利用设计好的工具帮助自己战胜它。 破釜沉舟，帮助自己战胜拖沓，这就是我和学生们的经验。它与日常生活有什么关系呢？我认为关系很大。抵御诱惑、灌输自制意识是人类总体的目标，一再失败、少有成功则是我们很多苦难的来源之一。我环顾周围，看到人们都在尽力做他们认为正确的事情，不管是发誓要远离点心盘子的节食者，还是发誓要少花钱、多储蓄的家庭，为自我控制进行的斗争到处都有。我们可以在书籍杂志、广播电台和电视里发现各种各样的自我完善和自助的信息。 但是，尽管有这些电波信息的传播和印刷品的集中关注，我们仍会看到自己处在和我的学生们同样的困境之中——一次又一次地无法达到我们的长远目标。为什么呢？因为缺乏破釜沉舟的决心，我们在诱惑面前一触即溃。</p>
+</li>
+<li><p>人类本性中的三大非理性怪癖</p>
+</li>
+<li><p>第一种怪癖，正如我们在篮球票案例中所看到的，我们对已经拥有的东西迷恋到不能自拔。</p>
+</li>
+<li><p>第二种怪癖，是我们总是把注意力集中到自己会失去什么上，而不是会得到什么上。</p>
+</li>
+<li><p>第三种怪癖，是我们经常假定别人看待交易的角度和我们一样。</p>
+</li>
+<li><p>用“非拥有心态”来看待每一桩交易（特别是大笔的），把自己和感兴趣的物件适当拉开距离。有了这样的努力，我不敢说能像印度托钵僧人那样，奉行对物质世界无欲无求的信条，但至少我可以尝试像禅宗弟子那样，对世间万物，尽量待之以平常心。</p>
+</li>
+<li><p>我们可能往往认识不到，无论哪种情况，保留余地的同时，我们也放弃了别的东西。结果是我们的电脑里有很多功能根本用不到，音响系统的保修费又高又多余。说到孩子，我们和他们都投入了太多时间——为了寻找孩子在某一方面的特长，让他们把一大堆活动都体验了一遍。我们为了一些不一定重要的事情疲于奔命，却忘记了在真正重要的事情上下功夫。这种傻瓜游戏得不偿失，但是我们偏偏喜欢玩</p>
+</li>
+<li><p>多种选择余地给我们造成了哪些困难？我们为什么非要给自己保留那么多的选择，即使这些选择要付出非常高的代价？我们为什么不能一心一意，全力以赴地做事呢？</p>
+</li>
+<li><p>他们同样带着非理性的冲动，竭力保持所有的选择余地。</p>
+</li>
+<li><p>我们非常奇怪，因为他们还是会把点击机会浪费在消失了却“可复活”的门上。尽管这无关紧要，很容易恢复，但一想到可能的损失他们就无法忍受，就要尽一切努力，不让可选择的任何一扇大门关闭。</p>
+</li>
+<li><p>我们有必要退出一些浪费时间的委员会，不要再给一些朋友寄送节日贺卡，因为他们有了新的生活、新的朋友。我们需要确定是否有时间去看篮球，是否能同时打高尔夫球和壁球，又能和家人在一起。我们或许应该把其中某些运动放一下。我们有必要把这些门关掉，因为这些事既费时费力还挤占了我们的参与机会，使我们无法顾及那些有价值的选择，并使我们疲惫不堪。</p>
+</li>
+<li><p>假如你把很多门都关了，只剩下两扇。你以为，这样你就容易选择了，但事实往往并非如此。事实上，在吸引力大致相同的两种选择中做取舍是最难的。在这种情形下，问题不仅在于保留选择时间的长短，还在于到头来我们要为自己的犹豫不决付出代价。</p>
+</li>
+<li><p>他们本可以更轻松地做出决定。他们甚至可以采取掷硬币猜正反面的方式来做决定（这是比喻，就像驴子的故事一样）。但是我们不会这样做，因为我们就是不愿意把这些门关上。</p>
+</li>
+<li><p>为什么会产生这么多暴力冲突？是历史、民族、政治方面的原因，还是我们本性中就存在某些非理性的东西，鼓励我们对抗，引导我们对同一事件根据自己的立场而采取完全不同的观察角度？</p>
+</li>
+<li><p>如果你直截了当地告诉人们某种东西可能味道不好，结果十有八九他们会跟着你走——他们之所以这样，不是因为体验，而是因为预期。</p>
+</li>
+<li><p>如果我们事先相信某种东西好，那它一般就会好（我们认为它不好，它也就会不好）。但是，这种影响到底有多深？它只是改变我们的信念，还是连实际体验的心理也一起改变了？换句话说，人们的预知能够改变对味道的辨别结果吗？我们预期某种东西味道好（或者不好），于是它就果真变成那样了吗？</p>
+</li>
+<li><p>如果蒙上顾客的眼睛让其进行品尝测试，这类配方未必有多大用处；但是事先给我们这种信息，用以改变我们的预期，却能有效地影响我们对味道的判断。</p>
+</li>
+<li><p>预期还可以形成成见。成见，说到底，这是人们希望用来预测体验，对信息进行分类的一种方式。大脑不能在每一种新环境下仅凭片段就开动，它必须建立在从前所收到过的信息基础上。由于这一原因，成见并不是从本质上就有害的。它为我们不断地理解周围复杂的环境提供了捷径。这就是为什么我们看到老年人用电脑，马上就会想到他们可能需要帮助，看到哈佛的学生就会想到他们一定很聪明的原因。 [1] 但是，因为成见给我们提供了对某一群体成员特定的预期，因而它也可能对我们的认识与行为产生不利影响。</p>
+</li>
+<li><p>在我们的实验里，尝酒前后都不知道加醋，与尝酒之后才知道加醋，都能品出酒的真正味道。这一方法也可以用来解决争端：双方不带偏见地提出各自的认识——只是揭示事实真相，而不去涉及是哪一方采取了什么行动。这种“蒙眼”状态有可能帮助我们更好地认识事情的原委。</p>
+</li>
+<li><p>总的来说，有两种机制能够形成预期，使安慰疗法与安慰剂起作用。其一是信念——我们对某种药品、某个手术或有关人员的信赖或信任。</p>
+</li>
+<li><p>第二个机制是条件反射。就像巴甫洛夫著名的条件反射实验（狗一听到铃响就流口水）一样，经过重复的体验，人的体内就能建立起一种期望。</p>
+</li>
+<li><p>那么，我们在价格上打了折扣，注定得到的东西就差更吗？如果我们依赖自己非理性的直觉，实际上就是这样。如果我们看到半价商品，我们本能地断定它的质量就比全价的差——事实上，是我们把它看得差了，它也就真的变差了。怎么纠正呢？如果我们定下心来，理性地拿产品与价格做一番比较，就能克服那种无意识的冲动，不再把产品的销售价格与内在质量挂钩了。</p>
+</li>
+<li><p>有了适当的机会，很多平日里诚实的人也会作弊。我们发现，坏了一锅汤的并不只是几条臭鱼，多数人都会作弊，但作弊的程度不高。</p>
+</li>
+<li><p>在诱惑下作弊，作弊的程度并不像人们通常认为的那样高，这可能与害怕被发现有直接关联。</p>
+</li>
+<li><p>离现金一步之遥的作弊最容易发生。</p>
+</li>
+<li><p>因为我们擅长把自己细微的不诚实想法和做法合理化，所以我们通常很难清楚地确定非现金事物对作弊的影响。例如，拿一支铅笔，我们可能推断办公用品是对员工的一部分补助，或者拿一两支铅笔之类的事人人都会干。我们会说，偶尔从公用电冰箱里拿一瓶可乐不算什么，因为有时我们自己的可乐也会被别人拿走。可能斯基林和法斯托等人认为篡改一下安然的账目也没有什么不可以的，因为那只不过是一种权宜措施，以后生意好转，再改回来就行了。谁知道呢？</p>
+</li>
+<li><p>象征货币不仅能给人们的某些道德约束“松绑”，还能使相当一部分人“松绑”得非常彻底，甚至到肆意作弊、毫无顾忌的地步。</p>
+</li>
+<li><p>我们了解到，只要有机会，人们就会作弊。但奇怪的是，我们多数人对此并无察觉。</p>
+</li>
+<li><p>交换介质一旦变成非货币的，我们为自己行为做出合理化解释的能力就会突飞猛进。</p>
+</li>
+<li><p>我们要认识到，一旦没有现金的直接提醒，我们就可能作弊，而且所达到的程度连我们自己都想象不到。我们必须唤醒自己，认识到这一切（不管是作为具体的个人、企业，还是作为一个国家），而且是越快越好，越早越好。</p>
+</li>
+<li><p>人们对酒类饮料的选择与同桌其他人不同的倾向，与被称作“独特需求”的人格特质之间的关联。从本质上说，那些注重表现自己独特性的人更可能点别人没点过的酒，以此来证明自己确实与众不同。</p>
+</li>
+<li><p>人们有时甘愿牺牲消费快感来突出自己在别人心目中的形象。人们在选择食品和饮料时好像有两个目标：要么能给自己带来最大享受，要么希望能在朋友心中留下自己某些正面的人格特质印象。问题在于，一旦他们做出选择，例如，点了菜，他们就必须勉强食用自己本来不喜欢的东西，从而陷入一种后悔莫及的境地。说到底，人，特别是那些独特需求旺盛的人，更有可能牺牲个人需求去换取名声需求。</p>
+</li>
+<li><p>我们都是棋盘上的小卒子，对棋局里的多种力量认识不多。我们通常认为自己稳坐在驾驶座上，对自己的决策，对自己生活的方向具有至高无上的操控能力；但是，可惜啊，这只是我们一厢情愿的认识，它反映的是我们的欲望，我们对自身想当然的认识，而不是现实。</p>
+</li>
+<li><p>尽管非理性司空见惯，但并不是说我们都无可救药了。一旦我们明白了自己的错误决定会发生在什么时间，源自什么地方，就可以提高警惕，强制自己从不同角度、用不同方式重新考虑这些决定，或者用科技手段来克服与生俱来的缺点</p>
+</li>
+<li><p>我建议说假如你要去酒吧，应当考虑带个伴儿，外貌、身材比你稍差一点儿。人们的评价行为都具有相对的特质，因此周围的人不但会认为你比你的“诱饵”朋友英俊潇洒，甚至还会觉得你风度翩翩，胜过酒吧里的其他所有人。根据同一逻辑，我还指出了事情的另一面，那就是如果有人请你陪伴他（她），你应该很容易推测出你朋友对你的评价。</p>
+</li>
+<li><p>要懂得相对论无处不在，我们对一切事物的观察都必然通过它的镜头，玫瑰色也好，其他色也罢。如果你在其他国家、其他城市遇到某个人，他（她）似乎对你有一种神秘的吸引力，你要明白这种吸引力可能仅限于特定的环境中。有了这样的认识，即使日后吸引力消失，你也不会感到失望。</p>
+</li>
+<li><p>人们对免费的东西都过分热衷，人们因此做出的决定往往对自己并非最有利。</p>
+</li>
+<li><p>如果你混淆了社会规范与市场规范，就会发生令人不快的事情。</p>
+</li>
+<li><p>市场规范内的理性行为，如果用社会规范来衡量，就会变得异乎寻常的非理性。</p>
+</li>
+<li><p>如果我们不能自我控制，有时候便会把需要立即做的事情一再拖延。但是，我们缺乏自制力还表现在另一方面，对有些应该放一放的事情我们却不厌其烦地费心处理——比如说，着魔似的一次又一次地检查电子邮箱里的邮件或手机短信。</p>
+</li>
+<li><p>在可变比率强化程式下，什么时候得到奖励是不可预期的。从表面上看，人们可能认为固定比率强化程式有更大的激励作用和奖励效果，因为老鼠（或者二手车销售经理）可以学会预测工作的奖励。结果与此相反，斯金纳发现，实际上可变比率强化程式的激励作用更大。最有说服力的结果是，一旦停止奖励，固定比率强化程式一组的老鼠几乎马上就会停止压杠杆，而可变比率强化程式一组的老鼠还会继续压很长的一段时间。</p>
+</li>
+<li><p>它提示出了几种摆脱斯金纳实验箱和可变比率强化程式的方法。我发现最有用的方法之一是关闭电子邮件的自动接收功能。我仍然可以接收邮件，但这样电脑就不能随时提示我又收到新邮件了（我心里会想，这其中肯定有我需要的和需要我处理的）。还有，我们还可以利用电脑的功能对收到的邮件设定不同颜色和声音。</p>
+</li>
+<li><p>我和其他人一样，在自我控制上也有非常多的困难，但我有个诀窍。我设法控制住其他方面的欲望，尽最大努力使自己能够忍受干扰素注射的痛苦。具体来说，我的办法就是看电影。 我酷爱看电影。如果有时间，我会天天看。在得知自己可能出现的副作用以后，我就下定决心，注射之前不看电影，等到打完针，能看多少就看多少，一直看到我睡着。</p>
+</li>
+<li><p>如果某一特定的预期行为将导致即时的负面结果（惩罚），那么这一行为将很难推进，即使最终结果（在我的这一个案例中为增进健康）的预期价值很高也不例外。归根结底，延迟满足这一问题的难点就在这里。毫无疑问，我们都知道经常锻炼、多吃蔬菜对健康有好处，即便我们无法像德拉尼姐妹那么长寿；但是，因为很难在我们的意识里保持一幅我们未来健康状况的生动画面，我们还是会忍不住伸手去拿甜甜圈。 为了克服人类易于犯错误的各种倾向，我认为寻求一些诀窍，用即时、有力、正面的强化因素与那些我们为了长远目标采取的、并非如此愉悦的步骤相匹配，这样做非常有用。就我来说，在副作用出现之前，先开始看电影，这帮助我抑制了治疗过程中的不适感。实际上，我把一切安排得恰到好处。刚打完针，我就按下开始（播放）键。假如当时副作用在先，按键在后，我未必能在那场漫长的拔河比赛中取得完全胜利。谁能说得准呢？假如我等到副作用出现后再开始放电影，我就可能建立一种负面关联，结果现在我可能就不那么喜欢看电影了。</p>
+</li>
+<li><p>我们对自己的东西估价过高这一倾向，是人类的一种基本偏见，反映出一种更为普遍的倾向，人们会对那些和自己有关的所有事物一见倾心、高看一眼。好好想一想——你是不是觉得自己车开得比一般人好，退休后也会比别人有钱，不大可能有高胆固醇，也不可能离婚，或者你在计时停车点泊车，计时表超过几分钟也不会被罚？这种正面偏见（心理学家给它起了另外一个名称：“沃比根湖效应”）源于收音机上盖瑞森·凯勒的系列流行歌曲《草原一家亲》。歌里唱道：“所有的女人都强壮，所有的男人都英俊，所有的孩子都超出一般聪明。”要让我们对自己孩子和房屋做出真正准确、客观的评价，我认为不大可能。但我们可以认识到自己存在这一偏见，认真听取别人的忠告和建议。</p>
+</li>
+<li><p>在生活中的许多领域，预期对我们最终体验事物的方式发挥着巨大的影响。想一下蒙娜丽莎这幅画。为什么这幅肖像如此美丽动人，这个女人的微笑如此神秘？你能辨别出利奥纳多·达·芬奇创作这幅画所需要的聪明才智和技巧吗？对我们大多数人来说，这幅画很美，笑容很神秘，但这都是听别人说的。没有专业的知识和完整的信息，我们只能从社会线索中寻求帮助，以求了解在多大程度上是，或者应该是，这幅画本身给我们的印象，其余的则由预期来决定。</p>
+</li>
+<li><p>正面预期会增强我们对周围世界的欣赏，改善我们对世界的观察力。不抱预期的危险在于，到头来，我们什么也得不到。</p>
+</li>
+<li><p>主动地、有意识地对难解、困惑以至受伤的事件进行正确解读，这一过程可以帮助人们从中摆脱出来。潘尼贝克在很多案例中，要求病人把自己的反思写在日记里，并发现这种做法非常有帮助。这意味着，即使外部事件不可理喻，我们只要尝试从自身所处的环境进行解读，就可以从尝试本身获益。</p>
+</li>
+<li><p>改变我们对新闻的消化方式，从被动接受改为主动对信息加以思考，进行正确的解读。</p>
+</li>
+<li><p>社会压力和金钱一样，也是一把双刃剑。它对人有激励作用，但是在公众的眼皮底下，压力就会增大，到了一定程度，压力就会占上风，抵消并压倒激励的有利作用。</p>
+</li>
+</ul>
+<h2 id="《怪诞行为学：非理性的积极力量》片段"><a href="#《怪诞行为学：非理性的积极力量》片段" class="headerlink" title="《怪诞行为学：非理性的积极力量》片段"></a>《怪诞行为学：非理性的积极力量》片段</h2>
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/blog/">blog</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/01/08/2020-01-16-softSkills/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">《软技能：代码之外的生存指南》读书笔记</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/01/08/2020-02-17-algorithms/">
+                        <span class="hidden-mobile">《算法图解》读书笔记</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://xiaolong00.github.io/about" target="_blank" rel="nofollow noopener"><span>Raines blog</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>use hexo Fluid theme</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>
