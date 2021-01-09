@@ -3,6 +3,7 @@ layout: post
 title: 计算机进制计算
 description: Java中高位转低位溢出的计算过程
 category: blog
+date: 2020-01-07 13:50:39
 ---
 
 ## Java基本数据类型

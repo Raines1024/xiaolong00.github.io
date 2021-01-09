@@ -3,6 +3,7 @@ layout: post
 title: 搭建Hadoop-2.9.2集群
 description: 
 category: blog
+date: 2020-01-07 13:50:39
 ---
 
 ## 准备

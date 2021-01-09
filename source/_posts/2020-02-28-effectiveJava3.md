@@ -3,6 +3,7 @@ layout: post
 title: 《Effective java 3》读书笔记
 description: 
 category: blog
+date: 2020-01-07 13:50:39
 ---
 
 ## 用静态工厂方法代替构造器

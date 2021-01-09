@@ -3,6 +3,7 @@ layout: post
 title: Flink入门
 description: 
 category: blog
+date: 2020-01-07 13:50:39
 ---
 
 - Mac OS X 上使用brew安装 Flink 

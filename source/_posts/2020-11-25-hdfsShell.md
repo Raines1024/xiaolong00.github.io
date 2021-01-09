@@ -3,6 +3,7 @@ layout: post
 title: HDFS常用Shell操作
 description: 
 category: blog
+date: 2020-01-07 13:50:39
 ---
 
 ## HDFS常用Shell操作

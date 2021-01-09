@@ -3,6 +3,7 @@ layout: post
 title: Java运行时数据区
 description: 主要参考书籍为《深入理解Java虚拟机》第三版
 category: blog
+date: 2020-01-07 13:50:39
 ---
 
 ## Java运行时数据区

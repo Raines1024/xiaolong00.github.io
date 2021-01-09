@@ -3,6 +3,7 @@ layout: post
 title: SpringBoot中使用Redis
 description: SpringBoot中使用Redis及常用配置和工具类
 category: blog
+date: 2020-01-07 13:50:39
 ---
 
 一、引入依赖： 

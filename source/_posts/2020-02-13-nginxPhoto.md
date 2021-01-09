@@ -3,6 +3,7 @@ layout: post
 title: 使用nginx搭建图片服务器
 description: 
 category: blog
+date: 2020-01-07 13:50:39
 ---
 
 ## nginx常用命令（路径替换为服务器具体路径）

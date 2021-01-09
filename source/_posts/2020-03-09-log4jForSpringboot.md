@@ -3,6 +3,7 @@ layout: post
 title: springboot日志体系---log4j2
 description: springboot下log4j2使用整理；maven依赖管理
 category: blog
+date: 2020-01-07 13:50:39
 ---
 
 ## springboot下log4j2日志的使用

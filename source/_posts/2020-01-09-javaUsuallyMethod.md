@@ -3,6 +3,7 @@ layout: post
 title: java常用方法
 description: web开发常用方法，快速开发、缩短工作时间必备
 category: blog
+date: 2020-01-07 13:50:39
 ---
 
 //集合转成字符串逗号分隔

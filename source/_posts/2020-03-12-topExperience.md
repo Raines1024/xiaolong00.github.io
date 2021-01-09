@@ -3,6 +3,7 @@ layout: post
 title: 在一个领域达到顶尖水平是怎样的体验
 description: 文章非常有借鉴和思考的价值，故转载学习。
 category: blog
+date: 2020-01-07 13:50:39
 ---
 
 

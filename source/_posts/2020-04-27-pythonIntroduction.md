@@ -3,6 +3,7 @@ layout: post
 title: Python入门
 description: 一起学Python系列（一）
 category: blog
+date: 2020-01-07 13:50:39
 ---
 
 ## 翻到以前阅读过的博客的一段话  

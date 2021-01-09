@@ -3,6 +3,7 @@ layout: post
 title: 《有钱人和你想的不一样》读书笔记
 description: 成功人士都具有马上行动的执行力。
 category: blog
+date: 2020-01-07 13:50:39
 ---
 
 ## 片段

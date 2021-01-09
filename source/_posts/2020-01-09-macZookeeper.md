@@ -2,6 +2,7 @@
 layout: post
 title: Mac安装并运行Zookeeper
 category: blog
+date: 2020-01-07 13:50:39
 ---
 
 ### 一、zookeeper下载地址：选择的是 3.4.14

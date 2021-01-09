@@ -3,6 +3,7 @@ layout: post
 title: IDEA查看类关系图
 description: 如何使用idea查看类关系图
 category: blog
+date: 2020-01-07 13:50:39
 ---
 
 ## idea-mac-查看类关系图

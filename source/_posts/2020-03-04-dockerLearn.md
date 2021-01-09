@@ -3,6 +3,7 @@ layout: post
 title: docker入门（一）
 description: Centos环境下安装及使用
 category: blog
+date: 2020-01-07 13:50:39
 ---
 
 ## 安装docker

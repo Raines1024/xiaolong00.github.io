@@ -3,6 +3,7 @@ layout: post
 title: 北欧教育模式，为何深受世界推崇？
 description: 每日英语
 category: blog
+date: 2020-01-07 13:50:39
 ---
 
 ### This Is How Scandinavia Got Great  斯堪的纳维亚国家崛起的原因

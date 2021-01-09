@@ -3,6 +3,7 @@ layout: post
 title: 每日英语
 description: 分数与能力 Score and Ability
 category: blog
+date: 2020-01-07 13:50:39
 ---
 
 ### 单词

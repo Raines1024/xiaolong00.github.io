@@ -3,6 +3,7 @@ layout: post
 title: CentOS必知必会
 description: CentOS学习
 category: blog
+date: 2020-01-07 13:50:39
 ---
 
 ## centos安装rzsz

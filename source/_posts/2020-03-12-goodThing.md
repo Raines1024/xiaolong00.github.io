@@ -3,6 +3,7 @@ layout: post
 title: 但行好事，莫问前程
 description: 郭德纲写给儿子：但行好事，莫问前程
 category: blog
+date: 2020-01-07 13:50:39
 ---
 
 ## 但行好事 莫问前程

@@ -3,6 +3,7 @@ layout: post
 title: 用高阶函数做抽象
 description: 主要参考书籍为《计算机程序的构造和解释》，改用Java语言重写
 category: blog
+date: 2020-01-07 13:50:39
 ---
 
 ## 以计算数值为例

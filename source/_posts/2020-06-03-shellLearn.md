@@ -3,6 +3,7 @@ layout: post
 title: Shell使用
 description: 
 category: blog
+date: 2020-01-07 13:50:39
 ---
 
 ## zsh与bash切换

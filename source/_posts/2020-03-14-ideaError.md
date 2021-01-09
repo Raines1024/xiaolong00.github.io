@@ -3,6 +3,7 @@ layout: post
 title: IDEA报错解决方案
 description: 
 category: blog
+date: 2020-01-07 13:50:39
 ---
 
 ## Error:java: Compilation failed: internal java compiler error  

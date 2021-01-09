@@ -3,6 +3,7 @@ layout: post
 title: 《番茄工作法》读书笔记
 description: 使今天所得，看破明天所得
 category: blog
+date: 2020-01-07 13:50:39
 ---
 
 ## 番茄工作法  https://book.douban.com/subject/34820460/
