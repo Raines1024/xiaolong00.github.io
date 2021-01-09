@@ -181,19 +181,19 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/01/08/2020-11-25-jdgui/">JD-GUI反编译工具使用</a>
+        <a href="/2021/01/09/2020-02-28-effectiveJava3/">《Effective java 3》读书笔记</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/01/08/2020-11-25-jdgui/">
+        <a href="/2021/01/09/2020-02-28-effectiveJava3/">
           
           
             
           
-          从服务器下载jar到本地sz *.jar
-解压jar包解压jar包至文件夹
-下载JD-GUI反编译工具打开JD-GUI，选择.class文件后打开
+          用静态工厂方法代替构造器当构造方法参数过多时使用builder模式构造方法参数过多解决方案：  
 
+重叠构造器模式：简而言之，重叠构造器模式可行，但是当有许多参数的时候，客户端代码会很难缩写，并且仍然较难以阅读。  
+JavaBeans模式，在这种模式下，先调用一个无参构造器来创建对象，然后再调用setter方法来设置每个必要的参数，以及每个相关的可选参数。缺点也却而易见：因为构造过程被分到了几个
         </a>
       </p>
 
@@ -201,8 +201,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-01-08 09:40" pubdate>
-              2021-01-08
+            <time datetime="2021-01-09 03:43" pubdate>
+              2021-01-09
             </time>
           </div>
         
@@ -225,19 +225,30 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/01/08/2020-11-25-ssh/">两台CentOS服务器配置ssh无密码登陆</a>
+        <a href="/2021/01/09/2020-03-04-dockerLearn/">docker入门（一）</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/01/08/2020-11-25-ssh/">
+        <a href="/2021/01/09/2020-03-04-dockerLearn/">
           
           
             
           
-          两台CentOS服务器配置ssh无密码登陆问题：两台CentOS服务器，IP分别为192.168.1.11、192.168.1.12（下面用11、12简称两台服务器），在12上配置test用户ssh无需要密码即可登陆11的root用户。解决
-用test用户登陆12
-ssh-keygen -t rsa生成密码
-在/home/test/.ssh下生成了密钥对：id_rsa为私钥，id_rsa.pub为
+          安装docker
+官网步骤安装  
+yum安装yum install docker  
+
+
+启动systemctl start docker  
+查看安装的docker版本docker version  
+
+
+https://www.cnblogs.com/hellxz/p/11044012.html
+
+springboot初使用目录结构.
+├── pom.xml
+└── src
+    └── 
         </a>
       </p>
 
@@ -245,8 +256,8 @@ ssh-keygen -t rsa生成密码
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-01-08 09:40" pubdate>
-              2021-01-08
+            <time datetime="2021-01-09 03:43" pubdate>
+              2021-01-09
             </time>
           </div>
         
@@ -269,19 +280,22 @@ ssh-keygen -t rsa生成密码
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/01/08/2020-12-02-bigdataBuild/">搭建Hadoop-2.9.2集群</a>
+        <a href="/2021/01/09/2020-03-06-computerCount/">计算机进制计算</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/01/08/2020-12-02-bigdataBuild/">
+        <a href="/2021/01/09/2020-03-06-computerCount/">
           
           
             
           
-          准备在安装 Hadoop 之前，请确认集群的每台机器上均安装 JDK，以及搭配环境变量。
-添加Java环境变量vim ~/.bash_profile  
-
-123456789101112131415# Java EnvironmentJAVA_HOME=/usr/java/latestJRE_HOME=$&#123;JAVA_HOME&#125;/jreCLASSPATH=.:$&#123;JAV
+          Java基本数据类型Java语言提供了八种基本类型。六种数字类型（四个整数型，两个浮点型），一种字符类型，还有一种布尔型。  
+byte：
+byte 数据类型是8位、有符号的，以二进制补码表示的整数；  
+最小值是 -128（-2^7）；  
+最大值是 127（2^7-1）；  
+默认值是 0；  
+byte 类型用在大型数组中节约空间，主要代替整数，因为 byte 变量占用的空间只有 int 类
         </a>
       </p>
 
@@ -289,8 +303,8 @@ ssh-keygen -t rsa生成密码
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-01-08 09:40" pubdate>
-              2021-01-08
+            <time datetime="2021-01-09 03:43" pubdate>
+              2021-01-09
             </time>
           </div>
         
@@ -313,16 +327,22 @@ ssh-keygen -t rsa生成密码
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/01/08/2020-12-03-flink/">搭建Flink-1.11.2集群</a>
+        <a href="/2021/01/09/2020-03-07-memoryCount/">Java中对象占用内存大小计算</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/01/08/2020-12-03-flink/">
+        <a href="/2021/01/09/2020-03-07-memoryCount/">
           
           
             
           
-          以Flink on YARN模式启动把 Flink 运行在 YARN 上有两种方式，第一种方式是建立一个长期运行的 Flink YARN Session，然后向这个 Session 提交 Flink Job，多个任务同时运行时会共享资源。第二种方式是为单个任务启动一个 Flink 集群，这个任务会独占 Flink 集群的所有资源，任务结束即代表集群被回收。另外，Flink on YARN 模式需要
+          回顾byte与bit1个字节占8位bit：位，比特。信息的最小单位，二进制数中的一个位数(二进制位)，其值为“0”或“1”；byte: 字节。计算机文件大小的基本计算单位
+原码：正数本身，负数，正数对应的二进制最高位为1(负)。  
+反码：正数本身，负数，符号位不变，其余各位取反。  
+补码：正数本身，负数：反码+1。  
+0的反码、补码都为零。  
+
+注意:Java中的char占两个字节，而c语
         </a>
       </p>
 
@@ -330,8 +350,8 @@ ssh-keygen -t rsa生成密码
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-01-08 09:40" pubdate>
-              2021-01-08
+            <time datetime="2021-01-09 03:43" pubdate>
+              2021-01-09
             </time>
           </div>
         
@@ -354,17 +374,21 @@ ssh-keygen -t rsa生成密码
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/01/08/2020-12-09-mvnshade/">maven-shade-plugin入门指南</a>
+        <a href="/2021/01/09/2020-03-08-spark/">Spark环境搭建及helloCount</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/01/08/2020-12-09-mvnshade/">
+        <a href="/2021/01/09/2020-03-08-spark/">
           
           
             
           
-          有时候，需要将复杂的项目，包括各种xml文件属性文件， 类， jar等等打包到一个可以执行的jar包中， 然后用java -jar  xxx.jar 来运行项目，这样简单方便，特别是在编写一些测试工具时，尤为重要。但是经常发现打包后的项目无法启动， 其中一大类是您项目有问题， 但是这个相对好解决。通过 maven-shade-plugin 生成的jar包，它包含所有的依赖 jar 包。
-使用配置 
+          环境centos查看centos版本rpm -q centos-release  
+更换centos默认镜像库163链接[http://mirrors.163.com/.help/centos.html]  
+
+首先备份/etc/yum.repos.d/CentOS-Base.repo  
+
+mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d
         </a>
       </p>
 
@@ -372,8 +396,8 @@ ssh-keygen -t rsa生成密码
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-01-08 09:40" pubdate>
-              2021-01-08
+            <time datetime="2021-01-09 03:43" pubdate>
+              2021-01-09
             </time>
           </div>
         
@@ -396,19 +420,22 @@ ssh-keygen -t rsa生成密码
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/01/08/2020-12-21-design1/">观察者模式</a>
+        <a href="/2021/01/09/2020-03-09-log4jForSpringboot/">springboot日志体系---log4j2</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/01/08/2020-12-21-design1/">
+        <a href="/2021/01/09/2020-03-09-log4jForSpringboot/">
           
           
             
           
-          创建被观察对象抽象主题接口
-对观察者的操作。必需功能有观察者的注册、删除以及主题状态发生改变时通知观察者
+          springboot下log4j2日志的使用
+将springboot内置日志去掉，并引入log4j2  
 
-1234567891011121314151617181920212223242526package watch;/** * 主题 */public interface Subject &#123;    /**     * 注册观察者     * @param o 观察者     */  
+&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;
+  
         </a>
       </p>
 
@@ -416,8 +443,8 @@ ssh-keygen -t rsa生成密码
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-01-08 09:40" pubdate>
-              2021-01-08
+            <time datetime="2021-01-09 03:43" pubdate>
+              2021-01-09
             </time>
           </div>
         
@@ -440,17 +467,16 @@ ssh-keygen -t rsa生成密码
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/01/08/2020-12-22-springboot/">工作中的Spring</a>
+        <a href="/2021/01/09/2020-03-09-marchSummary/">三月概述</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/01/08/2020-12-22-springboot/">
+        <a href="/2021/01/09/2020-03-09-marchSummary/">
           
           
             
           
-          Springboot项目上传大文件所需配置application.properties配置：spring.servlet.multipart.max-file-size=128MBspring.servlet.multipart.max-request-size=128MBspring.servlet.multipart.enabled=true
-
+          二月总结这个总结似乎晚了一些。人最怕的就是东一榔头，西一榔头，看似忙到精疲力尽，感动了自己，殊不知最终毫无收获：首先，不需钻研思考便能轻易弄懂的问题，并没有太多的含金量；其次，时间浪费在了寻找和浅尝辄止上；最终，遂成不喜思考的习惯，贻误终生。每一个难点都是你的成长点，一定要搞明白，不搞明白，碰到的都是自己熟知的问题，处于游刃有余的自乐中，最终难免成为被温水煮的那只青蛙。反而，搞明白后收获的不仅仅是
         </a>
       </p>
 
@@ -458,8 +484,8 @@ ssh-keygen -t rsa生成密码
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-01-08 09:40" pubdate>
-              2021-01-08
+            <time datetime="2021-01-09 03:43" pubdate>
+              2021-01-09
             </time>
           </div>
         
@@ -482,18 +508,18 @@ ssh-keygen -t rsa生成密码
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/01/08/2020-12-23-design2/">装饰者模式</a>
+        <a href="/2021/01/09/2020-03-09-maven/">maven常用整理</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/01/08/2020-12-23-design2/">
+        <a href="/2021/01/09/2020-03-09-maven/">
           
           
             
           
-          简介装饰器模式（Decorator Pattern）允许向一个现有的对象添加新的功能，同时又不改变其结构。装饰者模式动态地将责任附加到对象上，若要扩展功能，装饰者提供了比继承更有弹性的替代方案。  
-类图Componet每个组件（ConcreteComponent）都可以单独使用，或者被装饰者包起来使用
-实现定义抽象组件（超类）123456789101112131415161718192021pa
+          mac系统删除本地仓库中所有的.lastUpdatedfind ~/.m2/repository -name &quot;*.lastUpdated&quot; -exec grep -q &quot;Could not transfer&quot; &#123;&#125; \; -print -exec rm &#123;&#125; \;
+阿里maven库mirrors节点下添加如下配置
+1
         </a>
       </p>
 
@@ -501,8 +527,8 @@ ssh-keygen -t rsa生成密码
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-01-08 09:40" pubdate>
-              2021-01-08
+            <time datetime="2021-01-09 03:43" pubdate>
+              2021-01-09
             </time>
           </div>
         
@@ -525,16 +551,16 @@ ssh-keygen -t rsa生成密码
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/01/08/2020-12-26-pyparallel/">python 多进程初探</a>
+        <a href="/2021/01/09/2020-03-09-sparkRDD/">RDD操作详解</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/01/08/2020-12-26-pyparallel/">
+        <a href="/2021/01/09/2020-03-09-sparkRDD/">
           
           
             
           
-          简介
+          
         </a>
       </p>
 
@@ -542,8 +568,8 @@ ssh-keygen -t rsa生成密码
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-01-08 09:40" pubdate>
-              2021-01-08
+            <time datetime="2021-01-09 03:43" pubdate>
+              2021-01-09
             </time>
           </div>
         
@@ -566,22 +592,16 @@ ssh-keygen -t rsa生成密码
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/01/08/2020-12-29-design3/">工厂模式</a>
+        <a href="/2021/01/09/2020-03-10-everydayEnglish/">每日英语</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/01/08/2020-12-29-design3/">
+        <a href="/2021/01/09/2020-03-10-everydayEnglish/">
           
           
             
           
-          简介工厂方法和抽象工厂模式可以将对象的创建封装起来，以便于得到更松耦合、更有弹性的设计。
-工厂方法模式定义了一个创建对象的接口，但由子类决定要实例化的类是哪一个。工厂方法让类把实例化推迟到子类。
-抽象工厂模式提供一个接口，用于创建相关或依赖对象的家族，而不需要明确指定具体类。
-要点
-所有的工厂都是用来封装对象的创建。  
-工厂方法使用继承：把对象的创建委托给子类，子类实现工厂方法来创建对象。
-抽象
+          单词12345678910hard  [hɑːd]  adj.坚固的;坚硬的;结实的;难做的;难懂的;难以回答的;困苦的;艰苦的;艰难的      adv.努力地;费力地;艰难地;猛力地;猛烈地;彻底认真地realize  [ˈriːəlaɪz]  v.理解;领会;认识到;意识到;实现;将…变为现实;(所担心的事)发生，产生contribution  [ˌkɑːntrɪˈbjuːʃn]  n.捐款
         </a>
       </p>
 
@@ -589,8 +609,8 @@ ssh-keygen -t rsa生成密码
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-01-08 09:40" pubdate>
-              2021-01-08
+            <time datetime="2021-01-09 03:43" pubdate>
+              2021-01-09
             </time>
           </div>
         

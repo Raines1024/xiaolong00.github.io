@@ -1,0 +1,590 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/comm/favicon.png">
+  <link rel="icon" type="image/png" href="/img/comm/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  <title>docker入门（一） - Hexo</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/darcula.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>小龙的跋涉</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="docker入门（一）">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-01-09 03:43" pubdate>
+        2021年1月9日 凌晨
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      962 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      14
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">docker入门（一）</h1>
+            
+            <div class="markdown-body">
+              <h2 id="安装docker"><a href="#安装docker" class="headerlink" title="安装docker"></a>安装docker</h2><ol>
+<li>官网步骤安装  </li>
+<li>yum安装<br>yum install docker  </li>
+</ol>
+<ul>
+<li>启动<br>systemctl start docker  </li>
+<li>查看安装的docker版本<br>docker version  </li>
+</ul>
+<ol start="3">
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/hellxz/p/11044012.html">https://www.cnblogs.com/hellxz/p/11044012.html</a></li>
+</ol>
+<h2 id="springboot初使用"><a href="#springboot初使用" class="headerlink" title="springboot初使用"></a>springboot初使用</h2><h3 id="目录结构"><a href="#目录结构" class="headerlink" title="目录结构"></a>目录结构</h3><div class="hljs code-wrapper"><pre><code>.
+├── pom.xml
+└── src
+    └── main
+        ├── docker
+        │   └── Dockerfile
+        ├── java
+        │   └── com
+        │       └── docker
+        │           └── DockerApplication.java
+        └── resources
+            └── application.properties</code></pre></div>
+<h3 id="pom-xml"><a href="#pom-xml" class="headerlink" title="pom.xml"></a>pom.xml</h3><ul>
+<li><p>properties节点中设置docker镜像的前缀“springboot”：</p>
+</li>
+<li><p>加入maven插件“docker-maven-plugin”： </p>
+</li>
+</ul>
+<div class="hljs code-wrapper"><pre><code>&lt;build&gt;
+    &lt;plugins&gt;
+        &lt;plugin&gt;
+            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-boot-maven-plugin&lt;/artifactId&gt;
+        &lt;/plugin&gt;
+        &lt;plugin&gt;
+            &lt;groupId&gt;com.spotify&lt;/groupId&gt;
+            &lt;artifactId&gt;docker-maven-plugin&lt;/artifactId&gt;
+            &lt;version&gt;0.4.3&lt;/version&gt;
+            &lt;configuration&gt;
+                &lt;imageName&gt;$&#123;docker.image.prefix&#125;/$&#123;project.artifactId&#125;&lt;/imageName&gt;
+                &lt;dockerDirectory&gt;src/main/docker&lt;/dockerDirectory&gt;
+                &lt;resources&gt;
+                    &lt;resource&gt;
+                        &lt;targetPath&gt;/&lt;/targetPath&gt;
+                        &lt;directory&gt;$&#123;project.build.directory&#125;&lt;/directory&gt;
+                        &lt;include&gt;$&#123;project.build.finalName&#125;.jar&lt;/include&gt;
+                    &lt;/resource&gt;
+                &lt;/resources&gt;
+            &lt;/configuration&gt;
+        &lt;/plugin&gt;
+    &lt;/plugins&gt;
+&lt;/build&gt;</code></pre></div>
+<h3 id="创建“src-main-docker-Dockerfile”文件："><a href="#创建“src-main-docker-Dockerfile”文件：" class="headerlink" title="创建“src/main/docker/Dockerfile”文件："></a>创建“src/main/docker/Dockerfile”文件：</h3><div class="hljs code-wrapper"><pre><code>FROM frolvlad/alpine-oraclejdk8:slim
+VOLUME /tmp
+ADD spring12.jar app.jar
+RUN sh -c &#39;touch /app.jar&#39;
+ENV JAVA_OPTS=&quot;&quot;
+ENTRYPOINT [ &quot;sh&quot;, &quot;-c&quot;, &quot;java $JAVA_OPTS -Djava.security.egd=file:/dev/./urandom -jar /app.jar&quot; ]</code></pre></div>
+<p>FROM为使用哪个镜像</p>
+<p>VOLUME为挂载路径</p>
+<p>ADD为复制文件到镜像中</p>
+<p>RUN为初始化时运行的命令</p>
+<p>ENV为设置环境变量</p>
+<p>ENTRYPOINT为启动时运行的命令</p>
+<h2 id="使用Docker部署服务"><a href="#使用Docker部署服务" class="headerlink" title="使用Docker部署服务"></a>使用Docker部署服务</h2><h3 id="所需环境"><a href="#所需环境" class="headerlink" title="所需环境"></a>所需环境</h3><p>jdk，maven<br>安装成功标志：<br>java -version<br>mvn -version  </p>
+<h3 id="生成镜像并运行"><a href="#生成镜像并运行" class="headerlink" title="生成镜像并运行"></a>生成镜像并运行</h3><ol>
+<li>将src文件和pom放在任意文件夹下，执行命令  </li>
+</ol>
+<div class="hljs code-wrapper"><pre><code>mvn package docker:build</code></pre></div>
+<ol start="2">
+<li>查看镜像  </li>
+</ol>
+<div class="hljs code-wrapper"><pre><code>docker images</code></pre></div>
+<p>docker中存在的镜像、标签、镜像ID、已经创建的时间和大小，看下springboot/raines-learn 这个是在pom中<imageName>${docker.image.prefix}/${project.artifactId}</imageName>配置的，比较重要，因为它和接下来要讲的将镜像提交到DockerHub有着密切的联系。</p>
+<ol start="3">
+<li>运行镜像<br>启动服务  </li>
+</ol>
+<div class="hljs code-wrapper"><pre><code>docker run -d -p 8765:8080 springboot/raines-learn </code></pre></div>
+<ul>
+<li>解释下这个命令  </li>
+</ul>
+<p>-d 代表后台运行<br>-p 标识宿主机与docker服务的端口映射，注意谁前谁后：【宿主端口：docker内服务端口】<br>springboot/raines-learn 就是启动镜像的名称，当然了使用IMAGE ID 也是可以的</p>
+<ol start="4">
+<li>查看docker是否将服务启动成功</li>
+</ol>
+<div class="hljs code-wrapper"><pre><code>docker ps</code></pre></div>
+<ul>
+<li>解释<br>CONTAINER ID 容器ID<br>PORTS宿主与docker内部的服务映射<br>NAMES 容器名称，跟容器ID对应，如果你不指定名称的话，docker会随机给你分配一个name  </li>
+</ul>
+<h2 id="推送到DockerHub"><a href="#推送到DockerHub" class="headerlink" title="推送到DockerHub"></a>推送到DockerHub</h2><h3 id="地址"><a href="#地址" class="headerlink" title="地址"></a>地址</h3><p><a target="_blank" rel="noopener" href="https://hub.docker.com/">https://hub.docker.com/</a></p>
+<h3 id="登录"><a href="#登录" class="headerlink" title="登录"></a>登录</h3><p>docker login -u[用户名] -p[密码]</p>
+<h3 id="推送到DockerHub-1"><a href="#推送到DockerHub-1" class="headerlink" title="推送到DockerHub"></a>推送到DockerHub</h3><p>docker push springboot/raines-learn:latest<br>latest是tag，相当于版本号<br>[denied: requested access to the resource is denied]解决方案：<br>docker tag : 标记本地镜像，将其归入某一仓库。<br>docker tag [OPTIONS] IMAGE[:TAG] [REGISTRYHOST/][USERNAME/]NAME[:TAG]<br>eg: docker tag springboot/raines-learn:latest 1150079039/raines-learn:v1<br>此处的1150079039需要改为你的用户名  </p>
+<h3 id="拉取镜像"><a href="#拉取镜像" class="headerlink" title="拉取镜像"></a>拉取镜像</h3><p>docker pull springboot/raines-learn</p>
+<h2 id="docker常用命令"><a href="#docker常用命令" class="headerlink" title="docker常用命令"></a>docker常用命令</h2><h3 id="images"><a href="#images" class="headerlink" title="images"></a>images</h3><ul>
+<li>搜索image</li>
+</ul>
+<div class="hljs code-wrapper"><pre><code>docker search image_name</code></pre></div>
+<ul>
+<li>下载image</li>
+</ul>
+<div class="hljs code-wrapper"><pre><code>docker pull image_name</code></pre></div>
+<ul>
+<li>列出镜像列表</li>
+</ul>
+<div class="hljs code-wrapper"><pre><code>docker images</code></pre></div>
+<ul>
+<li>删除images</li>
+</ul>
+<div class="hljs code-wrapper"><pre><code>docker rmi &lt;image id&gt;</code></pre></div>
+<ul>
+<li>删除images id 为none的</li>
+</ul>
+<div class="hljs code-wrapper"><pre><code>docker rmi $(docker images | grep &quot;^&lt;none&gt;&quot; | awk &quot;&#123;print $3&#125;&quot;)</code></pre></div>
+<ul>
+<li>删除全部image</li>
+</ul>
+<div class="hljs code-wrapper"><pre><code>docker rmi $(docker images -q)</code></pre></div>
+<ul>
+<li>显示一个镜像的历史</li>
+</ul>
+<div class="hljs code-wrapper"><pre><code>docker history image_name</code></pre></div>
+<h3 id="container"><a href="#container" class="headerlink" title="container"></a>container</h3><ul>
+<li>列出当前所有正在运行的container</li>
+</ul>
+<div class="hljs code-wrapper"><pre><code>docker ps</code></pre></div>
+<ul>
+<li>列出所有的container</li>
+</ul>
+<div class="hljs code-wrapper"><pre><code>docker ps -a</code></pre></div>
+<ul>
+<li>列出最近一次启动的container</li>
+</ul>
+<div class="hljs code-wrapper"><pre><code>docker ps -l</code></pre></div>
+<ul>
+<li>停止所有的container，这样才能够删除其中的images：</li>
+</ul>
+<div class="hljs code-wrapper"><pre><code>docker stop $(docker ps -a -q)</code></pre></div>
+<ul>
+<li>删除所有container：</li>
+</ul>
+<div class="hljs code-wrapper"><pre><code>docker rm $(docker ps -a -q)</code></pre></div>
+<h2 id="Docker-快速删除所有容器"><a href="#Docker-快速删除所有容器" class="headerlink" title="Docker 快速删除所有容器"></a>Docker 快速删除所有容器</h2><ul>
+<li>查看运行容器<br>docker ps  </li>
+<li>查看所有容器<br>docker ps -a  </li>
+<li>进入容器,其中字符串为容器ID:<br>docker exec -it d27bd3008ad9 /bin/bash  </li>
+</ul>
+<ol>
+<li>停用全部运行中的容器:<br>docker stop $(docker ps -q)  </li>
+<li>删除全部容器：<br>docker rm $(docker ps -aq)  </li>
+<li>一条命令实现停用并删除容器：<br>docker stop $(docker ps -q) &amp; docker rm $(docker ps -aq)  </li>
+</ol>
+<h2 id="删除所有none镜像"><a href="#删除所有none镜像" class="headerlink" title="删除所有none镜像"></a>删除所有none镜像</h2><p>docker rmi $(docker images | grep “none” | awk ‘{print $3}’) </p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/blog/">blog</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/01/09/2020-02-28-effectiveJava3/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">《Effective java 3》读书笔记</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/01/09/2020-03-06-computerCount/">
+                        <span class="hidden-mobile">计算机进制计算</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://xiaolong00.github.io/about" target="_blank" rel="nofollow noopener"><span>Raines blog</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>use hexo Fluid theme</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/hibiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.7},"log":false});</script></body>
+</html>

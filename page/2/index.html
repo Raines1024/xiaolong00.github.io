@@ -181,16 +181,17 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/01/08/2020-03-30-getSendBody/">谁说 HTTP GET 就不能通过 Body 来发送数据呢？</a>
+        <a href="/2021/01/09/2020-12-09-mvnshade/">maven-shade-plugin入门指南</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/01/08/2020-03-30-getSendBody/">
+        <a href="/2021/01/09/2020-12-09-mvnshade/">
           
           
             
           
-          转载地址https://yanbin.blog/why-http-get-cannot-sent-data-with-reuqest-body/当我们被问及 HTTP 的 GET 与 POST 两种请求方式的区别的时候，很多答案是说 GET 的数据须通过 URL 以 Query Parameter 来传送，而 POST 可以通过请求体来发送数据，所以因 URL 的受限，往往 GET 无法发送太多的
+          有时候，需要将复杂的项目，包括各种xml文件属性文件， 类， jar等等打包到一个可以执行的jar包中， 然后用java -jar  xxx.jar 来运行项目，这样简单方便，特别是在编写一些测试工具时，尤为重要。但是经常发现打包后的项目无法启动， 其中一大类是您项目有问题， 但是这个相对好解决。通过 maven-shade-plugin 生成的jar包，它包含所有的依赖 jar 包。
+使用配置 
         </a>
       </p>
 
@@ -198,8 +199,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-01-08 09:40" pubdate>
-              2021-01-08
+            <time datetime="2021-01-09 03:43" pubdate>
+              2021-01-09
             </time>
           </div>
         
@@ -222,17 +223,19 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/01/08/2020-03-30-whyLearnComputerScience/"></a>
+        <a href="/2021/01/09/2020-12-02-bigdataBuild/">搭建Hadoop-2.9.2集群</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/01/08/2020-03-30-whyLearnComputerScience/">
+        <a href="/2021/01/09/2020-12-02-bigdataBuild/">
           
           
             
           
-          转载地址https://teachyourselfcs.com/中文翻译地址https://github.com/keithnull/TeachYourselfCS-CN/blob/master/TeachYourselfCS-CN.md  
-先挖个坑，以后再补
+          准备在安装 Hadoop 之前，请确认集群的每台机器上均安装 JDK，以及搭配环境变量。
+添加Java环境变量vim ~/.bash_profile  
+
+123456789101112131415# Java EnvironmentJAVA_HOME=/usr/java/latestJRE_HOME=$&#123;JAVA_HOME&#125;/jreCLASSPATH=.:$&#123;JAV
         </a>
       </p>
 
@@ -240,47 +243,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-01-08 09:40" pubdate>
-              2021-01-08
-            </time>
-          </div>
-        
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/01/08/2020-04-02-Jenkins/">Jenkins使用</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/01/08/2020-04-02-Jenkins/">
-          
-          
-            
-          
-          Docker+Jenkins从入门到放弃
-手动安装dockerhttps://www.cnblogs.com/hellxz/p/11044012.html   
-Docker镜像源修改https://blog.csdn.net/jixuju/article/details/80158493  
-运行jenkins  
-
-123456789docker run \  -u root \  --rm 
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-01-08 09:40" pubdate>
-              2021-01-08
+            <time datetime="2021-01-09 03:43" pubdate>
+              2021-01-09
             </time>
           </div>
         
@@ -303,17 +267,16 @@ Docker镜像源修改https://blog.csdn.net/jixuju/article/details/80158493
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/01/08/2020-04-07-highFunction/">用高阶函数做抽象</a>
+        <a href="/2021/01/09/2020-12-03-flink/">搭建Flink-1.11.2集群</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/01/08/2020-04-07-highFunction/">
+        <a href="/2021/01/09/2020-12-03-flink/">
           
           
             
           
-          以计算数值为例定义过程计算数值定义过程，做某些行为的封装
-12345678910111213141516171819202122232425262728293031public class SumCount &#123;    /**     * 计算从a到b各整数之和     */    public int sumIntegers(int a, int b) &#123;        if 
+          以Flink on YARN模式启动把 Flink 运行在 YARN 上有两种方式，第一种方式是建立一个长期运行的 Flink YARN Session，然后向这个 Session 提交 Flink Job，多个任务同时运行时会共享资源。第二种方式是为单个任务启动一个 Flink 集群，这个任务会独占 Flink 集群的所有资源，任务结束即代表集群被回收。另外，Flink on YARN 模式需要
         </a>
       </p>
 
@@ -321,8 +284,8 @@ Docker镜像源修改https://blog.csdn.net/jixuju/article/details/80158493
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-01-08 09:40" pubdate>
-              2021-01-08
+            <time datetime="2021-01-09 03:43" pubdate>
+              2021-01-09
             </time>
           </div>
         
@@ -345,20 +308,17 @@ Docker镜像源修改https://blog.csdn.net/jixuju/article/details/80158493
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/01/08/2020-04-16-threadPark/">线程阻塞与唤醒</a>
+        <a href="/2021/01/09/hello-world/">Hello World</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/01/08/2020-04-16-threadPark/">
+        <a href="/2021/01/09/hello-world/">
           
           
             
           
-          线程阻塞与唤醒方式一（@Deprecated）早期JAVA采用suspend()、resume()对线程进行阻塞与唤醒，但这种方式产生死锁的风险很大，因为线程被挂起以后不会释放锁，可能与其他线程、主线程产生死锁，suspend 它会一直保持对锁的占有，一直到其他的线程调用resume方法，它才能继续向下执行。   
-
-演示 suspend 方法为什么被弃用  
-
-1).独占：因为 suspend 
+          Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
+Quick
         </a>
       </p>
 
@@ -366,8 +326,45 @@ Docker镜像源修改https://blog.csdn.net/jixuju/article/details/80158493
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-01-08 09:40" pubdate>
-              2021-01-08
+            <time datetime="2021-01-09 03:43" pubdate>
+              2021-01-09
+            </time>
+          </div>
+        
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/01/09/2020-11-25-jdgui/">JD-GUI反编译工具使用</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/01/09/2020-11-25-jdgui/">
+          
+          
+            
+          
+          从服务器下载jar到本地sz *.jar
+解压jar包解压jar包至文件夹
+下载JD-GUI反编译工具打开JD-GUI，选择.class文件后打开
+
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-01-09 03:43" pubdate>
+              2021-01-09
             </time>
           </div>
         
@@ -390,16 +387,20 @@ Docker镜像源修改https://blog.csdn.net/jixuju/article/details/80158493
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/01/08/2020-04-27-pythonIntroduction/">Python入门</a>
+        <a href="/2021/01/09/2020-11-25-hdfsShell/">HDFS常用Shell操作</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/01/08/2020-04-27-pythonIntroduction/">
+        <a href="/2021/01/09/2020-11-25-hdfsShell/">
           
           
             
           
-          翻到以前阅读过的博客的一段话关于学习新知识我有一点心得体会想与你分享。我在学习新知识的时候会遵循一个5-20-2法则，用5分钟的时间了解这个新知识的特点、应用场景、要解决的问题；用20分钟理解它的主要设计原理、核心思想和思路；再花2个小时看关键的设计细节，尝试使用或者做一个demo。如果5分钟不能搞懂它要解决的问题，我就会放弃；20分钟没有理解它的设计思路，我也会放弃；2个小时还上不了手，我也会放
+          HDFS常用Shell操作列出文件目录：hadoop fs -ls 目录路径
+查看HDFS根目录下的目录：hadoop fs -ls /
+递归查看HDFS根目录下的目录：hadoop fs -lsr /
+
+在HDFS中创建文件夹：hadoop fs -mkdir 文件夹名称上传文件到HDFS中：hadoop fs -put 本地源路径 目标存放路径将本地系统中的一个log文件上传到di文件夹中：h
         </a>
       </p>
 
@@ -407,8 +408,8 @@ Docker镜像源修改https://blog.csdn.net/jixuju/article/details/80158493
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-01-08 09:40" pubdate>
-              2021-01-08
+            <time datetime="2021-01-09 03:43" pubdate>
+              2021-01-09
             </time>
           </div>
         
@@ -431,19 +432,16 @@ Docker镜像源修改https://blog.csdn.net/jixuju/article/details/80158493
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/01/08/2020-05-17-duansheliexpr/">《简叔的70个断舍离》片段</a>
+        <a href="/2021/01/09/2020-11-25-flink5/">Flink之Data transformation(转换)</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/01/08/2020-05-17-duansheliexpr/">
+        <a href="/2021/01/09/2020-11-25-flink5/">
           
           
             
           
-          简叔的70个断舍离
-成年人要懂得所有获得都有代价，所有失去也都有收获。  妄想一切好的都给我，一切坏的都离开我。这本身就有问题。  我不要焦虑，不要抑郁，不要贫困，不要疾病，不要死，不要有青春痘，夏天不要热，冬天不要冷，好东西不要贵，好女人不要太难追。  总是和大自然作对，大自然不折腾你折腾谁呢？  想进就进，想退就退。进退自如，不为所扰。
-
-1.只要开始张嘴说话，就要先肯定，然后委婉地提出意见。
+          Flink 应用程序结构1、Source: 数据源，Flink 在流处理和批处理上的 source 大概有 4 类：基于本地集合的 source、基于文件的 source、基于网络套接字的 source、自定义的 source。自定义的 source 常见的有 Apache kafka、Amazon Kinesis Streams、RabbitMQ、Twitter Streaming API、Ap
         </a>
       </p>
 
@@ -451,8 +449,8 @@ Docker镜像源修改https://blog.csdn.net/jixuju/article/details/80158493
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-01-08 09:40" pubdate>
-              2021-01-08
+            <time datetime="2021-01-09 03:43" pubdate>
+              2021-01-09
             </time>
           </div>
         
@@ -475,17 +473,17 @@ Docker镜像源修改https://blog.csdn.net/jixuju/article/details/80158493
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/01/08/2020-06-02-everydayEnglish/">北欧教育模式，为何深受世界推崇？</a>
+        <a href="/2021/01/09/2020-11-25-flink4/">Flink之Data Sink 实战</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/01/08/2020-06-02-everydayEnglish/">
+        <a href="/2021/01/09/2020-11-25-flink4/">
           
           
             
           
-          This Is How Scandinavia Got Great  斯堪的纳维亚国家崛起的原因长期以来，北欧在各项社会指标中名列前茅，被视为发达国家的标杆。有文章认为，北欧社会的幸福和平等，源于其全民化的教育制度。那么，这种教育制度有什么特征？它适合在其他地方推广吗？一起来听今天的讲解。   
-By David BrooksAlmost everybody admires the Nordic 
+          前言接上节Data Source 实战，Source 就是数据的来源，中间的Compute其实就是Flink干的事情，可以做一系列的操作，操作完后就把计算后的数据结果 Sink 到某个地方。（可以是 MySQL、ElasticSearch、Kafka、Cassandra 等）。趁热打铁干起来！
+Flink 从 Kafka topic 中获取数据并写入mysql的 demo工具类往 kafka to
         </a>
       </p>
 
@@ -493,8 +491,8 @@ By David BrooksAlmost everybody admires the Nordic
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-01-08 09:40" pubdate>
-              2021-01-08
+            <time datetime="2021-01-09 03:43" pubdate>
+              2021-01-09
             </time>
           </div>
         
@@ -517,23 +515,18 @@ By David BrooksAlmost everybody admires the Nordic
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/01/08/2020-06-03-shellLearn/">Shell使用</a>
+        <a href="/2021/01/09/2020-11-25-flink3/">Flink之Data Source 实战</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/01/08/2020-06-03-shellLearn/">
+        <a href="/2021/01/09/2020-11-25-flink3/">
           
           
             
           
-          zsh与bash切换
-zsh切换为bashchsh -s /bin/bash  
-bash切换为zshchsh -s /bin/zsh  
-
-查看当前运行的 Shellecho $SHELL  
-查看当前的 Linux 系统安装的所有 Shellcat /etc/shells
-Bash 变量env命令或printenv命令，可以显示所有环境变量。  
-12345678910111213141516
+          Flink 从 Kafka topic 中获取数据的 demo安装并运行 FLink 和 Kafka
+Flink见Flink入门
+Kafka启动ZooKeeper： bin/zookeeper-server-start.sh config/zookeeper.properties启动Kafka Broker： bin/kafka-server-start.sh config/server.prop
         </a>
       </p>
 
@@ -541,8 +534,8 @@ Bash 变量env命令或printenv命令，可以显示所有环境变量。
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-01-08 09:40" pubdate>
-              2021-01-08
+            <time datetime="2021-01-09 03:43" pubdate>
+              2021-01-09
             </time>
           </div>
         
@@ -565,17 +558,16 @@ Bash 变量env命令或printenv命令，可以显示所有环境变量。
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/01/08/2020-06-06-sqlLearn/">Mysql必知必会</a>
+        <a href="/2021/01/09/2020-11-25-flink2/">Flink之Data Source 介绍</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/01/08/2020-06-06-sqlLearn/">
+        <a href="/2021/01/09/2020-11-25-flink2/">
           
           
             
           
-          查询有两条或者两条以上的数据  –先分组，在统计select a.code from ldcode a where 1=1 GROUP BY a.code HAVING COUNT(a.code)&gt; 1
-为什么要用where 1=1？之前一直不太明白，sql语句里为什么要写where 1=1 巴拉巴拉巴拉提升某种执行效率？其实，1=1 是永恒成立的，意思无条件的，也就是说在SQL语句中有没有
+          Data Sources 是什么Data Sources 是什么呢？就字面意思其实就可以知道：数据来源。Flink 做为一款流式计算框架，它可用来做批处理，即处理静态的数据集、历史的数据集；也可以用来做流处理，即实时的处理些实时数据流，实时的产生数据流结果，只要数据源源不断的过来，Flink 就能够一直计算下去，这个 Data Sources 就是数据的来源地。Flink 中你可以使用 Strea
         </a>
       </p>
 
@@ -583,8 +575,8 @@ Bash 变量env命令或printenv命令，可以显示所有环境变量。
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-01-08 09:40" pubdate>
-              2021-01-08
+            <time datetime="2021-01-09 03:43" pubdate>
+              2021-01-09
             </time>
           </div>
         

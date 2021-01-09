@@ -181,21 +181,19 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/01/08/2020-01-09-springbootRedis/">SpringBoot中使用Redis</a>
+        <a href="/2021/01/09/2020-03-30-swapMoneyCount/">递归介绍(二）：换零钱方式的统计--树形递归</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/01/08/2020-01-09-springbootRedis/">
+        <a href="/2021/01/09/2020-03-30-swapMoneyCount/">
           
           
             
           
-          一、引入依赖： 
-    &lt;!-- redis --&gt;
-    &lt;dependency&gt;
-        &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-        &lt;artifactId&gt;spring-boot-starter-data-redis&lt;/artifactId&gt;
-   
+          实例：换零钱方式的统计问题给了50美分、25美分、10美分、5美分、1美分的硬币，将1美元换成零钱，一共有多少种不同方式？给定了任意数量的现金，写一个程序，计算出所有换零钱方式的种数。  
+思考过程假定我们所考虑的可用硬币类型种类排了某种顺序，于是有了下面的关系：将总数为a的现金换成n种硬币的不同方法的数目等于：  
+
+将现金数a换成除第一种硬币之外的所有其他硬币的不同方式数目，加上  将现金数a
         </a>
       </p>
 
@@ -203,8 +201,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-01-08 09:40" pubdate>
-              2021-01-08
+            <time datetime="2021-01-09 03:43" pubdate>
+              2021-01-09
             </time>
           </div>
         
@@ -227,18 +225,17 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/01/08/2020-01-09-timeComplex/">算法的时间复杂度</a>
+        <a href="/2021/01/09/2020-03-30-whyLearnComputerScience/"></a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/01/08/2020-01-09-timeComplex/">
+        <a href="/2021/01/09/2020-03-30-whyLearnComputerScience/">
           
           
             
           
-          基本概念算法的时间复杂度，用来度量算法的运行时间，记作: T(n) = O(f(n))。它表示随着 输入大小n 的增大，算法执行需要的时间的增长速度可以用 f(n) 来描述。
-那么当我们拿到算法的执行次数函数 T(n) 之后怎么得到算法的时间复杂度呢？
-1.我们知道常数项对函数的增长速度影响并不大，所以当 T(n) = c，c 为一个常数的时候，我们说这个算法的时间复杂度为 O(1)；如果 T(n
+          转载地址https://teachyourselfcs.com/中文翻译地址https://github.com/keithnull/TeachYourselfCS-CN/blob/master/TeachYourselfCS-CN.md  
+先挖个坑，以后再补
         </a>
       </p>
 
@@ -246,8 +243,43 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-01-08 09:40" pubdate>
-              2021-01-08
+            <time datetime="2021-01-09 03:43" pubdate>
+              2021-01-09
+            </time>
+          </div>
+        
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/01/09/2020-04-07-highFunction/">用高阶函数做抽象</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/01/09/2020-04-07-highFunction/">
+          
+          
+            
+          
+          以计算数值为例定义过程计算数值定义过程，做某些行为的封装
+12345678910111213141516171819202122232425262728293031public class SumCount &#123;    /**     * 计算从a到b各整数之和     */    public int sumIntegers(int a, int b) &#123;        if 
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-01-09 03:43" pubdate>
+              2021-01-09
             </time>
           </div>
         
@@ -270,18 +302,21 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/01/08/2020-01-09-viewpoint/">观点</a>
+        <a href="/2021/01/09/2020-04-02-Jenkins/">Jenkins使用</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/01/08/2020-01-09-viewpoint/">
+        <a href="/2021/01/09/2020-04-02-Jenkins/">
           
           
             
           
-          “996工作制”如何影响你自己的职业生涯？“996工作制”对个人的影响，包括如下几个方面：
-◇压缩了员工的业余时间——因此也就减少了你的自学【时间】
-　　人的精力是有限的，而不是能仅靠意志就能不断延续的。推荐一本书《精力管理》，精力的开销建议大家通过机会成本来严加控制，以求达到精力的价值最大化。（“机会成本”，通俗地说就是：把某项资源投入某种特定用途后所放弃的在其他用途中该项资源所能获得的利益。）
+          Docker+Jenkins从入门到放弃
+手动安装dockerhttps://www.cnblogs.com/hellxz/p/11044012.html   
+Docker镜像源修改https://blog.csdn.net/jixuju/article/details/80158493  
+运行jenkins  
+
+123456789docker run \  -u root \  --rm 
         </a>
       </p>
 
@@ -289,8 +324,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-01-08 09:40" pubdate>
-              2021-01-08
+            <time datetime="2021-01-09 03:43" pubdate>
+              2021-01-09
             </time>
           </div>
         
@@ -313,21 +348,20 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/01/08/2020-01-10-manualMavenJar/">Maven手动导入jar包</a>
+        <a href="/2021/01/09/2020-04-16-threadPark/">线程阻塞与唤醒</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/01/08/2020-01-10-manualMavenJar/">
+        <a href="/2021/01/09/2020-04-16-threadPark/">
           
           
             
           
-          一、pom文件依赖配置
-   &lt;dependency&gt;
-        &lt;groupId&gt;com.oracle&lt;/groupId&gt;
-        &lt;artifactId&gt;ojdbc6&lt;/artifactId&gt;
-        &lt;version&gt;11.2.0.3&lt;/version&gt;
-    &lt;/depende
+          线程阻塞与唤醒方式一（@Deprecated）早期JAVA采用suspend()、resume()对线程进行阻塞与唤醒，但这种方式产生死锁的风险很大，因为线程被挂起以后不会释放锁，可能与其他线程、主线程产生死锁，suspend 它会一直保持对锁的占有，一直到其他的线程调用resume方法，它才能继续向下执行。   
+
+演示 suspend 方法为什么被弃用  
+
+1).独占：因为 suspend 
         </a>
       </p>
 
@@ -335,8 +369,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-01-08 09:40" pubdate>
-              2021-01-08
+            <time datetime="2021-01-09 03:43" pubdate>
+              2021-01-09
             </time>
           </div>
         
@@ -359,29 +393,16 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/01/08/2020-01-10-sqlView/">Sql VIEW（视图）</a>
+        <a href="/2021/01/09/2020-04-27-pythonIntroduction/">Python入门</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/01/08/2020-01-10-sqlView/">
+        <a href="/2021/01/09/2020-04-27-pythonIntroduction/">
           
           
             
           
-          什么是视图？
-在 SQL 中，视图是基于 SQL 语句的结果集的可视化的表。
-视图是虚拟的表，本身不包含数据，也就不能对其进行索引操作。
-对视图的操作和对普通表的操作一样。
-
-视图的优点：
-简化复杂的 SQL 操作，比如复杂的连接；
-只使用实际表的一部分数据；
-通过只给用户访问视图的权限，保证数据的安全性；
-更改数据格式和表示。
-
-视图的写法eg：
-CREATE VIEW myview AS
-SE
+          翻到以前阅读过的博客的一段话关于学习新知识我有一点心得体会想与你分享。我在学习新知识的时候会遵循一个5-20-2法则，用5分钟的时间了解这个新知识的特点、应用场景、要解决的问题；用20分钟理解它的主要设计原理、核心思想和思路；再花2个小时看关键的设计细节，尝试使用或者做一个demo。如果5分钟不能搞懂它要解决的问题，我就会放弃；20分钟没有理解它的设计思路，我也会放弃；2个小时还上不了手，我也会放
         </a>
       </p>
 
@@ -389,8 +410,8 @@ SE
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-01-08 09:40" pubdate>
-              2021-01-08
+            <time datetime="2021-01-09 03:43" pubdate>
+              2021-01-09
             </time>
           </div>
         
@@ -413,22 +434,19 @@ SE
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/01/08/2020-01-13-resume/">个人简历</a>
+        <a href="/2021/01/09/2020-05-17-duansheliexpr/">《简叔的70个断舍离》片段</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/01/08/2020-01-13-resume/">
+        <a href="/2021/01/09/2020-05-17-duansheliexpr/">
           
           
             
           
-          基本资料
-姓名：刘晓龙 
-性别：男  
-电子邮箱：&#x72;&#117;&#121;&#x69;&#108;&#105;&#x75;&#x63;&#104;&#105;&#108;&#x64;&#64;&#x67;&#109;&#x61;&#x69;&#x6c;&#46;&#99;&#111;&#109;
+          简叔的70个断舍离
+成年人要懂得所有获得都有代价，所有失去也都有收获。  妄想一切好的都给我，一切坏的都离开我。这本身就有问题。  我不要焦虑，不要抑郁，不要贫困，不要疾病，不要死，不要有青春痘，夏天不要热，冬天不要冷，好东西不要贵，好女人不要太难追。  总是和大自然作对，大自然不折腾你折腾谁呢？  想进就进，想退就退。进退自如，不为所扰。
 
-技能
-非常熟练使用Java编程语言，IntelliJ IDEA工具，深入理解OOP编程思
+1.只要开始张嘴说话，就要先肯定，然后委婉地提出意见。
         </a>
       </p>
 
@@ -436,8 +454,8 @@ SE
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-01-08 09:40" pubdate>
-              2021-01-08
+            <time datetime="2021-01-09 03:43" pubdate>
+              2021-01-09
             </time>
           </div>
         
@@ -460,23 +478,17 @@ SE
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/01/08/2020-01-18-heartClash/">《我们内心的冲突》读书笔记</a>
+        <a href="/2021/01/09/2020-06-02-everydayEnglish/">北欧教育模式，为何深受世界推崇？</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/01/08/2020-01-18-heartClash/">
+        <a href="/2021/01/09/2020-06-02-everydayEnglish/">
           
           
             
           
-          冲突特征
-典型特征，其中之一就是，会产生自怨自怜的想法，总感觉自己“很弱小”“很无助”“很卑微”“很可怜”“很软弱”。
-
-第二个特征就是理所应当地认为自己不如别人。他会觉得所有人都比他优秀，比他有魅力，比他聪明，比他素质高，比他有价值。
-
-这类人的第三个典型特征，也是他讨好别人的一个体现，就是他会有意识地用别人对他的态度，来定义自己的价值。
-
-他们会无意识地通过突出一种倾向，而将其他与之相矛盾的倾
+          This Is How Scandinavia Got Great  斯堪的纳维亚国家崛起的原因长期以来，北欧在各项社会指标中名列前茅，被视为发达国家的标杆。有文章认为，北欧社会的幸福和平等，源于其全民化的教育制度。那么，这种教育制度有什么特征？它适合在其他地方推广吗？一起来听今天的讲解。   
+By David BrooksAlmost everybody admires the Nordic 
         </a>
       </p>
 
@@ -484,8 +496,8 @@ SE
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-01-08 09:40" pubdate>
-              2021-01-08
+            <time datetime="2021-01-09 03:43" pubdate>
+              2021-01-09
             </time>
           </div>
         
@@ -508,16 +520,21 @@ SE
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/01/08/2020-01-20-javaOfferComeon/">《Offer来了：Java面试核心知识点精讲（原理篇）》读书笔记</a>
+        <a href="/2021/01/09/2020-03-20-javaAsyncPractice/">多线程及异步编程的前世今生</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/01/08/2020-01-20-javaOfferComeon/">
+        <a href="/2021/01/09/2020-03-20-javaAsyncPractice/">
           
           
             
           
-          JVMJVM的运行机制多线程JVM的内存区域JVM的运行时内存垃圾回收与算法Java中的4种引用类型分代收集算法和分区收集算法垃圾收集器Java网络编程模型JVM的类加载机制Java基础集合异常分类及处理反射机制注解内部类泛型序列化Java并发编程Java线程的创建方式线程池的工作原理5种常用的线程池线程的生命周期线程的基本方法Java中的锁线程上下文切换Java阻塞队列Java并发关键字多线程如
+          显式使用线程和线程池实现异步编程Java中显式开启一个线程进行异步处理的两种方式理论基础
+在Java中，Java虚拟机允许应用程序同时运行多个执行线程，所以我们可在main函数内开启一个线程来异步执行任务A，而main函数所在线程执行B，即可大大缩短整个任务处理耗时。  
+
+Java中有两类线程：User Thread(用户线程)、Daemon Thread(守护线程)
+
+run()是多线程程序的
         </a>
       </p>
 
@@ -525,8 +542,8 @@ SE
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-01-08 09:40" pubdate>
-              2021-01-08
+            <time datetime="2021-01-09 03:43" pubdate>
+              2021-01-09
             </time>
           </div>
         
@@ -549,22 +566,16 @@ SE
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/01/08/2020-01-17-classRelation/">IDEA查看类关系图</a>
+        <a href="/2021/01/09/2020-03-16-books/">图书列表整理</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/01/08/2020-01-17-classRelation/">
+        <a href="/2021/01/09/2020-03-16-books/">
           
           
             
           
-          idea-mac-查看类关系图
-看继承关系
-     快捷键 control + h查看hierarchy,只能查看向上向下继承关系，而不能看实现了哪些接口。
-     右键选择Diagrams（也可以使用快捷键command+alt+u，更快捷），然后显示
-
-看接口的实现关系
-     command + alt + B会显示出跟这个接口有关系的类。 然后加command+all，鼠标弄开，然后
+          列表（理论上大部分按出版时间排序）占卜师神圣家族莎士比亚的零如何运营成功的智库侯大利刑侦笔记重构：门店新零售创业工作法赞扬与责备无常的博弈甜甜圈经济学厉害的人，从来不靠情绪表达自己日本人眼中的中國巨龍的胎動讲谈社·中国的历史在路上（2020全新译本！ 杨蔚译）英帝国史套书（全8卷）发现你的管理优势从零开始做运营从零开始做运营2柏青哥《三体》中的物理学史学与红学让写作成为自我精进的武器区块链金融时代
         </a>
       </p>
 
@@ -572,49 +583,8 @@ SE
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-01-08 09:40" pubdate>
-              2021-01-08
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/blog/">blog</a>
-            
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/01/08/2020-01-20-scalaStarted/">Scala入门</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/01/08/2020-01-20-scalaStarted/">
-          
-          
-            
-          
-          
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-01-08 09:40" pubdate>
-              2021-01-08
+            <time datetime="2021-01-09 03:43" pubdate>
+              2021-01-09
             </time>
           </div>
         
