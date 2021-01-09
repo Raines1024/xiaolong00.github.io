@@ -1,0 +1,441 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/comm/favicon.png">
+  <link rel="icon" type="image/png" href="/img/comm/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  <title>每日英语 - Hexo</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/darcula.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>小龙的跋涉</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="每日英语">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-01-07 13:50" pubdate>
+        2020年1月7日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.5k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      19
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">每日英语</h1>
+            
+            <div class="markdown-body">
+              <h3 id="单词"><a href="#单词" class="headerlink" title="单词"></a>单词</h3><figure class="highlight less"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs less"><span class="hljs-selector-tag">patient</span>  <span class="hljs-selector-attr">[ˈpeɪʃnt]</span><br>    <span class="hljs-selector-tag">adj</span>. 有耐心的，能容忍的<br>    <span class="hljs-selector-tag">n</span>. 病人，患者；受动者，承受者<br>    <span class="hljs-selector-tag">n</span>. (Patient) （美、英、法、加）帕蒂安（人名）<br><span class="hljs-selector-tag">online</span>   <span class="hljs-selector-attr">[ˌɒnˈlaɪn]</span><br>    <span class="hljs-selector-tag">adj</span>. 联机的；在线的<br>    <span class="hljs-selector-tag">adv</span>. 在线地<br><span class="hljs-selector-tag">enjoy</span>   <span class="hljs-selector-attr">[ɪnˈdʒɔɪ]</span><br>    <span class="hljs-selector-tag">vt</span>. 欣赏，享受；喜爱；使过得快活<br><span class="hljs-selector-tag">discounts</span>  <span class="hljs-selector-attr">[&#x27;dɪskaʊnts]</span><br>    <span class="hljs-selector-tag">n</span>. 优惠，折价；扣减额（<span class="hljs-selector-tag">discount</span>的复数形式）<br>    <span class="hljs-selector-tag">v</span>. 打折扣（<span class="hljs-selector-tag">discount</span>的三单形式）；<span class="hljs-selector-attr">[金融]</span> 贴现；低估；漠视<br><span class="hljs-selector-tag">take-away</span> <span class="hljs-selector-tag">food</span> <span class="hljs-selector-tag">deliver</span> <span class="hljs-selector-tag">guys</span>  <br>    外卖员<br><span class="hljs-selector-tag">take-away</span><br>    <span class="hljs-selector-tag">n</span>. 熟食<br>    <span class="hljs-selector-tag">adj</span>. 供应外带的；可带走的<br>    <span class="hljs-selector-tag">take</span>  <span class="hljs-selector-attr">[teɪk]</span><br>        <span class="hljs-selector-tag">vt</span>. 拿，取；采取；接受（礼物等）；买，花费；耗费（时间等）<br>        <span class="hljs-selector-tag">vi</span>. 拿；获得<br>        <span class="hljs-selector-tag">n</span>. 捕获量；看法；利益，盈益；（入场券的）售得金额<br>    <span class="hljs-selector-tag">away</span>   <span class="hljs-selector-attr">[əˈweɪ]</span><br>        <span class="hljs-selector-tag">adv</span>. 离去，离开；在远处<br><span class="hljs-selector-tag">deliver</span>  <span class="hljs-selector-attr">[dɪˈlɪvə(r)]</span><br>    <span class="hljs-selector-tag">vt</span>. 交付；发表；递送；释放；给予（打击）；给…接生<br>    <span class="hljs-selector-tag">vi</span>. 实现；传送；履行；投递<br>    <span class="hljs-selector-tag">n</span>. 投球<br><span class="hljs-selector-tag">guys</span>  <br>    <span class="hljs-selector-tag">n</span>. 球员；各位，朋友们<br>    <span class="hljs-selector-tag">n</span>. (Guys)人名；(法)居伊<br><span class="hljs-selector-tag">seen</span>  <span class="hljs-selector-attr">[siːn]</span><br>    <span class="hljs-selector-tag">vi</span>. 看见；明白（<span class="hljs-selector-tag">see</span> 的过去分词）<br>    <span class="hljs-selector-tag">vt</span>. 看望；会见；观看<br>    <span class="hljs-selector-tag">n</span>. (Seen) （美）森（人名）<br><span class="hljs-selector-tag">everywhere</span>  <span class="hljs-selector-attr">[ˈevriweə(r)]</span><br>    <span class="hljs-selector-tag">adv</span>. 到处<br>    <span class="hljs-selector-tag">n</span>. 每个地方<br><span class="hljs-selector-tag">inspiring</span>  <span class="hljs-selector-attr">[ɪnˈspaɪərɪŋ]</span><br>    <span class="hljs-selector-tag">adj</span>. 鼓舞人心的；灌输的；启发灵感的<br>    <span class="hljs-selector-tag">v</span>. 鼓舞；激发；使感悟（<span class="hljs-selector-tag">inspire</span>的<span class="hljs-selector-tag">ing</span>形式）<br><span class="hljs-selector-tag">among</span>  <span class="hljs-selector-attr">[əˈmʌŋ]</span><br>    <span class="hljs-selector-tag">prep</span>. 在……中间，周围是；在……之中，……之一；与……在一起；在三者或以上（中选择）；以及；为……所特有；（群体内部）相互间<br><span class="hljs-selector-tag">been</span>   <span class="hljs-selector-attr">[biːn; bɪn]</span><br>    <span class="hljs-selector-tag">v</span>. 是，有（<span class="hljs-selector-tag">be</span>的过去分词）<br>    <span class="hljs-selector-tag">n</span>. (Been) （美）贝恩（人名）<br><span class="hljs-selector-tag">have</span>  <span class="hljs-selector-attr">[həv; əv; hæv]</span><br>    <span class="hljs-selector-tag">vt</span>. 有；让；拿；从事；允许<br>    <span class="hljs-selector-tag">aux</span>. 已经<br>    <span class="hljs-selector-tag">n</span>. (Have)人名；(芬)哈韦；(德)哈弗<br><span class="hljs-selector-tag">industry</span>  <span class="hljs-selector-attr">[ˈɪndəstri]</span><br>    <span class="hljs-selector-tag">n</span>. 产业；工业；勤勉<br><span class="hljs-selector-tag">disable</span>  <span class="hljs-selector-attr">[dɪsˈeɪbl]</span><br>    <span class="hljs-selector-tag">vt</span>. 使失去能力；使残废；使无资格<br><span class="hljs-selector-tag">chance</span>  <span class="hljs-selector-attr">[tʃɑːns]</span><br>    <span class="hljs-selector-tag">n</span>. 机会，际遇；运气，侥幸；可能性<br>    <span class="hljs-selector-tag">vt</span>. 偶然发生；冒……的险<br>    <span class="hljs-selector-tag">vi</span>. 碰巧；偶然被发现<br>    <span class="hljs-selector-tag">n</span>. (Chance)人名；(英)钱斯<br><span class="hljs-selector-tag">fight</span>  <span class="hljs-selector-attr">[faɪt]</span><br>    <span class="hljs-selector-tag">v</span>. 与……打仗，与……斗争；打架；竞争；极力反对；努力争取；争辩；参加（拳击比赛）；反对……提案；指挥（部队）作战；奋力灭（火）；奋力赢得（选举）；克制（情感表露）；（双方）失和；打（官司）<br>    <span class="hljs-selector-tag">n</span>. 打架；斗争；竞赛；拳击赛；争论；战斗；斗志<br><span class="hljs-selector-tag">inspired</span>  <span class="hljs-selector-attr">[ɪnˈspaɪəd]</span><br><span class="hljs-selector-tag">adj</span>. 品质优秀的；能力卓越的；借助于灵感创作的；受……影响的；（空气等物质）吸入的；基于宗教、政治等原因<br><span class="hljs-selector-tag">v</span>. 激发，鼓舞（<span class="hljs-selector-tag">inspire</span> 的过去式和过去分词）<br><span class="hljs-selector-tag">hurt</span>  <span class="hljs-selector-attr">[hɜːt]</span><br>    <span class="hljs-selector-tag">vt</span>. 使受伤；损害；使疼痛；使痛心<br>    <span class="hljs-selector-tag">vi</span>. 感到疼痛；有坏处；带来痛苦<br>    <span class="hljs-selector-tag">n</span>. 痛苦；危害；痛苦的原因<br>    <span class="hljs-selector-tag">adj</span>. 受伤的；痛苦的；受损的<br>    <span class="hljs-selector-tag">n</span>. (Hurt)人名；(德、匈、捷)胡特；(英)赫特<br><span class="hljs-selector-tag">lacking</span>  <span class="hljs-selector-attr">[ˈlækɪŋ]</span><br>    <span class="hljs-selector-tag">adj</span>. 缺乏的，不足的；没有的，缺失的，不存在的；有缺陷的，不充分的<br>    <span class="hljs-selector-tag">v</span>. 缺少，没有，不足（<span class="hljs-selector-tag">lack</span> 的现在分词）<br><span class="hljs-selector-tag">patience</span>  <span class="hljs-selector-attr">[ˈpeɪʃns]</span><br>    <span class="hljs-selector-tag">n</span>. 耐性，耐心；忍耐，容忍<br><span class="hljs-selector-tag">got</span>  <span class="hljs-selector-attr">[ɡɒt]</span><br>    <span class="hljs-selector-tag">v</span>. 得到，明白（<span class="hljs-selector-tag">get</span>的过去式和过去分词）<br><span class="hljs-selector-tag">comment</span>  <span class="hljs-selector-attr">[ˈkɒment]</span><br>    <span class="hljs-selector-tag">n</span>. 评论；意见；批评；描述<br>    <span class="hljs-selector-tag">vt</span>. 发表评论；发表意见<br>    <span class="hljs-selector-tag">vi</span>. 为……作评语<br>    <span class="hljs-selector-tag">n</span>. (Comment) （美、瑞、法）科门特 （人名）<br><span class="hljs-selector-tag">thought</span>  <span class="hljs-selector-attr">[θɔːt]</span><br>    <span class="hljs-selector-tag">n</span>. 思想；思考；想法；关心<br>    <span class="hljs-selector-tag">v</span>. 想，思考；认为（<span class="hljs-selector-tag">think</span>的过去式和过去分词）<br><span class="hljs-selector-tag">took</span>  <span class="hljs-selector-attr">[tʊk]</span><br>    <span class="hljs-selector-tag">v</span>. 拿；取；接受（<span class="hljs-selector-tag">take</span>的过去式）<br><span class="hljs-selector-tag">sign</span>  <span class="hljs-selector-attr">[saɪn]</span><br>    <span class="hljs-selector-tag">n</span>. 迹象；符号；记号；手势；指示牌<br>    <span class="hljs-selector-tag">vi</span>. 签署；签名<br>    <span class="hljs-selector-tag">vt</span>. 签署；示意<br><span class="hljs-selector-tag">media</span>  <span class="hljs-selector-attr">[ˈmiːdiə]</span><br>    <span class="hljs-selector-tag">n</span>. 媒体；媒质（<span class="hljs-selector-tag">medium</span>的复数）；血管中层；浊塞音；中脉<br><span class="hljs-selector-tag">deaf-mute</span><br>    <span class="hljs-selector-tag">adj</span>. 聋哑的<br>    <span class="hljs-selector-tag">n</span>. 聋哑者<br><span class="hljs-selector-tag">gave</span>  <span class="hljs-selector-attr">[ɡeɪv]</span><br>    <span class="hljs-selector-tag">v</span>. 给予（<span class="hljs-selector-tag">give</span>的过去式）<br>    <span class="hljs-selector-tag">n</span>. (Gave)人名；(塞内)加韦；(法)加夫<br><span class="hljs-selector-tag">feedbacks</span><br>    <span class="hljs-selector-tag">n</span>. 回馈<br><span class="hljs-selector-tag">whole</span>  <span class="hljs-selector-attr">[həʊl]</span><br>    <span class="hljs-selector-tag">adj</span>. 完整的；纯粹的<br>    <span class="hljs-selector-tag">n</span>. 整体；全部<br><span class="hljs-selector-tag">then</span>  <span class="hljs-selector-attr">[ðen]</span><br>    <span class="hljs-selector-tag">adv</span>. 然后；那么；于是；当时；此外<br>    <span class="hljs-selector-tag">n</span>. (Then)人名；(德)特恩<br><span class="hljs-selector-tag">misunderstanding</span>  <span class="hljs-selector-attr">[ˌmɪsʌndəˈstændɪŋ]</span><br>    <span class="hljs-selector-tag">n</span>. 误解；误会；不和<br><span class="hljs-selector-tag">reduced</span>  <span class="hljs-selector-attr">[rɪ&#x27;djuːst]</span><br>    <span class="hljs-selector-tag">adj</span>. 减少的；<span class="hljs-selector-attr">[数]</span> 简化的；缩减的<br>        <span class="hljs-selector-tag">reduce</span>  <span class="hljs-selector-attr">[rɪˈdjuːs]</span><br>            <span class="hljs-selector-tag">vt</span>. 减少；降低；使处于；把…分解<br>            <span class="hljs-selector-tag">vi</span>. 减少；缩小；归纳为<br><span class="hljs-selector-tag">special</span>  <span class="hljs-selector-attr">[ˈspeʃl]</span><br>    <span class="hljs-selector-tag">adj</span>. 特别的；重要的；特设的；专用的，特有的；特派的；格外的；（主题）研究深入的；特殊（教育）的；特殊（矩阵）的<br>    <span class="hljs-selector-tag">n</span>. 特别的东西（活动、节目等）；特价（品）；特供菜；特派员；特产；专车<br>    <span class="hljs-selector-tag">n</span>. (Special) （印、美、俄）史派西娅乐（人名）<br><span class="hljs-selector-tag">deserves</span>  <span class="hljs-selector-attr">[dɪ&#x27;zɜːvs]</span><br>    应受,应得<br><span class="hljs-selector-tag">respect</span>  <span class="hljs-selector-attr">[rɪˈspekt]</span><br>    <span class="hljs-selector-tag">n</span>. 尊敬，尊重；方面；敬意<br>    <span class="hljs-selector-tag">vt</span>. 尊敬，尊重；遵守<br></code></pre></div></td></tr></table></figure>
+<h3 id="Be-More-Patient"><a href="#Be-More-Patient" class="headerlink" title="Be More Patient"></a>Be More Patient</h3><p>Nowadays, more and more people choose to order food online, because they don’t want to go out and at the same time they can enjoy some discounts.<br>As a result, the take-away food deliver guys can be seen everywhere. Many inspiring stories have been happened among them.<br>如今，越来越多的人因为不想出门而选择在网上订购食品，同时他们也可以享受一些优惠。因此，外卖人员随处可见，他们之间也发生了许多激励人心的故事。  </p>
+<p>As the take-away food deliver is the new industry, so some disable people are given the chance to work on it.<br>When the public sees these people fight for life, they are inspired, but some people hurt these people’s feeling because of lacking of patience.<br>It is said that a food deliver guy got a bad comment because the customers thought that he asked for money when he took out of a sign.<br>When the media reported the news, they found that this guy was deaf-mute, so the company gave him a sign to ask the customer to remember giving feedbacks in time.<br>If we gave more seconds to see the whole thing, then the misunderstanding will be reduced.<br>外卖是新兴行业，因此一些残疾人士得到了工作的机会。当公众看到这些人为生活奋斗，受到了鼓舞，但有些人却因为缺乏耐心而伤害这些人的感受。据说有一个送外卖的职工得到了不好的评论，因为那名员工拿出一个牌子时客户以为他要额外收钱。媒体报道了新闻后，他们发现这名人员是聋哑人，所以公司给了他一个牌子，提醒客户给予及时反馈。如果我们多点耐心来看待整个事情，那么误解就会减少很多。  </p>
+<p>Try to think about these special group of people. Their attitude to life deserves us to respect.<br>试着想想这么特殊的一群人。他们对生活的态度值得我们尊重。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/blog/">blog</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/01/07/2020-03-16-annotation/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Java自定义注解</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/01/07/2020-03-17-everydayEnglish/">
+                        <span class="hidden-mobile">每日英语</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://xiaolong00.github.io/about" target="_blank" rel="nofollow noopener"><span>Raines blog</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>use hexo Fluid theme</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/hibiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.7},"log":false});</script></body>
+</html>

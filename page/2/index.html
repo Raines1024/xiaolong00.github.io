@@ -181,17 +181,21 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/01/09/2020-12-09-mvnshade/">maven-shade-plugin入门指南</a>
+        <a href="/2020/01/07/2020-01-09-springbootRedis/">SpringBoot中使用Redis</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/01/09/2020-12-09-mvnshade/">
+        <a href="/2020/01/07/2020-01-09-springbootRedis/">
           
           
             
           
-          有时候，需要将复杂的项目，包括各种xml文件属性文件， 类， jar等等打包到一个可以执行的jar包中， 然后用java -jar  xxx.jar 来运行项目，这样简单方便，特别是在编写一些测试工具时，尤为重要。但是经常发现打包后的项目无法启动， 其中一大类是您项目有问题， 但是这个相对好解决。通过 maven-shade-plugin 生成的jar包，它包含所有的依赖 jar 包。
-使用配置 
+          一、引入依赖： 
+    &lt;!-- redis --&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-boot-starter-data-redis&lt;/artifactId&gt;
+   
         </a>
       </p>
 
@@ -199,8 +203,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-01-09 03:43" pubdate>
-              2021-01-09
+            <time datetime="2020-01-07 13:50" pubdate>
+              2020-01-07
             </time>
           </div>
         
@@ -223,19 +227,18 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/01/09/2020-12-02-bigdataBuild/">搭建Hadoop-2.9.2集群</a>
+        <a href="/2020/01/07/2020-01-09-timeComplex/">算法的时间复杂度</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/01/09/2020-12-02-bigdataBuild/">
+        <a href="/2020/01/07/2020-01-09-timeComplex/">
           
           
             
           
-          准备在安装 Hadoop 之前，请确认集群的每台机器上均安装 JDK，以及搭配环境变量。
-添加Java环境变量vim ~/.bash_profile  
-
-123456789101112131415# Java EnvironmentJAVA_HOME=/usr/java/latestJRE_HOME=$&#123;JAVA_HOME&#125;/jreCLASSPATH=.:$&#123;JAV
+          基本概念算法的时间复杂度，用来度量算法的运行时间，记作: T(n) = O(f(n))。它表示随着 输入大小n 的增大，算法执行需要的时间的增长速度可以用 f(n) 来描述。
+那么当我们拿到算法的执行次数函数 T(n) 之后怎么得到算法的时间复杂度呢？
+1.我们知道常数项对函数的增长速度影响并不大，所以当 T(n) = c，c 为一个常数的时候，我们说这个算法的时间复杂度为 O(1)；如果 T(n
         </a>
       </p>
 
@@ -243,8 +246,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-01-09 03:43" pubdate>
-              2021-01-09
+            <time datetime="2020-01-07 13:50" pubdate>
+              2020-01-07
             </time>
           </div>
         
@@ -267,16 +270,18 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/01/09/2020-12-03-flink/">搭建Flink-1.11.2集群</a>
+        <a href="/2020/01/07/2020-01-09-viewpoint/">观点</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/01/09/2020-12-03-flink/">
+        <a href="/2020/01/07/2020-01-09-viewpoint/">
           
           
             
           
-          以Flink on YARN模式启动把 Flink 运行在 YARN 上有两种方式，第一种方式是建立一个长期运行的 Flink YARN Session，然后向这个 Session 提交 Flink Job，多个任务同时运行时会共享资源。第二种方式是为单个任务启动一个 Flink 集群，这个任务会独占 Flink 集群的所有资源，任务结束即代表集群被回收。另外，Flink on YARN 模式需要
+          “996工作制”如何影响你自己的职业生涯？“996工作制”对个人的影响，包括如下几个方面：
+◇压缩了员工的业余时间——因此也就减少了你的自学【时间】
+　　人的精力是有限的，而不是能仅靠意志就能不断延续的。推荐一本书《精力管理》，精力的开销建议大家通过机会成本来严加控制，以求达到精力的价值最大化。（“机会成本”，通俗地说就是：把某项资源投入某种特定用途后所放弃的在其他用途中该项资源所能获得的利益。）
         </a>
       </p>
 
@@ -284,8 +289,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-01-09 03:43" pubdate>
-              2021-01-09
+            <time datetime="2020-01-07 13:50" pubdate>
+              2020-01-07
             </time>
           </div>
         
@@ -308,17 +313,21 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/01/09/hello-world/">Hello World</a>
+        <a href="/2020/01/07/2020-01-10-manualMavenJar/">Maven手动导入jar包</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/01/09/hello-world/">
+        <a href="/2020/01/07/2020-01-10-manualMavenJar/">
           
           
             
           
-          Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Quick
+          一、pom文件依赖配置
+   &lt;dependency&gt;
+        &lt;groupId&gt;com.oracle&lt;/groupId&gt;
+        &lt;artifactId&gt;ojdbc6&lt;/artifactId&gt;
+        &lt;version&gt;11.2.0.3&lt;/version&gt;
+    &lt;/depende
         </a>
       </p>
 
@@ -326,45 +335,8 @@ Quick
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-01-09 03:43" pubdate>
-              2021-01-09
-            </time>
-          </div>
-        
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/01/09/2020-11-25-jdgui/">JD-GUI反编译工具使用</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/01/09/2020-11-25-jdgui/">
-          
-          
-            
-          
-          从服务器下载jar到本地sz *.jar
-解压jar包解压jar包至文件夹
-下载JD-GUI反编译工具打开JD-GUI，选择.class文件后打开
-
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-01-09 03:43" pubdate>
-              2021-01-09
+            <time datetime="2020-01-07 13:50" pubdate>
+              2020-01-07
             </time>
           </div>
         
@@ -387,20 +359,29 @@ Quick
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/01/09/2020-11-25-hdfsShell/">HDFS常用Shell操作</a>
+        <a href="/2020/01/07/2020-01-10-sqlView/">Sql VIEW（视图）</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/01/09/2020-11-25-hdfsShell/">
+        <a href="/2020/01/07/2020-01-10-sqlView/">
           
           
             
           
-          HDFS常用Shell操作列出文件目录：hadoop fs -ls 目录路径
-查看HDFS根目录下的目录：hadoop fs -ls /
-递归查看HDFS根目录下的目录：hadoop fs -lsr /
+          什么是视图？
+在 SQL 中，视图是基于 SQL 语句的结果集的可视化的表。
+视图是虚拟的表，本身不包含数据，也就不能对其进行索引操作。
+对视图的操作和对普通表的操作一样。
 
-在HDFS中创建文件夹：hadoop fs -mkdir 文件夹名称上传文件到HDFS中：hadoop fs -put 本地源路径 目标存放路径将本地系统中的一个log文件上传到di文件夹中：h
+视图的优点：
+简化复杂的 SQL 操作，比如复杂的连接；
+只使用实际表的一部分数据；
+通过只给用户访问视图的权限，保证数据的安全性；
+更改数据格式和表示。
+
+视图的写法eg：
+CREATE VIEW myview AS
+SE
         </a>
       </p>
 
@@ -408,8 +389,8 @@ Quick
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-01-09 03:43" pubdate>
-              2021-01-09
+            <time datetime="2020-01-07 13:50" pubdate>
+              2020-01-07
             </time>
           </div>
         
@@ -432,16 +413,22 @@ Quick
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/01/09/2020-11-25-flink5/">Flink之Data transformation(转换)</a>
+        <a href="/2020/01/07/2020-01-13-resume/">个人简历</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/01/09/2020-11-25-flink5/">
+        <a href="/2020/01/07/2020-01-13-resume/">
           
           
             
           
-          Flink 应用程序结构1、Source: 数据源，Flink 在流处理和批处理上的 source 大概有 4 类：基于本地集合的 source、基于文件的 source、基于网络套接字的 source、自定义的 source。自定义的 source 常见的有 Apache kafka、Amazon Kinesis Streams、RabbitMQ、Twitter Streaming API、Ap
+          基本资料
+姓名：刘晓龙 
+性别：男  
+电子邮箱：&#x72;&#117;&#121;&#105;&#x6c;&#x69;&#x75;&#99;&#104;&#105;&#x6c;&#100;&#x40;&#x67;&#x6d;&#x61;&#105;&#108;&#46;&#99;&#111;&#109;
+
+技能
+非常熟练使用Java编程语言，IntelliJ IDEA工具，深入理解OOP编程思
         </a>
       </p>
 
@@ -449,8 +436,8 @@ Quick
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-01-09 03:43" pubdate>
-              2021-01-09
+            <time datetime="2020-01-07 13:50" pubdate>
+              2020-01-07
             </time>
           </div>
         
@@ -473,17 +460,22 @@ Quick
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/01/09/2020-11-25-flink4/">Flink之Data Sink 实战</a>
+        <a href="/2020/01/07/2020-01-17-classRelation/">IDEA查看类关系图</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/01/09/2020-11-25-flink4/">
+        <a href="/2020/01/07/2020-01-17-classRelation/">
           
           
             
           
-          前言接上节Data Source 实战，Source 就是数据的来源，中间的Compute其实就是Flink干的事情，可以做一系列的操作，操作完后就把计算后的数据结果 Sink 到某个地方。（可以是 MySQL、ElasticSearch、Kafka、Cassandra 等）。趁热打铁干起来！
-Flink 从 Kafka topic 中获取数据并写入mysql的 demo工具类往 kafka to
+          idea-mac-查看类关系图
+看继承关系
+     快捷键 control + h查看hierarchy,只能查看向上向下继承关系，而不能看实现了哪些接口。
+     右键选择Diagrams（也可以使用快捷键command+alt+u，更快捷），然后显示
+
+看接口的实现关系
+     command + alt + B会显示出跟这个接口有关系的类。 然后加command+all，鼠标弄开，然后
         </a>
       </p>
 
@@ -491,8 +483,8 @@ Flink 从 Kafka topic 中获取数据并写入mysql的 demo工具类往 kafka to
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-01-09 03:43" pubdate>
-              2021-01-09
+            <time datetime="2020-01-07 13:50" pubdate>
+              2020-01-07
             </time>
           </div>
         
@@ -515,18 +507,23 @@ Flink 从 Kafka topic 中获取数据并写入mysql的 demo工具类往 kafka to
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/01/09/2020-11-25-flink3/">Flink之Data Source 实战</a>
+        <a href="/2020/01/07/2020-01-18-heartClash/">《我们内心的冲突》读书笔记</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/01/09/2020-11-25-flink3/">
+        <a href="/2020/01/07/2020-01-18-heartClash/">
           
           
             
           
-          Flink 从 Kafka topic 中获取数据的 demo安装并运行 FLink 和 Kafka
-Flink见Flink入门
-Kafka启动ZooKeeper： bin/zookeeper-server-start.sh config/zookeeper.properties启动Kafka Broker： bin/kafka-server-start.sh config/server.prop
+          冲突特征
+典型特征，其中之一就是，会产生自怨自怜的想法，总感觉自己“很弱小”“很无助”“很卑微”“很可怜”“很软弱”。
+
+第二个特征就是理所应当地认为自己不如别人。他会觉得所有人都比他优秀，比他有魅力，比他聪明，比他素质高，比他有价值。
+
+这类人的第三个典型特征，也是他讨好别人的一个体现，就是他会有意识地用别人对他的态度，来定义自己的价值。
+
+他们会无意识地通过突出一种倾向，而将其他与之相矛盾的倾
         </a>
       </p>
 
@@ -534,8 +531,8 @@ Kafka启动ZooKeeper： bin/zookeeper-server-start.sh config/zookeeper.propertie
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-01-09 03:43" pubdate>
-              2021-01-09
+            <time datetime="2020-01-07 13:50" pubdate>
+              2020-01-07
             </time>
           </div>
         
@@ -558,16 +555,16 @@ Kafka启动ZooKeeper： bin/zookeeper-server-start.sh config/zookeeper.propertie
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/01/09/2020-11-25-flink2/">Flink之Data Source 介绍</a>
+        <a href="/2020/01/07/2020-01-20-javaOfferComeon/">《Offer来了：Java面试核心知识点精讲（原理篇）》读书笔记</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/01/09/2020-11-25-flink2/">
+        <a href="/2020/01/07/2020-01-20-javaOfferComeon/">
           
           
             
           
-          Data Sources 是什么Data Sources 是什么呢？就字面意思其实就可以知道：数据来源。Flink 做为一款流式计算框架，它可用来做批处理，即处理静态的数据集、历史的数据集；也可以用来做流处理，即实时的处理些实时数据流，实时的产生数据流结果，只要数据源源不断的过来，Flink 就能够一直计算下去，这个 Data Sources 就是数据的来源地。Flink 中你可以使用 Strea
+          JVMJVM的运行机制多线程JVM的内存区域JVM的运行时内存垃圾回收与算法Java中的4种引用类型分代收集算法和分区收集算法垃圾收集器Java网络编程模型JVM的类加载机制Java基础集合异常分类及处理反射机制注解内部类泛型序列化Java并发编程Java线程的创建方式线程池的工作原理5种常用的线程池线程的生命周期线程的基本方法Java中的锁线程上下文切换Java阻塞队列Java并发关键字多线程如
         </a>
       </p>
 
@@ -575,8 +572,49 @@ Kafka启动ZooKeeper： bin/zookeeper-server-start.sh config/zookeeper.propertie
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-01-09 03:43" pubdate>
-              2021-01-09
+            <time datetime="2020-01-07 13:50" pubdate>
+              2020-01-07
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/blog/">blog</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2020/01/07/2020-01-21-NewYearHope/">2020新年展望</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2020/01/07/2020-01-21-NewYearHope/">
+          
+          
+            
+          
+          财务展望过往对于金钱没有一个系统化和明确的认知，而理财方面也基本处于一片渺无人烟的荒漠状态，20年的第一要务是开源节流，当然，仅仅开源节流是远远不够的，工薪阶层如果只靠开源节流的话想达到财务自由的目标有些天方夜谭，低工资、求稳定、无成长的环境使工薪阶层难以跳出温水煮青蛙的困境，而自身的局限及琐碎的杂事又极大的限制了想跳出的人们，想要极大的减少这种限制，我想到了一个解决方案，等稍候再谈。开源节流的下
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-01-07 13:50" pubdate>
+              2020-01-07
             </time>
           </div>
         
