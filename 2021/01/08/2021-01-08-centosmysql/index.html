@@ -184,7 +184,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      0 字
+      626 字
     </span>
   
 
@@ -194,7 +194,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      1
+      8
        分钟
     </span>
   
@@ -227,11 +227,96 @@
             <h1 style="display: none">Centos下Mysql安装</h1>
             
             <div class="markdown-body">
-              <h2 id=""><a href="#" class="headerlink" title=""></a></h2>
+              <ol>
+<li><p>下载：<br>下载地址：<a target="_blank" rel="noopener" href="https://dev.mysql.com/downloads/mysql/5.7.html">https://dev.mysql.com/downloads/mysql/5.7.html</a></p>
+</li>
+<li><p>解压、移动<br>tar -zxvf mysql-5.7.26-linux-glibc2.12-x86_64.tar.gz<br>mv mysql-5.7.26-linux-glibc2.12-x86_64  /usr/local/mysql    </p>
+</li>
+<li><p>mysql用户组、权限配置<br>创建mysql用户组和用户并修改权限  </p>
+<figure class="highlight ebnf"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs ebnf"><span class="hljs-attribute">groupadd mysql</span><br><span class="hljs-attribute">useradd -r -g mysql mysql</span><br></code></pre></div></td></tr></table></figure>
+<p>创建数据目录（/data/mysql ），并赋予权限  </p>
+<figure class="highlight awk"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs awk">mkdir -p  <span class="hljs-regexp">/data/my</span>sql              <span class="hljs-comment">#创建目录</span><br>chown mysql:mysql -R <span class="hljs-regexp">/data/my</span>sql   <span class="hljs-comment">#赋予权限</span><br></code></pre></div></td></tr></table></figure></li>
+<li><p>配置 my.cnf ：<br>vim /etc/my.cnf<br>内容如下：  </p>
+<figure class="highlight routeros"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs routeros">[mysqld]<br><span class="hljs-attribute">bind-address</span>=0.0.0.0<br><span class="hljs-attribute">port</span>=3306<br><span class="hljs-attribute">user</span>=mysql<br><span class="hljs-attribute">basedir</span>=/usr/local/mysql<br><span class="hljs-attribute">socket</span>=/tmp/mysql.sock<br><br><span class="hljs-attribute">datadir</span>=/data/mysql<br><span class="hljs-attribute">log-error</span>=/data/mysql/mysql.err<br><span class="hljs-attribute">pid-file</span>=/data/mysql/mysql.pid<br><br><span class="hljs-attribute">symbolic-links</span>=0<br><span class="hljs-attribute">explicit_defaults_for_timestamp</span>=<span class="hljs-literal">true</span><br><br><span class="hljs-attribute">sql_mode</span>=STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION<br><br><span class="hljs-comment"># 默认引擎</span><br><span class="hljs-attribute">default-storage-engine</span>=InnoDB<br><br><br><span class="hljs-comment">## 默认字符集 utf8</span><br><span class="hljs-attribute">init_connect</span>=<span class="hljs-string">&#x27;SET collation_connection = utf8_unicode_ci&#x27;</span><br><span class="hljs-attribute">init_connect</span>=<span class="hljs-string">&#x27;SET NAMES utf8&#x27;</span><br><span class="hljs-attribute">character-set-server</span>=utf8<br><span class="hljs-attribute">collation-server</span>=utf8_unicode_ci<br>skip-character-set-client-handshake<br><br>[mysql]<br><span class="hljs-attribute">default-character-set</span>=utf8<br><br>[client]<br><span class="hljs-attribute">default-character-set</span>=utf8<br></code></pre></div></td></tr></table></figure>
+<p>注意：<br>在 [mysqld] 中使用 default-character-set 设置字符集， mysql 启动会报错导致无法启动。  </p>
+</li>
+<li><p>初始化数据库<br>进入mysql 的 bin 目录<br>cd /usr/local/mysql/bin/<br>初始化：   </p>
+<figure class="highlight awk"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs awk">.<span class="hljs-regexp">/mysqld  --defaults-file=/</span>etc<span class="hljs-regexp">/my.cnf --basedir=/u</span>sr<span class="hljs-regexp">/local/my</span>sql<span class="hljs-regexp">/ --datadir=/</span>data<span class="hljs-regexp">/mysql/</span> --user=mysql --initialize<br></code></pre></div></td></tr></table></figure>
+<p>注意：可能遇到的问题</p>
+<figure class="highlight vhdl"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs vhdl">./mysqld: <span class="hljs-literal">error</span> <span class="hljs-keyword">while</span> loading <span class="hljs-keyword">shared</span> libraries: libaio.so.<span class="hljs-number">1</span>: cannot <span class="hljs-keyword">open</span> <span class="hljs-keyword">shared</span> object <span class="hljs-keyword">file</span>: No such <span class="hljs-keyword">file</span> <span class="hljs-keyword">or</span> directory<br></code></pre></div></td></tr></table></figure>
+<p>解决方法：<br>出现该问题首先检查该 链接库文件 有没有安装， 使用命令进行核查。<br>rpm -qa | grep libaio<br>运行该命令后发现系统中无该链接库文件。<br>使用命令 ：<br>yum  install  libaio-devel.x86_64<br>安装成功后，继续运行数据库的初始化命令，提示成功。  </p>
+</li>
+<li><p>查看mysql 初始化密码（随机生成的）<br>cat /data/mysql/mysql.err   </p>
+</li>
+<li><p>启动mysql<br>先将 mysql.server 放置到 /etc/init.d/mysql 中：<br>启动Mysql ：<br>service mysql start<br>上面的启动没有报错，则说明启动成功。下面是查看是否有mysql进程<br>ps -ef|grep mysql<br>如果有mysql进程，说明mysql已经安装成功。  </p>
+</li>
+<li><p>修改密码<br>前面的步骤我们能查出mysql 随机生成的密码，接下来，登录mysql，修改密码。<br>./mysql -u root -p密码      #bin目录下<br>再执行下面三步操作，然后重新登录。  </p>
+<figure class="highlight pgsql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs pgsql"><span class="hljs-keyword">set</span> <span class="hljs-keyword">password</span> = <span class="hljs-keyword">password</span>(<span class="hljs-string">&#x27;1234@Mfg&#x27;</span>);<br><span class="hljs-keyword">alter</span> <span class="hljs-keyword">user</span> <span class="hljs-string">&#x27;root&#x27;</span>@<span class="hljs-string">&#x27;localhost&#x27;</span> <span class="hljs-keyword">password</span> expire never;<br>flush <span class="hljs-keyword">privileges</span>;                                     <br></code></pre></div></td></tr></table></figure>
+<p>此时，mysql的root 用户的密码是 1234@Mfg 。  </p>
+</li>
+<li><p>远程连接</p>
+<figure class="highlight crmsh"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs crmsh">use mysql;                                          <span class="hljs-comment"># 访问 mysql 库</span><br>update <span class="hljs-keyword">user</span> <span class="hljs-title">set</span> host = &#x27;%&#x27;  where  <span class="hljs-keyword">user</span> <span class="hljs-title">= &#x27;root</span>&#x27;;   <span class="hljs-comment"># 使 root 能再任何 host 访问</span><br>flush privileges;                                   <span class="hljs-comment"># 刷新</span><br>quit;                                               <span class="hljs-comment"># 退出 mysql</span><br></code></pre></div></td></tr></table></figure></li>
+<li><p>将mysql bin添加的系统bin中<br>如果不希望每次都到bin目录下使用 mysql 命令则执行以下命令  </p>
+<figure class="highlight awk"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs awk">ln -s  <span class="hljs-regexp">/usr/</span>local<span class="hljs-regexp">/mysql/</span>bin<span class="hljs-regexp">/mysql /u</span>sr/bin<br></code></pre></div></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</li>
+</ol>
+
             </div>
             <hr>
             <div>
               <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E7%BC%96%E7%A8%8B/">编程</a>
+                    
+                      <a class="hover-with-bg" href="/categories/%E7%BC%96%E7%A8%8B/%E5%90%8E%E7%AB%AF/">后端</a>
+                    
+                      <a class="hover-with-bg" href="/categories/%E7%BC%96%E7%A8%8B/%E5%90%8E%E7%AB%AF/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a>
+                    
+                  </div>
                 
                 
                   <div class="post-meta">
