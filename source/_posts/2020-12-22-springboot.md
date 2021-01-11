@@ -12,8 +12,8 @@ spring.servlet.multipart.max-file-size=128MB
 spring.servlet.multipart.max-request-size=128MB
 spring.servlet.multipart.enabled=true
 
-
-
+## 报错:The last packet successfully received from the server was 2,272 milliseconds ago. The last packet sent successfully to the server was 2,258 milliseconds ago.
+解决方法:将useSSL=true改为useSSL=false    
 
 
 
