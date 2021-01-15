@@ -266,17 +266,19 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2020/01/07/2020/2020-12-09-mvnshade/">maven-shade-plugin入门指南</a>
+        <a href="/2020/01/07/2020/2020-12-21-design1/">观察者模式</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2020/01/07/2020/2020-12-09-mvnshade/">
+        <a href="/2020/01/07/2020/2020-12-21-design1/">
           
           
             
           
-          有时候，需要将复杂的项目，包括各种xml文件属性文件， 类， jar等等打包到一个可以执行的jar包中， 然后用java -jar  xxx.jar 来运行项目，这样简单方便，特别是在编写一些测试工具时，尤为重要。但是经常发现打包后的项目无法启动， 其中一大类是您项目有问题， 但是这个相对好解决。通过 maven-shade-plugin 生成的jar包，它包含所有的依赖 jar 包。
-使用配置 
+          创建被观察对象抽象主题接口
+对观察者的操作。必需功能有观察者的注册、删除以及主题状态发生改变时通知观察者
+
+1234567891011121314151617181920212223242526package watch;/** * 主题 */public interface Subject &#123;    /**     * 注册观察者     * @param o 观察者     */  
         </a>
       </p>
 
@@ -308,19 +310,17 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2020/01/07/2020/2020-12-21-design1/">观察者模式</a>
+        <a href="/2020/01/07/2020/2020-12-09-mvnshade/">maven-shade-plugin入门指南</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2020/01/07/2020/2020-12-21-design1/">
+        <a href="/2020/01/07/2020/2020-12-09-mvnshade/">
           
           
             
           
-          创建被观察对象抽象主题接口
-对观察者的操作。必需功能有观察者的注册、删除以及主题状态发生改变时通知观察者
-
-1234567891011121314151617181920212223242526package watch;/** * 主题 */public interface Subject &#123;    /**     * 注册观察者     * @param o 观察者     */  
+          有时候，需要将复杂的项目，包括各种xml文件属性文件， 类， jar等等打包到一个可以执行的jar包中， 然后用java -jar  xxx.jar 来运行项目，这样简单方便，特别是在编写一些测试工具时，尤为重要。但是经常发现打包后的项目无法启动， 其中一大类是您项目有问题， 但是这个相对好解决。通过 maven-shade-plugin 生成的jar包，它包含所有的依赖 jar 包。
+使用配置 
         </a>
       </p>
 
