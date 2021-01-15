@@ -1,0 +1,504 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/comm/favicon.png">
+  <link rel="icon" type="image/png" href="/img/comm/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Raines">
+  <meta name="keywords" content="">
+  <title>一次提高访问性能经历 - 小龙的跋涉</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/darcula.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>小龙的跋涉</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="一次提高访问性能经历">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-01-07 13:50" pubdate>
+        2020年1月7日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.2k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      13
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">一次提高访问性能经历</h1>
+            
+            <div class="markdown-body">
+              <h2 id="Mysql索引"><a href="#Mysql索引" class="headerlink" title="Mysql索引"></a>Mysql索引</h2><p>MySQL索引的建立对于MySQL的高效运行是很重要的，索引可以大大提高MySQL的检索速度。  </p>
+<ul>
+<li>给t_record的code字段添加索引index_code<br>ALTER TABLE t_record ADD INDEX index_code(code);</li>
+</ul>
+<h3 id="添加索引"><a href="#添加索引" class="headerlink" title="添加索引"></a>添加索引</h3><ol>
+<li>添加PRIMARY KEY（主键索引）<br>mysql&gt;ALTER TABLE <code>table_name</code> ADD PRIMARY KEY ( <code>column</code> ) </li>
+<li>添加UNIQUE(唯一索引)<br>mysql&gt;ALTER TABLE <code>table_name</code> ADD UNIQUE (<br><code>column</code><br>) </li>
+<li>添加INDEX(普通索引)<br>mysql&gt;ALTER TABLE <code>table_name</code> ADD INDEX index_name ( <code>column</code> ) </li>
+<li>添加FULLTEXT(全文索引)<br>mysql&gt;ALTER TABLE <code>table_name</code> ADD FULLTEXT ( <code>column</code>) </li>
+<li>添加多列索引<br>mysql&gt;ALTER TABLE <code>table_name</code> ADD INDEX index_name ( <code>column1</code>, <code>column2</code>, <code>column3</code> )</li>
+</ol>
+<h4 id="扩展：MySQL设置多列为唯一约束-即多列不能同时相同"><a href="#扩展：MySQL设置多列为唯一约束-即多列不能同时相同" class="headerlink" title="扩展：MySQL设置多列为唯一约束,即多列不能同时相同"></a>扩展：MySQL设置多列为唯一约束,即多列不能同时相同</h4><p>设置serial_no、warn_day为t_fence_warn表的唯一约束<br>ALTER TABLE t_fence_warn ADD UNIQUE KEY index_name( <code>serial_no</code>, <code>warn_day</code> )</p>
+<h3 id="删除索引"><a href="#删除索引" class="headerlink" title="删除索引"></a>删除索引</h3><ul>
+<li>删除掉table_name中的索引index_name<br>ALTER TABLE table_name DROP INDEX index_name</li>
+</ul>
+<h2 id="寻找问题：日志查询"><a href="#寻找问题：日志查询" class="headerlink" title="寻找问题：日志查询"></a>寻找问题：日志查询</h2><ul>
+<li>统计my.log文件中107848的出现次数<br>cat my.log |grep 107848 |wc -l  </li>
+<li>持续追踪最新日志<br>tail -f my.log  </li>
+<li>查看my.log文件的最后200行<br>tail -200 my.log  </li>
+</ul>
+<h2 id="常用配置"><a href="#常用配置" class="headerlink" title="常用配置"></a>常用配置</h2><ul>
+<li>数据库连接池最大连接数配置</li>
+<li>tomcat的max-threads、max-connections、accept-count配置</li>
+</ul>
+<h2 id="tomcat集群"><a href="#tomcat集群" class="headerlink" title="tomcat集群"></a>tomcat集群</h2><ul>
+<li>开启多个tomcat，使用nginx轮询tomcat端口号</li>
+</ul>
+<h2 id="分库分表"><a href="#分库分表" class="headerlink" title="分库分表"></a>分库分表</h2><ul>
+<li>使用MyCat对Mysql进行分库分表</li>
+</ul>
+<h2 id="寻找问题：Mysql"><a href="#寻找问题：Mysql" class="headerlink" title="寻找问题：Mysql"></a>寻找问题：Mysql</h2><h3 id="show-processlist"><a href="#show-processlist" class="headerlink" title="show processlist"></a>show processlist</h3><p>show full processlist 返回的结果是实时变化的，是对mysql链接执行的现场快照，所以用来处理突发事件非常有用。<br>一般用到 show processlist 或 show full processlist 都是为了查看当前 mysql 是否有压力，都在跑什么语句，当前语句耗时多久了，有没有什么慢 SQL 正在执行之类的<br>可以看到总共有多少链接数，哪些线程有问题(time是执行秒数，时间长的就应该多注意了)，然后可以把有问题的线程 kill 掉，这样可以临时解决一些突发性的问题。<br>有时候一个快照可能看不出什么问题，那么可以频发的刷新试试</p>
+<h4 id="下面针对每列做下介绍："><a href="#下面针对每列做下介绍：" class="headerlink" title="下面针对每列做下介绍："></a>下面针对每列做下介绍：</h4><div class="hljs code-wrapper"><pre><code> Id：链接mysql 服务器线程的唯一标识，可以通过kill来终止此线程的链接。
+
+ User：当前线程链接数据库的用户
+
+ Host：显示这个语句是从哪个ip 的哪个端口上发出的。可用来追踪出问题语句的用户
+
+ db: 线程链接的数据库，如果没有则为null
+
+ Command: 显示当前连接的执行的命令，一般就是休眠或空闲（sleep），查询（query），连接（connect）
+
+ Time: 线程处在当前状态的时间，单位是秒
+
+ State：显示使用当前连接的sql语句的状态，很重要的列，后续会有所有的状态的描述，请注意，state只是语句执行中的某一个状态，一个 sql语句，已查询为例，可能需要经过copying to tmp table，Sorting result，Sending data等状态才可以完成
+
+ Info: 线程执行的sql语句，如果没有语句执行则为null。这个语句可以使客户端发来的执行语句也可以是内部执行的语句
+
+ 由于Command的状态大部分都是sleep对我们分析问题没什么作用，所以我们可以通过如下语句来排除sleep状态的线程：</code></pre></div>
+<ul>
+<li>查询非 Sleep 状态的链接，按消耗时间倒序展示，自己加条件过滤<br>select id, db, user, host, command, time, state, info<br>from information_schema.processlist<br>where command != ‘Sleep’<br>order by time desc<br>这样就过滤出来哪些是正在干活的，然后按照消耗时间倒叙展示，排在最前面的，极大可能就是有问题的链接了，然后查看 info 一列，就能看到具体执行的什么 SQL 语句了，针对分析 </li>
+</ul>
+<h3 id="kill-使用"><a href="#kill-使用" class="headerlink" title="kill 使用"></a>kill 使用</h3><h4 id="通过前面的查询，我们查到了问题sql，通常会kill掉这个链接的线程"><a href="#通过前面的查询，我们查到了问题sql，通常会kill掉这个链接的线程" class="headerlink" title="通过前面的查询，我们查到了问题sql，通常会kill掉这个链接的线程"></a>通过前面的查询，我们查到了问题sql，通常会kill掉这个链接的线程</h4><div class="hljs code-wrapper"><pre><code>-- 查询执行时间超过2分钟的线程，然后拼接成 kill 语句
+select concat(&#39;kill &#39;, id, &#39;;&#39;)
+from information_schema.processlist
+where command != &#39;Sleep&#39;
+and time &gt; 2*60
+order by time desc</code></pre></div>
+<h4 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h4><p>一些问题会导致连锁反应，而且不太好定位，有时候以为是慢查询，很可能是大多时间是在等在CPU、内存资源的释放，所以有时候同一个查询消耗的时间有时候差异很大<br>总结了一些常见问题：  </p>
+<ul>
+<li>CPU报警：很可能是 SQL 里面有较多的计算导致的</li>
+<li>连接数超高：很可能是有慢查询，然后导致很多的查询在排队，排查问题的时候可以看到”事发现场“类似的 SQL 语句一大片，那么有可能是没有索引或者索引不好使，可以用：explain 分析一下 SQL 语句</li>
+</ul>
+<h3 id="explain"><a href="#explain" class="headerlink" title="explain"></a>explain</h3>
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/blog/">blog</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/01/07/2020/2020-02-09-ChineseLoseHeart/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">中国人失掉自信力了吗</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/01/07/2020/2020-02-13-nginxPhoto/">
+                        <span class="hidden-mobile">使用nginx搭建图片服务器</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://xiaolong00.github.io/about" target="_blank" rel="nofollow noopener"><span>Raines blog</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>use hexo Fluid theme</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+<!-- hexo injector body_end start -->
+  <div id="aplayer"></div>
+  <link defer rel="stylesheet" href="https://cdn.staticfile.org/aplayer/1.10.1/APlayer.min.css" />
+  <script src="https://cdn.staticfile.org/aplayer/1.10.1/APlayer.min.js"></script>
+  <script defer src="/js/aplayer.js"></script>
+<!-- hexo injector body_end end --><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/hibiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.7},"log":false});</script></body>
+</html>

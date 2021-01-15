@@ -1,0 +1,559 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/comm/favicon.png">
+  <link rel="icon" type="image/png" href="/img/comm/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Raines">
+  <meta name="keywords" content="">
+  <title>Jenkins使用 - 小龙的跋涉</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/darcula.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>小龙的跋涉</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Jenkins使用">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-01-07 13:50" pubdate>
+        2020年1月7日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.2k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      16
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Jenkins使用</h1>
+            
+            <div class="markdown-body">
+              <h2 id="Docker-Jenkins从入门到放弃"><a href="#Docker-Jenkins从入门到放弃" class="headerlink" title="Docker+Jenkins从入门到放弃"></a>Docker+Jenkins从入门到放弃</h2><ol>
+<li>手动安装docker<br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/hellxz/p/11044012.html">https://www.cnblogs.com/hellxz/p/11044012.html</a>   </li>
+<li>Docker镜像源修改<br><a target="_blank" rel="noopener" href="https://blog.csdn.net/jixuju/article/details/80158493">https://blog.csdn.net/jixuju/article/details/80158493</a>  </li>
+<li>运行jenkins  </li>
+</ol>
+<figure class="highlight livescript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs livescript">docker run <span class="hljs-string">\</span><br>  -u root <span class="hljs-string">\</span><br>  --rm <span class="hljs-string">\</span><br>  -d <span class="hljs-string">\</span><br>  -p <span class="hljs-number">12345</span>:<span class="hljs-number">8080</span> <span class="hljs-string">\</span><br>  -p <span class="hljs-number">50000</span>:<span class="hljs-number">50000</span> <span class="hljs-string">\</span><br>  -v jenkins-data:/<span class="hljs-keyword">var</span>/jenkins_home <span class="hljs-string">\</span><br>  -v /<span class="hljs-keyword">var</span>/run/docker.sock:/<span class="hljs-keyword">var</span>/run/docker.sock <span class="hljs-string">\</span><br>  jenkinsci/blueocean<br></code></pre></div></td></tr></table></figure>
+<p>参数介绍<br>–rm   关闭时自动删除Docker容器<br>-d     在后台运行容器（即“分离”模式）并输出容器ID。如果您不指定此选项， 则在终端窗口中输出正在运行的此容器的Docker日志。<br>-p 12345:8000   容器的端口8080到主机上的端口8080。 第一个数字代表主机上的端口，而最后一个代表容器的端口。<br>-v jenkins-data:/var/jenkins_home   注意: 所述的 jenkins-data 卷也可以 docker volume create命令创建： docker volume create jenkins-data 代替映射 /var/jenkins_home 目录转换为Docker卷，还 可以将此目录映射到计算机本地文件系统上的目录。 例如，指定该选项 -v $HOME/jenkins:/var/jenkins_home 会将容器的 /var/jenkins_home 目录映射 到 本地计算机上目录中的 jenkins 子目录， 该$HOME目录通常是 /Users/<your-username>/jenkins 或 <code>/home/&lt;your-username&gt;/jenkins</code>  。</p>
+<ol start="4">
+<li>进入docker容器(查看docker中jenkins administrator密码)  </li>
+</ol>
+<figure class="highlight awk"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs awk">docker exec -it jenkins-blueoceanId bash<br>```  <br>离开容器：<span class="hljs-keyword">exit</span>  <br><span class="hljs-number">5</span>. 查看日志  <br><br></code></pre></div></td></tr></table></figure>
+<p>docker logs jenkins-blueoceanId</p>
+<figure class="highlight awk"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs awk"><span class="hljs-number">6</span>. 注意挂载目录授权  <br>sudo chown -R <span class="hljs-number">1000</span> <span class="hljs-regexp">/var/</span>jenkins_home   <br>启动：  <br>-v命令进行挂载，其中冒号前面的是本机的目录，将本机的javahome和mavenhome的路径，挂载到Jenkins容器上，冒号后面是容器上的目录，可以写跟本机目录相同。  <br>这样启动后就本地的容器中<span class="hljs-regexp">/var/</span>jenkins_home目录下的内容就会存入本机的<span class="hljs-regexp">/var/</span>jenkins_home下，密码也可以从这个目录下获取而不用进入容器内部。  <br><br><span class="hljs-number">7</span>. 放弃  <br>乱七八槽的授权与配置，算了，还是简单来吧。  <br><br><span class="hljs-comment">## Centos7 使用 Jenkins（以下为测试环境玩一下，切不可直接上手生产环境） </span><br><span class="hljs-number">1</span>. centos 使用 yum 安装 jenkins    <br>https:<span class="hljs-regexp">//</span>www.cnblogs.com<span class="hljs-regexp">/loveyouyou616/</span>p/<span class="hljs-number">8714544</span>.html  <br><span class="hljs-number">2</span>. jdk 安装  <br><span class="hljs-number">3</span>. maven 安装  <br>jdk和maven安装都类似，例如maven，下载 *-bin.tar.gz文件，解压；在linux环境中创建maven目录，<span class="hljs-regexp">/usr/</span>local<span class="hljs-regexp">/maven，将maven安装包上传至此目录中；配置环境变量 vi /</span>etc/profile :将下面这两行代码拷贝到文件末尾并保存   <br><br></code></pre></div></td></tr></table></figure>
+<p>MAVEN_HOME=/usr/local/maven/apache-maven-3.6.1<br>export PATH=${MAVEN_HOME}/bin:${PATH}</p>
+<div class="hljs code-wrapper"><pre><code>重载环境变量: source /etc/profile  
+查看结果: mvn –v  
+其他（非必须）： 可以考虑替换maven源 vim /usr/local/maven/apache-maven-3.6.1/conf/settings.xml  
+4. 主页面选择 Manage Jenkins，选择 Global Tool Configuration，配置jdk、maven (如果使用git需要配置git环境)  
+5. 主页面选择 New Item，选择 Freestyle project，OK。    
+选中 Source Code Management，填写 git/svn 配置  
+以maven为例，逻辑是先干掉现在运行的项目，然后打包，然后启动打包成功后的项目。  
+Build -&gt; Add build step，选择 shell（路径是当前workspace里项目名下的路径为起点） 和 maven targets（选择第4步配置的maven版本，输入打包命令clean install -e -DskipTests）   
+可能需要的配置：  
+Discard old builds  丢弃旧版本   
+注意【坑】： 按照第5步的逻辑来，可能出现Jenkins启动打包成功后发现执行脚本运行了，但是jar没有启动，原因是Jenkins又杀死了启动的jar。需要配置 Jenkins 参数为 dontKillMe   
+This project is parameterized -&gt; Add parameter -&gt; String parameter，设置name为BUILD_ID，默认值为dontKillMe。   
+6. 回到项目页面，Build/Build with parameters 执行就可以啦  
+
+总结：若遇到 Jenkins 没有权限执行某些命令（ https://www.cnblogs.com/vana/p/8707651.html）   
+粗糙解决方案：修改jenkins执行用户，重启Jenkins。  
+
+## 创建项目本地部署
+
+### General
+- 勾选 Discard old builds   
+- 勾选 This project is parameterized （不要自己 kill 掉自己）
+Add Parameter -&gt; String Parameter   
+  添加内容：  
+  Name:BUILD_ID  
+  Default Value    :dontKillMe  
+
+### Source Code Management
+- Git
+  Repository URL: git地址
+  Credentials： 用户名密码
+- Branch Specifier (blank for &#39;any&#39;)   
+选择分支，例如 develop 分支则输入：   */develop  
+
+### Build
+- Add build step -&gt; Execute shell   
+运行 shell 脚本，比如杀死项目jar包，重新部署   
+- Add build step -&gt; invoke top-level Maven targets   
+选择 Maven Version（此前要配置maven）   
+- Add build step -&gt; Execute shell    
+运行项目开启 shell 脚本    
+
+## 创建项目远程部署
+
+### General
+- 勾选 Discard old builds  
+- 勾选 This project is parameterized （不要自己 kill 掉自己）  
+  Add Parameter -&gt; String Parameter    
+  添加内容：   
+  Name:BUILD_ID   
+  Default Value    :dontKillMe  
+
+### Source Code Management
+- Git  
+  Repository URL: git地址  
+  Credentials： 用户名密码  
+- Branch Specifier (blank for &#39;any&#39;)     
+  选择分支，例如 develop 分支则输入：   */develop  
+
+### Build Environment
+- 勾选 Send files or execute commands over SSH after the build runs -&gt; Add Server    
+填写 SSH Publishers -&gt; SSH Server    
+1) 选择 Name（远程服务器）    
+2) 添加 Transfers    
+Add Transfer Set     
+   Source files：需要传输的文件或文件夹，如 Lovol-iot-farm-web/ 或 provider-pro.sh    
+   Remote directory：远程服务器目标路径，如 /farmJar  
+   Exec command： 执行命令（例如执行 shell 脚本）  
+
+### Build
+- Add build step -&gt; invoke top-level Maven targets  
+  选择 Maven Version（此前要配置maven）  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</code></pre></div>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/blog/">blog</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/01/07/2020/2020-03-30-whyLearnComputerScience/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">怎么学计算机科学</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/01/07/2020/2020-04-07-highFunction/">
+                        <span class="hidden-mobile">用高阶函数做抽象</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://xiaolong00.github.io/about" target="_blank" rel="nofollow noopener"><span>Raines blog</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>use hexo Fluid theme</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+<!-- hexo injector body_end start -->
+  <div id="aplayer"></div>
+  <link defer rel="stylesheet" href="https://cdn.staticfile.org/aplayer/1.10.1/APlayer.min.css" />
+  <script src="https://cdn.staticfile.org/aplayer/1.10.1/APlayer.min.js"></script>
+  <script defer src="/js/aplayer.js"></script>
+<!-- hexo injector body_end end --><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/hibiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.7},"log":false});</script></body>
+</html>

@@ -1,0 +1,451 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/comm/favicon.png">
+  <link rel="icon" type="image/png" href="/img/comm/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Raines">
+  <meta name="keywords" content="">
+  <title>递归介绍(一）：线性递归、线性迭代、树形递归 - 小龙的跋涉</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/darcula.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>小龙的跋涉</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="递归介绍(一）：线性递归、线性迭代、树形递归">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-01-07 13:50" pubdate>
+        2020年1月7日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.4k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      16
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">递归介绍(一）：线性递归、线性迭代、树形递归</h1>
+            
+            <div class="markdown-body">
+              <h2 id="以计算阶乘-n-为例解释线性递归和线性迭代"><a href="#以计算阶乘-n-为例解释线性递归和线性迭代" class="headerlink" title="以计算阶乘(n!)为例解释线性递归和线性迭代"></a>以计算阶乘(n!)为例解释线性递归和线性迭代</h2><h3 id="线性递归"><a href="#线性递归" class="headerlink" title="线性递归"></a>线性递归</h3><h4 id="思路：对于一个正整数n，n-就等于-n-n-1"><a href="#思路：对于一个正整数n，n-就等于-n-n-1" class="headerlink" title="思路：对于一个正整数n，n!就等于 n*(n-1)!"></a>思路：对于一个正整数n，n!就等于 n*(n-1)!</h4><p>代码：  </p>
+<figure class="highlight arduino"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs arduino"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> <span class="hljs-title">fuctorial</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n)</span></span>&#123;<br>    <span class="hljs-keyword">if</span> (n == <span class="hljs-number">1</span>)&#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;<br>    &#125;<span class="hljs-keyword">else</span> &#123;<br>        <span class="hljs-keyword">return</span> n * fuctorial(n<span class="hljs-number">-1</span>);<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<p>3!的线性递归过程,利用代换模型观看这一过程在计算3!时表现出的行为（代换模型揭示出一种先逐步展开而后收缩的形状）。<br>在展开阶段里，这一计算过程构造起一个推迟进行的操作所形成的链条（在这里是一个乘法的链条），收缩阶段表现为这些运算的实际执行。<br>这种类型的计算过程由一个推迟执行的运算链条刻画，称为一个递归计算过程。<br>要执行这种计算过程，解释器就需要维护好那些以后将要执行的操作的轨迹。<br>在计算阶乘n!时，推迟执行的乘法链条的长度也就是为保存其轨迹需要保存的信息量，这个长度随着n值而线性增长（正比于n），<br>就像计算中的步骤数目一样。这样的计算过程称为一个线性递归过程。  </p>
+<figure class="highlight apache"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs apache"><span class="hljs-attribute">3</span>!的执行过程：<br>    <span class="hljs-attribute">fuctorial</span>(<span class="hljs-number">3</span>)<br>    <span class="hljs-attribute">3</span> * fuctorial(<span class="hljs-number">2</span>)<br>    <span class="hljs-attribute">3</span> * <span class="hljs-number">2</span> * fuctorial(<span class="hljs-number">1</span>)<br>    <span class="hljs-attribute">3</span> * <span class="hljs-number">2</span> * <span class="hljs-number">1</span><br>    <span class="hljs-attribute">3</span> * <span class="hljs-number">2</span><br>    <span class="hljs-attribute">6</span><br></code></pre></div></td></tr></table></figure>
+<h3 id="线性迭代"><a href="#线性迭代" class="headerlink" title="线性迭代"></a>线性迭代</h3><h4 id="思路：先乘以1和2，而后一直乘到n"><a href="#思路：先乘以1和2，而后一直乘到n" class="headerlink" title="思路：先乘以1和2，而后一直乘到n"></a>思路：先乘以1和2，而后一直乘到n</h4><p>计算过程里并没有任何增长或者收缩，对于任何一个n，在计算过程中的每一步，在我们需要保存轨迹里，所有的东西就是变量product、counter和maxCount的当前值。这种过程为一个迭代计算过程。<br>一般来说，迭代计算过程就是那种状态可以用固定数目的状态变量描述的计算过程；而与此同时，又存在着一套固定的规则，描述了计算过程在从一个状态到下一状态转换时，这些变量的更新方式；还有一个（可能有的）结果检测，它描述这一计算过程应该终止的条件。在计算n!时，所需的计算步骤随着n线性增长，这种过程称为线性迭代过程。<br>计算3!的线性迭代过程  </p>
+<figure class="highlight stylus"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs stylus"><span class="hljs-function"><span class="hljs-title">factiorial</span><span class="hljs-params">(<span class="hljs-number">3</span>)</span></span><br><span class="hljs-function"><span class="hljs-title">factIter</span><span class="hljs-params">(<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">3</span>)</span></span><br><span class="hljs-function"><span class="hljs-title">factIter</span><span class="hljs-params">(<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>)</span></span><br><span class="hljs-function"><span class="hljs-title">factIter</span><span class="hljs-params">(<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">3</span>)</span></span><br><span class="hljs-function"><span class="hljs-title">factIter</span><span class="hljs-params">(<span class="hljs-number">6</span>,<span class="hljs-number">4</span>,<span class="hljs-number">3</span>)</span></span><br></code></pre></div></td></tr></table></figure>
+<p>代码：  </p>
+<figure class="highlight arduino"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs arduino"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Iteration</span> &#123;</span><br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> <span class="hljs-title">factiorial</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n)</span></span>&#123;<br>        <span class="hljs-keyword">return</span> factIter(<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,n);<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> <span class="hljs-title">factIter</span><span class="hljs-params">(<span class="hljs-keyword">int</span> product, <span class="hljs-keyword">int</span> counter, <span class="hljs-keyword">int</span> maxCount)</span></span>&#123;<br>        <span class="hljs-keyword">if</span> (counter &gt; maxCount)&#123;<br>            <span class="hljs-keyword">return</span> product;<br>        &#125;<span class="hljs-keyword">else</span> &#123;<br>            <span class="hljs-keyword">return</span> factIter(counter*product,++counter,maxCount);<br>        &#125;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">String</span>[] args)</span> </span>&#123;<br>        System.out.<span class="hljs-built_in">println</span>(factiorial(<span class="hljs-number">3</span>));<br>    &#125;<br>&#125;<br><br></code></pre></div></td></tr></table></figure>
+<h3 id="递归计算过程和递归过程的区别"><a href="#递归计算过程和递归过程的区别" class="headerlink" title="递归计算过程和递归过程的区别"></a>递归计算过程和递归过程的区别</h3><p>当我们说一个过程是递归的时候，论述的是一个语法形式上的事实，说明这个过程的定义中（直接或间接的）引用了该过程本身。再说某一计算过程具有某种格式时（例如线性递归），我们说的是这一计算过程的进展方式，而不是相应过程书写上的语法形式。<br>例如上个例子中说到的线性迭代，我们说这个递归过程将产生出一个迭代的计算过程，因为它的状态能由其中的三个状态变量完全刻画，解释器在执行这一计算过程时，只需要保持这三个变量的轨迹就足够了。  </p>
+<h2 id="以斐波那契数列为例解释计算模式–树形递归"><a href="#以斐波那契数列为例解释计算模式–树形递归" class="headerlink" title="以斐波那契数列为例解释计算模式–树形递归"></a>以斐波那契数列为例解释计算模式–树形递归</h2><h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight typescript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs typescript"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Fibonacci</span> </span>&#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> int <span class="hljs-function"><span class="hljs-title">fib</span>(<span class="hljs-params">int n</span>)</span>&#123;<br>        <span class="hljs-keyword">if</span> (n == <span class="hljs-number">0</span>)&#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>        &#125;<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (n == <span class="hljs-number">1</span>)&#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;<br>        &#125;<span class="hljs-keyword">else</span> &#123;<br>            <span class="hljs-keyword">return</span> fib(n-<span class="hljs-number">1</span>)+fib(n-<span class="hljs-number">2</span>);<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<h3 id="计算fib-5-中的产生的树型递归计算过程"><a href="#计算fib-5-中的产生的树型递归计算过程" class="headerlink" title="计算fib(5)中的产生的树型递归计算过程"></a>计算fib(5)中的产生的树型递归计算过程</h3><figure class="highlight apache"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs apache">                    <span class="hljs-attribute">fib</span>(<span class="hljs-number">5</span>)<br>     <span class="hljs-attribute">fib</span>(<span class="hljs-number">4</span>)          +            flib(<span class="hljs-number">3</span>)<br><span class="hljs-attribute">fib</span>(<span class="hljs-number">3</span>)     fib(<span class="hljs-number">2</span>)    +        fib(<span class="hljs-number">2</span>)fib(<span class="hljs-number">1</span>)<br><span class="hljs-attribute">fib</span>(<span class="hljs-number">2</span>)+<span class="hljs-number">1</span>  +  <span class="hljs-number">1</span>+<span class="hljs-number">0</span>     +          <span class="hljs-number">1</span>+<span class="hljs-number">0</span>  +   <span class="hljs-number">1</span><br><span class="hljs-attribute">1</span>+<span class="hljs-number">0</span>+   <span class="hljs-number">1</span> +   <span class="hljs-number">1</span>+<span class="hljs-number">0</span>     +          <span class="hljs-number">1</span>+<span class="hljs-number">0</span>  +   <span class="hljs-number">1</span><br><span class="hljs-attribute">5</span><br></code></pre></div></td></tr></table></figure>
+<h3 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h3><p>树形递归计算模式的每层分裂为两个分支（除了最下面），反映出对fib过程的每个调用中两次递归调用自身的事实。<br>fib(n)的增长相对于n是指数级的，该过程所用的计算步骤数将随着输入增长而指数性地增长。  </p>
+<h3 id="线性迭代实现"><a href="#线性迭代实现" class="headerlink" title="线性迭代实现"></a>线性迭代实现</h3><p>规划出计算斐波那契数列的迭代计算过程，其基本想法就是用一对整数a和b，将它们分别初始化为flib(1)=1</p>
+<figure class="highlight aspectj"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs aspectj"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">IterFibonacci</span> </span>&#123;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">fib</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n)</span> </span>&#123;<br>        <span class="hljs-function"><span class="hljs-keyword">return</span> <span class="hljs-title">fibIter</span><span class="hljs-params">(<span class="hljs-number">1</span>, <span class="hljs-number">0</span>, n)</span></span>;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">fibIter</span><span class="hljs-params">(<span class="hljs-keyword">int</span> a, <span class="hljs-keyword">int</span> b, <span class="hljs-keyword">int</span> count)</span> </span>&#123;<br>        <span class="hljs-keyword">if</span> (count == <span class="hljs-number">0</span>) &#123;<br>            <span class="hljs-keyword">return</span> b;<br>        &#125; <span class="hljs-keyword">else</span> &#123;<br>            <span class="hljs-function"><span class="hljs-keyword">return</span> <span class="hljs-title">fibIter</span><span class="hljs-params">(a + b, a, --count)</span></span>;<br>        &#125;<br>    &#125;<br><br>&#125;<br><br></code></pre></div></td></tr></table></figure>
+<h3 id="树形递归和线性迭代实现比较"><a href="#树形递归和线性迭代实现比较" class="headerlink" title="树形递归和线性迭代实现比较"></a>树形递归和线性迭代实现比较</h3><p>这两种方法在计算中所需的步骤差异巨大–线性迭代方法相对于n为线性的，树型递归实现增长像fib(n)一样快，即使不大的输入也可能造成很大的差异。<br>当我们考虑的是在层次结构性的数据上操作，而不是对数操作时，将会发现树形递归计算过程是一种自然的、威力强大的工具。<br>以以斐波那契数列为例，虽然树形递归计算过程远比线性迭代低效，但它更直截了当。而要规划出迭代过程，则需要注意到，这一计算过程可以重新塑造为一个采用三个状态变量的迭代。  </p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/blog/">blog</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/01/07/2020/2020-03-16-books/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">图书列表整理</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://xiaolong00.github.io/about" target="_blank" rel="nofollow noopener"><span>Raines blog</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>use hexo Fluid theme</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+<!-- hexo injector body_end start -->
+  <div id="aplayer"></div>
+  <link defer rel="stylesheet" href="https://cdn.staticfile.org/aplayer/1.10.1/APlayer.min.css" />
+  <script src="https://cdn.staticfile.org/aplayer/1.10.1/APlayer.min.js"></script>
+  <script defer src="/js/aplayer.js"></script>
+<!-- hexo injector body_end end --><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/hibiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.7},"log":false});</script></body>
+</html>
