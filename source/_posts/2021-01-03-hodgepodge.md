@@ -2,7 +2,11 @@
 layout: post
 title: 乱七八槽的常用命令
 date: 2021-01-07 13:50:39
-tags: 工作
+tags: [编程, 过去]
+category:
+- 200 工作类
+- 230 工作技能
+- 234 常用命令
 ---
 
 ## redis、nginx
