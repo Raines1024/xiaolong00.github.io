@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="Raines">
   <meta name="keywords" content="">
-  <title>Centos下Mysql安装 - 小龙的跋涉</title>
+  <title>记一次mysql的教训 - 小龙的跋涉</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
@@ -162,7 +162,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="Centos下Mysql安装">
+            <span class="h2" id="subtitle" title="记一次mysql的教训">
               
             </span>
 
@@ -172,8 +172,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-01-08 09:03" pubdate>
-        2021年1月8日 上午
+      <time datetime="2021-01-09 08:17" pubdate>
+        2021年1月9日 早上
       </time>
     </span>
   
@@ -184,7 +184,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      626 字
+      602 字
     </span>
   
 
@@ -194,7 +194,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      8
+      6
        分钟
     </span>
   
@@ -224,83 +224,17 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Centos下Mysql安装</h1>
+            <h1 style="display: none">记一次mysql的教训</h1>
             
             <div class="markdown-body">
-              <ol>
-<li><p>下载：<br>下载地址：<a target="_blank" rel="noopener" href="https://dev.mysql.com/downloads/mysql/5.7.html">https://dev.mysql.com/downloads/mysql/5.7.html</a></p>
-</li>
-<li><p>解压、移动<br>tar -zxvf mysql-5.7.26-linux-glibc2.12-x86_64.tar.gz<br>mv mysql-5.7.26-linux-glibc2.12-x86_64  /usr/local/mysql    </p>
-</li>
-<li><p>mysql用户组、权限配置<br>创建mysql用户组和用户并修改权限  </p>
-<figure class="highlight ebnf"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs ebnf"><span class="hljs-attribute">groupadd mysql</span><br><span class="hljs-attribute">useradd -r -g mysql mysql</span><br></code></pre></div></td></tr></table></figure>
-<p>创建数据目录（/data/mysql ），并赋予权限  </p>
-<figure class="highlight awk"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs awk">mkdir -p  <span class="hljs-regexp">/data/my</span>sql              <span class="hljs-comment">#创建目录</span><br>chown mysql:mysql -R <span class="hljs-regexp">/data/my</span>sql   <span class="hljs-comment">#赋予权限</span><br></code></pre></div></td></tr></table></figure></li>
-<li><p>配置 my.cnf ：<br>vim /etc/my.cnf<br>内容如下：  </p>
-<figure class="highlight routeros"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs routeros">[mysqld]<br><span class="hljs-attribute">bind-address</span>=0.0.0.0<br><span class="hljs-attribute">port</span>=3306<br><span class="hljs-attribute">user</span>=mysql<br><span class="hljs-attribute">basedir</span>=/usr/local/mysql<br><span class="hljs-attribute">socket</span>=/tmp/mysql.sock<br><br><span class="hljs-attribute">datadir</span>=/data/mysql<br><span class="hljs-attribute">log-error</span>=/data/mysql/mysql.err<br><span class="hljs-attribute">pid-file</span>=/data/mysql/mysql.pid<br><br><span class="hljs-attribute">symbolic-links</span>=0<br><span class="hljs-attribute">explicit_defaults_for_timestamp</span>=<span class="hljs-literal">true</span><br><br><span class="hljs-attribute">sql_mode</span>=STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION<br><br><span class="hljs-comment"># 默认引擎</span><br><span class="hljs-attribute">default-storage-engine</span>=InnoDB<br><br><br><span class="hljs-comment">## 默认字符集 utf8</span><br><span class="hljs-attribute">init_connect</span>=<span class="hljs-string">&#x27;SET collation_connection = utf8_unicode_ci&#x27;</span><br><span class="hljs-attribute">init_connect</span>=<span class="hljs-string">&#x27;SET NAMES utf8&#x27;</span><br><span class="hljs-attribute">character-set-server</span>=utf8<br><span class="hljs-attribute">collation-server</span>=utf8_unicode_ci<br>skip-character-set-client-handshake<br><br>[mysql]<br><span class="hljs-attribute">default-character-set</span>=utf8<br><br>[client]<br><span class="hljs-attribute">default-character-set</span>=utf8<br></code></pre></div></td></tr></table></figure>
-<p>注意：<br>在 [mysqld] 中使用 default-character-set 设置字符集， mysql 启动会报错导致无法启动。  </p>
-</li>
-<li><p>初始化数据库<br>进入mysql 的 bin 目录<br>cd /usr/local/mysql/bin/<br>初始化：   </p>
-<figure class="highlight awk"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs awk">.<span class="hljs-regexp">/mysqld  --defaults-file=/</span>etc<span class="hljs-regexp">/my.cnf --basedir=/u</span>sr<span class="hljs-regexp">/local/my</span>sql<span class="hljs-regexp">/ --datadir=/</span>data<span class="hljs-regexp">/mysql/</span> --user=mysql --initialize<br></code></pre></div></td></tr></table></figure>
-<p>注意：可能遇到的问题</p>
-<figure class="highlight vhdl"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs vhdl">./mysqld: <span class="hljs-literal">error</span> <span class="hljs-keyword">while</span> loading <span class="hljs-keyword">shared</span> libraries: libaio.so.<span class="hljs-number">1</span>: cannot <span class="hljs-keyword">open</span> <span class="hljs-keyword">shared</span> object <span class="hljs-keyword">file</span>: No such <span class="hljs-keyword">file</span> <span class="hljs-keyword">or</span> directory<br></code></pre></div></td></tr></table></figure>
-<p>解决方法：<br>出现该问题首先检查该 链接库文件 有没有安装， 使用命令进行核查。<br>rpm -qa | grep libaio<br>运行该命令后发现系统中无该链接库文件。<br>使用命令 ：<br>yum  install  libaio-devel.x86_64<br>安装成功后，继续运行数据库的初始化命令，提示成功。  </p>
-</li>
-<li><p>查看mysql 初始化密码（随机生成的）<br>cat /data/mysql/mysql.err   </p>
-</li>
-<li><p>启动mysql<br>先将 mysql.server 放置到 /etc/init.d/mysql 中：<br>启动Mysql ：<br>service mysql start<br>上面的启动没有报错，则说明启动成功。下面是查看是否有mysql进程<br>ps -ef|grep mysql<br>如果有mysql进程，说明mysql已经安装成功。  </p>
-</li>
-<li><p>修改密码<br>前面的步骤我们能查出mysql 随机生成的密码，接下来，登录mysql，修改密码。<br>./mysql -u root -p密码      #bin目录下<br>再执行下面三步操作，然后重新登录。  </p>
-<figure class="highlight pgsql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs pgsql"><span class="hljs-keyword">set</span> <span class="hljs-keyword">password</span> = <span class="hljs-keyword">password</span>(<span class="hljs-string">&#x27;1234@Mfg&#x27;</span>);<br><span class="hljs-keyword">alter</span> <span class="hljs-keyword">user</span> <span class="hljs-string">&#x27;root&#x27;</span>@<span class="hljs-string">&#x27;localhost&#x27;</span> <span class="hljs-keyword">password</span> expire never;<br>flush <span class="hljs-keyword">privileges</span>;                                     <br></code></pre></div></td></tr></table></figure>
-<p>此时，mysql的root 用户的密码是 1234@Mfg 。  </p>
-</li>
-<li><p>远程连接</p>
-<figure class="highlight crmsh"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs crmsh">use mysql;                                          <span class="hljs-comment"># 访问 mysql 库</span><br>update <span class="hljs-keyword">user</span> <span class="hljs-title">set</span> host = &#x27;%&#x27;  where  <span class="hljs-keyword">user</span> <span class="hljs-title">= &#x27;root</span>&#x27;;   <span class="hljs-comment"># 使 root 能再任何 host 访问</span><br>flush privileges;                                   <span class="hljs-comment"># 刷新</span><br>quit;                                               <span class="hljs-comment"># 退出 mysql</span><br></code></pre></div></td></tr></table></figure></li>
-<li><p>将mysql bin添加的系统bin中<br>如果不希望每次都到bin目录下使用 mysql 命令则执行以下命令  </p>
-<figure class="highlight awk"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs awk">ln -s  <span class="hljs-regexp">/usr/</span>local<span class="hljs-regexp">/mysql/</span>bin<span class="hljs-regexp">/mysql /u</span>sr/bin<br></code></pre></div></td></tr></table></figure>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-</li>
-</ol>
+              <h2 id="新知识"><a href="#新知识" class="headerlink" title="新知识"></a>新知识</h2><h3 id="字符串的字典序"><a href="#字符串的字典序" class="headerlink" title="字符串的字典序"></a>字符串的字典序</h3><p>字典序（dictionary order），又称 字母序（alphabetical order），原意是表示英文单词在字典中的先后顺序，在计算机领域中扩展成两个任意字符串的大小关系。<br>在Java语言中，**System.out.println(“ah1x”.compareTo(“ahb”));**会输出 -49−49，这个数是两个字符串第一个不一样的位置的两个字符的 ASCII 值之差，如果小于零则说明第一个字符串小于第二个字符串。<br>除此之外，大多数语言也都有对应的字符串比较方法，而背后的核心都是字符串的字典序。理解并掌握这个重要的概念，对今后计算机专业课程的学习和程序开发都至关重要。  </p>
+<h2 id="场景复现"><a href="#场景复现" class="headerlink" title="场景复现"></a>场景复现</h2><p>问题：我有一个名为hexcodetable的MySQL表，只有一个名为VARCHAR（100）的名为hexcode的列。该表包含所有十六进制颜色代码。这些行填充为六个字符的十六进制数字，后跟＃。例如，＃25F412。我们如何对从最黑到最白的所有行进行排序，使得第一行为＃000000，第二行为＃000001，最后一行为#FFFFFF？请注意，我不一定要进行数字排序。<br>答案：按十六进制值进行数字排序。  </p>
+<figure class="highlight sql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-keyword">Select</span> hexcode <span class="hljs-keyword">from</span> hexcodetable <span class="hljs-keyword">order</span> <span class="hljs-keyword">by</span> Conv(<span class="hljs-built_in">substring</span>(hexcode,<span class="hljs-number">2</span>,<span class="hljs-number">6</span>),<span class="hljs-number">16</span>,<span class="hljs-number">10</span>)<br></code></pre></div></td></tr></table></figure>
+<h3 id="详解"><a href="#详解" class="headerlink" title="详解"></a>详解</h3><ul>
+<li>MySQL conv()函数<br>CONV(N,from_base,to_base)<br>所述CONV()函数的目的是在基数之间进行转换。该函数返回值N从from_base到to_base转换的字符串。最小基数值是2，最大值为36。如果任一参数为NULL，则该函数返回NULL。考虑下面的例子，其中数字 5 将从基数16转为基数2   <figure class="highlight asciidoc"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs asciidoc"><span class="hljs-code">  mysql&gt; SELECT CONV(5,16,2);</span><br><span class="hljs-code">+---------------------------------------------------------+</span><br>| CONV(5,16,2)                                            |<br><span class="hljs-code">+---------------------------------------------------------+</span><br>| 101                                                     |<br><span class="hljs-code">+---------------------------------------------------------+</span><br>1 row in set (0.00 sec)<br><br></code></pre></div></td></tr></table></figure>
+<h3 id="延伸bug"><a href="#延伸bug" class="headerlink" title="延伸bug"></a>延伸bug</h3>这条sql里面有个坑就是，有时按照某个字段的大小排序（或是比大小）发现排序有点错乱。后来才发现，是我们想当然地把对字符串字段当成数字并按照其大小排序（或是比大小），结果肯定不会是你想要的结果。<br>这时候需要把字符串转成数字再排序，最简单的办法就是在字段后面加上+0。   </li>
+<li>排序：<br>例：<br>方法一：ORDER BY ‘123’+0;（首推）<br>方法二：ORDER BY CAST(‘123’ AS SIGNED);<br>方法三：ORDER BY CONVERT(‘123’,SIGNED);  </li>
+</ul>
 
             </div>
             <hr>
@@ -322,9 +256,9 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/%E7%BC%96%E7%A8%8B/">编程</a>
-                    
                       <a class="hover-with-bg" href="/tags/%E8%BF%87%E5%8E%BB/">过去</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E7%BC%96%E7%A8%8B/">编程</a>
                     
                   </div>
                 
@@ -337,9 +271,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/01/09/2021/2021-01-09-mysqllesson/">
+                      <a href="/2021/01/09/2021/01/2021-01-08-yearsummary/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">记一次mysql的教训</span>
+                        <span class="hidden-mobile">2020总结</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -347,8 +281,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/01/07/2021/2021-01-03-hodgepodge/">
-                        <span class="hidden-mobile">乱七八槽的常用命令</span>
+                      <a href="/2021/01/08/2021/01/2021-01-08-centosmysql/">
+                        <span class="hidden-mobile">Centos下Mysql安装</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
