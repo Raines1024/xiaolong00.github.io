@@ -349,6 +349,52 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
+        <a href="/2020/01/07/2020/2020-03-27-runtimeDataArea/">Java运行时数据区</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2020/01/07/2020/2020-03-27-runtimeDataArea/">
+          
+          
+            
+          
+          Java运行时数据区线程共享的数据区方法区（非堆）–堆的一个逻辑部分存储已被虚拟机加载的类型信息、常量、静态变量、即时编译器编译后的代码缓存等。  
+
+运行时常量池运行时常量池是方法区的一部分，存放编译器生成的各种字面量与符号引用。  
+
+堆存放对象实例和数组可扩展：-Xmx和-Xms设定  
+线程隔离的数据区（线程私有的内存）Java虚拟机栈栈帧：局部变量表、操作数栈、动态连接、方法接口等。  
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-01-07 13:50" pubdate>
+              2020-01-07
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/blog/">blog</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
         <a href="/2020/01/07/2019/2019-12-31-all/">2019年终总结</a>
       </h1>
 
@@ -432,19 +478,19 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2020/01/07/2020/2020-03-28-redisImplIdmpotent/">Redis实现幂等性接口（Java语言实现）</a>
+        <a href="/2020/01/07/2020/2020-03-28-redisImplLock/">Redis实现分布式锁（Java语言实现）</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2020/01/07/2020/2020-03-28-redisImplIdmpotent/">
+        <a href="/2020/01/07/2020/2020-03-28-redisImplLock/">
           
           
             
           
-          基础准备幂等性接口概念任意多次执行所产生的影响均与一次执行的影响相同。按照这个含义，最终的含义就是：对数据库的影响只能是一次性的，不能重复处理。  
-如何保证其幂等性，通常有以下手段：
-数据库建立唯一性索引，可以保证最终插入数据库的只有一条数据    
-token机制，每次接口请求前先获取一个token，然后再下次请求的时候在请求的header体中加上这个token，后台进行验证，如果验证通过删除
+          基础准备Redis简介Redis是一个Key-Value存储系统。   
+Redis命令参考http://redisdoc.com  
+使用set函数的NX参数实现分布式锁对于java中想操作redis，好的方式是使用jedis，首先pom中引入依赖（使用Jedis 2.9.3版本）：   
+1234&lt;dependency&gt;    &lt;groupId&gt;redis.client
         </a>
       </p>
 
@@ -486,50 +532,6 @@ token机制，每次接口请求前先获取一个token，然后再下次请求�
             
           
           转载地址https://yanbin.blog/why-http-get-cannot-sent-data-with-reuqest-body/当我们被问及 HTTP 的 GET 与 POST 两种请求方式的区别的时候，很多答案是说 GET 的数据须通过 URL 以 Query Parameter 来传送，而 POST 可以通过请求体来发送数据，所以因 URL 的受限，往往 GET 无法发送太多的
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2020-01-07 13:50" pubdate>
-              2020-01-07
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/blog/">blog</a>
-            
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2020/01/07/2020/2020-03-28-redisImplLock/">Redis实现分布式锁（Java语言实现）</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2020/01/07/2020/2020-03-28-redisImplLock/">
-          
-          
-            
-          
-          基础准备Redis简介Redis是一个Key-Value存储系统。   
-Redis命令参考http://redisdoc.com  
-使用set函数的NX参数实现分布式锁对于java中想操作redis，好的方式是使用jedis，首先pom中引入依赖（使用Jedis 2.9.3版本）：   
-1234&lt;dependency&gt;    &lt;groupId&gt;redis.client
         </a>
       </p>
 

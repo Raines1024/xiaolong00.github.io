@@ -181,6 +181,52 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
+        <a href="/2020/01/07/2020/2020-03-20-javaAsyncPractice/">多线程及异步编程的前世今生</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2020/01/07/2020/2020-03-20-javaAsyncPractice/">
+          
+          
+            
+          
+          显式使用线程和线程池实现异步编程Java中显式开启一个线程进行异步处理的两种方式理论基础
+在Java中，Java虚拟机允许应用程序同时运行多个执行线程，所以我们可在main函数内开启一个线程来异步执行任务A，而main函数所在线程执行B，即可大大缩短整个任务处理耗时。  
+
+Java中有两类线程：User Thread(用户线程)、Daemon Thread(守护线程)
+
+run()是多线程程序的
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-01-07 13:50" pubdate>
+              2020-01-07
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/blog/">blog</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
         <a href="/2020/01/07/2020/2020-04-13-tomatoWork/">《番茄工作法》读书笔记</a>
       </h1>
 
@@ -307,20 +353,20 @@ D
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2020/01/07/2020/2020-01-09-javaUsuallyMethod/">java常用方法</a>
+        <a href="/2020/01/07/2020/2020-01-09-macZookeeper/">Mac安装并运行Zookeeper</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2020/01/07/2020/2020-01-09-javaUsuallyMethod/">
+        <a href="/2020/01/07/2020/2020-01-09-macZookeeper/">
           
           
             
           
-          //集合转成字符串逗号分隔
-StringUtils.join(list,&quot;,&quot;);
-//取集合中最大值
-long parValueMax = Collections.max(resultList.stream().map(OmsCouponUserAppVo::getParValue).collect(Collectors.toList()));
-//字符串根据逗号转成List
+          一、zookeeper下载地址：选择的是 3.4.14http://mirror.bit.edu.cn/apache/zookeeper/
+二、解压下载得到的ZooKeeper压缩包，发现有bin，conf，lib等目录。  bin目录中存放有运行脚本；
+  conf目录中存放有配置文件；
+  lib目录”中存放有运行所需要第三方库。
+三、单机配置编辑配置文件在conf目录下，新建一个名为zoo.
         </a>
       </p>
 
@@ -352,20 +398,36 @@ long parValueMax = Collections.max(resultList.stream().map(OmsCouponUserAppVo::g
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2020/01/07/2020/2020-01-09-macZookeeper/">Mac安装并运行Zookeeper</a>
+        <a href="/2020/01/07/2020/2020-01-09-markdownLearn/">Markdown语法总结</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2020/01/07/2020/2020-01-09-macZookeeper/">
+        <a href="/2020/01/07/2020/2020-01-09-markdownLearn/">
           
           
             
           
-          一、zookeeper下载地址：选择的是 3.4.14http://mirror.bit.edu.cn/apache/zookeeper/
-二、解压下载得到的ZooKeeper压缩包，发现有bin，conf，lib等目录。  bin目录中存放有运行脚本；
-  conf目录中存放有配置文件；
-  lib目录”中存放有运行所需要第三方库。
-三、单机配置编辑配置文件在conf目录下，新建一个名为zoo.
+          # 标题1
+## 标题2
+-----------------------
+*斜体* and **粗体**
+-----------------------
+#### 无序列表
+* 项目1
+* 项目2
+* 项目3
++ Candy.
++ Gum.
++ Booze.
+- Candy.
+- Gum.
+- Booze.
+#### 有序列表
+1. 项目1
+2. 项目2
+3. 项目3
+#### 嵌套列表
+- 项目
         </a>
       </p>
 
@@ -537,21 +599,19 @@ long parValueMax = Collections.max(resultList.stream().map(OmsCouponUserAppVo::g
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2020/01/07/2020/2020-03-27-runtimeDataArea/">Java运行时数据区</a>
+        <a href="/2020/01/07/2020/2020-03-28-redisImplIdmpotent/">Redis实现幂等性接口（Java语言实现）</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2020/01/07/2020/2020-03-27-runtimeDataArea/">
+        <a href="/2020/01/07/2020/2020-03-28-redisImplIdmpotent/">
           
           
             
           
-          Java运行时数据区线程共享的数据区方法区（非堆）–堆的一个逻辑部分存储已被虚拟机加载的类型信息、常量、静态变量、即时编译器编译后的代码缓存等。  
-
-运行时常量池运行时常量池是方法区的一部分，存放编译器生成的各种字面量与符号引用。  
-
-堆存放对象实例和数组可扩展：-Xmx和-Xms设定  
-线程隔离的数据区（线程私有的内存）Java虚拟机栈栈帧：局部变量表、操作数栈、动态连接、方法接口等。  
+          基础准备幂等性接口概念任意多次执行所产生的影响均与一次执行的影响相同。按照这个含义，最终的含义就是：对数据库的影响只能是一次性的，不能重复处理。  
+如何保证其幂等性，通常有以下手段：
+数据库建立唯一性索引，可以保证最终插入数据库的只有一条数据    
+token机制，每次接口请求前先获取一个token，然后再下次请求的时候在请求的header体中加上这个token，后台进行验证，如果验证通过删除
         </a>
       </p>
 

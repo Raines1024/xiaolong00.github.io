@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="Raines">
   <meta name="keywords" content="">
-  <title>Java运行时数据区 - 小龙的跋涉</title>
+  <title>记一次利用shell减少重复劳动的尝试 - 小龙的跋涉</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
@@ -162,7 +162,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="Java运行时数据区">
+            <span class="h2" id="subtitle" title="记一次利用shell减少重复劳动的尝试">
               
             </span>
 
@@ -172,8 +172,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2020-01-07 13:50" pubdate>
-        2020年1月7日 下午
+      <time datetime="2021-01-09 08:17" pubdate>
+        2021年1月9日 早上
       </time>
     </span>
   
@@ -184,7 +184,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      248 字
+      777 字
     </span>
   
 
@@ -194,7 +194,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      2
+      9
        分钟
     </span>
   
@@ -224,17 +224,41 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Java运行时数据区</h1>
+            <h1 style="display: none">记一次利用shell减少重复劳动的尝试</h1>
             
             <div class="markdown-body">
-              <h2 id="Java运行时数据区"><a href="#Java运行时数据区" class="headerlink" title="Java运行时数据区"></a>Java运行时数据区</h2><h3 id="线程共享的数据区"><a href="#线程共享的数据区" class="headerlink" title="线程共享的数据区"></a>线程共享的数据区</h3><h4 id="方法区（非堆）–堆的一个逻辑部分"><a href="#方法区（非堆）–堆的一个逻辑部分" class="headerlink" title="方法区（非堆）–堆的一个逻辑部分"></a>方法区（非堆）–堆的一个逻辑部分</h4><p>存储已被虚拟机加载的类型信息、常量、静态变量、即时编译器编译后的代码缓存等。  </p>
-<ul>
-<li>运行时常量池<br>运行时常量池是方法区的一部分，存放编译器生成的各种字面量与符号引用。  </li>
+              <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>一直在用 git 命令行在添加文件、提交、更新、推送，耗时且毫无意义，遂想偷懒之法。故了解shell脚本以破之。</p>
+<h2 id="所需基础知识"><a href="#所需基础知识" class="headerlink" title="所需基础知识"></a>所需基础知识</h2><ol>
+<li>创建文件   <code>touch demo.sh</code></li>
+<li>使用 vim 编辑文件   <code>vim demo.sh</code></li>
+<li>赋予脚本执行权限   <code>chmod +x ./test.sh</code></li>
+<li>执行脚本  <code>./test.sh</code>   或   <code>sh test.sh</code>        </li>
+</ol>
+<h2 id="实践出真知–推送本地所有变更文件到git远端分支"><a href="#实践出真知–推送本地所有变更文件到git远端分支" class="headerlink" title="实践出真知–推送本地所有变更文件到git远端分支"></a>实践出真知–推送本地所有变更文件到git远端分支</h2><ul>
+<li><p>精简版shell</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash"><span class="hljs-meta">#!/bin/bash</span><br><span class="hljs-built_in">cd</span> /Users/raines/Desktop/my/xiaolong00.github.io<br>git status<br>git add .<br>git commit -m a<br>git push<br></code></pre></div></td></tr></table></figure>
+<p>“#!” 是一个约定的标记，它告诉系统这个脚本需要什么解释器来执行，即使用哪一种 Shell。</p>
+<p>其他命令查阅git基础知识，小龙很久前也写过git的基础命令。</p>
+<p>由于该shell只会把本地所有变更的文件全都推送，甚至都不给你反悔的余地，then–我决定改良一下它，让它告诉我有哪些文件改动了，会不会有误改的文件，给自己留一个反悔的机会。</p>
+</li>
+<li><p>留有余地的shell</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash"><span class="hljs-meta">#!/bin/bash</span><br><span class="hljs-built_in">cd</span> /Users/raines/Desktop/my/xiaolong00.github.io<br>git status<br><span class="hljs-built_in">read</span> -r -p <span class="hljs-string">&quot;Are You Sure? [Y/n] &quot;</span> input<br><br><span class="hljs-keyword">case</span> <span class="hljs-variable">$input</span> <span class="hljs-keyword">in</span><br>    [yY][eE][sS]|[yY])<br>		git add .<br>		git commit -m a<br>		git push<br>		;;<br><br>    [nN][oO]|[nN])<br>		<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;No&quot;</span><br>       	;;<br><br>    *)<br>		<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Invalid input...&quot;</span><br>		<span class="hljs-built_in">exit</span> 1<br>		;;<br><span class="hljs-keyword">esac</span><br></code></pre></div></td></tr></table></figure>
+<p>这个shell就人性化多了，它会拿着需要更改的文件询问你，Are You Sure? 如果你y（是），则推送到远程分支；或者你发现自己错了，选n（否），那就用”echo” 命令用于向窗口输出文本“No”，然后退出；或者你睡着了，误触了其他按键，则提醒你无效，退出脚本。但是–有人感觉自己睡不着，但是单身这么多年手速实在太快，误触了就很伤脑筋，我还给你准备了个预选方案：</p>
+</li>
+<li><h4 id="提示进行确认（输入正常退出，输入错误则需重新输入）"><a href="#提示进行确认（输入正常退出，输入错误则需重新输入）" class="headerlink" title="提示进行确认（输入正常退出，输入错误则需重新输入）"></a>提示进行确认（输入正常退出，输入错误则需重新输入）</h4><figure class="highlight awk"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs awk"><span class="hljs-comment">#!/bin/bash</span><br><br><span class="hljs-keyword">while</span> true<br><span class="hljs-keyword">do</span><br>	read -r -p <span class="hljs-string">&quot;Are You Sure? [Y/n] &quot;</span> input<br><br>	case <span class="hljs-variable">$input</span> <span class="hljs-keyword">in</span><br>	    [yY][eE][sS]|[yY])<br>			echo <span class="hljs-string">&quot;Yes&quot;</span><br>			<span class="hljs-keyword">exit</span> <span class="hljs-number">1</span><br>			;;<br><br>	    [nN][oO]|[nN])<br>			echo <span class="hljs-string">&quot;No&quot;</span><br>			<span class="hljs-keyword">exit</span> <span class="hljs-number">1</span>	       	<br>			;;<br><br>	    *)<br>			echo <span class="hljs-string">&quot;Invalid input...&quot;</span><br>			;;<br>	esac<br>done<br><br></code></pre></div></td></tr></table></figure>
+
+
+</li>
 </ul>
-<h4 id="堆"><a href="#堆" class="headerlink" title="堆"></a>堆</h4><p>存放对象实例和数组<br>可扩展：-Xmx和-Xms设定  </p>
-<h3 id="线程隔离的数据区（线程私有的内存）"><a href="#线程隔离的数据区（线程私有的内存）" class="headerlink" title="线程隔离的数据区（线程私有的内存）"></a>线程隔离的数据区（线程私有的内存）</h3><h4 id="Java虚拟机栈"><a href="#Java虚拟机栈" class="headerlink" title="Java虚拟机栈"></a>Java虚拟机栈</h4><p>栈帧：局部变量表、操作数栈、动态连接、方法接口等。  </p>
-<h4 id="本地方法栈"><a href="#本地方法栈" class="headerlink" title="本地方法栈"></a>本地方法栈</h4><p>和Java虚拟机栈类似，存取本地方法。<br>HotSpot虚拟机把本地方法栈和虚拟机栈合二为一。  </p>
-<h4 id="程序计数器"><a href="#程序计数器" class="headerlink" title="程序计数器"></a>程序计数器</h4><p>程序计数器是一块较小的内存空间，它可以看作是当前线程所执行的字节码的行号指示器。<br>程序控制流的指示器。   </p>
+<h2 id="彩蛋"><a href="#彩蛋" class="headerlink" title="彩蛋"></a>彩蛋</h2><p>一般新建一个文件扩展名为 sh（sh代表shell），扩展名并不影响脚本执行，见名知意就好。比如你用 php 写 shell 脚本，扩展名就用 php 好了。</p>
+<h2 id="突发奇想–把大象放到冰箱"><a href="#突发奇想–把大象放到冰箱" class="headerlink" title="突发奇想–把大象放到冰箱"></a>突发奇想–把大象放到冰箱</h2><p>1.把大象放进冰箱要几个步骤?</p>
+<p>答:3个.先打开冰箱门,再把大象放进去,再关上冰箱门.</p>
+<p>2.把长颈鹿放进冰箱要几个步骤?</p>
+<p>答:4个.先打开冰箱门,再把大象拿出来,再把长颈鹿放进去,然后关上冰箱门.</p>
+<p>3.森林里要开森林大会,规定所有的动物都要去参加,可是有一样动物没有到,你知道是什么动物吗?</p>
+<p>答:长颈鹿.因为它被关在冰箱里.</p>
+<p>4.有一条河,里面有很多凶狠的鳄鱼,河上又没有桥,有一个人却成功过河了,你知道他是怎么过去的吗?</p>
+<p>答:游过去的.因为鳄鱼去开森林大会了.</p>
 
             </div>
             <hr>
@@ -244,10 +268,23 @@
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/blog/">blog</a>
+                      <a class="hover-with-bg" href="/categories/100-%E5%AD%A6%E4%B9%A0%E7%B1%BB/">100 学习类</a>
+                    
+                      <a class="hover-with-bg" href="/categories/100-%E5%AD%A6%E4%B9%A0%E7%B1%BB/110-%E7%BC%96%E7%A8%8B/">110 编程</a>
+                    
+                      <a class="hover-with-bg" href="/categories/100-%E5%AD%A6%E4%B9%A0%E7%B1%BB/110-%E7%BC%96%E7%A8%8B/113-Linux/">113 Linux</a>
                     
                   </div>
                 
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E8%BF%87%E5%8E%BB/">过去</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E7%BC%96%E7%A8%8B/">编程</a>
+                    
+                  </div>
                 
               </div>
               
@@ -258,9 +295,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2020/01/07/2020/2020-03-26-recursion/">
+                      <a href="/2021/01/14/categoryrule/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">递归介绍(一）：线性递归、线性迭代、树形递归</span>
+                        <span class="hidden-mobile">分类规范</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -268,8 +305,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2020/01/07/2019/2019-12-31-all/">
-                        <span class="hidden-mobile">2019年终总结</span>
+                      <a href="/2021/01/09/2021/01/2021-01-08-yearsummary/">
+                        <span class="hidden-mobile">2020总结</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
