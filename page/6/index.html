@@ -437,16 +437,19 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2020/01/07/2020/2020-03-28-aopIntroduce/">AOP介绍</a>
+        <a href="/2020/01/07/2020/2020-03-28-redisImplIdmpotent/">Redis实现幂等性接口（Java语言实现）</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2020/01/07/2020/2020-03-28-aopIntroduce/">
+        <a href="/2020/01/07/2020/2020-03-28-redisImplIdmpotent/">
           
           
             
           
-          基础AOP中 @Before @After @AfterThrowing @AfterReturning 的执行顺序123456789101112131415public Object invoke(Object proxy, Method method, Object[] args) throws Throwable &#123;   Object result;   try &#123;   
+          基础准备幂等性接口概念任意多次执行所产生的影响均与一次执行的影响相同。按照这个含义，最终的含义就是：对数据库的影响只能是一次性的，不能重复处理。  
+如何保证其幂等性，通常有以下手段：
+数据库建立唯一性索引，可以保证最终插入数据库的只有一条数据    
+token机制，每次接口请求前先获取一个token，然后再下次请求的时候在请求的header体中加上这个token，后台进行验证，如果验证通过删除
         </a>
       </p>
 
