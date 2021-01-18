@@ -537,16 +537,21 @@ long parValueMax = Collections.max(resultList.stream().map(OmsCouponUserAppVo::g
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2020/01/07/2020/2020-03-28-aopIntroduce/">AOP介绍</a>
+        <a href="/2020/01/07/2020/2020-03-27-runtimeDataArea/">Java运行时数据区</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2020/01/07/2020/2020-03-28-aopIntroduce/">
+        <a href="/2020/01/07/2020/2020-03-27-runtimeDataArea/">
           
           
             
           
-          基础AOP中 @Before @After @AfterThrowing @AfterReturning 的执行顺序123456789101112131415public Object invoke(Object proxy, Method method, Object[] args) throws Throwable &#123;   Object result;   try &#123;   
+          Java运行时数据区线程共享的数据区方法区（非堆）–堆的一个逻辑部分存储已被虚拟机加载的类型信息、常量、静态变量、即时编译器编译后的代码缓存等。  
+
+运行时常量池运行时常量池是方法区的一部分，存放编译器生成的各种字面量与符号引用。  
+
+堆存放对象实例和数组可扩展：-Xmx和-Xms设定  
+线程隔离的数据区（线程私有的内存）Java虚拟机栈栈帧：局部变量表、操作数栈、动态连接、方法接口等。  
         </a>
       </p>
 
