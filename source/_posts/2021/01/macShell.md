@@ -1,6 +1,6 @@
 ---
 title: 记一次利用shell减少重复劳动的尝试
-date: 2021-01-09 08:17:39
+date: 2021-01-18 08:17:39
 tags: [编程, 过去]
 category:
     - 100 学习类
@@ -25,12 +25,12 @@ category:
 
 - 精简版shell
 
-  ```
+  ```sh
   #!/bin/bash
   cd /Users/raines/Desktop/my/xiaolong00.github.io
   git status
   git add .
-  git commit -m a
+  git commit -m test
   git push
   ```
 
@@ -42,7 +42,7 @@ category:
 
 - 留有余地的shell
 
-  ```
+  ```sh
   #!/bin/bash
   cd /Users/raines/Desktop/my/xiaolong00.github.io
   git status
@@ -70,7 +70,7 @@ category:
 
 - #### 提示进行确认（输入正常退出，输入错误则需重新输入）
 
-  ```
+  ```sh
   #!/bin/bash
   
   while true
