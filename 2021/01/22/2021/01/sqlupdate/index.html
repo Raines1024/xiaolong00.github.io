@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="Raines">
   <meta name="keywords" content="">
-  <title>Ubuntu 桌面版 - 小龙的跋涉</title>
+  <title>联表查询并修改sql - 小龙的跋涉</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
@@ -162,7 +162,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="Ubuntu 桌面版">
+            <span class="h2" id="subtitle" title="联表查询并修改sql">
               
             </span>
 
@@ -172,8 +172,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2020-01-07 13:50" pubdate>
-        2020年1月7日 下午
+      <time datetime="2021-01-22 08:15" pubdate>
+        2021年1月22日 早上
       </time>
     </span>
   
@@ -184,7 +184,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      687 字
+      92 字
     </span>
   
 
@@ -194,7 +194,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      8
+      1
        分钟
     </span>
   
@@ -224,26 +224,49 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Ubuntu 桌面版</h1>
+            <h1 style="display: none">联表查询并修改sql</h1>
             
             <div class="markdown-body">
-              <h2 id="为什么选择Ubuntu"><a href="#为什么选择Ubuntu" class="headerlink" title="为什么选择Ubuntu"></a>为什么选择Ubuntu</h2><p>之前一直使用MBP作为开发的主力机使用，因公司原因，使用thinkpad作为日常开发机器，回归windows后使用一段时间感触颇深，实在是大大降低了工作效率，<br>主要原因有如下：命令行下不支持linux命令，没有tab补足git的命令的人性化设计；对docker的支持不完善；时常有弹窗广告，实在不胜其烦，广告事小，打断思路、惊扰神经事大。<br>实在忍无可忍，无奈之下决定体验一下Ubuntu的桌面版。<br>Ubuntu还是大体让人满意的：最满意的当数命令行、完美支持docker、毫无弹窗广告。不过其不便也很明显：软件支持少，微信qq等等就放弃吧，不要曲线救国耗费心力了。<br>是以，选择使用Ubuntu作为windows的虚拟机，用以当作开发的主力机。<br>dd</p>
-<h2 id="软件"><a href="#软件" class="headerlink" title="软件"></a>软件</h2><ul>
-<li><p>Ubuntu上一个炫酷的终端程序–guake <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/40684802">https://zhuanlan.zhihu.com/p/40684802</a><br>  安装命令sudo apt install guake  </p>
-</li>
-<li><p>ubuntu16.04下安装如何安装.deb安装包   </p>
-</li>
-</ul>
-<figure class="highlight vim"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs vim">在Ubuntu下安装<span class="hljs-keyword">deb</span>包需要使用dpkg命令.  <br>Dpkg 的普通用法：   <br><span class="hljs-number">1</span>、sudo dpkg -i &lt;package.<span class="hljs-keyword">deb</span>&gt;  <br>安装一个 Debian 软件包，如你手动下载的文件。  <br><span class="hljs-number">2</span>、sudo dpkg -<span class="hljs-keyword">c</span> &lt;package.<span class="hljs-keyword">deb</span>&gt;  <br>列出 &lt;package.<span class="hljs-keyword">deb</span>&gt; 的内容。  <br><span class="hljs-number">3</span>、sudo dpkg -I &lt;package.<span class="hljs-keyword">deb</span>&gt;  <br>从 &lt;package.<span class="hljs-keyword">deb</span>&gt; 中提取包裹信息。  <br><span class="hljs-number">4</span>、sudo dpkg -r <span class="hljs-symbol">&lt;package&gt;</span>  <br>移除一个已安装的包裹。  <br><span class="hljs-number">5</span>、sudo dpkg -<span class="hljs-keyword">P</span> <span class="hljs-symbol">&lt;package&gt;</span>  <br>完全清除一个已安装的包裹。和 <span class="hljs-built_in">remove</span> 不同的是，<span class="hljs-built_in">remove</span> 只是删掉数据和可执行文件，purge 另外还删除所有的配制文件。  <br><span class="hljs-number">6</span>、sudo dpkg -L <span class="hljs-symbol">&lt;package&gt;</span>  <br>列出 <span class="hljs-symbol">&lt;package&gt;</span> 安装的所有文件清单。同时请看 dpkg -<span class="hljs-keyword">c</span> 来检查一个 .<span class="hljs-keyword">deb</span> 文件的内容。  <br><span class="hljs-number">7</span>、sudo dpkg -s <span class="hljs-symbol">&lt;package&gt;</span>  <br>显示已安装包裹的信息。同时请看 apt-cache 显示 Debian 存档中的包裹信息，以及 dpkg -I 来显示从一个 .<span class="hljs-keyword">deb</span> 文件中提取的包裹信息。  <br><span class="hljs-number">8</span>、sudo dpkg-reconfigure <span class="hljs-symbol">&lt;package&gt;</span>  <br>重新配制一个已经安装的包裹，如果它使用的是 debconf (debconf 为包裹安装提供了一个统一的配制界面)。  <br>如果安装过程中出现问题,可以先使用命令:  <br>sudo apt-<span class="hljs-built_in">get</span> <span class="hljs-keyword">update</span>  <br>更新后再执行相应操作。  <br></code></pre></div></td></tr></table></figure>
-<h2 id="快捷键"><a href="#快捷键" class="headerlink" title="快捷键"></a>快捷键</h2><p>作为之前mbp的无鼠标开发人士，不得不吐槽thinkpad的触控板实在是渣渣。<br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/45535756">https://zhuanlan.zhihu.com/p/45535756</a>   </p>
-<h2 id="日常使用"><a href="#日常使用" class="headerlink" title="日常使用"></a>日常使用</h2><h3 id="远程连接"><a href="#远程连接" class="headerlink" title="远程连接"></a>远程连接</h3><ul>
-<li>安装ssh<br>sudo apt install ssh  </li>
-<li>开启<br>service ssh start</li>
-</ul>
-<h3 id="git-使用"><a href="#git-使用" class="headerlink" title="git 使用"></a>git 使用</h3><ul>
-<li>修改git默认编辑器为Vim<br>git config –global core.editor vim    </li>
-<li>git保存仓库的账号密码<br>git config –global credential.helper store   </li>
-</ul>
+              <h2 id="业务需求"><a href="#业务需求" class="headerlink" title="业务需求"></a>业务需求</h2><p>退换货原因，需根据车辆编号重新绑定设备号，提供车辆编号对应设备号excel。</p>
+<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><p>创建临时表t2并导入excel数据。</p>
+<h2 id="sql实现"><a href="#sql实现" class="headerlink" title="sql实现"></a>sql实现</h2><p>俩表关联，修改原表设备号为临时表设备号</p>
+<figure class="highlight sql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-keyword">UPDATE</span> table_1 t1 <span class="hljs-keyword">left</span> <span class="hljs-keyword">join</span> table_2 t2 <span class="hljs-keyword">on</span> t2.serail_no <span class="hljs-operator">=</span> t1.serail_no <span class="hljs-keyword">SET</span> t1.dev_no <span class="hljs-operator">=</span> t2.dev_no<br><span class="hljs-keyword">where</span> t1.id<span class="hljs-operator">&gt;</span><span class="hljs-number">5</span>;<br></code></pre></div></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
             </div>
             <hr>
@@ -253,10 +276,23 @@
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/blog/">blog</a>
+                      <a class="hover-with-bg" href="/categories/200-%E5%B7%A5%E4%BD%9C%E7%B1%BB/">200 工作类</a>
+                    
+                      <a class="hover-with-bg" href="/categories/200-%E5%B7%A5%E4%BD%9C%E7%B1%BB/230-%E5%B7%A5%E4%BD%9C%E6%8A%80%E8%83%BD/">230 工作技能</a>
+                    
+                      <a class="hover-with-bg" href="/categories/200-%E5%B7%A5%E4%BD%9C%E7%B1%BB/230-%E5%B7%A5%E4%BD%9C%E6%8A%80%E8%83%BD/235-%E5%B8%B8%E7%94%A8sql/">235 常用sql</a>
                     
                   </div>
                 
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E8%BF%87%E5%8E%BB/">过去</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E7%BC%96%E7%A8%8B/">编程</a>
+                    
+                  </div>
                 
               </div>
               
@@ -267,18 +303,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2020/01/07/2020/2020-06-06-sqlLearn/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Mysql必知必会</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2020/01/07/2020/2020-06-07-k8s/">
-                        <span class="hidden-mobile">kubernetes入门实战</span>
+                      <a href="/2021/01/21/2021/01/goodresume/">
+                        <span class="hidden-mobile">吴军：如何写好简历？</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
