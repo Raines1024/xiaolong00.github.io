@@ -487,20 +487,16 @@ Flink 从 Kafka topic 中获取数据并写入mysql的 demo工具类往 kafka to
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2020/01/07/2020/2020-11-25-hdfsShell/">HDFS常用Shell操作</a>
+        <a href="/2020/01/07/2020/2020-11-25-flink5/">Flink之Data transformation(转换)</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2020/01/07/2020/2020-11-25-hdfsShell/">
+        <a href="/2020/01/07/2020/2020-11-25-flink5/">
           
           
             
           
-          HDFS常用Shell操作列出文件目录：hadoop fs -ls 目录路径
-查看HDFS根目录下的目录：hadoop fs -ls /
-递归查看HDFS根目录下的目录：hadoop fs -lsr /
-
-在HDFS中创建文件夹：hadoop fs -mkdir 文件夹名称上传文件到HDFS中：hadoop fs -put 本地源路径 目标存放路径将本地系统中的一个log文件上传到di文件夹中：h
+          Flink 应用程序结构1、Source: 数据源，Flink 在流处理和批处理上的 source 大概有 4 类：基于本地集合的 source、基于文件的 source、基于网络套接字的 source、自定义的 source。自定义的 source 常见的有 Apache kafka、Amazon Kinesis Streams、RabbitMQ、Twitter Streaming API、Ap
         </a>
       </p>
 
@@ -532,16 +528,20 @@ Flink 从 Kafka topic 中获取数据并写入mysql的 demo工具类往 kafka to
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2020/01/07/2020/2020-11-25-flink5/">Flink之Data transformation(转换)</a>
+        <a href="/2020/01/07/2020/2020-11-25-hdfsShell/">HDFS常用Shell操作</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2020/01/07/2020/2020-11-25-flink5/">
+        <a href="/2020/01/07/2020/2020-11-25-hdfsShell/">
           
           
             
           
-          Flink 应用程序结构1、Source: 数据源，Flink 在流处理和批处理上的 source 大概有 4 类：基于本地集合的 source、基于文件的 source、基于网络套接字的 source、自定义的 source。自定义的 source 常见的有 Apache kafka、Amazon Kinesis Streams、RabbitMQ、Twitter Streaming API、Ap
+          HDFS常用Shell操作列出文件目录：hadoop fs -ls 目录路径
+查看HDFS根目录下的目录：hadoop fs -ls /
+递归查看HDFS根目录下的目录：hadoop fs -lsr /
+
+在HDFS中创建文件夹：hadoop fs -mkdir 文件夹名称上传文件到HDFS中：hadoop fs -put 本地源路径 目标存放路径将本地系统中的一个log文件上传到di文件夹中：h
         </a>
       </p>
 
