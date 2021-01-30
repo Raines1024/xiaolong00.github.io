@@ -181,68 +181,19 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2020/01/07/2020/2020-02-24-flinkLearn/">Flink入门</a>
+        <a href="/2020/01/07/2020/2020-02-28-effectiveJava3/">《Effective java 3》读书笔记</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2020/01/07/2020/2020-02-24-flinkLearn/">
+        <a href="/2020/01/07/2020/2020-02-28-effectiveJava3/">
           
           
             
           
-          
-Mac OS X 上使用brew安装 Flinkbrew install apache-flink
-查看flink安装路径brew info apache-flink
-进入安装路径下运行./libexec/bin/start-cluster.sh
+          用静态工厂方法代替构造器当构造方法参数过多时使用builder模式构造方法参数过多解决方案：  
 
-
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2020-01-07 13:50" pubdate>
-              2020-01-07
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/blog/">blog</a>
-            
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2020/01/07/2020/2020-03-06-computerCount/">计算机进制计算</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2020/01/07/2020/2020-03-06-computerCount/">
-          
-          
-            
-          
-          Java基本数据类型Java语言提供了八种基本类型。六种数字类型（四个整数型，两个浮点型），一种字符类型，还有一种布尔型。  
-byte：
-byte 数据类型是8位、有符号的，以二进制补码表示的整数；  
-最小值是 -128（-2^7）；  
-最大值是 127（2^7-1）；  
-默认值是 0；  
-byte 类型用在大型数组中节约空间，主要代替整数，因为 byte 变量占用的空间只有 int 类
+重叠构造器模式：简而言之，重叠构造器模式可行，但是当有许多参数的时候，客户端代码会很难缩写，并且仍然较难以阅读。  
+JavaBeans模式，在这种模式下，先调用一个无参构造器来创建对象，然后再调用setter方法来设置每个必要的参数，以及每个相关的可选参数。缺点也却而易见：因为构造过程被分到了几个
         </a>
       </p>
 
@@ -298,6 +249,53 @@ springboot初使用目录结构.
 ├── pom.xml
 └── src
     └── 
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-01-07 13:50" pubdate>
+              2020-01-07
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/blog/">blog</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2020/01/07/2020/2020-03-06-computerCount/">计算机进制计算</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2020/01/07/2020/2020-03-06-computerCount/">
+          
+          
+            
+          
+          Java基本数据类型Java语言提供了八种基本类型。六种数字类型（四个整数型，两个浮点型），一种字符类型，还有一种布尔型。  
+byte：
+byte 数据类型是8位、有符号的，以二进制补码表示的整数；  
+最小值是 -128（-2^7）；  
+最大值是 127（2^7-1）；  
+默认值是 0；  
+byte 类型用在大型数组中节约空间，主要代替整数，因为 byte 变量占用的空间只有 int 类
         </a>
       </p>
 
