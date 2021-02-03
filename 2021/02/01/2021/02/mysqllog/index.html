@@ -1,0 +1,712 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/comm/favicon.png">
+  <link rel="icon" type="image/png" href="/img/comm/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Raines">
+  <meta name="keywords" content="">
+  <title>mysql日志那些事 - 小龙的跋涉</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/darcula.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>小龙的跋涉</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="mysql日志那些事">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-02-01 10:47" pubdate>
+        2021年2月1日 上午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      4.5k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      58
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">mysql日志那些事</h1>
+            
+            <div class="markdown-body">
+              <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>最近看了一下mysql的主从配置，延伸出mysql的日志，故记之。</p>
+<p>查看mysql的语句,比较常用的大概是show processlist 命令了,但是这个对于查询时间比较长的语句比较有意义,对于一下子就能执行的语句真心拼不过手速啊。</p>
+<p>MySQL中一般有以下几种日志：</p>
+<table>
+<thead>
+<tr>
+<th align="center">日志类型</th>
+<th align="left">写入日志的信息</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">错误日志</td>
+<td align="left">记录在启动，运行或停止mysqld时遇到的问题</td>
+</tr>
+<tr>
+<td align="center">通用查询日志</td>
+<td align="left">记录建立的客户端连接和执行的语句</td>
+</tr>
+<tr>
+<td align="center">二进制日志</td>
+<td align="left">记录更改数据的语句</td>
+</tr>
+<tr>
+<td align="center">中继日志</td>
+<td align="left">从复制主服务器接收的数据更改</td>
+</tr>
+<tr>
+<td align="center">慢查询日志</td>
+<td align="left">记录所有执行时间超过 <code>long_query_time</code> 秒的所有查询或不使用索引的查询</td>
+</tr>
+<tr>
+<td align="center">DDL日志（元数据日志）</td>
+<td align="left">元数据操作由DDL语句执行</td>
+</tr>
+</tbody></table>
+<h2 id="Binlog介绍"><a href="#Binlog介绍" class="headerlink" title="Binlog介绍"></a>Binlog介绍</h2><p>MySQL 的二进制日志 binlog 可以说是 MySQL 最重要的日志，它记录了所有的 <code>DDL</code> 和 <code>DML</code> 语句（除了数据查询语句select、show等），<strong>以事件形式记录</strong>，还包含语句所执行的消耗的时间，MySQL的二进制日志是事务安全型的。binlog 的主要目的是<strong>复制和恢复</strong>。</p>
+<h3 id="Binlog日志的两个最重要的使用场景"><a href="#Binlog日志的两个最重要的使用场景" class="headerlink" title="Binlog日志的两个最重要的使用场景"></a>Binlog日志的两个最重要的使用场景</h3><ul>
+<li><strong>MySQL主从复制</strong>：MySQL Replication在Master端开启binlog，Master把它的二进制日志传递给slaves来达到master-slave数据一致的目的</li>
+<li><strong>数据恢复</strong>：通过使用 mysqlbinlog工具来使恢复数据</li>
+</ul>
+<h3 id="启用-Binlog"><a href="#启用-Binlog" class="headerlink" title="启用 Binlog"></a>启用 Binlog</h3><blockquote>
+<p>注：笔者实验的MySQL版本为：5.7.32</p>
+</blockquote>
+<p>一般来说开启binlog日志大概会有1%的性能损耗。</p>
+<p>启用binlog，通过配置 <code>/etc/my.cnf</code> 或 <code>/etc/mysql/mysql.conf.d/mysqld.cnf</code> 配置文件的 <code>log-bin</code> 选项：</p>
+<p>在配置文件中加入 <code>log-bin</code> 配置，表示启用binlog，如果没有给定值，写成 <code>log-bin=</code>，则默认名称为主机名。（注：名称若带有小数点，则只取第一个小数点前的部分作为名称）</p>
+<figure class="highlight applescript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs applescript">[mysqld]<br><span class="hljs-built_in">log</span>-bin=<span class="hljs-keyword">my</span>-binlog-<span class="hljs-built_in">name</span><br></code></pre></div></td></tr></table></figure>
+<p>也可以通过 <code>SET SQL_LOG_BIN=1</code> 命令来启用 binlog，通过 <code>SET SQL_LOG_BIN=0</code> 命令停用 binlog。启用 binlog 之后须重启MySQL才能生效。</p>
+<h4 id="常用的Binlog操作命令"><a href="#常用的Binlog操作命令" class="headerlink" title="常用的Binlog操作命令"></a>常用的Binlog操作命令</h4><figure class="highlight vala"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs vala"><span class="hljs-meta"># 是否启用binlog日志</span><br>show variables like <span class="hljs-string">&#x27;log_bin&#x27;</span>;<br><br><span class="hljs-meta"># 查看详细的日志配置信息</span><br>show global variables like <span class="hljs-string">&#x27;%log%&#x27;</span>;<br><br><span class="hljs-meta"># mysql数据存储目录</span><br>show variables like <span class="hljs-string">&#x27;%dir%&#x27;</span>;<br><br><span class="hljs-meta"># 查看binlog的目录</span><br>show global variables like <span class="hljs-string">&quot;%log_bin%&quot;</span>;<br><br><span class="hljs-meta"># 查看当前服务器使用的biglog文件及大小</span><br>show binary logs;<br><br><span class="hljs-meta"># 查看主服务器使用的biglog文件及大小</span><br><br><span class="hljs-meta"># 查看最新一个binlog日志文件名称和Position</span><br>show master status;<br><br><br><span class="hljs-meta"># 事件查询命令</span><br><span class="hljs-meta"># IN &#x27;log_name&#x27; ：指定要查询的binlog文件名(不指定就是第一个binlog文件)</span><br><span class="hljs-meta"># FROM pos ：指定从哪个pos起始点开始查起(不指定就是从整个文件首个pos点开始算)</span><br><span class="hljs-meta"># LIMIT [offset,] ：偏移量(不指定就是0)</span><br><span class="hljs-meta"># row_count ：查询总条数(不指定就是所有行)</span><br>show binlog events [IN <span class="hljs-string">&#x27;log_name&#x27;</span>] [FROM pos] [LIMIT [offset,] row_count];<br><br><span class="hljs-meta"># 查看 binlog 内容</span><br>show binlog events;<br><br><span class="hljs-meta"># 查看具体一个binlog文件的内容 （in 后面为binlog的文件名）</span><br>show binlog events in <span class="hljs-string">&#x27;master.000003&#x27;</span>;<br><br><span class="hljs-meta"># 设置binlog文件保存事件，过期删除，单位天</span><br><span class="hljs-keyword">set</span> global expire_log_days=<span class="hljs-number">3</span>; <br><br><span class="hljs-meta"># 删除当前的binlog文件</span><br>reset master; <br><br><span class="hljs-meta"># 删除slave的中继日志</span><br>reset slave;<br><br><span class="hljs-meta"># 删除指定日期前的日志索引中binlog日志文件</span><br>purge master logs before <span class="hljs-string">&#x27;2019-03-09 14:00:00&#x27;</span>;<br><br><span class="hljs-meta"># 删除指定日志文件</span><br>purge master logs to <span class="hljs-string">&#x27;master.000003&#x27;</span>;<br></code></pre></div></td></tr></table></figure>
+<h4 id="写-Binlog-的时机"><a href="#写-Binlog-的时机" class="headerlink" title="写 Binlog 的时机"></a>写 Binlog 的时机</h4><p>对支持事务的引擎如InnoDB而言，必须要提交了事务才会记录binlog。binlog 什么时候<strong>刷新到磁盘</strong>跟参数 <code>sync_binlog</code> 相关。</p>
+<ul>
+<li>如果设置为0，则表示MySQL不控制binlog的刷新，由文件系统去控制它缓存的刷新；</li>
+<li>如果设置为不为0的值，则表示每 <code>sync_binlog</code> 次事务，MySQL调用文件系统的刷新操作刷新binlog到磁盘中。</li>
+<li>设为1是最安全的，在系统故障时最多丢失一个事务的更新，但是会对性能有所影响。</li>
+</ul>
+<p>如果 <code>sync_binlog=0</code> 或 <code>sync_binlog大于1</code>，当发生电源故障或操作系统崩溃时，可能有一部分已提交但其binlog未被同步到磁盘的事务会被丢失，恢复程序将无法恢复这部分事务。</p>
+<p>在MySQL 5.7.7之前，默认值 sync_binlog 是0，MySQL 5.7.7和更高版本使用默认值1，这是最安全的选择。一般情况下会设置为100或者0，牺牲一定的一致性来获取更好的性能。</p>
+<h4 id="Binlog-文件以及扩展"><a href="#Binlog-文件以及扩展" class="headerlink" title="Binlog 文件以及扩展"></a>Binlog 文件以及扩展</h4><p>binlog日志包括两类文件:</p>
+<ul>
+<li>二进制日志索引文件（文件名后缀为.index）用于记录所有有效的的二进制文件</li>
+<li>二进制日志文件（文件名后缀为.00000*）记录数据库所有的DDL和DML语句事件</li>
+</ul>
+<p>binlog是一个二进制文件集合，每个binlog文件以一个4字节的魔数开头，接着是一组Events:</p>
+<ul>
+<li>魔数：0xfe62696e对应的是0xfebin；</li>
+<li>Event：每个Event包含header和data两个部分；header提供了Event的创建时间，哪个服务器等信息，data部分提供的是针对该Event的具体信息，如具体数据的修改；</li>
+<li>第一个Event用于描述binlog文件的格式版本，这个格式就是event写入binlog文件的格式；</li>
+<li>其余的Event按照第一个Event的格式版本写入；</li>
+<li>最后一个Event用于说明下一个binlog文件；</li>
+<li>binlog的索引文件是一个文本文件，其中内容为当前的binlog文件列表</li>
+</ul>
+<p>当遇到以下3种情况时，MySQL会重新生成一个新的日志文件，文件序号递增：</p>
+<ul>
+<li>MySQL服务器停止或重启时</li>
+<li>使用 <code>flush logs</code> 命令；</li>
+<li>当 binlog 文件大小超过 <code>max_binlog_size</code> 变量的值时；</li>
+</ul>
+<blockquote>
+<p><code>max_binlog_size</code> 的最小值是4096字节，最大值和默认值是 1GB (1073741824字节)。事务被写入到binlog的一个块中，所以它不会在几个二进制日志之间被拆分。因此，如果你有很大的事务，为了保证事务的完整性，不可能做切换日志的动作，只能将该事务的日志都记录到当前日志文件中，直到事务结束，你可能会看到binlog文件大于 max_binlog_size 的情况。</p>
+</blockquote>
+<h4 id="Binlog-的日志格式"><a href="#Binlog-的日志格式" class="headerlink" title="Binlog 的日志格式"></a>Binlog 的日志格式</h4><p>记录在二进制日志中的事件的格式取决于二进制记录格式。支持三种格式类型：</p>
+<ul>
+<li>STATEMENT：基于SQL语句的复制（statement-based replication, SBR）</li>
+<li>ROW：基于行的复制（row-based replication, RBR）</li>
+<li>MIXED：混合模式复制（mixed-based replication, MBR）</li>
+</ul>
+<p>在 <code>MySQL 5.7.7</code> 之前，默认的格式是 <code>STATEMENT</code>，在 <code>MySQL 5.7.7</code> 及更高版本中，默认值是 <code>ROW</code>。日志格式通过 <code>binlog-format</code> 指定，如 <code>binlog-format=STATEMENT</code>、<code>binlog-format=ROW</code>、<code>binlog-format=MIXED</code>。</p>
+<h5 id="Statement"><a href="#Statement" class="headerlink" title="Statement"></a>Statement</h5><p>每一条会修改数据的sql都会记录在binlog中</p>
+<p>优点：不需要记录每一行的变化，减少了binlog日志量，节约了IO, 提高了性能。</p>
+<p>缺点：由于记录的只是执行语句，为了这些语句能在slave上正确运行，因此还必须记录每条语句在执行的时候的一些相关信息，以保证所有语句能在slave得到和在master端执行的时候相同的结果。另外mysql的复制，像一些特定函数的功能，slave与master要保持一致会有很多相关问题。</p>
+<h5 id="Row"><a href="#Row" class="headerlink" title="Row"></a>Row</h5><p>5.1.5版本的MySQL才开始支持 <code>row level</code> 的复制,它不记录sql语句上下文相关信息，仅保存哪条记录被修改。</p>
+<p>优点： binlog中可以不记录执行的sql语句的上下文相关的信息，仅需要记录那一条记录被修改成什么了。所以row的日志内容会非常清楚的记录下每一行数据修改的细节。而且不会出现某些特定情况下的存储过程，或function，以及trigger的调用和触发无法被正确复制的问题.</p>
+<p>缺点:所有的执行的语句当记录到日志中的时候，都将以每行记录的修改来记录，这样可能会产生大量的日志内容。</p>
+<blockquote>
+<p>注：将二进制日志格式设置为ROW时，有些更改仍然使用基于语句的格式，包括所有DDL语句，例如CREATE TABLE， ALTER TABLE，或 DROP TABLE。</p>
+</blockquote>
+<h5 id="Mixed"><a href="#Mixed" class="headerlink" title="Mixed"></a>Mixed</h5><p>从5.1.8版本开始，MySQL提供了Mixed格式，实际上就是Statement与Row的结合。<br>在Mixed模式下，一般的语句修改使用statment格式保存binlog，如一些函数，statement无法完成主从复制的操作，则采用row格式保存binlog，MySQL会根据执行的每一条具体的sql语句来区分对待记录的日志形式，也就是在Statement和Row之间选择一种。</p>
+<h4 id="mysqlbinlog-命令的使用"><a href="#mysqlbinlog-命令的使用" class="headerlink" title="mysqlbinlog 命令的使用"></a>mysqlbinlog 命令的使用</h4><p>服务器以二进制格式将binlog日志写入binlog文件，如何要以文本格式显示其内容，可以使用 mysqlbinlog 命令。</p>
+<figure class="highlight jboss-cli"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs jboss-cli"><span class="hljs-comment"># mysqlbinlog 的执行格式</span><br>mysqlbinlog [options] log_file <span class="hljs-string">...</span><br><br><span class="hljs-comment"># 查看bin-log二进制文件（shell方式）</span><br>mysqlbinlog -v <span class="hljs-params">--base64-output=decode-rows</span> <span class="hljs-string">/var/lib/mysql/master.000003</span><br><br><span class="hljs-comment"># 查看bin-log二进制文件（带查询条件）</span><br>mysqlbinlog -v <span class="hljs-params">--base64-output=decode-rows</span> <span class="hljs-string">/var/lib/mysql/master.000003</span> \<br>    <span class="hljs-params">--start-datetime=</span><span class="hljs-string">&quot;2019-03-01 00:00:00&quot;</span>  \<br>    <span class="hljs-params">--stop-datetime=</span><span class="hljs-string">&quot;2019-03-10 00:00:00&quot;</span>   \<br>    <span class="hljs-params">--start-position=</span><span class="hljs-string">&quot;5000&quot;</span>    \<br>    <span class="hljs-params">--stop-position=</span><span class="hljs-string">&quot;20000&quot;</span><br></code></pre></div></td></tr></table></figure>
+<p>设置日志格式为ROW时，在我的机器上输出了以下信息</p>
+<figure class="highlight vala"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs vala">[root@openshift1 mysql]#  /usr/local/mysql/bin/mysqlbinlog --no-defaults  -v --base64-output=decode-rows master-bin<span class="hljs-number">.000016</span><br><span class="hljs-comment">/*!50530 SET @@SESSION.PSEUDO_SLAVE_MODE=1*/</span>;<br><span class="hljs-comment">/*!50003 SET @OLD_COMPLETION_TYPE=@@COMPLETION_TYPE,COMPLETION_TYPE=0*/</span>;<br>DELIMITER <span class="hljs-comment">/*!*/</span>;<br><span class="hljs-meta"># at 17423</span><br><span class="hljs-meta">#210130 10:15:21 server id 1  end_log_pos 17467 CRC32 0xf7c48f0d        Table_map: `test`.`a` mapped to number 163</span><br><span class="hljs-meta"># at 17467</span><br><span class="hljs-meta">#210130 10:15:21 server id 1  end_log_pos 17507 CRC32 0x4568c431        Write_rows: table id 163 flags: STMT_END_F</span><br><span class="hljs-meta">### INSERT INTO `test`.`a`</span><br><span class="hljs-meta">### SET</span><br><span class="hljs-meta">###   @1=1</span><br><span class="hljs-meta"># at 17507</span><br><span class="hljs-meta">#210130 10:15:21 server id 1  end_log_pos 17538 CRC32 0xae0f343c        Xid = 5434</span><br>COMMIT<span class="hljs-comment">/*!*/</span>;<br><span class="hljs-meta"># at 17538</span><br><span class="hljs-meta">#210201  8:22:41 server id 1  end_log_pos 17603 CRC32 0xe75364ae        Anonymous_GTID  last_committed=11  sequence_number=12      rbr_only=yes</span><br><span class="hljs-comment">/*!50718 SET TRANSACTION ISOLATION LEVEL READ COMMITTED*/</span><span class="hljs-comment">/*!*/</span>;<br>SET @@SESSION.GTID_NEXT= <span class="hljs-string">&#x27;ANONYMOUS&#x27;</span><span class="hljs-comment">/*!*/</span>;<br><span class="hljs-meta"># at 17603</span><br><span class="hljs-meta">#210201  8:22:41 server id 1  end_log_pos 17675 CRC32 0x228ba16b        Query   thread_id=4912  exec_time=0        error_code=0</span><br>SET TIMESTAMP=<span class="hljs-number">1612138961</span><span class="hljs-comment">/*!*/</span>;<br>BEGIN<br><span class="hljs-comment">/*!*/</span>;<br><span class="hljs-meta"># at 17675</span><br><span class="hljs-meta">#210201  8:22:41 server id 1  end_log_pos 17719 CRC32 0x46a33884        Table_map: `test`.`a` mapped to number 163</span><br><span class="hljs-meta"># at 17719</span><br><span class="hljs-meta">#210201  8:22:41 server id 1  end_log_pos 17759 CRC32 0xcb7ee07b        Write_rows: table id 163 flags: STMT_END_F</span><br><span class="hljs-meta">### INSERT INTO `test`.`a`</span><br><span class="hljs-meta">### SET</span><br><span class="hljs-meta">###   @1=2</span><br><span class="hljs-meta"># at 17759</span><br><span class="hljs-meta">#210201  8:22:41 server id 1  end_log_pos 17790 CRC32 0x037265f5        Xid = 1782200</span><br>COMMIT<span class="hljs-comment">/*!*/</span>;<br></code></pre></div></td></tr></table></figure>
+<p>截取其中的一段进行分析：</p>
+<figure class="highlight awk"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs awk"><span class="hljs-comment"># at 17603</span><br><span class="hljs-comment">#210201  8:22:41 server id 1  end_log_pos 17675 CRC32 0x228ba16b        Query   thread_id=4912  exec_time=0        error_code=0</span><br>SET TIMESTAMP=<span class="hljs-number">1612138961</span><span class="hljs-regexp">/*!*/</span>;<br><span class="hljs-keyword">BEGIN</span><br><span class="hljs-regexp">/*!*/</span>;<br></code></pre></div></td></tr></table></figure>
+<p>上面输出包括信息：</p>
+<ul>
+<li>position: 位于文件中的位置，即第一行的（# at 17603）,说明该事件记录从文件第21019个字节开始</li>
+<li>timestamp: 事件发生的时间戳，即第二行的（#210201  8:22:41）</li>
+<li>server id: 服务器标识（1）</li>
+<li>end_log_pos 表示下一个事件开始的位置（即当前事件的结束位置+1）</li>
+<li>thread_id: 执行该事件的线程id （thread_id=4912）</li>
+<li>exec_time: 事件执行的花费时间</li>
+<li>error_code: 错误码，0意味着没有发生错误</li>
+<li>type:事件类型Query</li>
+</ul>
+<h4 id="Binlog-事件类型"><a href="#Binlog-事件类型" class="headerlink" title="Binlog 事件类型"></a>Binlog 事件类型</h4><p>binlog 事件的结构主要有3个版本：</p>
+<ul>
+<li>v1: 在 MySQL 3.23 中使用</li>
+<li>v3: 在 MySQL 4.0.2 到 4.1 中使用</li>
+<li>v4: 在 MySQL 5.0 及以上版本中使用</li>
+</ul>
+<p>现在一般不会使用MySQL5.0以下版本，所以下面仅介绍v4版本的binlog事件类型。binlog 的事件类型较多，本文在此做一些简单的汇总</p>
+<table>
+<thead>
+<tr>
+<th align="left">事件类型</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">UNKNOWN_EVENT</td>
+<td align="left">此事件从不会被触发，也不会被写入binlog中；发生在当读取binlog时，不能被识别其他任何事件，那被视为UNKNOWN_EVENT</td>
+</tr>
+<tr>
+<td align="left">START_EVENT_V3</td>
+<td align="left">每个binlog文件开始的时候写入的事件，此事件被用在MySQL3.23 – 4.1，MYSQL5.0以后已经被 FORMAT_DESCRIPTION_EVENT 取代</td>
+</tr>
+<tr>
+<td align="left">QUERY_EVENT</td>
+<td align="left">执行更新语句时会生成此事件，包括：create，insert，update，delete；</td>
+</tr>
+<tr>
+<td align="left">STOP_EVENT</td>
+<td align="left">当mysqld停止时生成此事件</td>
+</tr>
+<tr>
+<td align="left">ROTATE_EVENT</td>
+<td align="left">当mysqld切换到新的binlog文件生成此事件，切换到新的binlog文件可以通过执行flush logs命令或者binlog文件大于 <code>max_binlog_size</code> 参数配置的大小；</td>
+</tr>
+<tr>
+<td align="left">INTVAR_EVENT</td>
+<td align="left">当sql语句中使用了AUTO_INCREMENT的字段或者LAST_INSERT_ID()函数；此事件没有被用在binlog_format为ROW模式的情况下</td>
+</tr>
+<tr>
+<td align="left">LOAD_EVENT</td>
+<td align="left">执行LOAD DATA INFILE 语句时产生此事件，在MySQL 3.23版本中使用</td>
+</tr>
+<tr>
+<td align="left">SLAVE_EVENT</td>
+<td align="left">未使用</td>
+</tr>
+<tr>
+<td align="left">CREATE_FILE_EVENT</td>
+<td align="left">执行LOAD DATA INFILE 语句时产生此事件，在MySQL4.0和4.1版本中使用</td>
+</tr>
+<tr>
+<td align="left">APPEND_BLOCK_EVENT</td>
+<td align="left">执行LOAD DATA INFILE 语句时产生此事件，在MySQL4.0版本中使用</td>
+</tr>
+<tr>
+<td align="left">EXEC_LOAD_EVENT</td>
+<td align="left">执行LOAD DATA INFILE 语句时产生此事件，在MySQL4.0和4.1版本中使用</td>
+</tr>
+<tr>
+<td align="left">DELETE_FILE_EVENT</td>
+<td align="left">执行LOAD DATA INFILE 语句时产生此事件，在MySQL4.0版本中使用</td>
+</tr>
+<tr>
+<td align="left">NEW_LOAD_EVENT</td>
+<td align="left">执行LOAD DATA INFILE 语句时产生此事件，在MySQL4.0和4.1版本中使用</td>
+</tr>
+<tr>
+<td align="left">RAND_EVENT</td>
+<td align="left">执行包含RAND()函数的语句产生此事件，此事件没有被用在binlog_format为ROW模式的情况下</td>
+</tr>
+<tr>
+<td align="left">USER_VAR_EVENT</td>
+<td align="left">执行包含了用户变量的语句产生此事件，此事件没有被用在binlog_format为ROW模式的情况下</td>
+</tr>
+<tr>
+<td align="left">FORMAT_DESCRIPTION_EVENT</td>
+<td align="left">描述事件，被写在每个binlog文件的开始位置，用在MySQL5.0以后的版本中，代替了START_EVENT_V3</td>
+</tr>
+<tr>
+<td align="left">XID_EVENT</td>
+<td align="left">支持XA的存储引擎才有，本地测试的数据库存储引擎是innodb，所有上面出现了XID_EVENT；innodb事务提交产生了QUERY_EVENT的BEGIN声明，QUERY_EVENT以及COMMIT声明，如果是myIsam存储引擎也会有BEGIN和COMMIT声明，只是COMMIT类型不是XID_EVENT</td>
+</tr>
+<tr>
+<td align="left">BEGIN_LOAD_QUERY_EVENT</td>
+<td align="left">执行LOAD DATA INFILE 语句时产生此事件，在MySQL5.0版本中使用</td>
+</tr>
+<tr>
+<td align="left">EXECUTE_LOAD_QUERY_EVENT</td>
+<td align="left">执行LOAD DATA INFILE 语句时产生此事件，在MySQL5.0版本中使用</td>
+</tr>
+<tr>
+<td align="left">TABLE_MAP_EVENT</td>
+<td align="left">用在binlog_format为ROW模式下，将表的定义映射到一个数字，在行操作事件之前记录（包括：WRITE_ROWS_EVENT，UPDATE_ROWS_EVENT，DELETE_ROWS_EVENT）</td>
+</tr>
+<tr>
+<td align="left">PRE_GA_WRITE_ROWS_EVENT</td>
+<td align="left">已过期，被 WRITE_ROWS_EVENT 代替</td>
+</tr>
+<tr>
+<td align="left">PRE_GA_UPDATE_ROWS_EVENT</td>
+<td align="left">已过期，被 UPDATE_ROWS_EVENT 代替</td>
+</tr>
+<tr>
+<td align="left">PRE_GA_DELETE_ROWS_EVENT</td>
+<td align="left">已过期，被 DELETE_ROWS_EVENT 代替</td>
+</tr>
+<tr>
+<td align="left">WRITE_ROWS_EVENT</td>
+<td align="left">用在binlog_format为ROW模式下，对应 insert 操作</td>
+</tr>
+<tr>
+<td align="left">UPDATE_ROWS_EVENT</td>
+<td align="left">用在binlog_format为ROW模式下，对应 update 操作</td>
+</tr>
+<tr>
+<td align="left">DELETE_ROWS_EVENT</td>
+<td align="left">用在binlog_format为ROW模式下，对应 delete 操作</td>
+</tr>
+<tr>
+<td align="left">INCIDENT_EVENT</td>
+<td align="left">主服务器发生了不正常的事件，通知从服务器并告知可能会导致数据处于不一致的状态</td>
+</tr>
+<tr>
+<td align="left">HEARTBEAT_LOG_EVENT</td>
+<td align="left">主服务器告诉从服务器，主服务器还活着，不写入到日志文件中</td>
+</tr>
+</tbody></table>
+<h4 id="Binlog-事件的结构"><a href="#Binlog-事件的结构" class="headerlink" title="Binlog 事件的结构"></a>Binlog 事件的结构</h4><p>一个事件对象分为事件头和事件体，事件的结构如下：</p>
+<figure class="highlight gherkin"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs gherkin">+=====================================+<br>|<span class="hljs-string"> event  </span>|<span class="hljs-string"> timestamp         0 : 4    </span>|<br>|<span class="hljs-string"> header +----------------------------+</span><br>|<span class="hljs-string">        </span>|<span class="hljs-string"> type_code         4 : 1    </span>|<br>|<span class="hljs-string">        +----------------------------+</span><br>|<span class="hljs-string">        </span>|<span class="hljs-string"> server_id         5 : 4    </span>|<br>|<span class="hljs-string">        +----------------------------+</span><br>|<span class="hljs-string">        </span>|<span class="hljs-string"> event_length      9 : 4    </span>|<br>|<span class="hljs-string">        +----------------------------+</span><br>|<span class="hljs-string">        </span>|<span class="hljs-string"> next_position    13 : 4    </span>|<br>|<span class="hljs-string">        +----------------------------+</span><br>|<span class="hljs-string">        </span>|<span class="hljs-string"> flags            17 : 2    </span>|<br>|<span class="hljs-string">        +----------------------------+</span><br>|<span class="hljs-string">        </span>|<span class="hljs-string"> extra_headers    19 : x-19 </span>|<br>+=====================================+<br>|<span class="hljs-string"> event  </span>|<span class="hljs-string"> fixed part        x : y    </span>|<br>|<span class="hljs-string"> data   +----------------------------+</span><br>|<span class="hljs-string">        </span>|<span class="hljs-string"> variable part              </span>|<br>+=====================================+<br></code></pre></div></td></tr></table></figure>
+<p>如果事件头的长度是 <code>x</code> 字节，那么事件体的长度为 <code>(event_length - x)</code> 字节；设事件体中 <code>fixed part</code> 的长度为 <code>y</code> 字节，那么 <code>variable part</code> 的长度为 <code>(event_length - (x + y))</code> 字节</p>
+<h4 id="Binlog-Event-简要分析"><a href="#Binlog-Event-简要分析" class="headerlink" title="Binlog Event 简要分析"></a>Binlog Event 简要分析</h4><p>从一个最简单的实例来分析Event，包括创建表，插入数据，更新数据，删除数据；</p>
+<figure class="highlight n1ql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs n1ql"><span class="hljs-keyword">CREATE</span> TABLE <span class="hljs-symbol">`test`</span> (<br>  <span class="hljs-symbol">`id`</span> bigint(<span class="hljs-number">20</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-literal">NULL</span> AUTO_INCREMENT,<br>  <span class="hljs-symbol">`age`</span> int(<span class="hljs-number">11</span>) DEFAULT <span class="hljs-literal">NULL</span>,<br>  <span class="hljs-symbol">`name`</span> varchar(<span class="hljs-number">255</span>) DEFAULT <span class="hljs-literal">NULL</span>,<br>  <span class="hljs-keyword">PRIMARY</span> <span class="hljs-keyword">KEY</span> (<span class="hljs-symbol">`id`</span>)<br>) ENGINE=InnoDB DEFAULT CHARSET=utf8;<br><br><span class="hljs-keyword">insert</span> <span class="hljs-keyword">into</span> test <span class="hljs-keyword">values</span>(<span class="hljs-number">1</span>,<span class="hljs-number">22</span>,<span class="hljs-string">&quot;小旋锋&quot;</span>);<br><span class="hljs-keyword">update</span> test <span class="hljs-keyword">set</span> name=<span class="hljs-string">&#x27;whirly&#x27;</span> <span class="hljs-keyword">where</span> id=<span class="hljs-number">1</span>;<br><span class="hljs-keyword">delete</span> <span class="hljs-keyword">from</span> test <span class="hljs-keyword">where</span> id=<span class="hljs-number">1</span>;<br></code></pre></div></td></tr></table></figure>
+<p>日志格式为<code>ROW</code>，查看create、insert、update、delete操作产生的binlog事件</p>
+<figure class="highlight vala"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs vala"><span class="hljs-meta"># at 13309</span><br><span class="hljs-meta">#210203 14:00:28 server id 1  end_log_pos 13374 CRC32 0x70dff441 	Anonymous_GTID	last_committed=17	sequence_number=18	rbr_only=no</span><br>SET @@SESSION.GTID_NEXT= <span class="hljs-string">&#x27;ANONYMOUS&#x27;</span><span class="hljs-comment">/*!*/</span>;<br><span class="hljs-meta"># at 13374</span><br><span class="hljs-meta">#210203 14:00:28 server id 1  end_log_pos 13636 CRC32 0xf9e23901 	Query	thread_id=10888	exec_time=0	error_code=0</span><br>SET TIMESTAMP=<span class="hljs-number">1612332028</span><span class="hljs-comment">/*!*/</span>;<br>CREATE TABLE `test` (<br>  `id` bigint(<span class="hljs-number">20</span>) NOT NULL AUTO_INCREMENT,<br>  `age` <span class="hljs-keyword">int</span>(<span class="hljs-number">11</span>) DEFAULT NULL,<br>  `name` varchar(<span class="hljs-number">255</span>) DEFAULT NULL,<br>  PRIMARY KEY (`id`)<br>) ENGINE=InnoDB DEFAULT CHARSET=utf8<br><span class="hljs-comment">/*!*/</span>;<br><span class="hljs-meta"># at 13636</span><br><span class="hljs-meta">#210203 14:00:28 server id 1  end_log_pos 13701 CRC32 0x42d0df37 	Anonymous_GTID	last_committed=18	sequence_number=19	rbr_only=yes</span><br><span class="hljs-comment">/*!50718 SET TRANSACTION ISOLATION LEVEL READ COMMITTED*/</span><span class="hljs-comment">/*!*/</span>;<br>SET @@SESSION.GTID_NEXT= <span class="hljs-string">&#x27;ANONYMOUS&#x27;</span><span class="hljs-comment">/*!*/</span>;<br><span class="hljs-meta"># at 13701</span><br><span class="hljs-meta">#210203 14:00:28 server id 1  end_log_pos 13773 CRC32 0x5fc46a4b 	Query	thread_id=10888	exec_time=0	error_code=0</span><br>SET TIMESTAMP=<span class="hljs-number">1612332028</span><span class="hljs-comment">/*!*/</span>;<br>BEGIN<br><span class="hljs-comment">/*!*/</span>;<br><span class="hljs-meta"># at 13773</span><br><span class="hljs-meta">#210203 14:00:28 server id 1  end_log_pos 13824 CRC32 0x9e93cf24 	Table_map: `test`.`test` mapped to number 293</span><br><span class="hljs-meta"># at 13824</span><br><span class="hljs-meta">#210203 14:00:28 server id 1  end_log_pos 13880 CRC32 0x7b4a0463 	Write_rows: table id 293 flags: STMT_END_F</span><br><span class="hljs-meta">### INSERT INTO `test`.`test`</span><br><span class="hljs-meta">### SET</span><br><span class="hljs-meta">###   @1=1</span><br><span class="hljs-meta">###   @2=26</span><br><span class="hljs-meta">###   @3=&#x27;Raines&#x27;</span><br><span class="hljs-meta"># at 13880</span><br><span class="hljs-meta">#210203 14:00:28 server id 1  end_log_pos 13911 CRC32 0x2c762662 	Xid = 1625907</span><br>COMMIT<span class="hljs-comment">/*!*/</span>;<br><span class="hljs-meta"># at 13911</span><br><span class="hljs-meta">#210203 14:00:28 server id 1  end_log_pos 13976 CRC32 0xcd82a45f 	Anonymous_GTID	last_committed=19	sequence_number=20	rbr_only=yes</span><br><span class="hljs-comment">/*!50718 SET TRANSACTION ISOLATION LEVEL READ COMMITTED*/</span><span class="hljs-comment">/*!*/</span>;<br>SET @@SESSION.GTID_NEXT= <span class="hljs-string">&#x27;ANONYMOUS&#x27;</span><span class="hljs-comment">/*!*/</span>;<br><span class="hljs-meta"># at 13976</span><br><span class="hljs-meta">#210203 14:00:28 server id 1  end_log_pos 14048 CRC32 0xa71b0686 	Query	thread_id=10888	exec_time=0	error_code=0</span><br>SET TIMESTAMP=<span class="hljs-number">1612332028</span><span class="hljs-comment">/*!*/</span>;<br>BEGIN<br><span class="hljs-comment">/*!*/</span>;<br><span class="hljs-meta"># at 14048</span><br><span class="hljs-meta">#210203 14:00:28 server id 1  end_log_pos 14099 CRC32 0xe051b52e 	Table_map: `test`.`test` mapped to number 293</span><br><span class="hljs-meta"># at 14099</span><br><span class="hljs-meta">#210203 14:00:28 server id 1  end_log_pos 14177 CRC32 0x2131259c 	Update_rows: table id 293 flags: STMT_END_F</span><br><span class="hljs-meta">### UPDATE `test`.`test`</span><br><span class="hljs-meta">### WHERE</span><br><span class="hljs-meta">###   @1=1</span><br><span class="hljs-meta">###   @2=26</span><br><span class="hljs-meta">###   @3=&#x27;Raines&#x27;</span><br><span class="hljs-meta">### SET</span><br><span class="hljs-meta">###   @1=1</span><br><span class="hljs-meta">###   @2=26</span><br><span class="hljs-meta">###   @3=&#x27;raines&#x27;</span><br><span class="hljs-meta"># at 14177</span><br><span class="hljs-meta">#210203 14:00:28 server id 1  end_log_pos 14208 CRC32 0xf63a78df 	Xid = 1625909</span><br>COMMIT<span class="hljs-comment">/*!*/</span>;<br><span class="hljs-meta"># at 14208</span><br><span class="hljs-meta">#210203 14:00:28 server id 1  end_log_pos 14273 CRC32 0x9f9919a7 	Anonymous_GTID	last_committed=20	sequence_number=21	rbr_only=yes</span><br><span class="hljs-comment">/*!50718 SET TRANSACTION ISOLATION LEVEL READ COMMITTED*/</span><span class="hljs-comment">/*!*/</span>;<br>SET @@SESSION.GTID_NEXT= <span class="hljs-string">&#x27;ANONYMOUS&#x27;</span><span class="hljs-comment">/*!*/</span>;<br><span class="hljs-meta"># at 14273</span><br><span class="hljs-meta">#210203 14:00:28 server id 1  end_log_pos 14345 CRC32 0x30d7d943 	Query	thread_id=10888	exec_time=0	error_code=0</span><br>SET TIMESTAMP=<span class="hljs-number">1612332028</span><span class="hljs-comment">/*!*/</span>;<br>BEGIN<br><span class="hljs-comment">/*!*/</span>;<br><span class="hljs-meta"># at 14345</span><br><span class="hljs-meta">#210203 14:00:28 server id 1  end_log_pos 14396 CRC32 0x47e9cd1b 	Table_map: `test`.`test` mapped to number 293</span><br><span class="hljs-meta"># at 14396</span><br><span class="hljs-meta">#210203 14:00:28 server id 1  end_log_pos 14452 CRC32 0x6b5c7194 	Delete_rows: table id 293 flags: STMT_END_F</span><br><span class="hljs-meta">### DELETE FROM `test`.`test`</span><br><span class="hljs-meta">### WHERE</span><br><span class="hljs-meta">###   @1=1</span><br><span class="hljs-meta">###   @2=26</span><br><span class="hljs-meta">###   @3=&#x27;raines&#x27;</span><br><span class="hljs-meta"># at 14452</span><br><span class="hljs-meta">#210203 14:00:28 server id 1  end_log_pos 14483 CRC32 0x4516b3be 	Xid = 1625910</span><br>COMMIT<span class="hljs-comment">/*!*/</span>;<br>SET @@SESSION.GTID_NEXT= <span class="hljs-string">&#x27;AUTOMATIC&#x27;</span> <span class="hljs-comment">/* added by mysqlbinlog */</span> <span class="hljs-comment">/*!*/</span>;<br>DELIMITER ;<br><span class="hljs-meta"># End of log file</span><br></code></pre></div></td></tr></table></figure>
+<p>关于Event的分析，有需要可以查看参考文档进行推算。</p>
+<h4 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h4><ul>
+<li><a target="_blank" rel="noopener" href="http://www.searchdoc.cn/rdbms/mysql/dev.mysql.com/doc/refman/5.7/en/binary-log.com.coder114.cn.html">MySQL 5.7参考手册.二进制日志</a></li>
+</ul>
+<h2 id="坑"><a href="#坑" class="headerlink" title="坑"></a>坑</h2><h3 id="mysqlbinlog报错mysqlbinlog-unknown-variable-‘default-character-set-utf8"><a href="#mysqlbinlog报错mysqlbinlog-unknown-variable-‘default-character-set-utf8" class="headerlink" title="mysqlbinlog报错mysqlbinlog: unknown variable ‘default-character-set=utf8"></a>mysqlbinlog报错mysqlbinlog: unknown variable ‘default-character-set=utf8</h3><p>在使用mysqlbinlog分析日志时，报错</p>
+<p><code>mysqlbinlog: unknown variable &#39;default-character-set=utf8</code></p>
+<p>原因分析如下</p>
+<p>产生这个问题的原因是字符编码的问题，为了能够使Mysql中数据中文显示不乱吗，就在my.cnf中添加了：</p>
+<p> default-character-set=utf8<br>这个是mysqlbinlog的一个bug。 </p>
+<p>对于这个问题有两种解决办法</p>
+<p>1、mysqlbinlog –no-defaults mysql-bin.000019</p>
+<p> /usr/local/mysql/bin/mysqlbinlog –no-defaults –base64-output=DECODE-ROWS -v master-bin.000004</p>
+<p>2、使用mysqlbinlog工具查看二进制日志时会重新读取的mysql的配置文件my.cnf，而不是服务器已经加载进内存的配置文件。</p>
+<p>只要修改并保存了my.cnf文件，而不需要重启mysql服务器。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/100-%E5%AD%A6%E4%B9%A0%E7%B1%BB/">100 学习类</a>
+                    
+                      <a class="hover-with-bg" href="/categories/100-%E5%AD%A6%E4%B9%A0%E7%B1%BB/110-%E7%BC%96%E7%A8%8B/">110 编程</a>
+                    
+                      <a class="hover-with-bg" href="/categories/100-%E5%AD%A6%E4%B9%A0%E7%B1%BB/110-%E7%BC%96%E7%A8%8B/113-%E6%95%B0%E6%8D%AE%E5%BA%93/">113 数据库</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E8%BF%87%E5%8E%BB/">过去</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E7%BC%96%E7%A8%8B/">编程</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/02/02/2021/02/mysqlconn/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">MySQL查看连接数，设置最大连接数</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/01/30/2021/01/ossftp/">
+                        <span class="hidden-mobile">阿里云oss安装ossftp</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://xiaolong00.github.io/about" target="_blank" rel="nofollow noopener"><span>Raines blog</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>use hexo Fluid theme</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/hibiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.7},"log":false});</script></body>
+</html>

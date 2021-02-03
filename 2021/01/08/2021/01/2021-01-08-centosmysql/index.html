@@ -184,7 +184,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      626 字
+      638 字
     </span>
   
 
@@ -194,7 +194,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      8
+      9
        分钟
     </span>
   
@@ -248,7 +248,7 @@
 </li>
 <li><p>查看mysql 初始化密码（随机生成的）<br>cat /data/mysql/mysql.err   </p>
 </li>
-<li><p>启动mysql<br>先将 mysql.server 放置到 /etc/init.d/mysql 中：<br>启动Mysql ：<br>service mysql start<br>上面的启动没有报错，则说明启动成功。下面是查看是否有mysql进程<br>ps -ef|grep mysql<br>如果有mysql进程，说明mysql已经安装成功。  </p>
+<li><p>启动mysql<br>先将 mysql.server 放置到 /etc/init.d/mysql 中：   <code>cp /usr/local/mysql/support-files/mysql.server /etc/init.d/mysql </code><br>启动Mysql ：<br>service mysql start<br>上面的启动没有报错，则说明启动成功。下面是查看是否有mysql进程<br>ps -ef|grep mysql<br>如果有mysql进程，说明mysql已经安装成功。  </p>
 </li>
 <li><p>修改密码<br>前面的步骤我们能查出mysql 随机生成的密码，接下来，登录mysql，修改密码。<br>./mysql -u root -p密码      #bin目录下<br>再执行下面三步操作，然后重新登录。  </p>
 <figure class="highlight pgsql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs pgsql"><span class="hljs-keyword">set</span> <span class="hljs-keyword">password</span> = <span class="hljs-keyword">password</span>(<span class="hljs-string">&#x27;1234@Mfg&#x27;</span>);<br><span class="hljs-keyword">alter</span> <span class="hljs-keyword">user</span> <span class="hljs-string">&#x27;root&#x27;</span>@<span class="hljs-string">&#x27;localhost&#x27;</span> <span class="hljs-keyword">password</span> expire never;<br>flush <span class="hljs-keyword">privileges</span>;                                     <br></code></pre></div></td></tr></table></figure>
