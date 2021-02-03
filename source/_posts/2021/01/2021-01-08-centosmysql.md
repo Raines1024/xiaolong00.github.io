@@ -10,7 +10,7 @@ category:
 
 1. 下载：  
 下载地址：https://dev.mysql.com/downloads/mysql/5.7.html
-   
+  
 2. 解压、移动  
 tar -zxvf mysql-5.7.26-linux-glibc2.12-x86_64.tar.gz    
 mv mysql-5.7.26-linux-glibc2.12-x86_64  /usr/local/mysql    
@@ -82,10 +82,11 @@ rpm -qa | grep libaio
 使用命令 ：  
 yum  install  libaio-devel.x86_64    
 安装成功后，继续运行数据库的初始化命令，提示成功。  
+
 6. 查看mysql 初始化密码（随机生成的）  
 cat /data/mysql/mysql.err   
 7. 启动mysql  
-先将 mysql.server 放置到 /etc/init.d/mysql 中：  
+先将 mysql.server 放置到 /etc/init.d/mysql 中：   `cp /usr/local/mysql/support-files/mysql.server /etc/init.d/mysql `   
 启动Mysql ：   
 service mysql start   
 上面的启动没有报错，则说明启动成功。下面是查看是否有mysql进程   
