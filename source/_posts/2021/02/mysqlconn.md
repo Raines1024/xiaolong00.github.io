@@ -1,6 +1,7 @@
 ---
 title: MySQL查看连接数，设置最大连接数
 date: 2021-02-02 10:00:39
+description:
 tags: [编程, 过去]
 category:
     - 100 学习类
