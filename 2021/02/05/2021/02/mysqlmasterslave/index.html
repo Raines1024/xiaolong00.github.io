@@ -257,7 +257,7 @@
 <li>slave 开启两个线程：IO 线程和 SQL 线程。其中：IO 线程负责读取 master 的 binlog 内容到中继日志 relay log 里；SQL 线程负责从 relay log 日志里读出 binlog 内容，并更新到 slave 的数据库里，这样就能保证 slave 数据和 master 数据保持一致了；</li>
 <li>MySQL 复制至少需要两个 MySQL 的服务，当然 MySQL 服务可以分布在不同的服务器上，也可以在一台服务器上启动多个服务；</li>
 <li>MySQL复制最好确保 master 和 slave 服务器上的 MySQL 版本相同（如果不能满足版本一致，那么要保证 master 主节点的版本低于 slave 从节点的版本）；</li>
-<li>master 和 slave 两节点间时间需同步。</li>
+<li>master 和 slave 两节点间时间需同步。<br><img src="/img/develop/mysqlmasterslave/MySQL-Master-Slave-Replication-01.jpeg" srcset="/img/loading.gif" alt="MySQL-Master-Slave-Replication"></li>
 </ul>
 
             </div>

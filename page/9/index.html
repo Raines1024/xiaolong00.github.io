@@ -181,19 +181,19 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2020/01/07/2020/2020-11-25-ssh/">两台CentOS服务器配置ssh无密码登陆</a>
+        <a href="/2020/01/07/2020/2020-12-02-bigdataBuild/">搭建Hadoop-2.9.2集群</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2020/01/07/2020/2020-11-25-ssh/">
+        <a href="/2020/01/07/2020/2020-12-02-bigdataBuild/">
           
           
             
           
-          两台CentOS服务器配置ssh无密码登陆问题：两台CentOS服务器，IP分别为192.168.1.11、192.168.1.12（下面用11、12简称两台服务器），在12上配置test用户ssh无需要密码即可登陆11的root用户。解决
-用test用户登陆12
-ssh-keygen -t rsa生成密码
-在/home/test/.ssh下生成了密钥对：id_rsa为私钥，id_rsa.pub为
+          准备在安装 Hadoop 之前，请确认集群的每台机器上均安装 JDK，以及搭配环境变量。
+添加Java环境变量vim ~/.bash_profile  
+
+123456789101112131415# Java EnvironmentJAVA_HOME=/usr/java/latestJRE_HOME=$&#123;JAVA_HOME&#125;/jreCLASSPATH=.:$&#123;JAV
         </a>
       </p>
 
@@ -526,20 +526,16 @@ ssh-keygen -t rsa生成密码
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2020/01/07/2020/2020-12-30-design4/">单例模式</a>
+        <a href="/2020/01/07/2020/2020-03-16-books/">图书列表整理</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2020/01/07/2020/2020-12-30-design4/">
+        <a href="/2020/01/07/2020/2020-03-16-books/">
           
           
             
           
-          简介单例模式确保一个类只有一个实例，并提供一个全局访问点。
-实现
-使用”急切”创建实例（饿汉式）在JVM加载类时创建单例。保证了线程安全。
-
-12345678910public class Singleton &#123;    //静态初始化	private static Singleton uniqueInstance = new Singleton(); 	private Singleton
+          列表（理论上大部分按出版时间排序）占卜师神圣家族莎士比亚的零如何运营成功的智库侯大利刑侦笔记重构：门店新零售创业工作法赞扬与责备无常的博弈甜甜圈经济学厉害的人，从来不靠情绪表达自己日本人眼中的中國巨龍的胎動讲谈社·中国的历史在路上（2020全新译本！ 杨蔚译）英帝国史套书（全8卷）发现你的管理优势从零开始做运营从零开始做运营2柏青哥《三体》中的物理学史学与红学让写作成为自我精进的武器区块链金融时代
         </a>
       </p>
 
@@ -571,16 +567,20 @@ ssh-keygen -t rsa生成密码
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2020/01/07/2020/2020-03-16-books/">图书列表整理</a>
+        <a href="/2020/01/07/2020/2020-12-30-design4/">单例模式</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2020/01/07/2020/2020-03-16-books/">
+        <a href="/2020/01/07/2020/2020-12-30-design4/">
           
           
             
           
-          列表（理论上大部分按出版时间排序）占卜师神圣家族莎士比亚的零如何运营成功的智库侯大利刑侦笔记重构：门店新零售创业工作法赞扬与责备无常的博弈甜甜圈经济学厉害的人，从来不靠情绪表达自己日本人眼中的中國巨龍的胎動讲谈社·中国的历史在路上（2020全新译本！ 杨蔚译）英帝国史套书（全8卷）发现你的管理优势从零开始做运营从零开始做运营2柏青哥《三体》中的物理学史学与红学让写作成为自我精进的武器区块链金融时代
+          简介单例模式确保一个类只有一个实例，并提供一个全局访问点。
+实现
+使用”急切”创建实例（饿汉式）在JVM加载类时创建单例。保证了线程安全。
+
+12345678910public class Singleton &#123;    //静态初始化	private static Singleton uniqueInstance = new Singleton(); 	private Singleton
         </a>
       </p>
 
