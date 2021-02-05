@@ -51,8 +51,7 @@ MySQL 主从复制是指数据可以从一个 MySQL 数据库服务器主节点�
 - MySQL 复制至少需要两个 MySQL 的服务，当然 MySQL 服务可以分布在不同的服务器上，也可以在一台服务器上启动多个服务；
 - MySQL复制最好确保 master 和 slave 服务器上的 MySQL 版本相同（如果不能满足版本一致，那么要保证 master 主节点的版本低于 slave 从节点的版本）；
 - master 和 slave 两节点间时间需同步。
-
-
+![MySQL-Master-Slave-Replication](/img/develop/mysqlmasterslave/MySQL-Master-Slave-Replication-01.jpeg)
 
 
 
