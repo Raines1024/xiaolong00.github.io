@@ -28,9 +28,7 @@ category:
 
   在/etc/my.cnf设置，[mysqld]下添加global max_connections=1000，重启mysql服务
 
-## 参考链接
-
-[另一种思路恢复单个innodb表](http://www.ttlsa.com/mysql/mysql-backup-recovery-innodb-table/)
+  
 
 
 

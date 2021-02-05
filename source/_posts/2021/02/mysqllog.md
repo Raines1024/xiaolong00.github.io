@@ -25,7 +25,28 @@ MySQL中一般有以下几种日志：
 |      慢查询日志       | 记录所有执行时间超过 `long_query_time` 秒的所有查询或不使用索引的查询 |
 | DDL日志（元数据日志） | 元数据操作由DDL语句执行                                      |
 
+## 通用查询日志
 
+- 查看是否开启通用查询日志：show variables like '%general_log%';
+
+- 启用（不建议使用，重启失效）： set global general_log=ON;
+
+- 在my.cnf中的[mysqld]（其他地方可能无效）下插入如下参数：
+
+  参数含义：
+
+  general_log：是否开启
+
+  general_log_file：日志文件位置
+
+  ```
+  general_log=ON
+  general_log_file=/data/mysql/test.log
+  ```
+
+  然后要重启数据库，这个log会将所有的执行语句记录下来，所以在数据库很忙的时候，这个日志可能变得很大，不宜查看。
+
+  其他诸如慢查询、错误日志类似于这样，大家举一反三即可。
 
 ## Binlog介绍
 
