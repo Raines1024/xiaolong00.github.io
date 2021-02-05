@@ -34,6 +34,18 @@ MySQL中常用的四种存储引擎分别是： MyISAM存储引擎、innoDB存�
 
 4、show table status from database where name="tablename" //准确查看某个数据库中的某一表所使用的存储引擎
 
+5、ALTER TABLE 待改表名 engine=innodb;//修改已建成表的引擎
+
+6、设置InnoDB为默认引擎：
+
+vi  /etc/my.cnf
+
+在[mysqld] 下面加入
+
+default-storage-engine=InnoDB
+
+保存后重新启动mysql
+
 ### MySQL中常用的几种存储引擎
 
 #### InnoDB存储引擎（推荐）

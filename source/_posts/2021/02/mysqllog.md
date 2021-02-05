@@ -1,5 +1,5 @@
 ---
-title: mysql日志那些事
+title: MySQL日志那些事
 date: 2021-02-01 10:47:39
 tags: [编程, 过去]
 category:
