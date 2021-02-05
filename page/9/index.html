@@ -181,19 +181,19 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2020/01/07/2020/2020-12-02-bigdataBuild/">搭建Hadoop-2.9.2集群</a>
+        <a href="/2020/01/07/2020/2020-11-25-ssh/">两台CentOS服务器配置ssh无密码登陆</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2020/01/07/2020/2020-12-02-bigdataBuild/">
+        <a href="/2020/01/07/2020/2020-11-25-ssh/">
           
           
             
           
-          准备在安装 Hadoop 之前，请确认集群的每台机器上均安装 JDK，以及搭配环境变量。
-添加Java环境变量vim ~/.bash_profile  
-
-123456789101112131415# Java EnvironmentJAVA_HOME=/usr/java/latestJRE_HOME=$&#123;JAVA_HOME&#125;/jreCLASSPATH=.:$&#123;JAV
+          两台CentOS服务器配置ssh无密码登陆问题：两台CentOS服务器，IP分别为192.168.1.11、192.168.1.12（下面用11、12简称两台服务器），在12上配置test用户ssh无需要密码即可登陆11的root用户。解决
+用test用户登陆12
+ssh-keygen -t rsa生成密码
+在/home/test/.ssh下生成了密钥对：id_rsa为私钥，id_rsa.pub为
         </a>
       </p>
 
