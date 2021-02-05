@@ -327,22 +327,21 @@ byte 类型用在大型数组中节约空间，主要代替整数，因为 byte 
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2020/01/07/2020/2020-03-07-memoryCount/">Java中对象占用内存大小计算</a>
+        <a href="/2020/01/07/2020/2020-03-08-spark/">Spark环境搭建及helloCount</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2020/01/07/2020/2020-03-07-memoryCount/">
+        <a href="/2020/01/07/2020/2020-03-08-spark/">
           
           
             
           
-          回顾byte与bit1个字节占8位bit：位，比特。信息的最小单位，二进制数中的一个位数(二进制位)，其值为“0”或“1”；byte: 字节。计算机文件大小的基本计算单位
-原码：正数本身，负数，正数对应的二进制最高位为1(负)。  
-反码：正数本身，负数，符号位不变，其余各位取反。  
-补码：正数本身，负数：反码+1。  
-0的反码、补码都为零。  
+          环境centos查看centos版本rpm -q centos-release  
+更换centos默认镜像库163链接[http://mirrors.163.com/.help/centos.html]  
 
-注意:Java中的char占两个字节，而c语
+首先备份/etc/yum.repos.d/CentOS-Base.repo  
+
+mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d
         </a>
       </p>
 
@@ -374,21 +373,22 @@ byte 类型用在大型数组中节约空间，主要代替整数，因为 byte 
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2020/01/07/2020/2020-03-08-spark/">Spark环境搭建及helloCount</a>
+        <a href="/2020/01/07/2020/2020-03-07-memoryCount/">Java中对象占用内存大小计算</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2020/01/07/2020/2020-03-08-spark/">
+        <a href="/2020/01/07/2020/2020-03-07-memoryCount/">
           
           
             
           
-          环境centos查看centos版本rpm -q centos-release  
-更换centos默认镜像库163链接[http://mirrors.163.com/.help/centos.html]  
+          回顾byte与bit1个字节占8位bit：位，比特。信息的最小单位，二进制数中的一个位数(二进制位)，其值为“0”或“1”；byte: 字节。计算机文件大小的基本计算单位
+原码：正数本身，负数，正数对应的二进制最高位为1(负)。  
+反码：正数本身，负数，符号位不变，其余各位取反。  
+补码：正数本身，负数：反码+1。  
+0的反码、补码都为零。  
 
-首先备份/etc/yum.repos.d/CentOS-Base.repo  
-
-mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d
+注意:Java中的char占两个字节，而c语
         </a>
       </p>
 
