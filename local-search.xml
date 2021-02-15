@@ -4,6 +4,68 @@
   
   
   <entry>
+    <title>maven打包的jar指定启动类</title>
+    <link href="/2021/02/09/2021/02/mavenjarstart/"/>
+    <url>/2021/02/09/2021/02/mavenjarstart/</url>
+    
+    <content type="html"><![CDATA[<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p> 某些操作需要在服务器上执行某个类的main方法，比如调服务间内网的消息中间件等等。而此等操作大多都用到第三方以来，且大部分时间当作一个即兴的脚本开发，并不需要引入springboot，此时可以通过在pom中指定启动类来解决这个问题。</p><h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p>第一种：<br>     如果你的pom是继承spring-boot-starter-parent的话，只需要在pom的root如下指定就行</p><figure class="highlight xml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">properties</span>&gt;</span><br>    <span class="hljs-comment">&lt;!-- 指定启动类 --&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">start-class</span>&gt;</span>com.besttop.BaseServerApplication<span class="hljs-tag">&lt;/<span class="hljs-name">start-class</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">properties</span>&gt;</span><br></code></pre></div></td></tr></table></figure><p>第二种：</p><p>​    如果你的pom中没有继承Spring-boot-start-parent，那么需要通过如下配置实现。</p><figure class="highlight xml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">build</span>&gt;</span>  <br>    <span class="hljs-tag">&lt;<span class="hljs-name">plugins</span>&gt;</span>  <br>            <span class="hljs-tag">&lt;<span class="hljs-name">plugin</span>&gt;</span><br>                <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.springframework.boot<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>                <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>spring-boot-maven-plugin<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br>                <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>1.3.5.RELEASE<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span><br>                <span class="hljs-tag">&lt;<span class="hljs-name">configuration</span>&gt;</span><br>                    <span class="hljs-comment">&lt;!-- 指定启动类 --&gt;</span><br>                    <span class="hljs-tag">&lt;<span class="hljs-name">mainClass</span>&gt;</span>com.lovol.Main<span class="hljs-tag">&lt;/<span class="hljs-name">mainClass</span>&gt;</span><br>                <span class="hljs-tag">&lt;/<span class="hljs-name">configuration</span>&gt;</span><br>                <span class="hljs-tag">&lt;<span class="hljs-name">executions</span>&gt;</span><br>                    <span class="hljs-tag">&lt;<span class="hljs-name">execution</span>&gt;</span><br>                      <span class="hljs-tag">&lt;<span class="hljs-name">goals</span>&gt;</span><br>                        <span class="hljs-tag">&lt;<span class="hljs-name">goal</span>&gt;</span>repackage<span class="hljs-tag">&lt;/<span class="hljs-name">goal</span>&gt;</span><br>                      <span class="hljs-tag">&lt;/<span class="hljs-name">goals</span>&gt;</span><br>                    <span class="hljs-tag">&lt;/<span class="hljs-name">execution</span>&gt;</span><br>                <span class="hljs-tag">&lt;/<span class="hljs-name">executions</span>&gt;</span><br>            <span class="hljs-tag">&lt;/<span class="hljs-name">plugin</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">plugins</span>&gt;</span>  <br><span class="hljs-tag">&lt;/<span class="hljs-name">build</span>&gt;</span>  <br></code></pre></div></td></tr></table></figure>]]></content>
+    
+    
+    <categories>
+      
+      <category>100 学习类</category>
+      
+      <category>110 编程</category>
+      
+      <category>111 Java</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>过去</tag>
+      
+      <tag>编程</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>计算机科学导论（第三版）学习笔记</title>
+    <link href="/2021/02/08/2021/02/computerscience/"/>
+    <url>/2021/02/08/2021/02/computerscience/</url>
+    
+    <content type="html"><![CDATA[<h2 id="绪论"><a href="#绪论" class="headerlink" title="绪论"></a>绪论</h2>]]></content>
+    
+    
+    <categories>
+      
+      <category>100 学习类</category>
+      
+      <category>120 阅读</category>
+      
+      <category>121 读书笔记</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>编程</tag>
+      
+      <tag>现在</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>MySQL主从复制</title>
     <link href="/2021/02/05/2021/02/mysqlmasterslave/"/>
     <url>/2021/02/05/2021/02/mysqlmasterslave/</url>
@@ -71,37 +133,6 @@
     <url>/2021/02/02/2021/02/mysqlmv/</url>
     
     <content type="html"><![CDATA[<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>之前用过mysql通过备份数据目录来实现数据库全量迁移，非常方便快速。当时尝试恢复单个表而没有成功，此时再次尝试终于如愿以偿。</p><p>本文将要说说怎么移动或复制部分或全部的表到另一台服务器上，而所要用到的技术点就是transportable tablespace特性，这就意味着MySQL5.6.6以及以上版本才支持。</p><p>表空间传输特性允许表空间从一个实例移动到另一个实例上。这在以前版本上，这对InnoDB表空间是不可能的，因为所有的表数据都是系统表空间的一部分。</p><h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><ol><li>将拷贝的数据文件  “qqq.idb”放在自己的数据目录下的数据库中</li><li>“qqq.idb” 改个名字–&gt;”qqq–.idb”, 主要是避免冲突</li><li>执行 create table qqq(…) 语句，此时除了会生成一个  qqq.frm, 文件，还会新生成一个qqq.idb文件</li><li>执行 ALTER TABLE qqq DISCARD TABLESPACE; 会自动删除 新生成的qqq.idb 文件</li><li>改回 “qqq–.idb”文件名为 “qqq.idb”</li><li>赋给qqq.idb权限：chown mysql:mysql -R qqq.idb</li><li>ALTER TABLE qqq IMPORT TABLESPACE; SHOW WARNINGS;</li></ol><p>恢复完成！</p><p>如果import tablespace 的时候，报错 ibd文件与表的 ROW_TYPE_COMPACT 不兼容，则需要在建表语句最后 加上 ROW_FORMAT=COMPACT保持一致！</p><h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><p><a href="http://www.ttlsa.com/mysql/mysql-backup-recovery-innodb-table/">另一种思路恢复单个innodb表</a></p>]]></content>
-    
-    
-    <categories>
-      
-      <category>100 学习类</category>
-      
-      <category>110 编程</category>
-      
-      <category>113 数据库</category>
-      
-    </categories>
-    
-    
-    <tags>
-      
-      <tag>过去</tag>
-      
-      <tag>编程</tag>
-      
-    </tags>
-    
-  </entry>
-  
-  
-  
-  <entry>
-    <title>MySQL查看连接数，设置最大连接数</title>
-    <link href="/2021/02/02/2021/02/mysqlconn/"/>
-    <url>/2021/02/02/2021/02/mysqlconn/</url>
-    
-    <content type="html"><![CDATA[<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>测试mysql服务突然报连接数太多。</p><h2 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h2><ul><li><p>查看mysql连接</p><p>命令： show processlist;显示当前正在执行的mysql连接<br><strong>如果是root帐号，你能看到所有用户的当前连接。如果是其它普通帐号，只能看到自己占用的连接。</strong><br><strong>show processlist;**只列出前100条，如果想全列出请使用</strong>show full processlist;** </p></li><li><p>show variables like ‘%max_connections%’; 查看最大连接数</p></li><li><p>设置最大连接数的方法：</p><p>set global max_connections=1000 重新设置最大连接数</p><p>在/etc/my.cnf设置，[mysqld]下添加global max_connections=1000，重启mysql服务</p></li></ul>]]></content>
     
     
     <categories>
@@ -556,25 +587,6 @@
       <tag>编程</tag>
       
     </tags>
-    
-  </entry>
-  
-  
-  
-  <entry>
-    <title>《我们内心的冲突》读书笔记</title>
-    <link href="/2020/01/07/2020/2020-01-18-heartClash/"/>
-    <url>/2020/01/07/2020/2020-01-18-heartClash/</url>
-    
-    <content type="html"><![CDATA[<h2 id="冲突特征"><a href="#冲突特征" class="headerlink" title="冲突特征"></a>冲突特征</h2><ul><li><p>典型特征，其中之一就是，会产生自怨自怜的想法，总感觉自己“很弱小”“很无助”“很卑微”“很可怜”“很软弱”。</p></li><li><p>第二个特征就是理所应当地认为自己不如别人。他会觉得所有人都比他优秀，比他有魅力，比他聪明，比他素质高，比他有价值。</p></li><li><p>这类人的第三个典型特征，也是他讨好别人的一个体现，就是他会有意识地用别人对他的态度，来定义自己的价值。</p></li><li><p>他们会无意识地通过突出一种倾向，而将其他与之相矛盾的倾向消灭掉，以期实现对人格的重新塑造，这也是神经症患者解决冲突的一种主要方法。</p></li><li><p>自己长期不满的根源在于自己的内心，所以即使别人满足了他的要求，他依然会欲求不满。</p></li></ul><h2 id="理想化形象"><a href="#理想化形象" class="headerlink" title="理想化形象"></a>理想化形象</h2><ul><li>理想化形象，从本质上说是种无意识现象。</li><li>理想化形象和真正的理想之间，存在着巨大差别。理想化形象是一座静止的雕像，是顶礼膜拜的固执想法，你永远无法将其变成现实。而理想是动态的，能鼓舞人们不断去靠近，这种牵引力弥足珍贵，对于人的成长和发展必不可少。理想教会人们谦逊，而理想化形象只能让人自视过高。不仅如此，因为理想化形象会让人无视自己的缺点，或者夸大自己的缺点，所以它还会成为实现理想道路上的绊脚石。</li></ul><h2 id="外化作用"><a href="#外化作用" class="headerlink" title="外化作用"></a>外化作用</h2><ul><li>他们是为了躲避基本冲突而创造出理想化形象，以便从中得到庇护，然而，当理想化形象和真自我之间的差距不断扩大，大到压力和张力让他们无法承受的时候，庇护感就会消失。此时，他们再也不能在自我的范围内采取任何措施，也无法从中得到什么，只有彻底逃离自我，将一切都视为是自身之外的事。</li></ul><h2 id="理想化形象下的愤怒：（自我憎恨的外化形式）"><a href="#理想化形象下的愤怒：（自我憎恨的外化形式）" class="headerlink" title="理想化形象下的愤怒：（自我憎恨的外化形式）"></a>理想化形象下的愤怒：（自我憎恨的外化形式）</h2><ul><li>肆意发泄内心不满时，很容易让怒火燃烧到自身之外，会迁怒到别人身上，而这种迁怒，可以是因为别人的某个具体过错，也可能是无缘无故地发泄。即使是有别人的错误做导火索，也必然是因为他们无法忍受自己身上也有同样的错误。</li><li>患者总是在担惊受怕。有时候，他的忧心忡忡会浮现在意识中，由于他对自己的一些缺点深恶痛绝，所以他也害怕这些缺点会招来别人的厌恶，严重的服从是这种外化作用最主要的结果。</li><li>患者将注意力投向自己的身体，而且多是些小毛病。<br>否认内心的冲突，并将一切归咎于外部因素。他很愿意讲述自己遭遇过的各种挫折，却不愿意反省自己应该为其承担什么责任。<br>只要他在精神上仍是这副“我不存在问题”的样子，他就不可能将任何获得的真知灼见运用到生活中去，哪怕他对自己的了解越来越多，也无法改变什么。</li></ul><h3 id="如果真的存在尚未解决的冲突，通常会导致三方面的紊乱，它们都会让患者的精力被消耗，或是用在不该用的地方。"><a href="#如果真的存在尚未解决的冲突，通常会导致三方面的紊乱，它们都会让患者的精力被消耗，或是用在不该用的地方。" class="headerlink" title="如果真的存在尚未解决的冲突，通常会导致三方面的紊乱，它们都会让患者的精力被消耗，或是用在不该用的地方。"></a>如果真的存在尚未解决的冲突，通常会导致三方面的紊乱，它们都会让患者的精力被消耗，或是用在不该用的地方。</h3><ul><li>其一，是优柔寡断。<br>这类人会故意逃避选择，所以他们的优柔寡断未必能被察觉。往往意识不到自己的茫然，却能有意地掩饰自己优柔寡断的一面。</li><li>第二种耗费精力的紊乱是：办事低效。<br>节奏缓慢只是低效率的表现之一，常见的还有健忘和笨拙。</li><li>第三种耗费精力的紊乱是：普遍性懈怠。<br>导致这一结果的原因，通常是由于他们严重的自我隔离，以及对于生活方向的迷失。长久以来的内心压抑，并对任何努力持否定态度，导致他们的状态总是死气沉沉，即使偶尔有激情萌动，也只是转瞬即逝。理想化形象和虐待倾向，是他们的病因所在。由于理想化形象，他们不屑于像别人那样服从努力，认为这种过程太平庸了，和自己的理想化形象差距太大，他们宁肯只在幻想中做个精英，也不肯去行动。理想化形象带来了自信，而这份自信禁不起自卑的腐蚀，他们觉得自己做不成什么有意义的事，于是把关于工作的兴趣和激情干脆埋葬掉。虐待倾向之下，患者会在面对所有具有攻击性的事物时畏缩不前，尤其是在虐待倾向被压抑（表现为倒错型虐待倾向）的时候最为明显。他们会以激烈的方式去修正自己的错误，但因为用力过猛，最后反而会让精神更加萎靡。普遍性懈怠影响力之巨大，不仅体现在他们的言行上，还包括情绪。只要内心的冲突一天没有解决，精力就会被持续地浪费。从本质上说，神经症是特定文化的产物，因此，它对人们品质和潜能的损害，实际也是对特定文化的控告。<br>当患者的冲突尚未解决时，不仅会精力分散，还会导致道德观的分裂。这里所说的道德观，包括道德准则和足以影响人际关系与自身发展的态度、感受和行为。精力分散会造成精力的浪费，同理，道德观的分裂也会让道德体系出现巨大的缺失。这种缺失来源于他们向着几种矛盾的方向共同发力，还来源于他们对于这种矛盾的极力掩饰。当道德遭到破坏，首当其冲的表现就是真诚流失，而虚伪自私的一面却在增长。禅宗著作中认为：真诚的人必然内心完整。之所以分享这一点，是因为与我们临床治疗的结论如出一辙：内心分裂的人，不可能完全真诚。</li></ul><h2 id="绝望"><a href="#绝望" class="headerlink" title="绝望"></a>绝望</h2><ul><li>无法实现理想化形象，也会让患者感到绝望。</li><li>绝望的根源，是患者放弃解决冲突的希望，任凭自己的人格继续分裂。</li><li>他们的绝望感并不是真的来源于这些外部因素。在他们的概念里，自己永远得不到快乐和自由，也不会取得任何成就，他们已经被抛弃了。</li><li>一切绝望都源自对“做自己”不再抱有希望。每个时代的哲学家都在强调“做自己”是多么重要，强调“做自己”一旦受阻，便会产生出绝望，就连东方的禅宗也将“做自己”做为核心主题。在这里我引用现代学者约翰·麦克马雷的一句话：“除了彻底地成为我们自己外，我们的存在没有别的意义。”</li></ul><h2 id="虐待倾向"><a href="#虐待倾向" class="headerlink" title="虐待倾向"></a>虐待倾向</h2><ul><li>他所有的追求，都是为了满足自己对快感和激情的渴望。对于心理健康、内心平衡的正常人，不需要靠这些来刺激自己。越是成熟的人，越不会关注这些。但有虐待倾向的人，其内心除了愤怒和好胜心外再无他物，其他的感觉早已被压制住了。</li><li>绝望的人也会疯狂地追求某个目标，与前面的论断并不矛盾。因为患者想要的只是个赝品，他希望获得的不是真正的自由，或真实的自己，那些构成他绝望的要素依然纹丝不动，所以他并没能力改变什么。</li></ul><h2 id="解决冲突"><a href="#解决冲突" class="headerlink" title="解决冲突"></a>解决冲突</h2><ul><li>想要解决冲突，必须改变人格中造成冲突的因素。这种办法虽然可以治本，但实行起来不会一帆风顺。任何内心的改变，都不是件容易的事，正因如此，我们才会绞尽脑汁想找“捷径”。有人经常会问：“我看到了自己的基本冲突，是不是就能解决问题了？”回答显然是：不能。</li><li>我们把神经症视为患者围绕基本冲突建立起的防御堡垒，就可以将对神经症的性格结构进行分析的工作划分为两个大的步骤。<br>第一步，查明患者为了解决冲突而做的无意识努力，以及这些努力对其人格的影响。<br>第二步，对基本冲突本身进行处理。在这一步骤中，不仅要让患者对基本冲突有大致的了解，还要帮他弄懂冲突造成了怎样的影响，又是如何造成的。也就是说，患者需要知道那些相互矛盾的倾向，以及它们之间是如何相互干扰的。</li><li>试图在冲突中达成妥协是根本不可能的。理想化形象、外化作用并不能解决冲突，只是掩盖了冲突。拆除理想化形象之前，一定先要让他获得足够的现实性力量，否则他无法承受由此带来的打击。</li></ul><h3 id="分析疗法的目标"><a href="#分析疗法的目标" class="headerlink" title="分析疗法的目标"></a>分析疗法的目标</h3><ol><li>患者要具备对自己负责的能力，即感受到自己生命中澎湃的活力和对责任的担当，他敢于决策，并且敢于承担后果。同时出现的，是患者对他人负责的能力，他能毅然承担下他所认同的义务，无论这些义务涉及的是子女、父母、朋友、员工、同事、团体还是国家。</li><li>获得内心的独立。对于别人的看法和价值观，患者既不无视，但也不会盲目跟从；他能建立起一套属于自己的价值观，并运用在生活中；能在人际关系中，尊重别人的个性，并且不侵害别人的权益，做到真正的人格平等，互利共存，实现真正的民主精神。</li><li>唤醒内在的感情源泉。即无论是爱或恨，悲或喜，恐惧或渴求，所有感情都能觉醒并焕发生机。患者拥有表达感情的能力，又能很好地控制它们。我们在这里要着重强调爱与友善的能力，因为它们太至关重要。爱不是以寄生的方式去依附别人，也不是以虐待的方式去控制别人。爱是什么？爱是一种关系。约翰·麦克马雷说：“这种关系的本身，就是目的；我们因为这种关系而互相连接，对人类来说，这样的分享体验是最自然的事，因为我们天生就有与他人互动的愿望。我们向对方敞开心扉，表达心声，相互理解和包容，在合二为一的感受和生活中，分享彼此的快乐，满足彼此的心愿。  </li></ol><p><strong>实现人格的完整，对待任何人和事，都要做到一心一意，中正真诚。具体说，就是卸下所有伪装，不用虚伪的假象欺骗别人和欺骗自己；真情实意；将自己完全投入感情、事业和自己坚持的信念中。我们内心的冲突被解决多少，距离这一目标就近了多少。</strong></p>]]></content>
-    
-    
-    <categories>
-      
-      <category>blog</category>
-      
-    </categories>
-    
     
   </entry>
   
@@ -1592,7 +1604,7 @@
     <link href="/2020/01/07/2020/2020-11-25-centosLearn/"/>
     <url>/2020/01/07/2020/2020-11-25-centosLearn/</url>
     
-    <content type="html"><![CDATA[<h2 id="centos安装rzsz"><a href="#centos安装rzsz" class="headerlink" title="centos安装rzsz"></a>centos安装rzsz</h2><p>yum install lrzsz</p><h2 id="查看centos系统的版本"><a href="#查看centos系统的版本" class="headerlink" title="查看centos系统的版本"></a>查看centos系统的版本</h2><p>cat /etc/redhat-release</p><h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><p>free    # 查看服务器内存使用<br>netstat -lntup    # 查看端口情况  l-&gt;listen,n-&gt;num,t-&gt;tcp,u-&gt;udp,p-&gt;process<br>cat /etc/locale.conf   查看使用编码<br>lsblk  查看盘符  </p><h2 id="zip压缩当前文件夹下所有文件"><a href="#zip压缩当前文件夹下所有文件" class="headerlink" title="zip压缩当前文件夹下所有文件"></a>zip压缩当前文件夹下所有文件</h2><p>zip -r myfile.zip ./*</p><h2 id="两台centos之间传送文件"><a href="#两台centos之间传送文件" class="headerlink" title="两台centos之间传送文件"></a>两台centos之间传送文件</h2><p>scp -r /data/appmanage <a href="mailto:&#x72;&#111;&#x6f;&#x74;&#x40;&#49;&#x37;&#x32;&#46;&#49;&#x36;&#46;&#x37;&#48;&#x2e;&#x31;&#49;">&#x72;&#111;&#x6f;&#x74;&#x40;&#49;&#x37;&#x32;&#46;&#49;&#x36;&#46;&#x37;&#48;&#x2e;&#x31;&#49;</a>:/data/appmanage</p><h2 id="对当前文件夹打包"><a href="#对当前文件夹打包" class="headerlink" title="对当前文件夹打包"></a>对当前文件夹打包</h2><p>zip -r myfile.zip ./*   </p><h2 id="CentOS下查看文件和文件夹大小"><a href="#CentOS下查看文件和文件夹大小" class="headerlink" title="CentOS下查看文件和文件夹大小"></a>CentOS下查看文件和文件夹大小</h2><p>查看data文件夹下大小<br>du -h –max-depth=1 data/<br><a href="https://blog.csdn.net/qq_33326449/article/details/107446140">https://blog.csdn.net/qq_33326449/article/details/107446140</a></p><h2 id="设置环境变量"><a href="#设置环境变量" class="headerlink" title="设置环境变量"></a>设置环境变量</h2><p>vim /etc/profile   </p><ul><li><p>eg:添加maven环境变量   </p><figure class="highlight routeros"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs routeros"><span class="hljs-attribute">M2_HOME</span>=/usr/maven/apache-maven-3.6.3<br><span class="hljs-builtin-name">export</span> <span class="hljs-attribute">PATH</span>=<span class="hljs-variable">$&#123;M2_HOME&#125;</span>/bin:$&#123;PATH&#125;<br></code></pre></div></td></tr></table></figure><p>source /etc/profile   </p></li></ul><h2 id="linux-crontab-定时任务"><a href="#linux-crontab-定时任务" class="headerlink" title="linux crontab 定时任务"></a>linux crontab 定时任务</h2><h2 id="cron介绍"><a href="#cron介绍" class="headerlink" title="cron介绍"></a>cron介绍</h2><p>我们经常使用的是crontab命令是cron table的简写，它是cron的配置文件，也可以叫它作业列表，我们可以在以下文件夹内找到相关配置文件。<br>/var/spool/cron/ 目录下存放的是每个用户包括root的crontab任务，每个任务以创建者的名字命名<br>/etc/crontab 这个文件负责调度各种管理和维护任务。<br>/etc/cron.d/ 这个目录用来存放任何要执行的crontab文件或脚本。<br>我们还可以把脚本放在/etc/cron.hourly、/etc/cron.daily、/etc/cron.weekly、/etc/cron.monthly目录中，让它每小时/天/星期、月执行一次。   </p><figure class="highlight less"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs less"><span class="hljs-selector-tag">crontab</span> <span class="hljs-selector-attr">[-u username]</span>　　　　<span class="hljs-comment">//省略用户表表示操作当前用户的crontab</span><br>    <span class="hljs-selector-tag">-e</span>      (编辑工作表)<br>    <span class="hljs-selector-tag">-l</span>      (列出工作表里的命令)<br>    <span class="hljs-selector-tag">-r</span>      (删除工作表)<br></code></pre></div></td></tr></table></figure><p>我们用crontab -e进入当前用户的工作表编辑，是常见的vim界面。每行是一条命令。<br>crontab的命令构成为 时间+动作，其时间有分、时、日、月、周五种，操作符有  </p><figure class="highlight asciidoc"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs asciidoc"><span class="hljs-bullet">* </span>取值范围内的所有数字<br>/ 每过多少个数字<br><span class="hljs-bullet">- </span>从X到Z<br>，散列数字<br></code></pre></div></td></tr></table></figure><h3 id="使用实例"><a href="#使用实例" class="headerlink" title="使用实例"></a>使用实例</h3><figure class="highlight markdown"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs markdown">实例1：每1分钟执行一次myCommand<br><span class="hljs-bullet">*</span> <span class="hljs-emphasis">* *</span> <span class="hljs-emphasis">* *</span> myCommand<br><br>实例2：每小时的第3和第15分钟执行<br>3,15 <span class="hljs-emphasis">* *</span> <span class="hljs-emphasis">* *</span> myCommand<br><br>实例3：在上午8点到11点的第3和第15分钟执行<br>3,15 8-11 <span class="hljs-emphasis">* *</span> <span class="hljs-emphasis">* myCommand</span><br></code></pre></div></td></tr></table></figure>]]></content>
+    <content type="html"><![CDATA[<h2 id="centos安装rzsz"><a href="#centos安装rzsz" class="headerlink" title="centos安装rzsz"></a>centos安装rzsz</h2><p>yum install lrzsz</p><h2 id="查看centos系统的版本"><a href="#查看centos系统的版本" class="headerlink" title="查看centos系统的版本"></a>查看centos系统的版本</h2><p>cat /etc/redhat-release</p><h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><p>free    # 查看服务器内存使用<br>netstat -lntup    # 查看端口情况  l-&gt;listen,n-&gt;num,t-&gt;tcp,u-&gt;udp,p-&gt;process<br>cat /etc/locale.conf   查看使用编码<br>lsblk  查看盘符  </p><h2 id="zip压缩当前文件夹下所有文件"><a href="#zip压缩当前文件夹下所有文件" class="headerlink" title="zip压缩当前文件夹下所有文件"></a>zip压缩当前文件夹下所有文件</h2><p>zip -r myfile.zip ./*</p><h2 id="两台centos之间传送文件"><a href="#两台centos之间传送文件" class="headerlink" title="两台centos之间传送文件"></a>两台centos之间传送文件</h2><p>scp -r /data/appmanage <a href="mailto:&#114;&#x6f;&#x6f;&#116;&#x40;&#49;&#55;&#x32;&#x2e;&#x31;&#x36;&#46;&#x37;&#x30;&#46;&#x31;&#x31;">&#114;&#x6f;&#x6f;&#116;&#x40;&#49;&#55;&#x32;&#x2e;&#x31;&#x36;&#46;&#x37;&#x30;&#46;&#x31;&#x31;</a>:/data/appmanage</p><h2 id="对当前文件夹打包"><a href="#对当前文件夹打包" class="headerlink" title="对当前文件夹打包"></a>对当前文件夹打包</h2><p>zip -r myfile.zip ./*   </p><h2 id="CentOS下查看文件和文件夹大小"><a href="#CentOS下查看文件和文件夹大小" class="headerlink" title="CentOS下查看文件和文件夹大小"></a>CentOS下查看文件和文件夹大小</h2><p>查看data文件夹下大小<br>du -h –max-depth=1 data/<br><a href="https://blog.csdn.net/qq_33326449/article/details/107446140">https://blog.csdn.net/qq_33326449/article/details/107446140</a></p><h2 id="设置环境变量"><a href="#设置环境变量" class="headerlink" title="设置环境变量"></a>设置环境变量</h2><p>vim /etc/profile   </p><ul><li><p>eg:添加maven环境变量   </p><figure class="highlight routeros"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs routeros"><span class="hljs-attribute">M2_HOME</span>=/usr/maven/apache-maven-3.6.3<br><span class="hljs-builtin-name">export</span> <span class="hljs-attribute">PATH</span>=<span class="hljs-variable">$&#123;M2_HOME&#125;</span>/bin:$&#123;PATH&#125;<br></code></pre></div></td></tr></table></figure><p>source /etc/profile   </p></li></ul><h2 id="linux-crontab-定时任务"><a href="#linux-crontab-定时任务" class="headerlink" title="linux crontab 定时任务"></a>linux crontab 定时任务</h2><h2 id="cron介绍"><a href="#cron介绍" class="headerlink" title="cron介绍"></a>cron介绍</h2><p>我们经常使用的是crontab命令是cron table的简写，它是cron的配置文件，也可以叫它作业列表，我们可以在以下文件夹内找到相关配置文件。<br>/var/spool/cron/ 目录下存放的是每个用户包括root的crontab任务，每个任务以创建者的名字命名<br>/etc/crontab 这个文件负责调度各种管理和维护任务。<br>/etc/cron.d/ 这个目录用来存放任何要执行的crontab文件或脚本。<br>我们还可以把脚本放在/etc/cron.hourly、/etc/cron.daily、/etc/cron.weekly、/etc/cron.monthly目录中，让它每小时/天/星期、月执行一次。   </p><figure class="highlight less"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs less"><span class="hljs-selector-tag">crontab</span> <span class="hljs-selector-attr">[-u username]</span>　　　　<span class="hljs-comment">//省略用户表表示操作当前用户的crontab</span><br>    <span class="hljs-selector-tag">-e</span>      (编辑工作表)<br>    <span class="hljs-selector-tag">-l</span>      (列出工作表里的命令)<br>    <span class="hljs-selector-tag">-r</span>      (删除工作表)<br></code></pre></div></td></tr></table></figure><p>我们用crontab -e进入当前用户的工作表编辑，是常见的vim界面。每行是一条命令。<br>crontab的命令构成为 时间+动作，其时间有分、时、日、月、周五种，操作符有  </p><figure class="highlight asciidoc"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs asciidoc"><span class="hljs-bullet">* </span>取值范围内的所有数字<br>/ 每过多少个数字<br><span class="hljs-bullet">- </span>从X到Z<br>，散列数字<br></code></pre></div></td></tr></table></figure><h3 id="使用实例"><a href="#使用实例" class="headerlink" title="使用实例"></a>使用实例</h3><figure class="highlight markdown"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs markdown">实例1：每1分钟执行一次myCommand<br><span class="hljs-bullet">*</span> <span class="hljs-emphasis">* *</span> <span class="hljs-emphasis">* *</span> myCommand<br><br>实例2：每小时的第3和第15分钟执行<br>3,15 <span class="hljs-emphasis">* *</span> <span class="hljs-emphasis">* *</span> myCommand<br><br>实例3：在上午8点到11点的第3和第15分钟执行<br>3,15 8-11 <span class="hljs-emphasis">* *</span> <span class="hljs-emphasis">* myCommand</span><br></code></pre></div></td></tr></table></figure>]]></content>
     
     
     <categories>
@@ -1725,7 +1737,7 @@
     <link href="/2020/01/07/2020/2020-11-25-ssh/"/>
     <url>/2020/01/07/2020/2020-11-25-ssh/</url>
     
-    <content type="html"><![CDATA[<h2 id="两台CentOS服务器配置ssh无密码登陆"><a href="#两台CentOS服务器配置ssh无密码登陆" class="headerlink" title="两台CentOS服务器配置ssh无密码登陆"></a>两台CentOS服务器配置ssh无密码登陆</h2><h3 id="问题：两台CentOS服务器，IP分别为192-168-1-11、192-168-1-12（下面用11、12简称两台服务器），在12上配置test用户ssh无需要密码即可登陆11的root用户。"><a href="#问题：两台CentOS服务器，IP分别为192-168-1-11、192-168-1-12（下面用11、12简称两台服务器），在12上配置test用户ssh无需要密码即可登陆11的root用户。" class="headerlink" title="问题：两台CentOS服务器，IP分别为192.168.1.11、192.168.1.12（下面用11、12简称两台服务器），在12上配置test用户ssh无需要密码即可登陆11的root用户。"></a>问题：两台CentOS服务器，IP分别为192.168.1.11、192.168.1.12（下面用11、12简称两台服务器），在12上配置test用户ssh无需要密码即可登陆11的root用户。</h3><h3 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h3><ul><li>用test用户登陆12</li><li>ssh-keygen -t rsa生成密码</li><li>在/home/test/.ssh下生成了密钥对：id_rsa为私钥，id_rsa.pub为公钥。</li><li>将刚生成的公钥传到11上，且11上以root用户登陆。<br>ssh-copy-id <a href="mailto:&#x72;&#x6f;&#111;&#x74;&#x40;&#49;&#x39;&#50;&#46;&#x31;&#x36;&#56;&#46;&#49;&#x2e;&#49;&#x31;">&#x72;&#x6f;&#111;&#x74;&#x40;&#49;&#x39;&#50;&#46;&#x31;&#x36;&#56;&#46;&#49;&#x2e;&#49;&#x31;</a></li><li>在12上用root用户登陆 11:ssh <a href="mailto:&#114;&#111;&#111;&#x74;&#x40;&#49;&#x39;&#50;&#x2e;&#x31;&#54;&#x38;&#46;&#49;&#x2e;&#49;&#49;">&#114;&#111;&#111;&#x74;&#x40;&#49;&#x39;&#50;&#x2e;&#x31;&#54;&#x38;&#46;&#49;&#x2e;&#49;&#49;</a>，验证不需要密码可以登陆。</li></ul>]]></content>
+    <content type="html"><![CDATA[<h2 id="两台CentOS服务器配置ssh无密码登陆"><a href="#两台CentOS服务器配置ssh无密码登陆" class="headerlink" title="两台CentOS服务器配置ssh无密码登陆"></a>两台CentOS服务器配置ssh无密码登陆</h2><h3 id="问题：两台CentOS服务器，IP分别为192-168-1-11、192-168-1-12（下面用11、12简称两台服务器），在12上配置test用户ssh无需要密码即可登陆11的root用户。"><a href="#问题：两台CentOS服务器，IP分别为192-168-1-11、192-168-1-12（下面用11、12简称两台服务器），在12上配置test用户ssh无需要密码即可登陆11的root用户。" class="headerlink" title="问题：两台CentOS服务器，IP分别为192.168.1.11、192.168.1.12（下面用11、12简称两台服务器），在12上配置test用户ssh无需要密码即可登陆11的root用户。"></a>问题：两台CentOS服务器，IP分别为192.168.1.11、192.168.1.12（下面用11、12简称两台服务器），在12上配置test用户ssh无需要密码即可登陆11的root用户。</h3><h3 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h3><ul><li>用test用户登陆12</li><li>ssh-keygen -t rsa生成密码</li><li>在/home/test/.ssh下生成了密钥对：id_rsa为私钥，id_rsa.pub为公钥。</li><li>将刚生成的公钥传到11上，且11上以root用户登陆。<br>ssh-copy-id <a href="mailto:&#114;&#x6f;&#x6f;&#x74;&#x40;&#49;&#x39;&#50;&#x2e;&#x31;&#x36;&#x38;&#x2e;&#x31;&#46;&#49;&#x31;">&#114;&#x6f;&#x6f;&#x74;&#x40;&#49;&#x39;&#50;&#x2e;&#x31;&#x36;&#x38;&#x2e;&#x31;&#46;&#49;&#x31;</a></li><li>在12上用root用户登陆 11:ssh <a href="mailto:&#114;&#111;&#x6f;&#116;&#64;&#49;&#57;&#x32;&#46;&#x31;&#x36;&#56;&#46;&#49;&#x2e;&#49;&#x31;">&#114;&#111;&#x6f;&#116;&#64;&#49;&#57;&#x32;&#46;&#x31;&#x36;&#56;&#46;&#49;&#x2e;&#49;&#x31;</a>，验证不需要密码可以登陆。</li></ul>]]></content>
     
     
     <categories>
@@ -2158,6 +2170,25 @@
   
   
   <entry>
+    <title>Maven手动导入jar包</title>
+    <link href="/2020/01/07/2020/2020-01-10-manualMavenJar/"/>
+    <url>/2020/01/07/2020/2020-01-10-manualMavenJar/</url>
+    
+    <content type="html"><![CDATA[<p>一、pom文件依赖配置</p><div class="hljs code-wrapper"><pre><code>   &lt;dependency&gt;        &lt;groupId&gt;com.oracle&lt;/groupId&gt;        &lt;artifactId&gt;ojdbc6&lt;/artifactId&gt;        &lt;version&gt;11.2.0.3&lt;/version&gt;    &lt;/dependency&gt;</code></pre></div><p>二、下载ojdbc6.jar（<a href="http://www.oracle.com/technetwork/apps-tech/jdbc-112010-090769.html">http://www.oracle.com/technetwork/apps-tech/jdbc-112010-090769.html</a> ）</p><p>三、通过控制台执行命令，将ojdbc.jar安装到本地库：</p><blockquote><p>mvn install:install-file -Dfile=/Users/raines/Downloads/ojdbc6.jar -DgroupId=com.oracle -DartifactId=ojdbc6 -Dversion=11.2.0.3 -Dpackaging=jar -DgeneratePom=true -DlocalRepositoryPath=/Users/raines/.m2/repository</p></blockquote><p>成功安装到本地库：<br><img src="../images/program/manualMavenJarSuccess.jpg" alt="Image text"></p><p>四、说明</p><p>-DgroupId=com.oracle : 指定当前包的groupId为com.oracle</p><p>-DartifactId=ojdbc6 : 指定当前的artifactfactId为ojdbc6</p><p>-Dversion=11.2.0.3 : 指定当前包的version为11.2.0.3</p><p>-Dfile=A:\Develop\jar\ojdbc6.jar : 指定要打的包的文件位置</p><p>-DlocalRepositoryPath=/Users/raines/.m2/repository : 本地maven repo路径</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>blog</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>闲散颂</title>
     <link href="/2020/01/07/2020/2020-01-09-idle/"/>
     <url>/2020/01/07/2020/2020-01-09-idle/</url>
@@ -2310,25 +2341,6 @@
   
   
   <entry>
-    <title>Maven手动导入jar包</title>
-    <link href="/2020/01/07/2020/2020-01-10-manualMavenJar/"/>
-    <url>/2020/01/07/2020/2020-01-10-manualMavenJar/</url>
-    
-    <content type="html"><![CDATA[<p>一、pom文件依赖配置</p><div class="hljs code-wrapper"><pre><code>   &lt;dependency&gt;        &lt;groupId&gt;com.oracle&lt;/groupId&gt;        &lt;artifactId&gt;ojdbc6&lt;/artifactId&gt;        &lt;version&gt;11.2.0.3&lt;/version&gt;    &lt;/dependency&gt;</code></pre></div><p>二、下载ojdbc6.jar（<a href="http://www.oracle.com/technetwork/apps-tech/jdbc-112010-090769.html">http://www.oracle.com/technetwork/apps-tech/jdbc-112010-090769.html</a> ）</p><p>三、通过控制台执行命令，将ojdbc.jar安装到本地库：</p><blockquote><p>mvn install:install-file -Dfile=/Users/raines/Downloads/ojdbc6.jar -DgroupId=com.oracle -DartifactId=ojdbc6 -Dversion=11.2.0.3 -Dpackaging=jar -DgeneratePom=true -DlocalRepositoryPath=/Users/raines/.m2/repository</p></blockquote><p>成功安装到本地库：<br><img src="../images/program/manualMavenJarSuccess.jpg" alt="Image text"></p><p>四、说明</p><p>-DgroupId=com.oracle : 指定当前包的groupId为com.oracle</p><p>-DartifactId=ojdbc6 : 指定当前的artifactfactId为ojdbc6</p><p>-Dversion=11.2.0.3 : 指定当前包的version为11.2.0.3</p><p>-Dfile=A:\Develop\jar\ojdbc6.jar : 指定要打的包的文件位置</p><p>-DlocalRepositoryPath=/Users/raines/.m2/repository : 本地maven repo路径</p>]]></content>
-    
-    
-    <categories>
-      
-      <category>blog</category>
-      
-    </categories>
-    
-    
-  </entry>
-  
-  
-  
-  <entry>
     <title>Sql VIEW（视图）</title>
     <link href="/2020/01/07/2020/2020-01-10-sqlView/"/>
     <url>/2020/01/07/2020/2020-01-10-sqlView/</url>
@@ -2352,7 +2364,7 @@
     <link href="/2020/01/07/2020/2020-01-13-resume/"/>
     <url>/2020/01/07/2020/2020-01-13-resume/</url>
     
-    <content type="html"><![CDATA[<h2 id="基本资料"><a href="#基本资料" class="headerlink" title="基本资料"></a>基本资料</h2><ul><li>姓名：刘晓龙 </li><li>性别：男  </li><li>电子邮箱：<a href="mailto:&#114;&#117;&#121;&#x69;&#x6c;&#105;&#x75;&#99;&#104;&#105;&#x6c;&#100;&#64;&#103;&#109;&#x61;&#105;&#x6c;&#x2e;&#99;&#x6f;&#109;">&#114;&#117;&#121;&#x69;&#x6c;&#105;&#x75;&#99;&#104;&#105;&#x6c;&#100;&#64;&#103;&#109;&#x61;&#105;&#x6c;&#x2e;&#99;&#x6f;&#109;</a></li></ul><h2 id="技能"><a href="#技能" class="headerlink" title="技能"></a>技能</h2><ol><li>非常熟练使用Java编程语言，IntelliJ IDEA工具，深入理解OOP编程思想；</li><li>非常熟练搭建和使用SpringBoot+SpringCloud+MybatisPlus(SpringdataJPA)等开源框架来进行JavaWeb开发，熟悉微服务架构，熟悉Spring底层源码及实现；</li><li>熟练使用JaveScript，Ajax，jQuery等前台开发技术，熟练使用和进一步封装常用的js插件；</li><li>熟练使用git/svn，maven/gradle命令来进行项目管理和项目构建，熟练使用禅道来进行项目开发管控；</li><li>熟练使用Linux，熟练编写shell脚本，拥抱开源，有个人博客网站作为平时开发经验的分享；</li><li>熟悉MySQL关系型数据库，熟悉分库分表技术，掌握SQL语言，熟悉redis缓存技术的使用；</li><li>熟悉消息中间件Rabbitmq使用，有大型高并发网站设计经验，能根据业务需求选择合适的稳定技术；</li><li>良好的表达与沟通能力，能快速融入团队，积极主动，对工作尽心尽责；</li><li>熟练使用draw.io绘制流程图和脑图，使用网易云笔记来做团队间技能分享；</li><li>熟练使用python编程语言，熟练搭建django框架来进行pythonWeb开发；</li><li>熟悉爬虫技术，熟练使用python和java进行网站信息的爬取。</li></ol><h2 id="项目"><a href="#项目" class="headerlink" title="项目"></a>项目</h2><h3 id="TMS"><a href="#TMS" class="headerlink" title="TMS"></a>TMS</h3><h4 id="项目描述："><a href="#项目描述：" class="headerlink" title="项目描述："></a>项目描述：</h4><p>运输管理系统（Transportation Management System，TMS）是一套基于运输作业流程的管理系统，该系统以系统管理、信息管理、运输作业、财务管理四大线索设计开发。<br>系统管理是TMS系统的技术后台，起到支持系统高效运转的作用；信息管理是通过对企业的客户信息、车辆信息、人员信息、货物信息的管理，建立运输决策的知识库，也起到促进企业整体运营更加优化的作用；运输作业是该管理系统的核心，系统通过对运输任务的订单处理、调度配载、运输状态跟踪，确定任务的执行状况；财务管理是伴随着运输任务发生的应收应付费用，通过对应收应付的管理及运输任务对应的收支的核算，生成实时全面的统计报表，能够有效地促进运输决策。</p><h4 id="技术及框架："><a href="#技术及框架：" class="headerlink" title="技术及框架："></a>技术及框架：</h4><p>JavaScript+Jquery+BootStrap<br>SpringBoot+SpringCloud+SpringDataJPA+Redis+Jsoup+easypoi+Quartz<br>MySQL+Mycat<br>Git+Maven<br>Centos+shell脚本  </p><h4 id="责任描述："><a href="#责任描述：" class="headerlink" title="责任描述："></a>责任描述：</h4><ol><li>系统需求分析，搭建微服务架构开发环境,放入码云使用git进行版本控制  </li><li>爬虫爬取全国行政区域:根据甲方反应行政区域更新不及时及难以维护的问题进行解决.物流行业对行政区域极为敏感,鉴于维护耗时耗力,采用爬虫爬取国家行政区域的方法解决问题</li><li>系统整体问题的统一解决:<br>(1). 现spring提供的定时任务调度无法在系统崩溃重启后进行之前保存的定时任务,根据此问题作出相应的解决方案;<br>(2). 系统启动时必要缓存的统一刷新;<br>(3). Java事件的监听<br>(4). 测试发现搜索等功能通过前台影响后台sql,springdatajpa框架封装的部分方法无法进行安全检测,根据测试问题统一解决.  </li><li>编写shell脚本,方便版本升级及测试</li><li>根据架构师分解的模块通过禅道给开发分配具体任务</li><li>带新员工熟悉项目及开发日常问题的解决<h3 id="OMS"><a href="#OMS" class="headerlink" title="OMS"></a>OMS</h3></li></ol><h3 id="IDEA禅道插件"><a href="#IDEA禅道插件" class="headerlink" title="IDEA禅道插件"></a>IDEA禅道插件</h3><h4 id="项目描述：-1"><a href="#项目描述：-1" class="headerlink" title="项目描述："></a>项目描述：</h4><p>编写此插件主要是为了方便开发人员使用禅道来做任务管理和Bug处理,禅道为开源项目。<br><a href="https://gitee.com/herolxl/zentao">此项目为开源项目</a></p><h4 id="技术及框架：-1"><a href="#技术及框架：-1" class="headerlink" title="技术及框架："></a>技术及框架：</h4><p>Java+jsoup+fastjson+datepicker<br>禅道<br>Intellij IDEA</p><h4 id="责任描述"><a href="#责任描述" class="headerlink" title="责任描述:"></a>责任描述:</h4><ol><li>使用爬虫来获取禅道的基本信息,开发人员的当前任务和当前Bug</li><li>对用户账号密码的保存及用户的持续保持登录</li><li>通过爬虫来进行任务的新增,开始,暂停,继续,取消</li><li>通过爬虫来进行Bug的开始,完成,驳回</li></ol>]]></content>
+    <content type="html"><![CDATA[<h2 id="基本资料"><a href="#基本资料" class="headerlink" title="基本资料"></a>基本资料</h2><ul><li>姓名：刘晓龙 </li><li>性别：男  </li><li>电子邮箱：<a href="mailto:&#114;&#117;&#121;&#105;&#x6c;&#105;&#x75;&#99;&#104;&#105;&#x6c;&#100;&#x40;&#x67;&#109;&#97;&#105;&#x6c;&#46;&#99;&#111;&#109;">&#114;&#117;&#121;&#105;&#x6c;&#105;&#x75;&#99;&#104;&#105;&#x6c;&#100;&#x40;&#x67;&#109;&#97;&#105;&#x6c;&#46;&#99;&#111;&#109;</a></li></ul><h2 id="技能"><a href="#技能" class="headerlink" title="技能"></a>技能</h2><ol><li>非常熟练使用Java编程语言，IntelliJ IDEA工具，深入理解OOP编程思想；</li><li>非常熟练搭建和使用SpringBoot+SpringCloud+MybatisPlus(SpringdataJPA)等开源框架来进行JavaWeb开发，熟悉微服务架构，熟悉Spring底层源码及实现；</li><li>熟练使用JaveScript，Ajax，jQuery等前台开发技术，熟练使用和进一步封装常用的js插件；</li><li>熟练使用git/svn，maven/gradle命令来进行项目管理和项目构建，熟练使用禅道来进行项目开发管控；</li><li>熟练使用Linux，熟练编写shell脚本，拥抱开源，有个人博客网站作为平时开发经验的分享；</li><li>熟悉MySQL关系型数据库，熟悉分库分表技术，掌握SQL语言，熟悉redis缓存技术的使用；</li><li>熟悉消息中间件Rabbitmq使用，有大型高并发网站设计经验，能根据业务需求选择合适的稳定技术；</li><li>良好的表达与沟通能力，能快速融入团队，积极主动，对工作尽心尽责；</li><li>熟练使用draw.io绘制流程图和脑图，使用网易云笔记来做团队间技能分享；</li><li>熟练使用python编程语言，熟练搭建django框架来进行pythonWeb开发；</li><li>熟悉爬虫技术，熟练使用python和java进行网站信息的爬取。</li></ol><h2 id="项目"><a href="#项目" class="headerlink" title="项目"></a>项目</h2><h3 id="TMS"><a href="#TMS" class="headerlink" title="TMS"></a>TMS</h3><h4 id="项目描述："><a href="#项目描述：" class="headerlink" title="项目描述："></a>项目描述：</h4><p>运输管理系统（Transportation Management System，TMS）是一套基于运输作业流程的管理系统，该系统以系统管理、信息管理、运输作业、财务管理四大线索设计开发。<br>系统管理是TMS系统的技术后台，起到支持系统高效运转的作用；信息管理是通过对企业的客户信息、车辆信息、人员信息、货物信息的管理，建立运输决策的知识库，也起到促进企业整体运营更加优化的作用；运输作业是该管理系统的核心，系统通过对运输任务的订单处理、调度配载、运输状态跟踪，确定任务的执行状况；财务管理是伴随着运输任务发生的应收应付费用，通过对应收应付的管理及运输任务对应的收支的核算，生成实时全面的统计报表，能够有效地促进运输决策。</p><h4 id="技术及框架："><a href="#技术及框架：" class="headerlink" title="技术及框架："></a>技术及框架：</h4><p>JavaScript+Jquery+BootStrap<br>SpringBoot+SpringCloud+SpringDataJPA+Redis+Jsoup+easypoi+Quartz<br>MySQL+Mycat<br>Git+Maven<br>Centos+shell脚本  </p><h4 id="责任描述："><a href="#责任描述：" class="headerlink" title="责任描述："></a>责任描述：</h4><ol><li>系统需求分析，搭建微服务架构开发环境,放入码云使用git进行版本控制  </li><li>爬虫爬取全国行政区域:根据甲方反应行政区域更新不及时及难以维护的问题进行解决.物流行业对行政区域极为敏感,鉴于维护耗时耗力,采用爬虫爬取国家行政区域的方法解决问题</li><li>系统整体问题的统一解决:<br>(1). 现spring提供的定时任务调度无法在系统崩溃重启后进行之前保存的定时任务,根据此问题作出相应的解决方案;<br>(2). 系统启动时必要缓存的统一刷新;<br>(3). Java事件的监听<br>(4). 测试发现搜索等功能通过前台影响后台sql,springdatajpa框架封装的部分方法无法进行安全检测,根据测试问题统一解决.  </li><li>编写shell脚本,方便版本升级及测试</li><li>根据架构师分解的模块通过禅道给开发分配具体任务</li><li>带新员工熟悉项目及开发日常问题的解决<h3 id="OMS"><a href="#OMS" class="headerlink" title="OMS"></a>OMS</h3></li></ol><h3 id="IDEA禅道插件"><a href="#IDEA禅道插件" class="headerlink" title="IDEA禅道插件"></a>IDEA禅道插件</h3><h4 id="项目描述：-1"><a href="#项目描述：-1" class="headerlink" title="项目描述："></a>项目描述：</h4><p>编写此插件主要是为了方便开发人员使用禅道来做任务管理和Bug处理,禅道为开源项目。<br><a href="https://gitee.com/herolxl/zentao">此项目为开源项目</a></p><h4 id="技术及框架：-1"><a href="#技术及框架：-1" class="headerlink" title="技术及框架："></a>技术及框架：</h4><p>Java+jsoup+fastjson+datepicker<br>禅道<br>Intellij IDEA</p><h4 id="责任描述"><a href="#责任描述" class="headerlink" title="责任描述:"></a>责任描述:</h4><ol><li>使用爬虫来获取禅道的基本信息,开发人员的当前任务和当前Bug</li><li>对用户账号密码的保存及用户的持续保持登录</li><li>通过爬虫来进行任务的新增,开始,暂停,继续,取消</li><li>通过爬虫来进行Bug的开始,完成,驳回</li></ol>]]></content>
     
     
     <categories>
@@ -2372,6 +2384,25 @@
     <url>/2020/01/07/2020/2020-01-17-classRelation/</url>
     
     <content type="html"><![CDATA[<h2 id="idea-mac-查看类关系图"><a href="#idea-mac-查看类关系图" class="headerlink" title="idea-mac-查看类关系图"></a>idea-mac-查看类关系图</h2><ol><li><p>看继承关系</p><div class="hljs code-wrapper"><pre><code>     快捷键 control + h查看hierarchy,只能查看向上向下继承关系，而不能看实现了哪些接口。     右键选择Diagrams（也可以使用快捷键command+alt+u，更快捷），然后显示</code></pre></div></li><li><p>看接口的实现关系</p><div class="hljs code-wrapper"><pre><code>     command + alt + B会显示出跟这个接口有关系的类。 然后加command+all，鼠标弄开，然后回车，全出来     然后把需要的拖过来，形成树状图。(我暂时还没找到快捷的方法)     鼠标放在某个类上，command+enter，直接进看这个类     蓝色的实线是继承关系     白色虚线表示这种关系public abstract class AbstractOrder&lt;T extends BaseOrderResultVO&gt; &#123;  ----》抽象类+泛型</code></pre></div></li><li><p>选中类，然后command+option+shift+u</p></li></ol>]]></content>
+    
+    
+    <categories>
+      
+      <category>blog</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>《我们内心的冲突》读书笔记</title>
+    <link href="/2020/01/07/2020/2020-01-18-heartClash/"/>
+    <url>/2020/01/07/2020/2020-01-18-heartClash/</url>
+    
+    <content type="html"><![CDATA[<h2 id="冲突特征"><a href="#冲突特征" class="headerlink" title="冲突特征"></a>冲突特征</h2><ul><li><p>典型特征，其中之一就是，会产生自怨自怜的想法，总感觉自己“很弱小”“很无助”“很卑微”“很可怜”“很软弱”。</p></li><li><p>第二个特征就是理所应当地认为自己不如别人。他会觉得所有人都比他优秀，比他有魅力，比他聪明，比他素质高，比他有价值。</p></li><li><p>这类人的第三个典型特征，也是他讨好别人的一个体现，就是他会有意识地用别人对他的态度，来定义自己的价值。</p></li><li><p>他们会无意识地通过突出一种倾向，而将其他与之相矛盾的倾向消灭掉，以期实现对人格的重新塑造，这也是神经症患者解决冲突的一种主要方法。</p></li><li><p>自己长期不满的根源在于自己的内心，所以即使别人满足了他的要求，他依然会欲求不满。</p></li></ul><h2 id="理想化形象"><a href="#理想化形象" class="headerlink" title="理想化形象"></a>理想化形象</h2><ul><li>理想化形象，从本质上说是种无意识现象。</li><li>理想化形象和真正的理想之间，存在着巨大差别。理想化形象是一座静止的雕像，是顶礼膜拜的固执想法，你永远无法将其变成现实。而理想是动态的，能鼓舞人们不断去靠近，这种牵引力弥足珍贵，对于人的成长和发展必不可少。理想教会人们谦逊，而理想化形象只能让人自视过高。不仅如此，因为理想化形象会让人无视自己的缺点，或者夸大自己的缺点，所以它还会成为实现理想道路上的绊脚石。</li></ul><h2 id="外化作用"><a href="#外化作用" class="headerlink" title="外化作用"></a>外化作用</h2><ul><li>他们是为了躲避基本冲突而创造出理想化形象，以便从中得到庇护，然而，当理想化形象和真自我之间的差距不断扩大，大到压力和张力让他们无法承受的时候，庇护感就会消失。此时，他们再也不能在自我的范围内采取任何措施，也无法从中得到什么，只有彻底逃离自我，将一切都视为是自身之外的事。</li></ul><h2 id="理想化形象下的愤怒：（自我憎恨的外化形式）"><a href="#理想化形象下的愤怒：（自我憎恨的外化形式）" class="headerlink" title="理想化形象下的愤怒：（自我憎恨的外化形式）"></a>理想化形象下的愤怒：（自我憎恨的外化形式）</h2><ul><li>肆意发泄内心不满时，很容易让怒火燃烧到自身之外，会迁怒到别人身上，而这种迁怒，可以是因为别人的某个具体过错，也可能是无缘无故地发泄。即使是有别人的错误做导火索，也必然是因为他们无法忍受自己身上也有同样的错误。</li><li>患者总是在担惊受怕。有时候，他的忧心忡忡会浮现在意识中，由于他对自己的一些缺点深恶痛绝，所以他也害怕这些缺点会招来别人的厌恶，严重的服从是这种外化作用最主要的结果。</li><li>患者将注意力投向自己的身体，而且多是些小毛病。<br>否认内心的冲突，并将一切归咎于外部因素。他很愿意讲述自己遭遇过的各种挫折，却不愿意反省自己应该为其承担什么责任。<br>只要他在精神上仍是这副“我不存在问题”的样子，他就不可能将任何获得的真知灼见运用到生活中去，哪怕他对自己的了解越来越多，也无法改变什么。</li></ul><h3 id="如果真的存在尚未解决的冲突，通常会导致三方面的紊乱，它们都会让患者的精力被消耗，或是用在不该用的地方。"><a href="#如果真的存在尚未解决的冲突，通常会导致三方面的紊乱，它们都会让患者的精力被消耗，或是用在不该用的地方。" class="headerlink" title="如果真的存在尚未解决的冲突，通常会导致三方面的紊乱，它们都会让患者的精力被消耗，或是用在不该用的地方。"></a>如果真的存在尚未解决的冲突，通常会导致三方面的紊乱，它们都会让患者的精力被消耗，或是用在不该用的地方。</h3><ul><li>其一，是优柔寡断。<br>这类人会故意逃避选择，所以他们的优柔寡断未必能被察觉。往往意识不到自己的茫然，却能有意地掩饰自己优柔寡断的一面。</li><li>第二种耗费精力的紊乱是：办事低效。<br>节奏缓慢只是低效率的表现之一，常见的还有健忘和笨拙。</li><li>第三种耗费精力的紊乱是：普遍性懈怠。<br>导致这一结果的原因，通常是由于他们严重的自我隔离，以及对于生活方向的迷失。长久以来的内心压抑，并对任何努力持否定态度，导致他们的状态总是死气沉沉，即使偶尔有激情萌动，也只是转瞬即逝。理想化形象和虐待倾向，是他们的病因所在。由于理想化形象，他们不屑于像别人那样服从努力，认为这种过程太平庸了，和自己的理想化形象差距太大，他们宁肯只在幻想中做个精英，也不肯去行动。理想化形象带来了自信，而这份自信禁不起自卑的腐蚀，他们觉得自己做不成什么有意义的事，于是把关于工作的兴趣和激情干脆埋葬掉。虐待倾向之下，患者会在面对所有具有攻击性的事物时畏缩不前，尤其是在虐待倾向被压抑（表现为倒错型虐待倾向）的时候最为明显。他们会以激烈的方式去修正自己的错误，但因为用力过猛，最后反而会让精神更加萎靡。普遍性懈怠影响力之巨大，不仅体现在他们的言行上，还包括情绪。只要内心的冲突一天没有解决，精力就会被持续地浪费。从本质上说，神经症是特定文化的产物，因此，它对人们品质和潜能的损害，实际也是对特定文化的控告。<br>当患者的冲突尚未解决时，不仅会精力分散，还会导致道德观的分裂。这里所说的道德观，包括道德准则和足以影响人际关系与自身发展的态度、感受和行为。精力分散会造成精力的浪费，同理，道德观的分裂也会让道德体系出现巨大的缺失。这种缺失来源于他们向着几种矛盾的方向共同发力，还来源于他们对于这种矛盾的极力掩饰。当道德遭到破坏，首当其冲的表现就是真诚流失，而虚伪自私的一面却在增长。禅宗著作中认为：真诚的人必然内心完整。之所以分享这一点，是因为与我们临床治疗的结论如出一辙：内心分裂的人，不可能完全真诚。</li></ul><h2 id="绝望"><a href="#绝望" class="headerlink" title="绝望"></a>绝望</h2><ul><li>无法实现理想化形象，也会让患者感到绝望。</li><li>绝望的根源，是患者放弃解决冲突的希望，任凭自己的人格继续分裂。</li><li>他们的绝望感并不是真的来源于这些外部因素。在他们的概念里，自己永远得不到快乐和自由，也不会取得任何成就，他们已经被抛弃了。</li><li>一切绝望都源自对“做自己”不再抱有希望。每个时代的哲学家都在强调“做自己”是多么重要，强调“做自己”一旦受阻，便会产生出绝望，就连东方的禅宗也将“做自己”做为核心主题。在这里我引用现代学者约翰·麦克马雷的一句话：“除了彻底地成为我们自己外，我们的存在没有别的意义。”</li></ul><h2 id="虐待倾向"><a href="#虐待倾向" class="headerlink" title="虐待倾向"></a>虐待倾向</h2><ul><li>他所有的追求，都是为了满足自己对快感和激情的渴望。对于心理健康、内心平衡的正常人，不需要靠这些来刺激自己。越是成熟的人，越不会关注这些。但有虐待倾向的人，其内心除了愤怒和好胜心外再无他物，其他的感觉早已被压制住了。</li><li>绝望的人也会疯狂地追求某个目标，与前面的论断并不矛盾。因为患者想要的只是个赝品，他希望获得的不是真正的自由，或真实的自己，那些构成他绝望的要素依然纹丝不动，所以他并没能力改变什么。</li></ul><h2 id="解决冲突"><a href="#解决冲突" class="headerlink" title="解决冲突"></a>解决冲突</h2><ul><li>想要解决冲突，必须改变人格中造成冲突的因素。这种办法虽然可以治本，但实行起来不会一帆风顺。任何内心的改变，都不是件容易的事，正因如此，我们才会绞尽脑汁想找“捷径”。有人经常会问：“我看到了自己的基本冲突，是不是就能解决问题了？”回答显然是：不能。</li><li>我们把神经症视为患者围绕基本冲突建立起的防御堡垒，就可以将对神经症的性格结构进行分析的工作划分为两个大的步骤。<br>第一步，查明患者为了解决冲突而做的无意识努力，以及这些努力对其人格的影响。<br>第二步，对基本冲突本身进行处理。在这一步骤中，不仅要让患者对基本冲突有大致的了解，还要帮他弄懂冲突造成了怎样的影响，又是如何造成的。也就是说，患者需要知道那些相互矛盾的倾向，以及它们之间是如何相互干扰的。</li><li>试图在冲突中达成妥协是根本不可能的。理想化形象、外化作用并不能解决冲突，只是掩盖了冲突。拆除理想化形象之前，一定先要让他获得足够的现实性力量，否则他无法承受由此带来的打击。</li></ul><h3 id="分析疗法的目标"><a href="#分析疗法的目标" class="headerlink" title="分析疗法的目标"></a>分析疗法的目标</h3><ol><li>患者要具备对自己负责的能力，即感受到自己生命中澎湃的活力和对责任的担当，他敢于决策，并且敢于承担后果。同时出现的，是患者对他人负责的能力，他能毅然承担下他所认同的义务，无论这些义务涉及的是子女、父母、朋友、员工、同事、团体还是国家。</li><li>获得内心的独立。对于别人的看法和价值观，患者既不无视，但也不会盲目跟从；他能建立起一套属于自己的价值观，并运用在生活中；能在人际关系中，尊重别人的个性，并且不侵害别人的权益，做到真正的人格平等，互利共存，实现真正的民主精神。</li><li>唤醒内在的感情源泉。即无论是爱或恨，悲或喜，恐惧或渴求，所有感情都能觉醒并焕发生机。患者拥有表达感情的能力，又能很好地控制它们。我们在这里要着重强调爱与友善的能力，因为它们太至关重要。爱不是以寄生的方式去依附别人，也不是以虐待的方式去控制别人。爱是什么？爱是一种关系。约翰·麦克马雷说：“这种关系的本身，就是目的；我们因为这种关系而互相连接，对人类来说，这样的分享体验是最自然的事，因为我们天生就有与他人互动的愿望。我们向对方敞开心扉，表达心声，相互理解和包容，在合二为一的感受和生活中，分享彼此的快乐，满足彼此的心愿。  </li></ol><p><strong>实现人格的完整，对待任何人和事，都要做到一心一意，中正真诚。具体说，就是卸下所有伪装，不用虚伪的假象欺骗别人和欺骗自己；真情实意；将自己完全投入感情、事业和自己坚持的信念中。我们内心的冲突被解决多少，距离这一目标就近了多少。</strong></p>]]></content>
     
     
     <categories>
