@@ -184,7 +184,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      506 字
+      539 字
     </span>
   
 
@@ -241,24 +241,7 @@
 <figure class="highlight plain"><figcaption><span>script</span></figcaption><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs apple">repeat<br>	tell application &quot;System Events&quot;<br>		set appRunning to exists of application process &quot;Books&quot;<br>	end tell<br>	if not appRunning then<br>		exit repeat<br>	end if<br>	delay 30<br>	tell application &quot;Books&quot;<br>		if frontmost then<br>			set activeApp to &quot;Books&quot;<br>		else<br>			tell application &quot;System Events&quot;<br>				set activeApp to name of first application process whose frontmost is true<br>			end tell<br>		end if<br>		activate<br>		tell application &quot;System Events&quot; to key code 125<br>		log &quot;Next Page&quot;<br>	end tell<br>	tell application activeApp<br>		activate<br>	end tell<br>end repeat<br><br></code></pre></div></td></tr></table></figure>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p>打开应用，复制AppleScript脚本代码，命名为bookread.scpt文件，打开终端，执行<code>osascript bookread.scpt</code>命令即可。</p>
 
             </div>
             <hr>
