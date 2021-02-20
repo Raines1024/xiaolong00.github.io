@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="Raines">
   <meta name="keywords" content="">
-  <title>2020年初计划 - 小龙的跋涉</title>
+  <title>mac上的自动翻书 - 小龙的跋涉</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
@@ -162,7 +162,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="2020年初计划">
+            <span class="h2" id="subtitle" title="mac上的自动翻书">
               
             </span>
 
@@ -172,8 +172,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2020-01-07 13:50" pubdate>
-        2020年1月7日 下午
+      <time datetime="2021-02-20 09:37" pubdate>
+        2021年2月20日 上午
       </time>
     </span>
   
@@ -184,7 +184,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      283 字
+      506 字
     </span>
   
 
@@ -194,7 +194,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      3
+      7
        分钟
     </span>
   
@@ -224,14 +224,41 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">2020年初计划</h1>
+            <h1 style="display: none">mac上的自动翻书</h1>
             
             <div class="markdown-body">
-              <h2 id="阅读"><a href="#阅读" class="headerlink" title="阅读"></a>阅读</h2><p>阅读52本书（理论上的一周一本）。必深读书目：<br>财务自由之路系列<br>鲁迅全集<br>怪诞行为学系列<br>沉思录<br>史记<br>阅读完每本书必须写读书笔记，非深读书目写一下感想。</p>
-<h2 id="理财"><a href="#理财" class="headerlink" title="理财"></a>理财</h2><p>缩短第一阶段财务保障所需时间。达成财务保障期间，30%投资稳定基金；40%-50%投资股票，投资2-3股；10%-20%作为日常花费；其中不小于10%作为固定储蓄。</p>
-<h2 id="专业学习"><a href="#专业学习" class="headerlink" title="专业学习"></a>专业学习</h2><p>70%时间继续探索Java；20%时间探索python和ts；10%时间探索sql。<br>70%java时间：其中70%探索原理知识；20%探索高并发和分布式；10%追寻业界流行技术<br>总结每天学习收获<br>大数据和数据分析</p>
-<h2 id="旅游"><a href="#旅游" class="headerlink" title="旅游"></a>旅游</h2><p>三清山<br>嵩山</p>
-<h2 id="工作"><a href="#工作" class="headerlink" title="工作"></a>工作</h2><p>上班1小时，下班前2小时。一天工作时间控制不超过4小时。如果焦头烂额超过4小时，先找自身原因，承担责任，调整工作方法；若非现在能力所控，就换工作。<br>总结每天工作内容</p>
+              <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>工作可以不懒，为了生活我可以忍，但让我凭白翻书就不行！在mac上用预览和图书应用看书时，翻页需要滑动触控板or按动空格键，实在是太累了，何不自动按呢？故使用AppleScript自动按一下键盘的向下翻页。</p>
+<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p>参考 StackOverflow 上一个好心人的<a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/60268384/macos-send-keystroke-to-the-active-app-periodically">答案</a>，改改应用名称和<a target="_blank" rel="noopener" href="https://eastmanreference.com/complete-list-of-applescript-key-codes">按键值</a>，写出了第一版。</p>
+<figure class="highlight plain"><figcaption><span>script</span></figcaption><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs apple">tell application &quot;System Events&quot;<br>    repeat while (exists of application process &quot;Preview&quot;)<br>        set activeApp to name of first application process whose frontmost is true<br>        if &quot;Preview&quot; is in activeApp then<br>            tell its application process &quot;Preview&quot;<br>                repeat while frontmost<br>                    key code 125<br>                    delay 30<br>                end repeat<br>            end tell<br>        end if<br>    end repeat<br>end tell<br></code></pre></div></td></tr></table></figure>
+<p>这样就能在预览窗口活动的情况下，每半分钟自动往下翻翻。</p>
+<p>我就这么用了一小会之后，感觉不太方便，预览不活动的时候，它就不翻书了，很不人性化，我需要多任务，在使用其他 App 的同时，预览也在自动翻书。</p>
+<p>研究了一会，实现了多个 App 窗口先后激活，先激活预览，再翻书，最后激活之前的窗口。</p>
+<p>除了切换窗口那一瞬间的闪烁，堪称完美。</p>
+<figure class="highlight plain"><figcaption><span>script</span></figcaption><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs apple">repeat<br>	tell application &quot;System Events&quot;<br>		set appRunning to exists of application process &quot;Preview&quot;<br>	end tell<br>	if not appRunning then<br>		exit repeat<br>	end if<br>	delay 30<br>	tell application &quot;Preview&quot;<br>		if frontmost then<br>			set activeApp to &quot;Preview&quot;<br>		else<br>			tell application &quot;System Events&quot;<br>				set activeApp to name of first application process whose frontmost is true<br>			end tell<br>		end if<br>		activate<br>		tell application &quot;System Events&quot; to key code 125<br>		log &quot;Next Page&quot;<br>	end tell<br>	tell application activeApp<br>		activate<br>	end tell<br>end repeat<br></code></pre></div></td></tr></table></figure>
+
+
+<p>举一而反三，mac的图书应用亦可如此</p>
+<figure class="highlight plain"><figcaption><span>script</span></figcaption><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs apple">repeat<br>	tell application &quot;System Events&quot;<br>		set appRunning to exists of application process &quot;Books&quot;<br>	end tell<br>	if not appRunning then<br>		exit repeat<br>	end if<br>	delay 30<br>	tell application &quot;Books&quot;<br>		if frontmost then<br>			set activeApp to &quot;Books&quot;<br>		else<br>			tell application &quot;System Events&quot;<br>				set activeApp to name of first application process whose frontmost is true<br>			end tell<br>		end if<br>		activate<br>		tell application &quot;System Events&quot; to key code 125<br>		log &quot;Next Page&quot;<br>	end tell<br>	tell application activeApp<br>		activate<br>	end tell<br>end repeat<br><br></code></pre></div></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
             </div>
             <hr>
@@ -241,10 +268,23 @@
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/blog/">blog</a>
+                      <a class="hover-with-bg" href="/categories/100-%E5%AD%A6%E4%B9%A0%E7%B1%BB/">100 学习类</a>
+                    
+                      <a class="hover-with-bg" href="/categories/100-%E5%AD%A6%E4%B9%A0%E7%B1%BB/140-%E7%94%9F%E4%BA%A7%E5%8A%9B%E5%B7%A5%E5%85%B7/">140 生产力工具</a>
+                    
+                      <a class="hover-with-bg" href="/categories/100-%E5%AD%A6%E4%B9%A0%E7%B1%BB/140-%E7%94%9F%E4%BA%A7%E5%8A%9B%E5%B7%A5%E5%85%B7/143-mac/">143 mac</a>
                     
                   </div>
                 
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E8%BF%87%E5%8E%BB/">过去</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%87%92%E7%99%8C/">懒癌</a>
+                    
+                  </div>
                 
               </div>
               
@@ -255,18 +295,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2020/01/07/2020/2020-01-01-booksPlan1/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">1月阅读计划</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2020/01/07/2020/2020-01-09-findIdeal/">
-                        <span class="hidden-mobile">寻找你丢失的梦想</span>
+                      <a href="/2021/02/09/2021/02/mavenjarstart/">
+                        <span class="hidden-mobile">maven打包的jar指定启动类</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
