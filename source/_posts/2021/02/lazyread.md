@@ -102,13 +102,9 @@ end repeat
 
 
 
+## 使用
 
-
-
-
-
-
-
+打开应用，复制AppleScript脚本代码，命名为bookread.scpt文件，打开终端，执行`osascript bookread.scpt`命令即可。
 
 
 
