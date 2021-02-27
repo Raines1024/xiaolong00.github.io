@@ -8,15 +8,18 @@
 <head>
   <meta charset="UTF-8">
   <link rel="apple-touch-icon" sizes="76x76" href="/img/comm/favicon.png">
-  <link rel="icon" type="image/png" href="/img/comm/favicon.png">
+  <link rel="icon" href="/img/comm/favicon.png">
   <meta name="viewport"
         content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#2f4154">
-  <meta name="description" content="">
+  
+    <meta name="description" content="">
+  
   <meta name="author" content="Raines">
   <meta name="keywords" content="">
+  
   <title>两台CentOS服务器配置ssh无密码登陆 - 小龙的跋涉</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
@@ -55,7 +58,7 @@
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
@@ -231,8 +234,8 @@
 <li>用test用户登陆12</li>
 <li>ssh-keygen -t rsa生成密码</li>
 <li>在/home/test/.ssh下生成了密钥对：id_rsa为私钥，id_rsa.pub为公钥。</li>
-<li>将刚生成的公钥传到11上，且11上以root用户登陆。<br>ssh-copy-id <a href="mailto:&#114;&#111;&#x6f;&#116;&#x40;&#49;&#57;&#x32;&#x2e;&#49;&#54;&#x38;&#46;&#49;&#x2e;&#x31;&#x31;">&#114;&#111;&#x6f;&#116;&#x40;&#49;&#57;&#x32;&#x2e;&#49;&#54;&#x38;&#46;&#49;&#x2e;&#x31;&#x31;</a></li>
-<li>在12上用root用户登陆 11:ssh <a href="mailto:&#114;&#111;&#111;&#x74;&#64;&#x31;&#57;&#50;&#x2e;&#49;&#x36;&#56;&#46;&#49;&#46;&#49;&#49;">&#114;&#111;&#111;&#x74;&#64;&#x31;&#57;&#50;&#x2e;&#49;&#x36;&#56;&#46;&#49;&#46;&#49;&#49;</a>，验证不需要密码可以登陆。</li>
+<li>将刚生成的公钥传到11上，且11上以root用户登陆。<br>ssh-copy-id <a href="mailto:&#x72;&#x6f;&#x6f;&#x74;&#64;&#49;&#x39;&#50;&#46;&#x31;&#54;&#56;&#46;&#49;&#x2e;&#x31;&#49;">&#x72;&#x6f;&#x6f;&#x74;&#64;&#49;&#x39;&#50;&#46;&#x31;&#54;&#56;&#46;&#49;&#x2e;&#x31;&#49;</a></li>
+<li>在12上用root用户登陆 11:ssh <a href="mailto:&#114;&#x6f;&#111;&#116;&#x40;&#49;&#57;&#50;&#46;&#x31;&#x36;&#56;&#x2e;&#49;&#x2e;&#x31;&#49;">&#114;&#x6f;&#111;&#116;&#x40;&#49;&#57;&#50;&#46;&#x31;&#x36;&#56;&#x2e;&#49;&#x2e;&#x31;&#49;</a>，验证不需要密码可以登陆。</li>
 </ul>
 
             </div>
@@ -250,7 +253,11 @@
                 
               </div>
               
-                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
               
               
                 <div class="post-prevnext">
@@ -413,11 +420,12 @@
   <script>
     (function () {
       var path = "/local-search.xml";
-      var inputArea = document.querySelector("#local-search-input");
-      inputArea.onclick = function () {
+      $('#local-search-input').on('click', function() {
         searchFunc(path, 'local-search-input', 'local-search-result');
-        this.onclick = null
-      }
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
     })()
   </script>
 
