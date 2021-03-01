@@ -1,7 +1,7 @@
 ---
-title: 从零到一Centos
+title: 从零到一搭建Hadoop+Flink集群
 date: 2021-02-27 08:40:39
-description: 
+description: 从创建虚拟机开始···
 tags: [编程, 现在]
 category:
     - 100 学习类
