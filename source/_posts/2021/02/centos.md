@@ -208,11 +208,64 @@ bin/zkServer.sh status         //查看zookeeper状态
 
 ----
 
+## Flink 1.10 on yarn集群搭建(Hadoop-2.9.2)
 
+### 安装
 
+1. 下载Flink 1.10安装包
+2. 解压安装包`tar zxvf *.tgz`
+3. 远程传输到flink2、flink3节点
 
+### JobManager高可用配置
 
+1. Hadoop配置文件yarn-site.xml
 
+   Hadoop主目录下etc/hadoop/yarn-site.xml(hadoop安装目录下的yarn集群配置文件）
+
+   添加如下配置
+
+   ```xml
+   <property>
+     <name>yarn.resourcemanager.am.max-attempts</name>
+     <value>4</value>
+     <description>
+       The maximum number of application master execution attempts.
+     </description>
+   </property>
+   ```
+
+2. Flink配置文件flink-conf.yaml
+
+   Flink主目录下conf/flink-conf.yaml
+
+   屏蔽jobmanager.rpc.address配置
+
+   高可用设置
+
+   ```yaml
+   high-availability: zookeeper
+   high-availability.zookeeper.quorum: hadoop1:2181,hadoop2:2181,hadoop3:2181
+   high-availability.storageDir: hdfs:///flink/recovery
+   high-availability.zookeeper.path.root: /flink
+   yarn.application-attempts: 10
+   ```
+
+3. 添加flink环境变量/etc/profile
+
+   vim /etc/profile
+
+   ```
+   #flink环境变量配置
+   export FLINK_HOME=/usr/local/softwareinstall/flink-1.10.0
+   export PATH=$PATH:$FLINK_HOME/bin
+   #flink on yarn配置
+   HADOOP_CONF_DIR=$HADOOP_HOME
+   export HADOOP_CLASSPATH=`hadoop classpath`
+   ```
+
+   `source /etc/profile`   使环境变量生效
+
+4. Flink具体使用后续再写
 
 -----
 
