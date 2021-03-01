@@ -187,7 +187,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.3k 字
+      1.5k 字
     </span>
   
 
@@ -197,7 +197,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      17
+      20
        分钟
     </span>
   
@@ -269,7 +269,7 @@
 <hr>
 <h2 id="安装Java"><a href="#安装Java" class="headerlink" title="安装Java"></a>安装Java</h2><h3 id="上传"><a href="#上传" class="headerlink" title="上传"></a>上传</h3><p>使用rz命令把.tar.gz文件上传到服务器</p>
 <h3 id="解压并删除"><a href="#解压并删除" class="headerlink" title="解压并删除"></a>解压并删除</h3><p>tar -zxvf *.gz<br>rm -f *.gz</p>
-<h3 id="传到其他服务器"><a href="#传到其他服务器" class="headerlink" title="传到其他服务器"></a>传到其他服务器</h3><p>scp -r /home/java <a href="mailto:&#114;&#x6f;&#111;&#x74;&#64;&#49;&#55;&#50;&#x2e;&#x32;&#57;&#46;&#51;&#x32;&#46;&#x31;&#50;">&#114;&#x6f;&#111;&#x74;&#64;&#49;&#55;&#50;&#x2e;&#x32;&#57;&#46;&#51;&#x32;&#46;&#x31;&#50;</a>:/home/java<br>scp -r /home/java <a href="mailto:&#x72;&#111;&#x6f;&#x74;&#64;&#x31;&#55;&#50;&#x2e;&#x32;&#57;&#46;&#x33;&#x32;&#46;&#49;&#x33;">&#x72;&#111;&#x6f;&#x74;&#64;&#x31;&#55;&#50;&#x2e;&#x32;&#57;&#46;&#x33;&#x32;&#46;&#49;&#x33;</a>:/home/java</p>
+<h3 id="传到其他服务器"><a href="#传到其他服务器" class="headerlink" title="传到其他服务器"></a>传到其他服务器</h3><p>scp -r /home/java <a href="mailto:&#x72;&#x6f;&#111;&#x74;&#x40;&#49;&#55;&#50;&#x2e;&#x32;&#57;&#46;&#x33;&#50;&#46;&#x31;&#x32;">&#x72;&#x6f;&#111;&#x74;&#x40;&#49;&#55;&#50;&#x2e;&#x32;&#57;&#46;&#x33;&#50;&#46;&#x31;&#x32;</a>:/home/java<br>scp -r /home/java <a href="mailto:&#x72;&#x6f;&#x6f;&#x74;&#x40;&#49;&#55;&#50;&#46;&#x32;&#x39;&#x2e;&#51;&#x32;&#x2e;&#49;&#51;">&#x72;&#x6f;&#x6f;&#x74;&#x40;&#49;&#55;&#50;&#46;&#x32;&#x39;&#x2e;&#51;&#x32;&#x2e;&#49;&#51;</a>:/home/java</p>
 <h3 id="修改环境变量"><a href="#修改环境变量" class="headerlink" title="修改环境变量"></a>修改环境变量</h3><p>vim /etc/profile<br>插入：</p>
 <figure class="highlight yaml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs yaml"><span class="hljs-string">JAVA_HOME=/home/java/jdk1.8.0_201</span><br><span class="hljs-string">JRE_HOME=$JAVA_HOME/jre</span><br><span class="hljs-string">PATH=$PATH:$JAVA_HOME/bin:$JRE_HOME/bin</span><br><span class="hljs-string">CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar:$JRE_HOME/lib</span><br><span class="hljs-string">export</span> <span class="hljs-string">JAVA_HOME</span> <span class="hljs-string">JRE_HOME</span> <span class="hljs-string">PATH</span> <span class="hljs-string">CLASSPATH</span><br></code></pre></div></td></tr></table></figure>
 
@@ -316,6 +316,29 @@
 <figure class="highlight yaml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs yaml"><span class="hljs-string">bin/zkServer.sh</span> <span class="hljs-string">start</span>          <span class="hljs-string">//启动zookeeper</span><br><span class="hljs-string">bin/zkServer.sh</span> <span class="hljs-string">stop</span>           <span class="hljs-string">//停止zookeeper</span><br><span class="hljs-string">bin/zkServer.sh</span> <span class="hljs-string">status</span>         <span class="hljs-string">//查看zookeeper状态</span><br></code></pre></div></td></tr></table></figure>
 <p>三个节点的zookeeper服务都需要开启，仔细查看是否每台节点的zk服务是否都开启。并且开启后稍等片刻，看着否状态显示正常。</p>
 <hr>
+<h2 id="Flink-1-10-on-yarn集群搭建-Hadoop-2-9-2"><a href="#Flink-1-10-on-yarn集群搭建-Hadoop-2-9-2" class="headerlink" title="Flink 1.10 on yarn集群搭建(Hadoop-2.9.2)"></a>Flink 1.10 on yarn集群搭建(Hadoop-2.9.2)</h2><h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><ol>
+<li>下载Flink 1.10安装包</li>
+<li>解压安装包<code>tar zxvf *.tgz</code></li>
+<li>远程传输到flink2、flink3节点</li>
+</ol>
+<h3 id="JobManager高可用配置"><a href="#JobManager高可用配置" class="headerlink" title="JobManager高可用配置"></a>JobManager高可用配置</h3><ol>
+<li><p>Hadoop配置文件yarn-site.xml</p>
+<p>Hadoop主目录下etc/hadoop/yarn-site.xml(hadoop安装目录下的yarn集群配置文件）</p>
+<p>添加如下配置</p>
+<figure class="highlight xml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">property</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">name</span>&gt;</span>yarn.resourcemanager.am.max-attempts<span class="hljs-tag">&lt;/<span class="hljs-name">name</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">value</span>&gt;</span>4<span class="hljs-tag">&lt;/<span class="hljs-name">value</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">description</span>&gt;</span><br>    The maximum number of application master execution attempts.<br>  <span class="hljs-tag">&lt;/<span class="hljs-name">description</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">property</span>&gt;</span><br></code></pre></div></td></tr></table></figure></li>
+<li><p>Flink配置文件flink-conf.yaml</p>
+<p>Flink主目录下conf/flink-conf.yaml</p>
+<p>屏蔽jobmanager.rpc.address配置</p>
+<p>高可用设置</p>
+<figure class="highlight yaml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs yaml"><span class="hljs-attr">high-availability:</span> <span class="hljs-string">zookeeper</span><br><span class="hljs-attr">high-availability.zookeeper.quorum:</span> <span class="hljs-string">hadoop1:2181,hadoop2:2181,hadoop3:2181</span><br><span class="hljs-attr">high-availability.storageDir:</span> <span class="hljs-string">hdfs:///flink/recovery</span><br><span class="hljs-attr">high-availability.zookeeper.path.root:</span> <span class="hljs-string">/flink</span><br><span class="hljs-attr">yarn.application-attempts:</span> <span class="hljs-number">10</span><br></code></pre></div></td></tr></table></figure></li>
+<li><p>添加flink环境变量/etc/profile</p>
+<p>vim /etc/profile</p>
+<figure class="highlight routeros"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs routeros"><span class="hljs-comment">#flink环境变量配置</span><br><span class="hljs-builtin-name">export</span> <span class="hljs-attribute">FLINK_HOME</span>=/usr/local/softwareinstall/flink-1.10.0<br><span class="hljs-builtin-name">export</span> <span class="hljs-attribute">PATH</span>=<span class="hljs-variable">$PATH</span>:$FLINK_HOME/bin<br><span class="hljs-comment">#flink on yarn配置</span><br><span class="hljs-attribute">HADOOP_CONF_DIR</span>=<span class="hljs-variable">$HADOOP_HOME</span><br><span class="hljs-builtin-name">export</span> <span class="hljs-attribute">HADOOP_CLASSPATH</span>=`hadoop classpath`<br></code></pre></div></td></tr></table></figure>
+<p><code>source /etc/profile</code>   使环境变量生效</p>
+</li>
+<li><p>Flink具体使用后续再写</p>
+</li>
+</ol>
 <hr>
 <h2 id="挂载硬盘"><a href="#挂载硬盘" class="headerlink" title="挂载硬盘"></a>挂载硬盘</h2><p>由于安装虚拟机时使用默认分区，存储挂载在/home目录，有时强迫症犯了还是喜欢修改为/data</p>
 <h3 id="直接挂载。但是是用逻辑卷的名称挂载。硬盘上的数据还在。"><a href="#直接挂载。但是是用逻辑卷的名称挂载。硬盘上的数据还在。" class="headerlink" title="直接挂载。但是是用逻辑卷的名称挂载。硬盘上的数据还在。"></a>直接挂载。但是是用逻辑卷的名称挂载。硬盘上的数据还在。</h3><p>1、用 <code>fdisk -l</code> 命令，查看服务器物理分区，逻辑卷的信息(前面是物理分区，后面是逻辑卷信息)</p>
