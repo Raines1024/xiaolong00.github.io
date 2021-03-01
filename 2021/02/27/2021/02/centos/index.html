@@ -187,7 +187,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      0 字
+      1.3k 字
     </span>
   
 
@@ -197,7 +197,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      1
+      17
        分钟
     </span>
   
@@ -230,7 +230,102 @@
             <h1 style="display: none">从零到一Centos</h1>
             
             <div class="markdown-body">
-              
+              <p>开始之前，我还不知道我要干什么，emmmmmm，茫然亦前行。</p>
+<h2 id="创建虚拟机"><a href="#创建虚拟机" class="headerlink" title="创建虚拟机"></a>创建虚拟机</h2><p>使用vmware esxi创建新虚拟机，选择8核心16G，使用iso镜像文件安装。</p>
+<h3 id="初始化Centos"><a href="#初始化Centos" class="headerlink" title="初始化Centos"></a>初始化Centos</h3><p>进入系统界面，选择中国、简体中文，选择默认分区，点击确定后，选择设置登录密码，设置登录密码</p>
+<h3 id="配置ip"><a href="#配置ip" class="headerlink" title="配置ip"></a>配置ip</h3><p>CentOS 7 网卡命令规则变化，命名规则根据系统固件和硬件来命名为 ifcfg-en* 类型，网络设置及静态IP配置文件<br>/etc/sysconfig/network-scripts/ifcfg-ens192</p>
+<figure class="highlight yaml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs yaml"><span class="hljs-string">TYPE=Ethernet</span><br><span class="hljs-string">PROXY_METHOD=none</span><br><span class="hljs-string">BROWSER_ONLY=no</span><br><span class="hljs-string">BOOTPROTO=none</span><br><span class="hljs-string">DEFROUTE=yes</span><br><span class="hljs-string">IPV4_FAILURE_FATAL=no</span><br><span class="hljs-string">IPV6INIT=yes</span><br><span class="hljs-string">IPV6_AUTOCONF=yes</span><br><span class="hljs-string">IPV6_DEFROUTE=yes</span><br><span class="hljs-string">IPV6_FAILURE_FATAL=no</span><br><span class="hljs-string">IPV6_ADDR_GEN_MODE=stable-privacy</span><br><span class="hljs-string">NAME=ens192</span><br><span class="hljs-string">UUID=e90f25a3-3f05-4555-b107-ec7a17d6d1b2</span><br><span class="hljs-string">DEVICE=ens192</span><br><span class="hljs-string">ONBOOT=yes</span><br><span class="hljs-string">IPADDR=172.29.32.11</span><br><span class="hljs-string">PREFIX=24</span><br><span class="hljs-string">GATEWAY=172.29.32.1</span><br><span class="hljs-string">IPV6_PRIVACY=no</span><br><span class="hljs-string">DNS1=172.16.61.253</span><br></code></pre></div></td></tr></table></figure>
+<p>重启网络<br>service network restart</p>
+<h3 id="系统配置"><a href="#系统配置" class="headerlink" title="系统配置"></a>系统配置</h3><p>3台虚拟机<br>flink1: 16g内存 8核 300g硬盘<br>flink2: 16g内存 8核 300g硬盘<br>flink3: 16g内存 8核 300g硬盘</p>
+<hr>
+<h2 id="CentOS7关闭防火墙"><a href="#CentOS7关闭防火墙" class="headerlink" title="CentOS7关闭防火墙"></a>CentOS7关闭防火墙</h2><ul>
+<li>查看防火墙状态<br>firewall-cmd –state</li>
+<li>停止firewall<br>systemctl stop firewalld.service</li>
+<li>禁止firewall开机启动<br>systemctl disable firewalld.service</li>
+</ul>
+<hr>
+<h2 id="常用软件包"><a href="#常用软件包" class="headerlink" title="常用软件包"></a>常用软件包</h2><h3 id="ifconfig所需软件包"><a href="#ifconfig所需软件包" class="headerlink" title="ifconfig所需软件包"></a>ifconfig所需软件包</h3><p>yum install net-tools.x86_64</p>
+<h3 id="查看某端口占用"><a href="#查看某端口占用" class="headerlink" title="查看某端口占用"></a>查看某端口占用</h3><p>yum install lsof<br>使用示例<code>lsof -i:80</code></p>
+<h3 id="vim编辑器"><a href="#vim编辑器" class="headerlink" title="vim编辑器"></a>vim编辑器</h3><p>yum install vim</p>
+<h3 id="centos-安装rzsz"><a href="#centos-安装rzsz" class="headerlink" title="centos 安装rzsz"></a>centos 安装rzsz</h3><p>yum install lrzsz</p>
+<h3 id="wget"><a href="#wget" class="headerlink" title="wget"></a>wget</h3><p>yum install wget</p>
+<hr>
+<h2 id="修改主机名"><a href="#修改主机名" class="headerlink" title="修改主机名"></a>修改主机名</h2><ol>
+<li><p>修改主机名<br>hostnamectl set-hostname flink1<br>more /etc/hostname<br>退出重新登陆即可显示新设置的主机名flink1</p>
+</li>
+<li><p>修改hosts文件</p>
+<p>vim /etc/hosts</p>
+<figure class="highlight yaml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs yaml"><span class="hljs-number">172.29</span><span class="hljs-number">.32</span><span class="hljs-number">.11</span>    <span class="hljs-string">flink1</span><br><span class="hljs-number">172.29</span><span class="hljs-number">.32</span><span class="hljs-number">.12</span>    <span class="hljs-string">flink2</span><br><span class="hljs-number">172.29</span><span class="hljs-number">.32</span><span class="hljs-number">.13</span>    <span class="hljs-string">flink3</span><br></code></pre></div></td></tr></table></figure></li>
+<li><p>其他俩台主机亦是如此</p>
+</li>
+</ol>
+<hr>
+<h2 id="CentOS服务器间配置ssh免密登陆"><a href="#CentOS服务器间配置ssh免密登陆" class="headerlink" title="CentOS服务器间配置ssh免密登陆"></a>CentOS服务器间配置ssh免密登陆</h2><ol>
+<li>11上<code>ssh-keygen -t rsa</code>生成密码,在/home/.ssh下生成了密钥对：id_rsa为私钥，id_rsa.pub为公钥</li>
+<li>将刚生成的公钥传到12上，且12上以root用户登陆。 <code>ssh-copy-id root@172.29.32.12</code></li>
+<li>在11上用root用户登陆12: <code>ssh 172.29.32.12</code> 验证不需要密码可以登陆。</li>
+</ol>
+<p>其他机器亦是如此</p>
+<hr>
+<h2 id="安装Java"><a href="#安装Java" class="headerlink" title="安装Java"></a>安装Java</h2><h3 id="上传"><a href="#上传" class="headerlink" title="上传"></a>上传</h3><p>使用rz命令把.tar.gz文件上传到服务器</p>
+<h3 id="解压并删除"><a href="#解压并删除" class="headerlink" title="解压并删除"></a>解压并删除</h3><p>tar -zxvf *.gz<br>rm -f *.gz</p>
+<h3 id="传到其他服务器"><a href="#传到其他服务器" class="headerlink" title="传到其他服务器"></a>传到其他服务器</h3><p>scp -r /home/java <a href="mailto:&#114;&#x6f;&#111;&#x74;&#64;&#49;&#55;&#50;&#x2e;&#x32;&#57;&#46;&#51;&#x32;&#46;&#x31;&#50;">&#114;&#x6f;&#111;&#x74;&#64;&#49;&#55;&#50;&#x2e;&#x32;&#57;&#46;&#51;&#x32;&#46;&#x31;&#50;</a>:/home/java<br>scp -r /home/java <a href="mailto:&#x72;&#111;&#x6f;&#x74;&#64;&#x31;&#55;&#50;&#x2e;&#x32;&#57;&#46;&#x33;&#x32;&#46;&#49;&#x33;">&#x72;&#111;&#x6f;&#x74;&#64;&#x31;&#55;&#50;&#x2e;&#x32;&#57;&#46;&#x33;&#x32;&#46;&#49;&#x33;</a>:/home/java</p>
+<h3 id="修改环境变量"><a href="#修改环境变量" class="headerlink" title="修改环境变量"></a>修改环境变量</h3><p>vim /etc/profile<br>插入：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs yaml"><span class="hljs-string">JAVA_HOME=/home/java/jdk1.8.0_201</span><br><span class="hljs-string">JRE_HOME=$JAVA_HOME/jre</span><br><span class="hljs-string">PATH=$PATH:$JAVA_HOME/bin:$JRE_HOME/bin</span><br><span class="hljs-string">CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar:$JRE_HOME/lib</span><br><span class="hljs-string">export</span> <span class="hljs-string">JAVA_HOME</span> <span class="hljs-string">JRE_HOME</span> <span class="hljs-string">PATH</span> <span class="hljs-string">CLASSPATH</span><br></code></pre></div></td></tr></table></figure>
+
+
+<p>生效：<code>source /etc/profile</code> </p>
+<table>
+<thead>
+<tr>
+<th align="center">变量</th>
+<th align="center">含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">JAVA_HOME</td>
+<td align="center">指明JDK安装路径，就是刚才安装时所选择的路径，此路径下包括lib，bin，jre等文件夹（tomcat，Eclipse的运行都需要依靠此变量）。</td>
+</tr>
+<tr>
+<td align="center">CLASSPATH</td>
+<td align="center">为java加载类(class or lib)路径，只有类在classpath中，java命令才能识别，设：<code>.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar:$JRE_HOME/lib</code>。CLASSPATH 变量值中的.表示当前目录</td>
+</tr>
+<tr>
+<td align="center">PATH</td>
+<td align="center">使得系统可以在任何路径下识别java命令，设为：<code>$JAVA_HOME/bin:$JRE_HOME/bin</code>。</td>
+</tr>
+<tr>
+<td align="center">特别注意</td>
+<td align="center">环境变量值的结尾没有任何符号，不同值之间用:隔开</td>
+</tr>
+</tbody></table>
+<h3 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h3><p>命令<code>java -version</code></p>
+<hr>
+<h2 id="zookeeper集群搭建"><a href="#zookeeper集群搭建" class="headerlink" title="zookeeper集群搭建"></a>zookeeper集群搭建</h2><p>注：zookeeper集群节点数必须为奇数，满足leader选举算法(当选leader的节点所需支持节点数过半的原则)，且&gt;=3</p>
+<p>1、下载zookeeper安装包</p>
+<figure class="highlight apache"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs apache"><span class="hljs-attribute">curl</span> -O https://archive.apache.org/dist/zookeeper/zookeeper-<span class="hljs-number">3</span>.<span class="hljs-number">4</span>.<span class="hljs-number">10</span>/zookeeper-<span class="hljs-number">3</span>.<span class="hljs-number">4</span>.<span class="hljs-number">10</span>.tar.gz<br></code></pre></div></td></tr></table></figure>
+<p>2、解压安装包</p>
+<figure class="highlight apache"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs apache"><span class="hljs-attribute">tar</span> -zxvf zookeeper-<span class="hljs-number">3</span>.<span class="hljs-number">4</span>.<span class="hljs-number">10</span>.tar.gz<br></code></pre></div></td></tr></table></figure>
+<p>3、拷贝”xxx安装目录/zookeeper-3.4.10/conf”目录下的zoo_sample.cfg文件，重命名为zoo.cfg，并进行编辑，添加如下设置</p>
+<figure class="highlight yaml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs yaml"><span class="hljs-string">cp</span> <span class="hljs-string">zoo_sample.cfg</span> <span class="hljs-string">zoo.cfg</span><br><span class="hljs-string">vim</span> <span class="hljs-string">zoo.cfg</span><br><span class="hljs-string">插入内容：</span><br><span class="hljs-string">dataDir=/home/data/zookeeper</span><br><span class="hljs-string">server.1=flink1:2888:3888</span><br><span class="hljs-string">server.2=flink2:2888:3888</span><br><span class="hljs-string">server.3=flink3:2888:3888</span><br></code></pre></div></td></tr></table></figure>
+<p>4、远程传输到flink2、flink3节点上</p>
+<figure class="highlight elixir"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs elixir">scp -r /home/zookeeper/zookeeper<span class="hljs-number">-3.4</span>.<span class="hljs-number">10</span> root<span class="hljs-variable">@flink2</span><span class="hljs-symbol">:/home/zookeeper/zookeeper-</span><span class="hljs-number">3.4</span>.<span class="hljs-number">10</span><br>scp -r /home/zookeeper/zookeeper<span class="hljs-number">-3.4</span>.<span class="hljs-number">10</span> root<span class="hljs-variable">@flink3</span><span class="hljs-symbol">:/home/zookeeper/zookeeper-</span><span class="hljs-number">3.4</span>.<span class="hljs-number">10</span><br></code></pre></div></td></tr></table></figure>
+<p>5、在配置的文件目录/home/data/zookeeper目录下，新建myid文件并编辑(用于标识在zookeeper集群的编号)</p>
+<p>如上配置，flink1服务器为1，flink2服务器内容为2，flink3服务器内容为3</p>
+<p>6、启动/停止zookeeper</p>
+<figure class="highlight yaml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs yaml"><span class="hljs-string">bin/zkServer.sh</span> <span class="hljs-string">start</span>          <span class="hljs-string">//启动zookeeper</span><br><span class="hljs-string">bin/zkServer.sh</span> <span class="hljs-string">stop</span>           <span class="hljs-string">//停止zookeeper</span><br><span class="hljs-string">bin/zkServer.sh</span> <span class="hljs-string">status</span>         <span class="hljs-string">//查看zookeeper状态</span><br></code></pre></div></td></tr></table></figure>
+<p>三个节点的zookeeper服务都需要开启，仔细查看是否每台节点的zk服务是否都开启。并且开启后稍等片刻，看着否状态显示正常。</p>
+<hr>
+<hr>
+<h2 id="挂载硬盘"><a href="#挂载硬盘" class="headerlink" title="挂载硬盘"></a>挂载硬盘</h2><p>由于安装虚拟机时使用默认分区，存储挂载在/home目录，有时强迫症犯了还是喜欢修改为/data</p>
+<h3 id="直接挂载。但是是用逻辑卷的名称挂载。硬盘上的数据还在。"><a href="#直接挂载。但是是用逻辑卷的名称挂载。硬盘上的数据还在。" class="headerlink" title="直接挂载。但是是用逻辑卷的名称挂载。硬盘上的数据还在。"></a>直接挂载。但是是用逻辑卷的名称挂载。硬盘上的数据还在。</h3><p>1、用 <code>fdisk -l</code> 命令，查看服务器物理分区，逻辑卷的信息(前面是物理分区，后面是逻辑卷信息)</p>
+<p>2、用<code>lvdisplay</code>命令查看逻辑卷的具体信息</p>
+<p>3、用<code>mount /dev/mapper/centos-home /data</code>命令将逻辑卷（如：逻辑卷的名称为：/dev/mapper/centos-home ，即在第1步中看到的逻辑卷信息）挂载在目录（如：/data）下。</p>
+<h3 id="其它命令："><a href="#其它命令：" class="headerlink" title="其它命令："></a>其它命令：</h3><p>df -h（查看分区情况及数据盘名称）</p>
+<p>umount /home（卸载硬盘已挂载的home目录）</p>
+<p>自动挂载配置文件:/etc/fstab （编辑fstab文件修改或添加，使重启后可以自动挂载）</p>
+<h3 id="其它链接："><a href="#其它链接：" class="headerlink" title="其它链接："></a>其它链接：</h3><p><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000008007157">CentOS 7 下挂载新硬盘</a></p>
+
             </div>
             <hr>
             <div>
