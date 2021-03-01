@@ -15,12 +15,12 @@
   
   <meta name="theme-color" content="#2f4154">
   
-    <meta name="description" content="">
+    <meta name="description" content="从创建虚拟机开始···">
   
   <meta name="author" content="Raines">
   <meta name="keywords" content="">
   
-  <title>从零到一Centos - 小龙的跋涉</title>
+  <title>从零到一搭建Hadoop+Flink集群 - 小龙的跋涉</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
@@ -165,7 +165,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="从零到一Centos">
+            <span class="h2" id="subtitle" title="从零到一搭建Hadoop+Flink集群">
               
             </span>
 
@@ -227,7 +227,7 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">从零到一Centos</h1>
+            <h1 style="display: none">从零到一搭建Hadoop+Flink集群</h1>
             
             <div class="markdown-body">
               <p>开始之前，我还不知道我要干什么，emmmmmm，茫然亦前行。</p>
@@ -269,7 +269,7 @@
 <hr>
 <h2 id="安装Java"><a href="#安装Java" class="headerlink" title="安装Java"></a>安装Java</h2><h3 id="上传"><a href="#上传" class="headerlink" title="上传"></a>上传</h3><p>使用rz命令把.tar.gz文件上传到服务器</p>
 <h3 id="解压并删除"><a href="#解压并删除" class="headerlink" title="解压并删除"></a>解压并删除</h3><p>tar -zxvf *.gz<br>rm -f *.gz</p>
-<h3 id="传到其他服务器"><a href="#传到其他服务器" class="headerlink" title="传到其他服务器"></a>传到其他服务器</h3><p>scp -r /home/java <a href="mailto:&#x72;&#x6f;&#111;&#x74;&#x40;&#49;&#55;&#50;&#x2e;&#x32;&#57;&#46;&#x33;&#50;&#46;&#x31;&#x32;">&#x72;&#x6f;&#111;&#x74;&#x40;&#49;&#55;&#50;&#x2e;&#x32;&#57;&#46;&#x33;&#50;&#46;&#x31;&#x32;</a>:/home/java<br>scp -r /home/java <a href="mailto:&#x72;&#x6f;&#x6f;&#x74;&#x40;&#49;&#55;&#50;&#46;&#x32;&#x39;&#x2e;&#51;&#x32;&#x2e;&#49;&#51;">&#x72;&#x6f;&#x6f;&#x74;&#x40;&#49;&#55;&#50;&#46;&#x32;&#x39;&#x2e;&#51;&#x32;&#x2e;&#49;&#51;</a>:/home/java</p>
+<h3 id="传到其他服务器"><a href="#传到其他服务器" class="headerlink" title="传到其他服务器"></a>传到其他服务器</h3><p>scp -r /home/java <a href="mailto:&#114;&#x6f;&#111;&#116;&#64;&#x31;&#x37;&#x32;&#46;&#x32;&#x39;&#46;&#x33;&#50;&#46;&#49;&#x32;">&#114;&#x6f;&#111;&#116;&#64;&#x31;&#x37;&#x32;&#46;&#x32;&#x39;&#46;&#x33;&#50;&#46;&#49;&#x32;</a>:/home/java<br>scp -r /home/java <a href="mailto:&#114;&#111;&#x6f;&#x74;&#x40;&#49;&#x37;&#50;&#x2e;&#x32;&#57;&#x2e;&#51;&#50;&#x2e;&#49;&#x33;">&#114;&#111;&#x6f;&#x74;&#x40;&#49;&#x37;&#50;&#x2e;&#x32;&#57;&#x2e;&#51;&#50;&#x2e;&#49;&#x33;</a>:/home/java</p>
 <h3 id="修改环境变量"><a href="#修改环境变量" class="headerlink" title="修改环境变量"></a>修改环境变量</h3><p>vim /etc/profile<br>插入：</p>
 <figure class="highlight yaml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs yaml"><span class="hljs-string">JAVA_HOME=/home/java/jdk1.8.0_201</span><br><span class="hljs-string">JRE_HOME=$JAVA_HOME/jre</span><br><span class="hljs-string">PATH=$PATH:$JAVA_HOME/bin:$JRE_HOME/bin</span><br><span class="hljs-string">CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar:$JRE_HOME/lib</span><br><span class="hljs-string">export</span> <span class="hljs-string">JAVA_HOME</span> <span class="hljs-string">JRE_HOME</span> <span class="hljs-string">PATH</span> <span class="hljs-string">CLASSPATH</span><br></code></pre></div></td></tr></table></figure>
 
