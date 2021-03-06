@@ -32,7 +32,15 @@
     
     
       
-      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/darcula.min.css" />
+      
+        
+          
+        
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.22.0/themes/prism.min.css" />
+      
+      
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.22.0/plugins/line-numbers/prism-line-numbers.min.css" />
+      
     
   
 
@@ -187,7 +195,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      2.3k 字
+      2.4k 字
     </span>
   
 
@@ -197,7 +205,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      35
+      38
        分钟
     </span>
   
@@ -246,96 +254,586 @@
 <h3 id="定义比萨、披萨店、原料工厂抽象类"><a href="#定义比萨、披萨店、原料工厂抽象类" class="headerlink" title="定义比萨、披萨店、原料工厂抽象类"></a>定义比萨、披萨店、原料工厂抽象类</h3><ul>
 <li>定义比萨抽象类  </li>
 </ul>
-<figure class="highlight processing"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs processing"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 比萨抽象类（比萨店的产品，客户只依赖这个抽象类型</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> class Pizza &#123;<br>	<span class="hljs-keyword">String</span> name;<br><br>	<span class="hljs-comment">/**</span><br><span class="hljs-comment">	 * 比萨会用到的原料</span><br><span class="hljs-comment">	 */</span><br>	Dough dough;<br>	Sauce sauce;<br>	Veggies veggies[];<br>	Cheese cheese;<br>	Pepperoni pepperoni;<br>	Clams clam;<br><br>	<span class="hljs-comment">/**</span><br><span class="hljs-comment">	 * 把prepare方法声明成抽象，在这个方法中，我们需要收集比萨所需的原料，原料来自原料工厂</span><br><span class="hljs-comment">	 */</span><br>	<span class="hljs-keyword">abstract</span> <span class="hljs-keyword">void</span> prepare();<br><br>	<span class="hljs-keyword">void</span> bake() &#123;<br>		System.out.<span class="hljs-built_in">println</span>(<span class="hljs-string">&quot;Bake for 25 minutes at 350&quot;</span>);<br>	&#125;<br><br>	<span class="hljs-keyword">void</span> cut() &#123;<br>		System.out.<span class="hljs-built_in">println</span>(<span class="hljs-string">&quot;Cutting the pizza into diagonal slices&quot;</span>);<br>	&#125;<br><br>	<span class="hljs-keyword">void</span> <span class="hljs-built_in">box</span>() &#123;<br>		System.out.<span class="hljs-built_in">println</span>(<span class="hljs-string">&quot;Place pizza in official PizzaStore box&quot;</span>);<br>	&#125;<br><br>	<span class="hljs-keyword">void</span> setName(<span class="hljs-keyword">String</span> name) &#123;<br>		<span class="hljs-keyword">this</span>.name = name;<br>	&#125;<br><br>	<span class="hljs-keyword">String</span> getName() &#123;<br>		<span class="hljs-keyword">return</span> name;<br>	&#125;<br><br>	<span class="hljs-keyword">public</span> <span class="hljs-keyword">String</span> toString() &#123;<br>		StringBuffer result = <span class="hljs-keyword">new</span> StringBuffer();<br>		result.<span class="hljs-built_in">append</span>(<span class="hljs-string">&quot;---- &quot;</span> + name + <span class="hljs-string">&quot; ----\n&quot;</span>);<br>		<span class="hljs-keyword">if</span> (dough != <span class="hljs-keyword">null</span>) &#123;<br>			result.<span class="hljs-built_in">append</span>(dough);<br>			result.<span class="hljs-built_in">append</span>(<span class="hljs-string">&quot;\n&quot;</span>);<br>		&#125;<br>		<span class="hljs-keyword">if</span> (sauce != <span class="hljs-keyword">null</span>) &#123;<br>			result.<span class="hljs-built_in">append</span>(sauce);<br>			result.<span class="hljs-built_in">append</span>(<span class="hljs-string">&quot;\n&quot;</span>);<br>		&#125;<br>		<span class="hljs-keyword">if</span> (cheese != <span class="hljs-keyword">null</span>) &#123;<br>			result.<span class="hljs-built_in">append</span>(cheese);<br>			result.<span class="hljs-built_in">append</span>(<span class="hljs-string">&quot;\n&quot;</span>);<br>		&#125;<br>		<span class="hljs-keyword">if</span> (veggies != <span class="hljs-keyword">null</span>) &#123;<br>			<span class="hljs-keyword">for</span> (<span class="hljs-built_in">int</span> i = <span class="hljs-number">0</span>; i &lt; veggies.length; i++) &#123;<br>				result.<span class="hljs-built_in">append</span>(veggies[i]);<br>				<span class="hljs-keyword">if</span> (i &lt; veggies.length<span class="hljs-number">-1</span>) &#123;<br>					result.<span class="hljs-built_in">append</span>(<span class="hljs-string">&quot;, &quot;</span>);<br>				&#125;<br>			&#125;<br>			result.<span class="hljs-built_in">append</span>(<span class="hljs-string">&quot;\n&quot;</span>);<br>		&#125;<br>		<span class="hljs-keyword">if</span> (clam != <span class="hljs-keyword">null</span>) &#123;<br>			result.<span class="hljs-built_in">append</span>(clam);<br>			result.<span class="hljs-built_in">append</span>(<span class="hljs-string">&quot;\n&quot;</span>);<br>		&#125;<br>		<span class="hljs-keyword">if</span> (pepperoni != <span class="hljs-keyword">null</span>) &#123;<br>			result.<span class="hljs-built_in">append</span>(pepperoni);<br>			result.<span class="hljs-built_in">append</span>(<span class="hljs-string">&quot;\n&quot;</span>);<br>		&#125;<br>		<span class="hljs-keyword">return</span> result.toString();<br>	&#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">&#x2F;**
+ * 比萨抽象类（比萨店的产品，客户只依赖这个抽象类型
+ *&#x2F;
+public abstract class Pizza &#123;
+	String name;
+
+	&#x2F;**
+	 * 比萨会用到的原料
+	 *&#x2F;
+	Dough dough;
+	Sauce sauce;
+	Veggies veggies[];
+	Cheese cheese;
+	Pepperoni pepperoni;
+	Clams clam;
+
+	&#x2F;**
+	 * 把prepare方法声明成抽象，在这个方法中，我们需要收集比萨所需的原料，原料来自原料工厂
+	 *&#x2F;
+	abstract void prepare();
+
+	void bake() &#123;
+		System.out.println(&quot;Bake for 25 minutes at 350&quot;);
+	&#125;
+
+	void cut() &#123;
+		System.out.println(&quot;Cutting the pizza into diagonal slices&quot;);
+	&#125;
+
+	void box() &#123;
+		System.out.println(&quot;Place pizza in official PizzaStore box&quot;);
+	&#125;
+
+	void setName(String name) &#123;
+		this.name &#x3D; name;
+	&#125;
+
+	String getName() &#123;
+		return name;
+	&#125;
+
+	public String toString() &#123;
+		StringBuffer result &#x3D; new StringBuffer();
+		result.append(&quot;---- &quot; + name + &quot; ----\n&quot;);
+		if (dough !&#x3D; null) &#123;
+			result.append(dough);
+			result.append(&quot;\n&quot;);
+		&#125;
+		if (sauce !&#x3D; null) &#123;
+			result.append(sauce);
+			result.append(&quot;\n&quot;);
+		&#125;
+		if (cheese !&#x3D; null) &#123;
+			result.append(cheese);
+			result.append(&quot;\n&quot;);
+		&#125;
+		if (veggies !&#x3D; null) &#123;
+			for (int i &#x3D; 0; i &lt; veggies.length; i++) &#123;
+				result.append(veggies[i]);
+				if (i &lt; veggies.length-1) &#123;
+					result.append(&quot;, &quot;);
+				&#125;
+			&#125;
+			result.append(&quot;\n&quot;);
+		&#125;
+		if (clam !&#x3D; null) &#123;
+			result.append(clam);
+			result.append(&quot;\n&quot;);
+		&#125;
+		if (pepperoni !&#x3D; null) &#123;
+			result.append(pepperoni);
+			result.append(&quot;\n&quot;);
+		&#125;
+		return result.toString();
+	&#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 <ul>
 <li>定义披萨店抽象类  </li>
 </ul>
-<figure class="highlight typescript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs typescript"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 披萨店抽象类（工厂方法：提供一个抽象接口来创建一个产品）</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">PizzaStore</span> </span>&#123;<br><br>	<span class="hljs-comment">/**</span><br><span class="hljs-comment">	 * 创建不同风味的披萨（工厂方法，子类由工厂方法实例化）</span><br><span class="hljs-comment">	 * <span class="hljs-doctag">@param </span>item 以披萨类型作为参数，可以返回许多类型的比萨产品</span><br><span class="hljs-comment">	 */</span><br>	<span class="hljs-keyword">protected</span> <span class="hljs-keyword">abstract</span> Pizza createPizza(<span class="hljs-built_in">String</span> item);<br><br>	<span class="hljs-comment">/**</span><br><span class="hljs-comment">	 * 披萨共有处理流程</span><br><span class="hljs-comment">	 */</span><br>	<span class="hljs-keyword">public</span> Pizza <span class="hljs-function"><span class="hljs-title">orderPizza</span>(<span class="hljs-params"><span class="hljs-built_in">String</span> <span class="hljs-keyword">type</span></span>)</span> &#123;<br>		<span class="hljs-comment">//获取一个比萨，开=【poui涉及3原料工厂</span><br>		Pizza pizza = createPizza(<span class="hljs-keyword">type</span>);<br>		System.out.println(<span class="hljs-string">&quot;--- Making a &quot;</span> + pizza.getName() + <span class="hljs-string">&quot; ---&quot;</span>);<br>		<span class="hljs-comment">//工厂将被要求准备原料</span><br>		pizza.prepare();<br>		<span class="hljs-comment">//烘烤</span><br>		pizza.bake();<br>		<span class="hljs-comment">//切片</span><br>		pizza.cut();<br>		<span class="hljs-comment">//装盒</span><br>		pizza.box();<br>		<span class="hljs-keyword">return</span> pizza;<br>	&#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">&#x2F;**
+ * 披萨店抽象类（工厂方法：提供一个抽象接口来创建一个产品）
+ *&#x2F;
+public abstract class PizzaStore &#123;
+
+	&#x2F;**
+	 * 创建不同风味的披萨（工厂方法，子类由工厂方法实例化）
+	 * @param item 以披萨类型作为参数，可以返回许多类型的比萨产品
+	 *&#x2F;
+	protected abstract Pizza createPizza(String item);
+
+	&#x2F;**
+	 * 披萨共有处理流程
+	 *&#x2F;
+	public Pizza orderPizza(String type) &#123;
+		&#x2F;&#x2F;获取一个比萨，开&#x3D;【poui涉及3原料工厂
+		Pizza pizza &#x3D; createPizza(type);
+		System.out.println(&quot;--- Making a &quot; + pizza.getName() + &quot; ---&quot;);
+		&#x2F;&#x2F;工厂将被要求准备原料
+		pizza.prepare();
+		&#x2F;&#x2F;烘烤
+		pizza.bake();
+		&#x2F;&#x2F;切片
+		pizza.cut();
+		&#x2F;&#x2F;装盒
+		pizza.box();
+		return pizza;
+	&#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 <ul>
 <li>定义原料工厂抽象类</li>
 </ul>
-<figure class="highlight csharp"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs csharp"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 原料工厂(抽象工厂）</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title">PizzaIngredientFactory</span> &#123;<br><br>	<span class="hljs-comment">//面团</span><br>	<span class="hljs-function">Dough <span class="hljs-title">createDough</span>(<span class="hljs-params"></span>)</span>;<br><br>	<span class="hljs-comment">//酱</span><br>	<span class="hljs-function">Sauce <span class="hljs-title">createSauce</span>(<span class="hljs-params"></span>)</span>;<br><br>	<span class="hljs-comment">//芝士</span><br>	<span class="hljs-function">Cheese <span class="hljs-title">createCheese</span>(<span class="hljs-params"></span>)</span>;<br><br>	<span class="hljs-comment">//蔬菜</span><br>	<span class="hljs-function">Veggies[] <span class="hljs-title">createVeggies</span>(<span class="hljs-params"></span>)</span>;<br><br>	<span class="hljs-comment">//香肠</span><br>	<span class="hljs-function">Pepperoni <span class="hljs-title">createPepperoni</span>(<span class="hljs-params"></span>)</span>;<br><br>	<span class="hljs-comment">//蛤蜊</span><br>	<span class="hljs-function">Clams <span class="hljs-title">createClam</span>(<span class="hljs-params"></span>)</span>;<br><br>&#125;<br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">&#x2F;**
+ * 原料工厂(抽象工厂）
+ *&#x2F;
+public interface PizzaIngredientFactory &#123;
+
+	&#x2F;&#x2F;面团
+	Dough createDough();
+
+	&#x2F;&#x2F;酱
+	Sauce createSauce();
+
+	&#x2F;&#x2F;芝士
+	Cheese createCheese();
+
+	&#x2F;&#x2F;蔬菜
+	Veggies[] createVeggies();
+
+	&#x2F;&#x2F;香肠
+	Pepperoni createPepperoni();
+
+	&#x2F;&#x2F;蛤蜊
+	Clams createClam();
+
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 <h3 id="定义原料抽象"><a href="#定义原料抽象" class="headerlink" title="定义原料抽象"></a>定义原料抽象</h3><ul>
 <li><p>面团   </p>
-<figure class="highlight angelscript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs angelscript"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 面团（原料）</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-symbol">Dough</span> &#123;<br>	String toString();<br>&#125;<br></code></pre></div></td></tr></table></figure></li>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">&#x2F;**
+ * 面团（原料）
+ *&#x2F;
+public interface Dough &#123;
+	String toString();
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></li>
 <li><p>酱</p>
-<figure class="highlight angelscript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs angelscript"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 酱</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-symbol">Sauce</span> &#123;<br>	String toString();<br>&#125;<br></code></pre></div></td></tr></table></figure></li>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">&#x2F;**
+ * 酱
+ *&#x2F;
+public interface Sauce &#123;
+	String toString();
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></li>
 <li><p>芝士</p>
-<figure class="highlight angelscript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs angelscript"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 芝士</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-symbol">Cheese</span> &#123;<br>	String toString();<br>&#125;<br></code></pre></div></td></tr></table></figure></li>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">&#x2F;**
+ * 芝士
+ *&#x2F;
+public interface Cheese &#123;
+	String toString();
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></li>
 <li><p>蔬菜</p>
-<figure class="highlight angelscript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs angelscript"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 蔬菜（工厂原料）</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-symbol">Veggies</span> &#123;<br>	String toString();<br>&#125;<br></code></pre></div></td></tr></table></figure></li>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">&#x2F;**
+ * 蔬菜（工厂原料）
+ *&#x2F;
+public interface Veggies &#123;
+	String toString();
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></li>
 <li><p>香肠</p>
-<figure class="highlight angelscript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs angelscript"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 香肠</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-symbol">Pepperoni</span> &#123;<br>	String toString();<br>&#125;<br></code></pre></div></td></tr></table></figure></li>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">&#x2F;**
+ * 香肠
+ *&#x2F;
+public interface Pepperoni &#123;
+	String toString();
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></li>
 <li><p>蛤蜊</p>
-<figure class="highlight angelscript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs angelscript"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 蛤蜊</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-symbol">Clams</span> &#123;<br>	String toString();<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">&#x2F;**
+ * 蛤蜊
+ *&#x2F;
+public interface Clams &#123;
+	String toString();
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 <h3 id="实现原料"><a href="#实现原料" class="headerlink" title="实现原料"></a>实现原料</h3></li>
 <li><p>定义二种面团  </p>
 </li>
 </ul>
-<figure class="highlight haxe"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs haxe"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 一种面团</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ThickCrustDough</span> <span class="hljs-keyword"><span class="hljs-keyword">implements</span> <span class="hljs-type">Dough</span></span> </span>&#123;<br>	<span class="hljs-keyword">public</span> <span class="hljs-keyword">String</span> toString() &#123;<br>		<span class="hljs-keyword">return</span> <span class="hljs-string">&quot;ThickCrust style extra thick crust dough&quot;</span>;<br>	&#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">&#x2F;**
+ * 一种面团
+ *&#x2F;
+public class ThickCrustDough implements Dough &#123;
+	public String toString() &#123;
+		return &quot;ThickCrust style extra thick crust dough&quot;;
+	&#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 <p>另一种  </p>
-<figure class="highlight haxe"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs haxe"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 另一种面团</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ThinCrustDough</span> <span class="hljs-keyword"><span class="hljs-keyword">implements</span> <span class="hljs-type">Dough</span></span> </span>&#123;<br>	<span class="hljs-keyword">public</span> <span class="hljs-keyword">String</span> toString() &#123;<br>		<span class="hljs-keyword">return</span> <span class="hljs-string">&quot;Thin Crust Dough&quot;</span>;<br>	&#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">&#x2F;**
+ * 另一种面团
+ *&#x2F;
+public class ThinCrustDough implements Dough &#123;
+	public String toString() &#123;
+		return &quot;Thin Crust Dough&quot;;
+	&#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 <ul>
 <li>定义二种酱</li>
 </ul>
-<figure class="highlight haxe"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs haxe"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 梅子西红柿酱</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">PlumTomatoSauce</span> <span class="hljs-keyword"><span class="hljs-keyword">implements</span> <span class="hljs-type">Sauce</span></span> </span>&#123;<br>	<span class="hljs-keyword">public</span> <span class="hljs-keyword">String</span> toString() &#123;<br>		<span class="hljs-keyword">return</span> <span class="hljs-string">&quot;Tomato sauce with plum tomatoes&quot;</span>;<br>	&#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">&#x2F;**
+ * 梅子西红柿酱
+ *&#x2F;
+public class PlumTomatoSauce implements Sauce &#123;
+	public String toString() &#123;
+		return &quot;Tomato sauce with plum tomatoes&quot;;
+	&#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 <p>另一种</p>
-<figure class="highlight haxe"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs haxe"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 意大利西红柿酱</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MarinaraSauce</span> <span class="hljs-keyword"><span class="hljs-keyword">implements</span> <span class="hljs-type">Sauce</span></span> </span>&#123;<br>	<span class="hljs-keyword">public</span> <span class="hljs-keyword">String</span> toString() &#123;<br>		<span class="hljs-keyword">return</span> <span class="hljs-string">&quot;Marinara Sauce&quot;</span>;<br>	&#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">&#x2F;**
+ * 意大利西红柿酱
+ *&#x2F;
+public class MarinaraSauce implements Sauce &#123;
+	public String toString() &#123;
+		return &quot;Marinara Sauce&quot;;
+	&#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 <ul>
 <li>定义三种芝士</li>
 </ul>
-<figure class="highlight haxe"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs haxe"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 一种芝士</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MozzarellaCheese</span> <span class="hljs-keyword"><span class="hljs-keyword">implements</span> <span class="hljs-type">Cheese</span></span> </span>&#123;<br><br>	<span class="hljs-keyword">public</span> <span class="hljs-keyword">String</span> toString() &#123;<br>		<span class="hljs-keyword">return</span> <span class="hljs-string">&quot;Shredded Mozzarella&quot;</span>;<br>	&#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">&#x2F;**
+ * 一种芝士
+ *&#x2F;
+public class MozzarellaCheese implements Cheese &#123;
+
+	public String toString() &#123;
+		return &quot;Shredded Mozzarella&quot;;
+	&#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 <p>另一种</p>
-<figure class="highlight haxe"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs haxe"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 另一种芝士</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ParmesanCheese</span> <span class="hljs-keyword"><span class="hljs-keyword">implements</span> <span class="hljs-type">Cheese</span></span> </span>&#123;<br><br>	<span class="hljs-keyword">public</span> <span class="hljs-keyword">String</span> toString() &#123;<br>		<span class="hljs-keyword">return</span> <span class="hljs-string">&quot;Shredded Parmesan&quot;</span>;<br>	&#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">&#x2F;**
+ * 另一种芝士
+ *&#x2F;
+public class ParmesanCheese implements Cheese &#123;
+
+	public String toString() &#123;
+		return &quot;Shredded Parmesan&quot;;
+	&#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 <p>另一种</p>
-<figure class="highlight haxe"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs haxe"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 另一种芝士</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ReggianoCheese</span> <span class="hljs-keyword"><span class="hljs-keyword">implements</span> <span class="hljs-type">Cheese</span></span> </span>&#123;<br><br>	<span class="hljs-keyword">public</span> <span class="hljs-keyword">String</span> toString() &#123;<br>		<span class="hljs-keyword">return</span> <span class="hljs-string">&quot;Reggiano Cheese&quot;</span>;<br>	&#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">&#x2F;**
+ * 另一种芝士
+ *&#x2F;
+public class ReggianoCheese implements Cheese &#123;
+
+	public String toString() &#123;
+		return &quot;Reggiano Cheese&quot;;
+	&#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 <ul>
 <li>定义七种蔬菜</li>
 </ul>
-<figure class="highlight haxe"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs haxe"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 黑橄榄</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">BlackOlives</span> <span class="hljs-keyword"><span class="hljs-keyword">implements</span> <span class="hljs-type">Veggies</span></span> </span>&#123;<br><br>	<span class="hljs-keyword">public</span> <span class="hljs-keyword">String</span> toString() &#123;<br>		<span class="hljs-keyword">return</span> <span class="hljs-string">&quot;Black Olives&quot;</span>;<br>	&#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">&#x2F;**
+ * 黑橄榄
+ *&#x2F;
+public class BlackOlives implements Veggies &#123;
+
+	public String toString() &#123;
+		return &quot;Black Olives&quot;;
+	&#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 <p>另一种</p>
-<figure class="highlight haxe"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs haxe"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 茄子</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Eggplant</span> <span class="hljs-keyword"><span class="hljs-keyword">implements</span> <span class="hljs-type">Veggies</span></span> </span>&#123;<br><br>	<span class="hljs-keyword">public</span> <span class="hljs-keyword">String</span> toString() &#123;<br>		<span class="hljs-keyword">return</span> <span class="hljs-string">&quot;Eggplant&quot;</span>;<br>	&#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">&#x2F;**
+ * 茄子
+ *&#x2F;
+public class Eggplant implements Veggies &#123;
+
+	public String toString() &#123;
+		return &quot;Eggplant&quot;;
+	&#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 <p>另一种</p>
-<figure class="highlight haxe"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs haxe"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 大蒜</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Garlic</span> <span class="hljs-keyword"><span class="hljs-keyword">implements</span> <span class="hljs-type">Veggies</span></span> </span>&#123;<br><br>	<span class="hljs-keyword">public</span> <span class="hljs-keyword">String</span> toString() &#123;<br>		<span class="hljs-keyword">return</span> <span class="hljs-string">&quot;Garlic&quot;</span>;<br>	&#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">&#x2F;**
+ * 大蒜
+ *&#x2F;
+public class Garlic implements Veggies &#123;
+
+	public String toString() &#123;
+		return &quot;Garlic&quot;;
+	&#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 <p>另一种</p>
-<figure class="highlight haxe"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs haxe"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 蘑菇</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Mushroom</span> <span class="hljs-keyword"><span class="hljs-keyword">implements</span> <span class="hljs-type">Veggies</span></span> </span>&#123;<br><br>	<span class="hljs-keyword">public</span> <span class="hljs-keyword">String</span> toString() &#123;<br>		<span class="hljs-keyword">return</span> <span class="hljs-string">&quot;Mushrooms&quot;</span>;<br>	&#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">&#x2F;**
+ * 蘑菇
+ *&#x2F;
+public class Mushroom implements Veggies &#123;
+
+	public String toString() &#123;
+		return &quot;Mushrooms&quot;;
+	&#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 <p>另一种</p>
-<figure class="highlight haxe"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs haxe"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 洋葱</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Onion</span> <span class="hljs-keyword"><span class="hljs-keyword">implements</span> <span class="hljs-type">Veggies</span></span> </span>&#123;<br><br>	<span class="hljs-keyword">public</span> <span class="hljs-keyword">String</span> toString() &#123;<br>		<span class="hljs-keyword">return</span> <span class="hljs-string">&quot;Onion&quot;</span>;<br>	&#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">&#x2F;**
+ * 洋葱
+ *&#x2F;
+public class Onion implements Veggies &#123;
+
+	public String toString() &#123;
+		return &quot;Onion&quot;;
+	&#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 <p>另一种</p>
-<figure class="highlight haxe"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs haxe"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 辣椒</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">RedPepper</span> <span class="hljs-keyword"><span class="hljs-keyword">implements</span> <span class="hljs-type">Veggies</span></span> </span>&#123;<br><br>	<span class="hljs-keyword">public</span> <span class="hljs-keyword">String</span> toString() &#123;<br>		<span class="hljs-keyword">return</span> <span class="hljs-string">&quot;Red Pepper&quot;</span>;<br>	&#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">&#x2F;**
+ * 辣椒
+ *&#x2F;
+public class RedPepper implements Veggies &#123;
+
+	public String toString() &#123;
+		return &quot;Red Pepper&quot;;
+	&#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 <p>另一种</p>
-<figure class="highlight haxe"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs haxe"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 菠菜</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Spinach</span> <span class="hljs-keyword"><span class="hljs-keyword">implements</span> <span class="hljs-type">Veggies</span></span> </span>&#123;<br><br>	<span class="hljs-keyword">public</span> <span class="hljs-keyword">String</span> toString() &#123;<br>		<span class="hljs-keyword">return</span> <span class="hljs-string">&quot;Spinach&quot;</span>;<br>	&#125;<br>&#125;<br><br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">&#x2F;**
+ * 菠菜
+ *&#x2F;
+public class Spinach implements Veggies &#123;
+
+	public String toString() &#123;
+		return &quot;Spinach&quot;;
+	&#125;
+&#125;
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 <ul>
 <li>定义香肠</li>
 </ul>
-<figure class="highlight haxe"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs haxe"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SlicedPepperoni</span> <span class="hljs-keyword"><span class="hljs-keyword">implements</span> <span class="hljs-type">Pepperoni</span></span> </span>&#123;<br><br>	<span class="hljs-keyword">public</span> <span class="hljs-keyword">String</span> toString() &#123;<br>		<span class="hljs-keyword">return</span> <span class="hljs-string">&quot;Sliced Pepperoni&quot;</span>;<br>	&#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">public class SlicedPepperoni implements Pepperoni &#123;
+
+	public String toString() &#123;
+		return &quot;Sliced Pepperoni&quot;;
+	&#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 <ul>
 <li>定义二种蛤蜊</li>
 </ul>
-<figure class="highlight haxe"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs haxe"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">FrozenClams</span> <span class="hljs-keyword"><span class="hljs-keyword">implements</span> <span class="hljs-type">Clams</span></span> </span>&#123;<br><br>	<span class="hljs-keyword">public</span> <span class="hljs-keyword">String</span> toString() &#123;<br>		<span class="hljs-keyword">return</span> <span class="hljs-string">&quot;Frozen Clams from Chesapeake Bay&quot;</span>;<br>	&#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">public class FrozenClams implements Clams &#123;
+
+	public String toString() &#123;
+		return &quot;Frozen Clams from Chesapeake Bay&quot;;
+	&#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 <p>另一种</p>
-<figure class="highlight haxe"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs haxe"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">FreshClams</span> <span class="hljs-keyword"><span class="hljs-keyword">implements</span> <span class="hljs-type">Clams</span></span> </span>&#123;<br><br>	<span class="hljs-keyword">public</span> <span class="hljs-keyword">String</span> toString() &#123;<br>		<span class="hljs-keyword">return</span> <span class="hljs-string">&quot;Fresh Clams from Long Island Sound&quot;</span>;<br>	&#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
-<h3 id="实现四种披萨"><a href="#实现四种披萨" class="headerlink" title="实现四种披萨"></a>实现四种披萨</h3><figure class="highlight scala"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs scala">public <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">CheesePizza</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Pizza</span> </span>&#123;<br>	<span class="hljs-type">PizzaIngredientFactory</span> ingredientFactory;<br><br>	<span class="hljs-comment">/**</span><br><span class="hljs-comment">	 * 要制作比萨，需要工厂提供原料，所以每个比萨类都需要从构造器参数中得到一个工厂，并把这个工厂存储在一个实例变量中</span><br><span class="hljs-comment">	 * @param ingredientFactory</span><br><span class="hljs-comment">	 */</span><br>	public <span class="hljs-type">CheesePizza</span>(<span class="hljs-type">PizzaIngredientFactory</span> ingredientFactory) &#123;<br>		<span class="hljs-keyword">this</span>.ingredientFactory = ingredientFactory;<br>	&#125;<br><br>	<span class="hljs-comment">/**</span><br><span class="hljs-comment">	 * 创建比萨所需的原料</span><br><span class="hljs-comment">	 */</span><br>	void prepare() &#123;<br>		<span class="hljs-type">System</span>.out.println(<span class="hljs-string">&quot;Preparing &quot;</span> + name);<br>		dough = ingredientFactory.createDough();<br>		sauce = ingredientFactory.createSauce();<br>		cheese = ingredientFactory.createCheese();<br>	&#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
-<figure class="highlight scala"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs scala">public <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">PepperoniPizza</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Pizza</span> </span>&#123;<br>	<span class="hljs-type">PizzaIngredientFactory</span> ingredientFactory;<br> <br>	public <span class="hljs-type">PepperoniPizza</span>(<span class="hljs-type">PizzaIngredientFactory</span> ingredientFactory) &#123;<br>		<span class="hljs-keyword">this</span>.ingredientFactory = ingredientFactory;<br>	&#125;<br> <br>	void prepare() &#123;<br>		<span class="hljs-type">System</span>.out.println(<span class="hljs-string">&quot;Preparing &quot;</span> + name);<br>		dough = ingredientFactory.createDough();<br>		sauce = ingredientFactory.createSauce();<br>		cheese = ingredientFactory.createCheese();<br>		veggies = ingredientFactory.createVeggies();<br>		pepperoni = ingredientFactory.createPepperoni();<br>	&#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
-<figure class="highlight scala"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs scala">public <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">VeggiePizza</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Pizza</span> </span>&#123;<br>	<span class="hljs-type">PizzaIngredientFactory</span> ingredientFactory;<br> <br>	public <span class="hljs-type">VeggiePizza</span>(<span class="hljs-type">PizzaIngredientFactory</span> ingredientFactory) &#123;<br>		<span class="hljs-keyword">this</span>.ingredientFactory = ingredientFactory;<br>	&#125;<br> <br>	void prepare() &#123;<br>		<span class="hljs-type">System</span>.out.println(<span class="hljs-string">&quot;Preparing &quot;</span> + name);<br>		dough = ingredientFactory.createDough();<br>		sauce = ingredientFactory.createSauce();<br>		cheese = ingredientFactory.createCheese();<br>		veggies = ingredientFactory.createVeggies();<br>	&#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
-<figure class="highlight scala"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs scala">public <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ClamPizza</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Pizza</span> </span>&#123;<br>	<span class="hljs-type">PizzaIngredientFactory</span> ingredientFactory;<br> <br>	public <span class="hljs-type">ClamPizza</span>(<span class="hljs-type">PizzaIngredientFactory</span> ingredientFactory) &#123;<br>		<span class="hljs-keyword">this</span>.ingredientFactory = ingredientFactory;<br>	&#125;<br> <br>	void prepare() &#123;<br>		<span class="hljs-type">System</span>.out.println(<span class="hljs-string">&quot;Preparing &quot;</span> + name);<br>		dough = ingredientFactory.createDough();<br>		sauce = ingredientFactory.createSauce();<br>		cheese = ingredientFactory.createCheese();<br>		clam = ingredientFactory.createClam();<br>	&#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">public class FreshClams implements Clams &#123;
+
+	public String toString() &#123;
+		return &quot;Fresh Clams from Long Island Sound&quot;;
+	&#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+<h3 id="实现四种披萨"><a href="#实现四种披萨" class="headerlink" title="实现四种披萨"></a>实现四种披萨</h3><div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">public class CheesePizza extends Pizza &#123;
+	PizzaIngredientFactory ingredientFactory;
+
+	&#x2F;**
+	 * 要制作比萨，需要工厂提供原料，所以每个比萨类都需要从构造器参数中得到一个工厂，并把这个工厂存储在一个实例变量中
+	 * @param ingredientFactory
+	 *&#x2F;
+	public CheesePizza(PizzaIngredientFactory ingredientFactory) &#123;
+		this.ingredientFactory &#x3D; ingredientFactory;
+	&#125;
+
+	&#x2F;**
+	 * 创建比萨所需的原料
+	 *&#x2F;
+	void prepare() &#123;
+		System.out.println(&quot;Preparing &quot; + name);
+		dough &#x3D; ingredientFactory.createDough();
+		sauce &#x3D; ingredientFactory.createSauce();
+		cheese &#x3D; ingredientFactory.createCheese();
+	&#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">public class PepperoniPizza extends Pizza &#123;
+	PizzaIngredientFactory ingredientFactory;
+ 
+	public PepperoniPizza(PizzaIngredientFactory ingredientFactory) &#123;
+		this.ingredientFactory &#x3D; ingredientFactory;
+	&#125;
+ 
+	void prepare() &#123;
+		System.out.println(&quot;Preparing &quot; + name);
+		dough &#x3D; ingredientFactory.createDough();
+		sauce &#x3D; ingredientFactory.createSauce();
+		cheese &#x3D; ingredientFactory.createCheese();
+		veggies &#x3D; ingredientFactory.createVeggies();
+		pepperoni &#x3D; ingredientFactory.createPepperoni();
+	&#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">public class VeggiePizza extends Pizza &#123;
+	PizzaIngredientFactory ingredientFactory;
+ 
+	public VeggiePizza(PizzaIngredientFactory ingredientFactory) &#123;
+		this.ingredientFactory &#x3D; ingredientFactory;
+	&#125;
+ 
+	void prepare() &#123;
+		System.out.println(&quot;Preparing &quot; + name);
+		dough &#x3D; ingredientFactory.createDough();
+		sauce &#x3D; ingredientFactory.createSauce();
+		cheese &#x3D; ingredientFactory.createCheese();
+		veggies &#x3D; ingredientFactory.createVeggies();
+	&#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">public class ClamPizza extends Pizza &#123;
+	PizzaIngredientFactory ingredientFactory;
+ 
+	public ClamPizza(PizzaIngredientFactory ingredientFactory) &#123;
+		this.ingredientFactory &#x3D; ingredientFactory;
+	&#125;
+ 
+	void prepare() &#123;
+		System.out.println(&quot;Preparing &quot; + name);
+		dough &#x3D; ingredientFactory.createDough();
+		sauce &#x3D; ingredientFactory.createSauce();
+		cheese &#x3D; ingredientFactory.createCheese();
+		clam &#x3D; ingredientFactory.createClam();
+	&#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 <h3 id="实现芝加哥、纽约披萨店"><a href="#实现芝加哥、纽约披萨店" class="headerlink" title="实现芝加哥、纽约披萨店"></a>实现芝加哥、纽约披萨店</h3><ul>
 <li>芝加哥披萨店</li>
 </ul>
-<figure class="highlight scala"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs scala"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 芝加哥披萨店</span><br><span class="hljs-comment"> */</span><br>public <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ChicagoPizzaStore</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">PizzaStore</span> </span>&#123;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 选择原料工厂，创建不同原料的相同风味披萨</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-keyword">protected</span> <span class="hljs-type">Pizza</span> createPizza(<span class="hljs-type">String</span> item) &#123;<br>        <span class="hljs-type">Pizza</span> pizza = <span class="hljs-literal">null</span>;<br>        <span class="hljs-comment">//芝加哥披萨店会用到芝加哥比萨原料工厂，由改原料工厂负责生产所有芝加哥风味比萨所需要的原料</span><br>        <span class="hljs-type">PizzaIngredientFactory</span> ingredientFactory = <span class="hljs-keyword">new</span> <span class="hljs-type">ChicagoPizzaIngredientFactory</span>();<br><br>        <span class="hljs-keyword">if</span> (item.equals(<span class="hljs-string">&quot;cheese&quot;</span>)) &#123;<br>            <span class="hljs-comment">//把原料工厂传递给每一个比萨，以便比萨能从工厂中取得原料</span><br>            pizza = <span class="hljs-keyword">new</span> <span class="hljs-type">CheesePizza</span>(ingredientFactory);<br>            pizza.setName(<span class="hljs-string">&quot;Chicago Style Cheese Pizza&quot;</span>);<br>        &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (item.equals(<span class="hljs-string">&quot;veggie&quot;</span>)) &#123;<br>            pizza = <span class="hljs-keyword">new</span> <span class="hljs-type">VeggiePizza</span>(ingredientFactory);<br>            pizza.setName(<span class="hljs-string">&quot;Chicago Style Veggie Pizza&quot;</span>);<br>        &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (item.equals(<span class="hljs-string">&quot;clam&quot;</span>)) &#123;<br>            pizza = <span class="hljs-keyword">new</span> <span class="hljs-type">ClamPizza</span>(ingredientFactory);<br>            pizza.setName(<span class="hljs-string">&quot;Chicago Style Clam Pizza&quot;</span>);<br>        &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (item.equals(<span class="hljs-string">&quot;pepperoni&quot;</span>)) &#123;<br>            pizza = <span class="hljs-keyword">new</span> <span class="hljs-type">PepperoniPizza</span>(ingredientFactory);<br>            pizza.setName(<span class="hljs-string">&quot;Chicago Style Pepperoni Pizza&quot;</span>);<br>        &#125;<br>        <span class="hljs-keyword">return</span> pizza;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">&#x2F;**
+ * 芝加哥披萨店
+ *&#x2F;
+public class ChicagoPizzaStore extends PizzaStore &#123;
+
+    &#x2F;**
+     * 选择原料工厂，创建不同原料的相同风味披萨
+     *&#x2F;
+    protected Pizza createPizza(String item) &#123;
+        Pizza pizza &#x3D; null;
+        &#x2F;&#x2F;芝加哥披萨店会用到芝加哥比萨原料工厂，由改原料工厂负责生产所有芝加哥风味比萨所需要的原料
+        PizzaIngredientFactory ingredientFactory &#x3D; new ChicagoPizzaIngredientFactory();
+
+        if (item.equals(&quot;cheese&quot;)) &#123;
+            &#x2F;&#x2F;把原料工厂传递给每一个比萨，以便比萨能从工厂中取得原料
+            pizza &#x3D; new CheesePizza(ingredientFactory);
+            pizza.setName(&quot;Chicago Style Cheese Pizza&quot;);
+        &#125; else if (item.equals(&quot;veggie&quot;)) &#123;
+            pizza &#x3D; new VeggiePizza(ingredientFactory);
+            pizza.setName(&quot;Chicago Style Veggie Pizza&quot;);
+        &#125; else if (item.equals(&quot;clam&quot;)) &#123;
+            pizza &#x3D; new ClamPizza(ingredientFactory);
+            pizza.setName(&quot;Chicago Style Clam Pizza&quot;);
+        &#125; else if (item.equals(&quot;pepperoni&quot;)) &#123;
+            pizza &#x3D; new PepperoniPizza(ingredientFactory);
+            pizza.setName(&quot;Chicago Style Pepperoni Pizza&quot;);
+        &#125;
+        return pizza;
+    &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 <ul>
 <li>纽约披萨店</li>
 </ul>
-<figure class="highlight reasonml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs reasonml">public <span class="hljs-keyword">class</span> NYPizzaStore extends PizzaStore &#123;<br> <br>	protected Pizza create<span class="hljs-constructor">Pizza(String <span class="hljs-params">item</span>)</span> &#123;<br>		Pizza pizza = null;<br>		PizzaIngredientFactory ingredientFactory = <span class="hljs-keyword">new</span> <span class="hljs-constructor">NYPizzaIngredientFactory()</span>;<br> <br>		<span class="hljs-keyword">if</span> (item.equals(<span class="hljs-string">&quot;cheese&quot;</span>)) &#123;<br>  <br>			pizza = <span class="hljs-keyword">new</span> <span class="hljs-constructor">CheesePizza(<span class="hljs-params">ingredientFactory</span>)</span>;<br>			pizza.set<span class="hljs-constructor">Name(<span class="hljs-string">&quot;New York Style Cheese Pizza&quot;</span>)</span>;<br>  <br>		&#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (item.equals(<span class="hljs-string">&quot;veggie&quot;</span>)) &#123;<br> <br>			pizza = <span class="hljs-keyword">new</span> <span class="hljs-constructor">VeggiePizza(<span class="hljs-params">ingredientFactory</span>)</span>;<br>			pizza.set<span class="hljs-constructor">Name(<span class="hljs-string">&quot;New York Style Veggie Pizza&quot;</span>)</span>;<br> <br>		&#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (item.equals(<span class="hljs-string">&quot;clam&quot;</span>)) &#123;<br> <br>			pizza = <span class="hljs-keyword">new</span> <span class="hljs-constructor">ClamPizza(<span class="hljs-params">ingredientFactory</span>)</span>;<br>			pizza.set<span class="hljs-constructor">Name(<span class="hljs-string">&quot;New York Style Clam Pizza&quot;</span>)</span>;<br> <br>		&#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (item.equals(<span class="hljs-string">&quot;pepperoni&quot;</span>)) &#123;<br><br>			pizza = <span class="hljs-keyword">new</span> <span class="hljs-constructor">PepperoniPizza(<span class="hljs-params">ingredientFactory</span>)</span>;<br>			pizza.set<span class="hljs-constructor">Name(<span class="hljs-string">&quot;New York Style Pepperoni Pizza&quot;</span>)</span>;<br> <br>		&#125; <br>		return pizza;<br>	&#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">public class NYPizzaStore extends PizzaStore &#123;
+ 
+	protected Pizza createPizza(String item) &#123;
+		Pizza pizza &#x3D; null;
+		PizzaIngredientFactory ingredientFactory &#x3D; new NYPizzaIngredientFactory();
+ 
+		if (item.equals(&quot;cheese&quot;)) &#123;
+  
+			pizza &#x3D; new CheesePizza(ingredientFactory);
+			pizza.setName(&quot;New York Style Cheese Pizza&quot;);
+  
+		&#125; else if (item.equals(&quot;veggie&quot;)) &#123;
+ 
+			pizza &#x3D; new VeggiePizza(ingredientFactory);
+			pizza.setName(&quot;New York Style Veggie Pizza&quot;);
+ 
+		&#125; else if (item.equals(&quot;clam&quot;)) &#123;
+ 
+			pizza &#x3D; new ClamPizza(ingredientFactory);
+			pizza.setName(&quot;New York Style Clam Pizza&quot;);
+ 
+		&#125; else if (item.equals(&quot;pepperoni&quot;)) &#123;
+
+			pizza &#x3D; new PepperoniPizza(ingredientFactory);
+			pizza.setName(&quot;New York Style Pepperoni Pizza&quot;);
+ 
+		&#125; 
+		return pizza;
+	&#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 <h3 id="实现芝加哥、纽约原料工厂"><a href="#实现芝加哥、纽约原料工厂" class="headerlink" title="实现芝加哥、纽约原料工厂"></a>实现芝加哥、纽约原料工厂</h3><ul>
 <li>芝加哥原料工厂</li>
 </ul>
-<figure class="highlight typescript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs typescript"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 芝加哥披萨原料工厂</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ChicagoPizzaIngredientFactory</span> <span class="hljs-title">implements</span> <span class="hljs-title">PizzaIngredientFactory</span> </span>&#123;<br><br>	<span class="hljs-keyword">public</span> Dough <span class="hljs-function"><span class="hljs-title">createDough</span>(<span class="hljs-params"></span>)</span> &#123;<br>		<span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> ThickCrustDough();<br>	&#125;<br><br>	<span class="hljs-keyword">public</span> Sauce <span class="hljs-function"><span class="hljs-title">createSauce</span>(<span class="hljs-params"></span>)</span> &#123;<br>		<span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> PlumTomatoSauce();<br>	&#125;<br><br>	<span class="hljs-keyword">public</span> Cheese <span class="hljs-function"><span class="hljs-title">createCheese</span>(<span class="hljs-params"></span>)</span> &#123;<br>		<span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> MozzarellaCheese();<br>	&#125;<br><br>	<span class="hljs-keyword">public</span> Veggies[] <span class="hljs-function"><span class="hljs-title">createVeggies</span>(<span class="hljs-params"></span>)</span> &#123;<br>		Veggies veggies[] = &#123; <span class="hljs-keyword">new</span> BlackOlives(), <br>		                      <span class="hljs-keyword">new</span> Spinach(), <br>		                      <span class="hljs-keyword">new</span> Eggplant() &#125;;<br>		<span class="hljs-keyword">return</span> veggies;<br>	&#125;<br><br>	<span class="hljs-keyword">public</span> Pepperoni <span class="hljs-function"><span class="hljs-title">createPepperoni</span>(<span class="hljs-params"></span>)</span> &#123;<br>		<span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> SlicedPepperoni();<br>	&#125;<br><br>	<span class="hljs-keyword">public</span> Clams <span class="hljs-function"><span class="hljs-title">createClam</span>(<span class="hljs-params"></span>)</span> &#123;<br>		<span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> FrozenClams();<br>	&#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">&#x2F;**
+ * 芝加哥披萨原料工厂
+ *&#x2F;
+public class ChicagoPizzaIngredientFactory implements PizzaIngredientFactory &#123;
+
+	public Dough createDough() &#123;
+		return new ThickCrustDough();
+	&#125;
+
+	public Sauce createSauce() &#123;
+		return new PlumTomatoSauce();
+	&#125;
+
+	public Cheese createCheese() &#123;
+		return new MozzarellaCheese();
+	&#125;
+
+	public Veggies[] createVeggies() &#123;
+		Veggies veggies[] &#x3D; &#123; new BlackOlives(), 
+		                      new Spinach(), 
+		                      new Eggplant() &#125;;
+		return veggies;
+	&#125;
+
+	public Pepperoni createPepperoni() &#123;
+		return new SlicedPepperoni();
+	&#125;
+
+	public Clams createClam() &#123;
+		return new FrozenClams();
+	&#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 <ul>
 <li>纽约原料工厂</li>
 </ul>
-<figure class="highlight typescript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs typescript"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">NYPizzaIngredientFactory</span> <span class="hljs-title">implements</span> <span class="hljs-title">PizzaIngredientFactory</span> </span>&#123;<br> <br>	<span class="hljs-keyword">public</span> Dough <span class="hljs-function"><span class="hljs-title">createDough</span>(<span class="hljs-params"></span>)</span> &#123;<br>		<span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> ThinCrustDough();<br>	&#125;<br> <br>	<span class="hljs-keyword">public</span> Sauce <span class="hljs-function"><span class="hljs-title">createSauce</span>(<span class="hljs-params"></span>)</span> &#123;<br>		<span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> MarinaraSauce();<br>	&#125;<br> <br>	<span class="hljs-keyword">public</span> Cheese <span class="hljs-function"><span class="hljs-title">createCheese</span>(<span class="hljs-params"></span>)</span> &#123;<br>		<span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> ReggianoCheese();<br>	&#125;<br> <br>	<span class="hljs-keyword">public</span> Veggies[] <span class="hljs-function"><span class="hljs-title">createVeggies</span>(<span class="hljs-params"></span>)</span> &#123;<br>		Veggies veggies[] = &#123; <span class="hljs-keyword">new</span> Garlic(), <span class="hljs-keyword">new</span> Onion(), <span class="hljs-keyword">new</span> Mushroom(), <span class="hljs-keyword">new</span> RedPepper() &#125;;<br>		<span class="hljs-keyword">return</span> veggies;<br>	&#125;<br> <br>	<span class="hljs-keyword">public</span> Pepperoni <span class="hljs-function"><span class="hljs-title">createPepperoni</span>(<span class="hljs-params"></span>)</span> &#123;<br>		<span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> SlicedPepperoni();<br>	&#125;<br><br>	<span class="hljs-keyword">public</span> Clams <span class="hljs-function"><span class="hljs-title">createClam</span>(<span class="hljs-params"></span>)</span> &#123;<br>		<span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> FreshClams();<br>	&#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
-<h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><figure class="highlight reasonml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs reasonml">public <span class="hljs-keyword">class</span> PizzaTestDrive &#123;<br> <br>	public static void main(String<span class="hljs-literal">[]</span> args) &#123;<br>		PizzaStore nyStore = <span class="hljs-keyword">new</span> <span class="hljs-constructor">NYPizzaStore()</span>;<br>		<span class="hljs-comment">//一个芝加哥比萨店</span><br>		PizzaStore chicagoStore = <span class="hljs-keyword">new</span> <span class="hljs-constructor">ChicagoPizzaStore()</span>;<br> <br>		Pizza pizza = nyStore.order<span class="hljs-constructor">Pizza(<span class="hljs-string">&quot;cheese&quot;</span>)</span>;<br>		<span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">System</span>.</span></span>out.println(<span class="hljs-string">&quot;Ethan ordered a &quot;</span> + pizza + <span class="hljs-string">&quot;\n&quot;</span>);<br><br>		<span class="hljs-comment">//接受订单</span><br>		pizza = chicagoStore.order<span class="hljs-constructor">Pizza(<span class="hljs-string">&quot;cheese&quot;</span>)</span>;<br>		<span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">System</span>.</span></span>out.println(<span class="hljs-string">&quot;Joel ordered a &quot;</span> + pizza + <span class="hljs-string">&quot;\n&quot;</span>);<br><br>		pizza = nyStore.order<span class="hljs-constructor">Pizza(<span class="hljs-string">&quot;clam&quot;</span>)</span>;<br>		<span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">System</span>.</span></span>out.println(<span class="hljs-string">&quot;Ethan ordered a &quot;</span> + pizza + <span class="hljs-string">&quot;\n&quot;</span>);<br> <br>		pizza = chicagoStore.order<span class="hljs-constructor">Pizza(<span class="hljs-string">&quot;clam&quot;</span>)</span>;<br>		<span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">System</span>.</span></span>out.println(<span class="hljs-string">&quot;Joel ordered a &quot;</span> + pizza + <span class="hljs-string">&quot;\n&quot;</span>);<br><br>		pizza = nyStore.order<span class="hljs-constructor">Pizza(<span class="hljs-string">&quot;pepperoni&quot;</span>)</span>;<br>		<span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">System</span>.</span></span>out.println(<span class="hljs-string">&quot;Ethan ordered a &quot;</span> + pizza + <span class="hljs-string">&quot;\n&quot;</span>);<br> <br>		pizza = chicagoStore.order<span class="hljs-constructor">Pizza(<span class="hljs-string">&quot;pepperoni&quot;</span>)</span>;<br>		<span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">System</span>.</span></span>out.println(<span class="hljs-string">&quot;Joel ordered a &quot;</span> + pizza + <span class="hljs-string">&quot;\n&quot;</span>);<br><br>		pizza = nyStore.order<span class="hljs-constructor">Pizza(<span class="hljs-string">&quot;veggie&quot;</span>)</span>;<br>		<span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">System</span>.</span></span>out.println(<span class="hljs-string">&quot;Ethan ordered a &quot;</span> + pizza + <span class="hljs-string">&quot;\n&quot;</span>);<br> <br>		pizza = chicagoStore.order<span class="hljs-constructor">Pizza(<span class="hljs-string">&quot;veggie&quot;</span>)</span>;<br>		<span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">System</span>.</span></span>out.println(<span class="hljs-string">&quot;Joel ordered a &quot;</span> + pizza + <span class="hljs-string">&quot;\n&quot;</span>);<br>	&#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">public class NYPizzaIngredientFactory implements PizzaIngredientFactory &#123;
+ 
+	public Dough createDough() &#123;
+		return new ThinCrustDough();
+	&#125;
+ 
+	public Sauce createSauce() &#123;
+		return new MarinaraSauce();
+	&#125;
+ 
+	public Cheese createCheese() &#123;
+		return new ReggianoCheese();
+	&#125;
+ 
+	public Veggies[] createVeggies() &#123;
+		Veggies veggies[] &#x3D; &#123; new Garlic(), new Onion(), new Mushroom(), new RedPepper() &#125;;
+		return veggies;
+	&#125;
+ 
+	public Pepperoni createPepperoni() &#123;
+		return new SlicedPepperoni();
+	&#125;
+
+	public Clams createClam() &#123;
+		return new FreshClams();
+	&#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+<h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">public class PizzaTestDrive &#123;
+ 
+	public static void main(String[] args) &#123;
+		PizzaStore nyStore &#x3D; new NYPizzaStore();
+		&#x2F;&#x2F;一个芝加哥比萨店
+		PizzaStore chicagoStore &#x3D; new ChicagoPizzaStore();
+ 
+		Pizza pizza &#x3D; nyStore.orderPizza(&quot;cheese&quot;);
+		System.out.println(&quot;Ethan ordered a &quot; + pizza + &quot;\n&quot;);
+
+		&#x2F;&#x2F;接受订单
+		pizza &#x3D; chicagoStore.orderPizza(&quot;cheese&quot;);
+		System.out.println(&quot;Joel ordered a &quot; + pizza + &quot;\n&quot;);
+
+		pizza &#x3D; nyStore.orderPizza(&quot;clam&quot;);
+		System.out.println(&quot;Ethan ordered a &quot; + pizza + &quot;\n&quot;);
+ 
+		pizza &#x3D; chicagoStore.orderPizza(&quot;clam&quot;);
+		System.out.println(&quot;Joel ordered a &quot; + pizza + &quot;\n&quot;);
+
+		pizza &#x3D; nyStore.orderPizza(&quot;pepperoni&quot;);
+		System.out.println(&quot;Ethan ordered a &quot; + pizza + &quot;\n&quot;);
+ 
+		pizza &#x3D; chicagoStore.orderPizza(&quot;pepperoni&quot;);
+		System.out.println(&quot;Joel ordered a &quot; + pizza + &quot;\n&quot;);
+
+		pizza &#x3D; nyStore.orderPizza(&quot;veggie&quot;);
+		System.out.println(&quot;Ethan ordered a &quot; + pizza + &quot;\n&quot;);
+ 
+		pizza &#x3D; chicagoStore.orderPizza(&quot;veggie&quot;);
+		System.out.println(&quot;Joel ordered a &quot; + pizza + &quot;\n&quot;);
+	&#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 
 
 
@@ -499,6 +997,8 @@
 
 
 
+  
+    
   
 
 

@@ -32,7 +32,15 @@
     
     
       
-      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/darcula.min.css" />
+      
+        
+          
+        
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.22.0/themes/prism.min.css" />
+      
+      
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.22.0/plugins/line-numbers/prism-line-numbers.min.css" />
+      
     
   
 
@@ -233,7 +241,8 @@
               <h2 id="业务需求"><a href="#业务需求" class="headerlink" title="业务需求"></a>业务需求</h2><p>退换货原因，需根据车辆编号重新绑定设备号，提供车辆编号对应设备号excel。</p>
 <h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><p>创建临时表t2并导入excel数据。</p>
 <h2 id="sql实现"><a href="#sql实现" class="headerlink" title="sql实现"></a>sql实现</h2><p>俩表关联，修改原表设备号为临时表设备号</p>
-<figure class="highlight sql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-keyword">UPDATE</span> table_1 t1 <span class="hljs-keyword">left</span> <span class="hljs-keyword">join</span> table_2 t2 <span class="hljs-keyword">on</span> t2.serail_no <span class="hljs-operator">=</span> t1.serail_no <span class="hljs-keyword">SET</span> t1.dev_no <span class="hljs-operator">=</span> t2.dev_no<br><span class="hljs-keyword">where</span> t1.id<span class="hljs-operator">&gt;</span><span class="hljs-number">5</span>;<br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">UPDATE</span> table_1 t1 <span class="token keyword">left</span> <span class="token keyword">join</span> table_2 t2 <span class="token keyword">on</span> t2<span class="token punctuation">.</span>serail_no <span class="token operator">=</span> t1<span class="token punctuation">.</span>serail_no <span class="token keyword">SET</span> t1<span class="token punctuation">.</span>dev_no <span class="token operator">=</span> t2<span class="token punctuation">.</span>dev_no
+<span class="token keyword">where</span> t1<span class="token punctuation">.</span>id<span class="token operator">></span><span class="token number">5</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></div>
 
 
 
@@ -426,6 +435,8 @@
 
 
 
+  
+    
   
 
 

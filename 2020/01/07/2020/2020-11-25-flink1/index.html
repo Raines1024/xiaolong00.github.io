@@ -32,7 +32,15 @@
     
     
       
-      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/darcula.min.css" />
+      
+        
+          
+        
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.22.0/themes/prism.min.css" />
+      
+      
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.22.0/plugins/line-numbers/prism-line-numbers.min.css" />
+      
     
   
 
@@ -187,7 +195,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      482 字
+      497 字
     </span>
   
 
@@ -197,7 +205,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      7
+      8
        分钟
     </span>
   
@@ -238,7 +246,56 @@
 <h3 id="关闭"><a href="#关闭" class="headerlink" title="关闭"></a>关闭</h3><p>./bin/stop-cluster.sh</p>
 <hr>
 <h2 id="Flink-demo（idea）"><a href="#Flink-demo（idea）" class="headerlink" title="Flink demo（idea）"></a>Flink demo（idea）</h2><h3 id="新建一个-maven-项目"><a href="#新建一个-maven-项目" class="headerlink" title="新建一个 maven 项目"></a>新建一个 maven 项目</h3><p>勾选create from archetype，选择flink-quickstart-java，next</p>
-<h3 id="创建一个-SocketTextStreamWordCount-文件，加入以下代码："><a href="#创建一个-SocketTextStreamWordCount-文件，加入以下代码：" class="headerlink" title="创建一个 SocketTextStreamWordCount 文件，加入以下代码："></a>创建一个 SocketTextStreamWordCount 文件，加入以下代码：</h3><figure class="highlight arduino"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs arduino"><br><span class="hljs-keyword">import</span> org.apache.flink.api.common.functions.FlatMapFunction;<br><span class="hljs-keyword">import</span> org.apache.flink.api.java.tuple.Tuple2;<br><span class="hljs-keyword">import</span> org.apache.flink.streaming.api.datastream.DataStreamSource;<br><span class="hljs-keyword">import</span> org.apache.flink.streaming.api.datastream.SingleOutputStreamOperator;<br><span class="hljs-keyword">import</span> org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;<br><span class="hljs-keyword">import</span> org.apache.flink.util.Collector;<br><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SocketTextStreamWordCount</span> &#123;</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">String</span>[] args)</span> throws Exception </span>&#123;<br>        <span class="hljs-comment">//参数检查</span><br>        <span class="hljs-keyword">if</span> (args.length != <span class="hljs-number">2</span>) &#123;<br>            System.err.<span class="hljs-built_in">println</span>(<span class="hljs-string">&quot;USAGE:\nSocketTextStreamWordCount &lt;hostname&gt; &lt;port&gt;&quot;</span>);<br>            <span class="hljs-keyword">return</span>;<br>        &#125;<br><br>        <span class="hljs-keyword">String</span> hostname = args[<span class="hljs-number">0</span>];<br>        Integer port = Integer.<span class="hljs-built_in">parseInt</span>(args[<span class="hljs-number">1</span>]);<br><br><br>        <span class="hljs-comment">// set up the streaming execution environment</span><br>        <span class="hljs-keyword">final</span> StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();<br><br>        <span class="hljs-comment">//获取数据</span><br>        DataStreamSource&lt;<span class="hljs-keyword">String</span>&gt; stream = env.socketTextStream(hostname, port);<br><br>        <span class="hljs-comment">//计数</span><br>        SingleOutputStreamOperator&lt;Tuple2&lt;<span class="hljs-keyword">String</span>, Integer&gt;&gt; sum = stream.flatMap(<span class="hljs-keyword">new</span> LineSplitter())<br>                .keyBy(<span class="hljs-number">0</span>)<br>                .sum(<span class="hljs-number">1</span>);<br><br>        sum.<span class="hljs-built_in">print</span>();<br><br>        env.execute(<span class="hljs-string">&quot;Java WordCount from SocketTextStream Example&quot;</span>);<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">LineSplitter</span> <span class="hljs-title">implements</span> <span class="hljs-title">FlatMapFunction</span>&lt;</span><span class="hljs-keyword">String</span>, Tuple2&lt;<span class="hljs-keyword">String</span>, Integer&gt;&gt; &#123;<br>        @Override<br>        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">flatMap</span><span class="hljs-params">(<span class="hljs-keyword">String</span> s, Collector&lt;Tuple2&lt;<span class="hljs-keyword">String</span>, Integer&gt;&gt; collector)</span> </span>&#123;<br>            <span class="hljs-keyword">String</span>[] tokens = s.toLowerCase().split(<span class="hljs-string">&quot;\\W+&quot;</span>);<br><br>            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">String</span> token: tokens) &#123;<br>                <span class="hljs-keyword">if</span> (token.length() &gt; <span class="hljs-number">0</span>) &#123;<br>                    collector.collect(<span class="hljs-keyword">new</span> Tuple2&lt;<span class="hljs-keyword">String</span>, Integer&gt;(token, <span class="hljs-number">1</span>));<br>                &#125;<br>            &#125;<br>        &#125;<br>    &#125;<br>&#125;  <br><br></code></pre></div></td></tr></table></figure>
+<h3 id="创建一个-SocketTextStreamWordCount-文件，加入以下代码："><a href="#创建一个-SocketTextStreamWordCount-文件，加入以下代码：" class="headerlink" title="创建一个 SocketTextStreamWordCount 文件，加入以下代码："></a>创建一个 SocketTextStreamWordCount 文件，加入以下代码：</h3><div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">
+import org.apache.flink.api.common.functions.FlatMapFunction;
+import org.apache.flink.api.java.tuple.Tuple2;
+import org.apache.flink.streaming.api.datastream.DataStreamSource;
+import org.apache.flink.streaming.api.datastream.SingleOutputStreamOperator;
+import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
+import org.apache.flink.util.Collector;
+
+public class SocketTextStreamWordCount &#123;
+    public static void main(String[] args) throws Exception &#123;
+        &#x2F;&#x2F;参数检查
+        if (args.length !&#x3D; 2) &#123;
+            System.err.println(&quot;USAGE:\nSocketTextStreamWordCount &lt;hostname&gt; &lt;port&gt;&quot;);
+            return;
+        &#125;
+
+        String hostname &#x3D; args[0];
+        Integer port &#x3D; Integer.parseInt(args[1]);
+
+
+        &#x2F;&#x2F; set up the streaming execution environment
+        final StreamExecutionEnvironment env &#x3D; StreamExecutionEnvironment.getExecutionEnvironment();
+
+        &#x2F;&#x2F;获取数据
+        DataStreamSource&lt;String&gt; stream &#x3D; env.socketTextStream(hostname, port);
+
+        &#x2F;&#x2F;计数
+        SingleOutputStreamOperator&lt;Tuple2&lt;String, Integer&gt;&gt; sum &#x3D; stream.flatMap(new LineSplitter())
+                .keyBy(0)
+                .sum(1);
+
+        sum.print();
+
+        env.execute(&quot;Java WordCount from SocketTextStream Example&quot;);
+    &#125;
+
+    public static final class LineSplitter implements FlatMapFunction&lt;String, Tuple2&lt;String, Integer&gt;&gt; &#123;
+        @Override
+        public void flatMap(String s, Collector&lt;Tuple2&lt;String, Integer&gt;&gt; collector) &#123;
+            String[] tokens &#x3D; s.toLowerCase().split(&quot;\\W+&quot;);
+
+            for (String token: tokens) &#123;
+                if (token.length() &gt; 0) &#123;
+                    collector.collect(new Tuple2&lt;String, Integer&gt;(token, 1));
+                &#125;
+            &#125;
+        &#125;
+    &#125;
+&#125;  
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 <h3 id="进入工程目录，使用以下命令打包"><a href="#进入工程目录，使用以下命令打包" class="headerlink" title="进入工程目录，使用以下命令打包"></a>进入工程目录，使用以下命令打包</h3><p>mvn clean package -Dmaven.test.skip=true</p>
 <h3 id="开启监听-9000-端口"><a href="#开启监听-9000-端口" class="headerlink" title="开启监听 9000 端口"></a>开启监听 9000 端口</h3><p>nc -l 9000</p>
 <h3 id="进入-flink-安装目录-bin-下执行以下命令跑程序"><a href="#进入-flink-安装目录-bin-下执行以下命令跑程序" class="headerlink" title="进入 flink 安装目录 bin 下执行以下命令跑程序"></a>进入 flink 安装目录 bin 下执行以下命令跑程序</h3><p>flink run -c SocketTextStreamWordCount /data/original-word-count-1.0-SNAPSHOT.jar 127.0.0.1 9000<br>注意换成你自己项目的路径。执行完上述命令后，我们可以在 webUI 中看到正在运行的程序。<br>我们可以在 nc 监听端口中输入 text，然后我们通过 tail 命令看一下输出的 log 文件，来观察统计结果。进入目录 apache-flink/1.6.0/libexec/log，执行以下命令:<br>tail -f flink-raines-taskexecutor-0-localhost.out</p>
@@ -279,8 +336,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2020/01/07/2020/2020-11-25-flink2/">
-                        <span class="hidden-mobile">Flink之Data Source 介绍</span>
+                      <a href="/2020/01/07/2020/2020-08-19-k8sinstall/">
+                        <span class="hidden-mobile">Centos7.6部署k8s(v1.18.2)集群</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -385,6 +442,8 @@
 
 
 
+  
+    
   
 
 

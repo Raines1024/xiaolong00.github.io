@@ -32,7 +32,15 @@
     
     
       
-      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/darcula.min.css" />
+      
+        
+          
+        
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.22.0/themes/prism.min.css" />
+      
+      
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.22.0/plugins/line-numbers/prism-line-numbers.min.css" />
+      
     
   
 
@@ -197,7 +205,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      23
+      24
        分钟
     </span>
   
@@ -232,42 +240,126 @@
             <div class="markdown-body">
               <h2 id="Flink-应用程序结构"><a href="#Flink-应用程序结构" class="headerlink" title="Flink 应用程序结构"></a>Flink 应用程序结构</h2><p>1、Source: 数据源，Flink 在流处理和批处理上的 source 大概有 4 类：基于本地集合的 source、基于文件的 source、基于网络套接字的 source、自定义的 source。自定义的 source 常见的有 Apache kafka、Amazon Kinesis Streams、RabbitMQ、Twitter Streaming API、Apache NiFi 等，当然你也可以定义自己的 source。<br>2、Transformation：数据转换的各种操作，有 Map / FlatMap / Filter / KeyBy / Reduce / Fold / Aggregations / Window / WindowAll / Union / Window join / Split / Select / Project 等，操作很多，可以将数据转换计算成你想要的数据。<br>3、Sink：接收器，Flink 将转换计算后的数据发送的地点 ，你可能需要存储下来，Flink 常见的 Sink 大概有如下几类：写入文件、打印出来、写入 socket 、自定义的 sink 。自定义的 sink 常见的有 Apache kafka、RabbitMQ、MySQL、ElasticSearch、Apache Cassandra、Hadoop FileSystem 等，同理你也可以定义自己的 Sink。   </p>
 <h2 id="map"><a href="#map" class="headerlink" title="map"></a>map</h2><p>这是最简单的转换之一，其中输入是一个数据流，输出的也是一个数据流：<br>还是拿上一篇文章的案例来将数据进行 map 转换操作：<br>将每个人的年龄都增加 5 岁，其他不变。  </p>
-<figure class="highlight processing"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs processing">SingleOutputStreamOperator&lt;Student&gt; <span class="hljs-built_in">map</span> = student.<span class="hljs-built_in">map</span>(<span class="hljs-keyword">new</span> MapFunction&lt;Student, Student&gt;() &#123;<br>    @Override<br>    <span class="hljs-keyword">public</span> Student <span class="hljs-built_in">map</span>(Student value) <span class="hljs-keyword">throws</span> Exception &#123;<br>        Student s1 = <span class="hljs-keyword">new</span> Student();<br>        s1.id = value.id;<br>        s1.name = value.name;<br>        s1.password = value.password;<br>        s1.age = value.age + <span class="hljs-number">5</span>;<br>        <span class="hljs-keyword">return</span> s1;<br>    &#125;<br>&#125;);<br><span class="hljs-built_in">map</span>.<span class="hljs-built_in">print</span>();<br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">SingleOutputStreamOperator&lt;Student&gt; map &#x3D; student.map(new MapFunction&lt;Student, Student&gt;() &#123;
+    @Override
+    public Student map(Student value) throws Exception &#123;
+        Student s1 &#x3D; new Student();
+        s1.id &#x3D; value.id;
+        s1.name &#x3D; value.name;
+        s1.password &#x3D; value.password;
+        s1.age &#x3D; value.age + 5;
+        return s1;
+    &#125;
+&#125;);
+map.print();<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 <h3 id="FlatMap"><a href="#FlatMap" class="headerlink" title="FlatMap"></a>FlatMap</h3><p>FlatMap 采用一条记录并输出零个，一个或多个记录。  </p>
-<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">SingleOutputStreamOperator&lt;Student&gt; flatMap = student.flatMap(<span class="hljs-keyword">new</span> FlatMapFunction&lt;Student, Student&gt;() &#123;<br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">flatMap</span><span class="hljs-params">(Student value, Collector&lt;Student&gt; out)</span> <span class="hljs-keyword">throws</span> Exception </span>&#123;<br>        <span class="hljs-keyword">if</span> (value.id % <span class="hljs-number">2</span> == <span class="hljs-number">0</span>) &#123;<br>            out.collect(value);<br>        &#125;<br>    &#125;<br>&#125;);<br>flatMap.print();<br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">SingleOutputStreamOperator&lt;Student&gt; flatMap &#x3D; student.flatMap(new FlatMapFunction&lt;Student, Student&gt;() &#123;
+    @Override
+    public void flatMap(Student value, Collector&lt;Student&gt; out) throws Exception &#123;
+        if (value.id % 2 &#x3D;&#x3D; 0) &#123;
+            out.collect(value);
+        &#125;
+    &#125;
+&#125;);
+flatMap.print();<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 <p>这里将 id 为偶数的聚集出来。  </p>
 <h3 id="Filter"><a href="#Filter" class="headerlink" title="Filter"></a>Filter</h3><p>Filter 函数根据条件判断出结果。</p>
-<figure class="highlight processing"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs processing">SingleOutputStreamOperator&lt;Student&gt; <span class="hljs-built_in">filter</span> = student.<span class="hljs-built_in">filter</span>(<span class="hljs-keyword">new</span> FilterFunction&lt;Student&gt;() &#123;<br>    @Override<br>    <span class="hljs-keyword">public</span> <span class="hljs-built_in">boolean</span> <span class="hljs-built_in">filter</span>(Student value) <span class="hljs-keyword">throws</span> Exception &#123;<br>        <span class="hljs-keyword">if</span> (value.id &gt; <span class="hljs-number">95</span>) &#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>;<br>        &#125;<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;<br>    &#125;<br>&#125;);<br><span class="hljs-built_in">filter</span>.<span class="hljs-built_in">print</span>();<br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">SingleOutputStreamOperator&lt;Student&gt; filter &#x3D; student.filter(new FilterFunction&lt;Student&gt;() &#123;
+    @Override
+    public boolean filter(Student value) throws Exception &#123;
+        if (value.id &gt; 95) &#123;
+            return true;
+        &#125;
+        return false;
+    &#125;
+&#125;);
+filter.print();<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 <p>这里将 id 大于 95 的过滤出来，然后打印出来。  </p>
 <h3 id="KeyBy"><a href="#KeyBy" class="headerlink" title="KeyBy"></a>KeyBy</h3><p>KeyBy 在逻辑上是基于 key 对流进行分区。在内部，它使用 hash 函数对流进行分区。它返回 KeyedDataStream 数据流。  </p>
-<figure class="highlight php"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs php">KeyedStream&lt;Student, <span class="hljs-keyword">Integer</span>&gt; keyBy = student.keyBy(<span class="hljs-keyword">new</span> KeySelector&lt;Student, <span class="hljs-keyword">Integer</span>&gt;() &#123;<br>    @Override<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">Integer</span> getKey(Student value) throws <span class="hljs-built_in">Exception</span> &#123;<br>        <span class="hljs-keyword">return</span> value.age;<br>    &#125;<br>&#125;);<br>keyBy.<span class="hljs-keyword">print</span>();<br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">KeyedStream&lt;Student, Integer&gt; keyBy &#x3D; student.keyBy(new KeySelector&lt;Student, Integer&gt;() &#123;
+    @Override
+    public Integer getKey(Student value) throws Exception &#123;
+        return value.age;
+    &#125;
+&#125;);
+keyBy.print();<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 <p>上面对 student 的 age 做 KeyBy 操作分区  </p>
 <h3 id="Reduce"><a href="#Reduce" class="headerlink" title="Reduce"></a>Reduce</h3><p>Reduce 返回单个的结果值，并且 reduce 操作每处理一个元素总是创建一个新值。常用的方法有 average, sum, min, max, count，使用 reduce 方法都可实现。  </p>
-<figure class="highlight pgsql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs pgsql">SingleOutputStreamOperator&lt;Student&gt; reduce = student.keyBy(<span class="hljs-built_in">new</span> KeySelector&lt;Student, <span class="hljs-type">Integer</span>&gt;() &#123;<br>    @Override<br>    <span class="hljs-built_in">public</span> <span class="hljs-type">Integer</span> getKey(Student <span class="hljs-keyword">value</span>) throws <span class="hljs-keyword">Exception</span> &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">value</span>.age;<br>    &#125;<br>&#125;).reduce(<span class="hljs-built_in">new</span> ReduceFunction&lt;Student&gt;() &#123;<br>    @Override<br>    <span class="hljs-built_in">public</span> Student reduce(Student value1, Student value2) throws <span class="hljs-keyword">Exception</span> &#123;<br>        Student student1 = <span class="hljs-built_in">new</span> Student();<br>        student1.name = value1.name + value2.name;<br>        student1.id = (value1.id + value2.id) / <span class="hljs-number">2</span>;<br>        student1.<span class="hljs-keyword">password</span> = value1.<span class="hljs-keyword">password</span> + value2.<span class="hljs-keyword">password</span>;<br>        student1.age = (value1.age + value2.age) / <span class="hljs-number">2</span>;<br>        <span class="hljs-keyword">return</span> student1;<br>    &#125;<br>&#125;);<br>reduce.print();<br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">SingleOutputStreamOperator&lt;Student&gt; reduce &#x3D; student.keyBy(new KeySelector&lt;Student, Integer&gt;() &#123;
+    @Override
+    public Integer getKey(Student value) throws Exception &#123;
+        return value.age;
+    &#125;
+&#125;).reduce(new ReduceFunction&lt;Student&gt;() &#123;
+    @Override
+    public Student reduce(Student value1, Student value2) throws Exception &#123;
+        Student student1 &#x3D; new Student();
+        student1.name &#x3D; value1.name + value2.name;
+        student1.id &#x3D; (value1.id + value2.id) &#x2F; 2;
+        student1.password &#x3D; value1.password + value2.password;
+        student1.age &#x3D; (value1.age + value2.age) &#x2F; 2;
+        return student1;
+    &#125;
+&#125;);
+reduce.print();<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 <p>上面先将数据流进行 keyby 操作，因为执行 reduce 操作只能是 KeyedStream，然后将 student 对象的 age 做了一个求平均值的操作。  </p>
 <h3 id="Fold"><a href="#Fold" class="headerlink" title="Fold"></a>Fold</h3><p>Fold 通过将最后一个文件夹流与当前记录组合来推出 KeyedStream。 它会发回数据流。  </p>
-<figure class="highlight php"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs php">KeyedStream.fold(<span class="hljs-string">&quot;1&quot;</span>, <span class="hljs-keyword">new</span> FoldFunction&lt;<span class="hljs-keyword">Integer</span>, <span class="hljs-keyword">String</span>&gt;() &#123;<br>    @Override<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">String</span> fold(<span class="hljs-keyword">String</span> accumulator, <span class="hljs-keyword">Integer</span> value) throws <span class="hljs-built_in">Exception</span> &#123;<br>        <span class="hljs-keyword">return</span> accumulator + <span class="hljs-string">&quot;=&quot;</span> + value;<br>    &#125;<br>&#125;)<br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">KeyedStream.fold(&quot;1&quot;, new FoldFunction&lt;Integer, String&gt;() &#123;
+    @Override
+    public String fold(String accumulator, Integer value) throws Exception &#123;
+        return accumulator + &quot;&#x3D;&quot; + value;
+    &#125;
+&#125;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 <h3 id="Aggregations"><a href="#Aggregations" class="headerlink" title="Aggregations"></a>Aggregations</h3><p>DataStream API 支持各种聚合，例如 min，max，sum 等。 这些函数可以应用于 KeyedStream 以获得 Aggregations 聚合。  </p>
-<figure class="highlight reasonml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs reasonml"><span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">KeyedStream</span>.</span></span>sum(<span class="hljs-number">0</span>) <br><span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">KeyedStream</span>.</span></span>sum(<span class="hljs-string">&quot;key&quot;</span>) <br><span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">KeyedStream</span>.</span></span>min(<span class="hljs-number">0</span>) <br><span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">KeyedStream</span>.</span></span>min(<span class="hljs-string">&quot;key&quot;</span>) <br><span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">KeyedStream</span>.</span></span>max(<span class="hljs-number">0</span>) <br><span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">KeyedStream</span>.</span></span>max(<span class="hljs-string">&quot;key&quot;</span>) <br><span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">KeyedStream</span>.</span></span>min<span class="hljs-constructor">By(0)</span> <br><span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">KeyedStream</span>.</span></span>min<span class="hljs-constructor">By(<span class="hljs-string">&quot;key&quot;</span>)</span> <br><span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">KeyedStream</span>.</span></span>max<span class="hljs-constructor">By(0)</span> <br><span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">KeyedStream</span>.</span></span>max<span class="hljs-constructor">By(<span class="hljs-string">&quot;key&quot;</span>)</span><br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">KeyedStream.sum(0) 
+KeyedStream.sum(&quot;key&quot;) 
+KeyedStream.min(0) 
+KeyedStream.min(&quot;key&quot;) 
+KeyedStream.max(0) 
+KeyedStream.max(&quot;key&quot;) 
+KeyedStream.minBy(0) 
+KeyedStream.minBy(&quot;key&quot;) 
+KeyedStream.maxBy(0) 
+KeyedStream.maxBy(&quot;key&quot;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 <p>max 和 maxBy 之间的区别在于 max 返回流中的最大值，但 maxBy 返回具有最大值的键， min 和 minBy 同理。  </p>
 <h3 id="Window"><a href="#Window" class="headerlink" title="Window"></a>Window</h3><p>Window 函数允许按时间或其他条件对现有 KeyedStream 进行分组。 以下是以 10 秒的时间窗口聚合：</p>
-<figure class="highlight css"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs css"><span class="hljs-selector-tag">inputStream</span><span class="hljs-selector-class">.keyBy</span>(0)<span class="hljs-selector-class">.window</span>(<span class="hljs-selector-tag">Time</span><span class="hljs-selector-class">.seconds</span>(10));<br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">inputStream.keyBy(0).window(Time.seconds(10));<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div>
 <p>Flink 定义数据片段以便（可能）处理无限数据流。 这些切片称为窗口。 此切片有助于通过应用转换处理数据块。    要对流进行窗口化，我们需要分配一个可以进行分发的键和一个描述要对窗口化流执行哪些转换的函数<br>要将流切片到窗口，我们可以使用 Flink 自带的窗口分配器。 我们有选项，如 tumbling windows, sliding windows, global 和 session windows。Flink还允许您通过扩展WindowAssginer类来编写自定义窗口分配器。 这里先预留下篇文章来讲解这些不同的 windows 是如何工作的。   </p>
 <h3 id="WindowAll"><a href="#WindowAll" class="headerlink" title="WindowAll"></a>WindowAll</h3><p>windowAll 函数允许对常规数据流进行分组。 通常，这是非并行数据转换，因为它在非分区数据流上运行。<br>与常规数据流功能类似，我们也有窗口数据流功能。 唯一的区别是它们处理窗口数据流。 所以窗口缩小就像 Reduce 函数一样，Window fold 就像 Fold 函数一样，并且还有聚合。    </p>
-<figure class="highlight css"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs css"><span class="hljs-selector-tag">inputStream</span><span class="hljs-selector-class">.keyBy</span>(0)<span class="hljs-selector-class">.windowAll</span>(<span class="hljs-selector-tag">Time</span><span class="hljs-selector-class">.seconds</span>(10));<br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">inputStream.keyBy(0).windowAll(Time.seconds(10));<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div>
 <h3 id="Union"><a href="#Union" class="headerlink" title="Union"></a>Union</h3><p>Union 函数将两个或多个数据流结合在一起。 这样就可以并行地组合数据流。 如果我们将一个流与自身组合，那么它会输出每个记录两次。   </p>
-<figure class="highlight apache"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs apache"><span class="hljs-attribute">inputStream</span>.union(inputStream<span class="hljs-number">1</span>, inputStream<span class="hljs-number">2</span>, ...);<br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">inputStream.union(inputStream1, inputStream2, ...);<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div>
 <h3 id="Window-join"><a href="#Window-join" class="headerlink" title="Window join"></a>Window join</h3><p>我们可以通过一些 key 将同一个 window 的两个数据流 join 起来。</p>
-<figure class="highlight nim"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs nim">inputStream.join(inputStream1)<br>           .where(<span class="hljs-number">0</span>).equalTo(<span class="hljs-number">1</span>)<br>           .window(<span class="hljs-type">Time</span>.seconds(<span class="hljs-number">5</span>))     <br>           .apply (new <span class="hljs-type">JoinFunction</span> () <span class="hljs-meta">&#123;...&#125;</span>);<br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">inputStream.join(inputStream1)
+           .where(0).equalTo(1)
+           .window(Time.seconds(5))     
+           .apply (new JoinFunction () &#123;...&#125;);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre></div>
 <p>以上示例是在 5 秒的窗口中连接两个流，其中第一个流的第一个属性的连接条件等于另一个流的第二个属性。</p>
 <h3 id="Split"><a href="#Split" class="headerlink" title="Split"></a>Split</h3><p>此功能根据条件将流拆分为两个或多个流。 当您获得混合流并且您可能希望单独处理每个数据流时，可以使用此方法。</p>
-<figure class="highlight processing"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs processing">SplitStream&lt;Integer&gt; <span class="hljs-built_in">split</span> = inputStream.<span class="hljs-built_in">split</span>(<span class="hljs-keyword">new</span> OutputSelector&lt;Integer&gt;() &#123;<br>    @Override<br>    <span class="hljs-keyword">public</span> Iterable&lt;<span class="hljs-keyword">String</span>&gt; select(Integer value) &#123;<br>        List&lt;<span class="hljs-keyword">String</span>&gt; output = <span class="hljs-keyword">new</span> ArrayList&lt;<span class="hljs-keyword">String</span>&gt;(); <br>        <span class="hljs-keyword">if</span> (value % <span class="hljs-number">2</span> == <span class="hljs-number">0</span>) &#123;<br>            output.<span class="hljs-built_in">add</span>(<span class="hljs-string">&quot;even&quot;</span>);<br>        &#125;<br>        <span class="hljs-keyword">else</span> &#123;<br>            output.<span class="hljs-built_in">add</span>(<span class="hljs-string">&quot;odd&quot;</span>);<br>        &#125;<br>        <span class="hljs-keyword">return</span> output;<br>    &#125;<br>&#125;);<br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">SplitStream&lt;Integer&gt; split &#x3D; inputStream.split(new OutputSelector&lt;Integer&gt;() &#123;
+    @Override
+    public Iterable&lt;String&gt; select(Integer value) &#123;
+        List&lt;String&gt; output &#x3D; new ArrayList&lt;String&gt;(); 
+        if (value % 2 &#x3D;&#x3D; 0) &#123;
+            output.add(&quot;even&quot;);
+        &#125;
+        else &#123;
+            output.add(&quot;odd&quot;);
+        &#125;
+        return output;
+    &#125;
+&#125;);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 <h3 id="Select"><a href="#Select" class="headerlink" title="Select"></a>Select</h3><p>此功能允许您从拆分流中选择特定流。   </p>
-<figure class="highlight lasso"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs lasso">SplitStream&lt;<span class="hljs-built_in">Integer</span>&gt; split;<br>DataStream&lt;<span class="hljs-built_in">Integer</span>&gt; even = split.<span class="hljs-keyword">select</span>(<span class="hljs-string">&quot;even&quot;</span>); <br>DataStream&lt;<span class="hljs-built_in">Integer</span>&gt; odd = split.<span class="hljs-keyword">select</span>(<span class="hljs-string">&quot;odd&quot;</span>); <br>DataStream&lt;<span class="hljs-built_in">Integer</span>&gt; <span class="hljs-literal">all</span> = split.<span class="hljs-keyword">select</span>(<span class="hljs-string">&quot;even&quot;</span>,<span class="hljs-string">&quot;odd&quot;</span>);<br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">SplitStream&lt;Integer&gt; split;
+DataStream&lt;Integer&gt; even &#x3D; split.select(&quot;even&quot;); 
+DataStream&lt;Integer&gt; odd &#x3D; split.select(&quot;odd&quot;); 
+DataStream&lt;Integer&gt; all &#x3D; split.select(&quot;even&quot;,&quot;odd&quot;);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre></div>
 <h3 id="Project"><a href="#Project" class="headerlink" title="Project"></a>Project</h3><p>Project 函数允许您从事件流中选择属性子集，并仅将所选元素发送到下一个处理流。  </p>
-<figure class="highlight php"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs php">DataStream&lt;Tuple4&lt;<span class="hljs-keyword">Integer</span>, <span class="hljs-keyword">Double</span>, <span class="hljs-keyword">String</span>, <span class="hljs-keyword">String</span>&gt;&gt; in = <span class="hljs-comment">// [...] </span><br>DataStream&lt;Tuple2&lt;<span class="hljs-keyword">String</span>, <span class="hljs-keyword">String</span>&gt;&gt; out = in.project(<span class="hljs-number">3</span>,<span class="hljs-number">2</span>);<br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">DataStream&lt;Tuple4&lt;Integer, Double, String, String&gt;&gt; in &#x3D; &#x2F;&#x2F; [...] 
+DataStream&lt;Tuple2&lt;String, String&gt;&gt; out &#x3D; in.project(3,2);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></div>
 <p>上述函数从给定记录中选择属性号 2 和 3。 以下是示例输入和输出记录：  </p>
-<figure class="highlight gcode"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs gcode"><span class="hljs-comment">(1,10.0,A,B)</span>=&gt; <span class="hljs-comment">(B,A)</span><br><span class="hljs-comment">(2,20.0,C,D)</span>=&gt; <span class="hljs-comment">(D,C)</span><br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">(1,10.0,A,B)&#x3D;&gt; (B,A)
+(2,20.0,C,D)&#x3D;&gt; (D,C)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></div>
 <h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>本文主要介绍了 Flink Data 的常用转换方式：Map、FlatMap、Filter、KeyBy、Reduce、Fold、Aggregations、Window、WindowAll、Union、Window Join、Split、Select、Project 等。并用了点简单的 demo 介绍了如何使用，具体在项目中该如何将数据流转换成我们想要的格式，还需要根据实际情况对待。</p>
 
             </div>
@@ -296,9 +388,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2020/01/07/2020/2020-11-25-flink4/">
+                      <a href="/2020/01/07/2020/2020-11-25-hdfsShell/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Flink之Data Sink 实战</span>
+                        <span class="hidden-mobile">HDFS常用Shell操作</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -306,8 +398,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2020/01/07/2020/2020-11-25-hdfsShell/">
-                        <span class="hidden-mobile">HDFS常用Shell操作</span>
+                      <a href="/2020/01/07/2020/2020-11-25-ssh/">
+                        <span class="hidden-mobile">两台CentOS服务器配置ssh无密码登陆</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -412,6 +504,8 @@
 
 
 
+  
+    
   
 
 

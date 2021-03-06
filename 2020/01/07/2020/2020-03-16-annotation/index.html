@@ -32,7 +32,15 @@
     
     
       
-      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/darcula.min.css" />
+      
+        
+          
+        
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.22.0/themes/prism.min.css" />
+      
+      
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.22.0/plugins/line-numbers/prism-line-numbers.min.css" />
+      
     
   
 
@@ -243,9 +251,11 @@
 <li>Marker注解<br>这类注解没有任何元素，此类注解仅仅是一个标示。  </li>
 <li>单值注解<br>只接受单值类型，数据成员使用单词value指定。指定成员的语法与声明方法类似。<br>但是如果数据成员不使用value定义，新定义如下所示：  </li>
 </ol>
-<figure class="highlight haxe"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs haxe"><span class="hljs-keyword">public</span> @<span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">Good</span></span>&#123;<br>   <span class="hljs-keyword">String</span> description();<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">public @interface Good&#123;
+   String description();
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></div>
 <p>现在，需要使用下面的注解方式</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs kotlin"><span class="hljs-meta">@Good(description=<span class="hljs-meta-string">&quot;this good&quot;</span>)</span><br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">@Good(description&#x3D;&quot;this good&quot;)<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div>
 <p>注意：数据成员使用默认名称value时候，我们只指定了目标字符串，而省略了成员名称，这次我们需要显示拼写出数据成员的名称description，如果不这么做，编译器将会在编译过程中产生错误。<br>3. 多值注解   </p>
 <h3 id="设置默认值"><a href="#设置默认值" class="headerlink" title="设置默认值"></a>设置默认值</h3><p>java允许为任何数据成员指定默认值，这可以使用default关键字来完成。<br>当使用默认值注解的时候，target成员可以不指定，除非想为target设置不同的值。  </p>
 <h3 id="注解的定义规则"><a href="#注解的定义规则" class="headerlink" title="注解的定义规则"></a>注解的定义规则</h3><p>定义一个注解还是很简单的，需要遵照以下几个规则就可以了：<br>（1）注解声明以@interface开设，随后是注解的名称。<br>（2）为了创建注解的参数，需要使用参数的类型声明方法：<br>方法声明不应包含任何参数；<br>方法声明不应包含任何throws子句；<br>方法的返回类型应该为：基本类型，字符串，类，枚举，上述类型的数组。  </p>
@@ -253,9 +263,20 @@
 <ol>
 <li>首先自定义非空注解NotEmpty    </li>
 </ol>
-<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">import</span> java.lang.annotation.ElementType;<br><span class="hljs-keyword">import</span> java.lang.annotation.Retention;<br><span class="hljs-keyword">import</span> java.lang.annotation.RetentionPolicy;<br><span class="hljs-keyword">import</span> java.lang.annotation.Target;<br><br><span class="hljs-meta">@Target(ElementType.FIELD)</span><br><span class="hljs-meta">@Retention(RetentionPolicy.RUNTIME)</span><br><span class="hljs-keyword">public</span> <span class="hljs-meta">@interface</span> NotEmpty &#123;<br>&#125;<br>```  <br><span class="hljs-number">2.</span> 其次定义一个实体类Person，并在部分属性上面加上注解<span class="hljs-meta">@NotEmpty</span>    <br><br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+
+@Target(ElementType.FIELD)
+@Retention(RetentionPolicy.RUNTIME)
+public @interface NotEmpty &#123;
+&#125;
+&#96;&#96;&#96;  
+2. 其次定义一个实体类Person，并在部分属性上面加上注解@NotEmpty    
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 <p>public class Person {<br>    @NotEmpty<br>    private Integer id;<br>    @NotEmpty<br>    private int age;<br>    @NotEmpty<br>    private String name;<br>    @NotEmpty<br>    private String sex;<br>    private String address;</p>
-<div class="hljs code-wrapper"><pre><code>public Integer getId() &#123;
+<div class="code-wrapper"><pre><code>public Integer getId() &#123;
     return id;
 &#125;
 
@@ -295,21 +316,22 @@ public void setAddress(String address) &#123;
     this.address = address;
 &#125;</code></pre></div>
 <p>}</p>
-<figure class="highlight markdown"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs markdown"><span class="hljs-bullet">3.</span> 编写测试类Main  <br><br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">3. 编写测试类Main  
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div>
 <p>import java.lang.reflect.Field;</p>
 <p>/**</p>
 <ul>
 <li><p>测试类</p>
 </li>
 <li><p>/<br>public class Main {<br>  public static void main(String[] args) {</p>
-<div class="hljs code-wrapper"><pre><code>  try &#123;
+<div class="code-wrapper"><pre><code>  try &#123;
       Person person = new Person();
       person.setId(1);
       person.setAge(50);
       person.setName(&quot;张三&quot;);
       person.setAddress(&quot;北京&quot;);</code></pre></div>
 <p>//            person.setSex(“male”);</p>
-<div class="hljs code-wrapper"><pre><code>      validateParam(person);
+<div class="code-wrapper"><pre><code>      validateParam(person);
   &#125; catch (Exception e) &#123;
       e.printStackTrace();
   &#125;</code></pre></div>
@@ -325,27 +347,30 @@ public void setAddress(String address) &#123;
 </li>
 <li><p>/<br>public static void validateParam(Person person) throws Exception{<br>  Class<?> personClass = (Class<?>)person.getClass();<br>  //获取该类所有属性<br>  Field[] field = personClass.getDeclaredFields();</p>
 <p>  for (int i = 0; i &lt; field.length; i++) {</p>
-<div class="hljs code-wrapper"><pre><code>  Field f= field[i];
+<div class="code-wrapper"><pre><code>  Field f= field[i];
   f.setAccessible(true);</code></pre></div>
 <p>//            System.out.println(f.isAnnotationPresent(NotEmpty.class)+”;”+f.getName());</p>
-<div class="hljs code-wrapper"><pre><code>  if (f.getAnnotation(NotEmpty.class)!= null) &#123;
+<div class="code-wrapper"><pre><code>  if (f.getAnnotation(NotEmpty.class)!= null) &#123;
       //获取属性值
       Object attrValue=f.get(person);
       if(attrValue==null||attrValue.toString().trim().equals(&quot;&quot;))&#123;</code></pre></div>
 <p>//                    throw new RuntimeException(f.getName()+”属性值不能为空”);</p>
-<div class="hljs code-wrapper"><pre><code>          System.out.println(f.getName()+&quot;属性值不能为空&quot;);
+<div class="code-wrapper"><pre><code>          System.out.println(f.getName()+&quot;属性值不能为空&quot;);
       &#125;
       continue;
   &#125;</code></pre></div>
 <p>  }<br>}<br>}</p>
-<figure class="highlight clean"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs clean"><br>### 类使用多值注解并获取属性  <br><span class="hljs-number">1.</span> 首先写一个自定义注解@MyAnnotation   <br><br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">
+### 类使用多值注解并获取属性  
+1. 首先写一个自定义注解@MyAnnotation   
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></div>
 <p>import java.lang.annotation.ElementType;<br>import java.lang.annotation.Retention;<br>import java.lang.annotation.RetentionPolicy;<br>import java.lang.annotation.Target;</p>
 </li>
 </ul>
 </li>
 </ul>
 <p>@Retention(RetentionPolicy.RUNTIME)<br>@Target({ ElementType.METHOD, ElementType.TYPE })<br>public @interface MyAnnotation {<br>    // 为注解添加属性<br>    String color();</p>
-<div class="hljs code-wrapper"><pre><code>String value() default &quot;我是XXX&quot;; // 为属性提供默认值
+<div class="code-wrapper"><pre><code>String value() default &quot;我是XXX&quot;; // 为属性提供默认值
 
 int[] array() default &#123; 1, 2, 3 &#125;;
 
@@ -354,18 +379,33 @@ Gender gender() default Gender.MAN; // 添加一个枚举
 // 添加枚举属性
 MetaAnnotation metaAnnotation() default @MetaAnnotation(birthday = &quot;我的出生日期为1995-8-8&quot;);</code></pre></div>
 <p>}</p>
-<figure class="highlight markdown"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs markdown"><span class="hljs-bullet">2.</span> 写一个枚举类Gender，模拟注解中添加枚举属性  <br><br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">2. 写一个枚举类Gender，模拟注解中添加枚举属性  
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div>
 <p>public enum Gender {<br>    MAN {<br>        public String getName() {<br>            return “男”;<br>        }<br>    },<br>    WOMEN {<br>        public String getName() {<br>            return “女”;<br>        }<br>    }; // 后面记得有“;”<br>    public abstract String getName();<br>}</p>
-<figure class="highlight markdown"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs markdown"><span class="hljs-bullet">3.</span> 写一个注解类MetaAnnotation，模拟注解中添加注解属性    <br><br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">3. 写一个注解类MetaAnnotation，模拟注解中添加注解属性    
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div>
 <p>public @interface MetaAnnotation {<br>    String birthday();<br>}</p>
-<figure class="highlight markdown"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs markdown"><span class="hljs-bullet">4.</span> 最后写注解测试类AnnotationTest  <br><br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">4. 最后写注解测试类AnnotationTest  
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div>
 <p>//调用注解并赋值<br>@MyAnnotation(metaAnnotation = @MetaAnnotation(birthday = “我的出生日期为1995-8-88”), color = “red”, array = {23, 26})<br>public class AnnotationTest {<br>    public static void main(String[] args) {<br>        // 检查类AnnotationTest是否含有@MyAnnotation注解<br>        if (AnnotationTest.class.isAnnotationPresent(MyAnnotation.class)) {<br>            // 若存在就获取注解<br>            MyAnnotation annotation = (MyAnnotation) AnnotationTest.class.getAnnotation(MyAnnotation.class);<br>            System.out.println(annotation);<br>            // 获取注解属性<br>            System.out.println(annotation.color());<br>            System.out.println(annotation.value());<br>            // 数组<br>            int[] arrs = annotation.array();<br>            for (int arr : arrs) {<br>                System.out.println(arr);<br>            }<br>            // 枚举<br>            Gender gender = annotation.gender();<br>            System.out.println(“性别为：” + gender);<br>            // 获取注解属性<br>            MetaAnnotation meta = annotation.metaAnnotation();<br>            System.out.println(meta.birthday());<br>        }<br>    }<br>}</p>
-<figure class="highlight clean"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs clean"><br>## Java8可重复注解的理解与应用<br><br>### 参考：  <br>基于 隔叶黄莺 的博文修改，重新实现代码  <br>https:<span class="hljs-comment">//yanbin.blog/java8-repeatable-annotations/</span><br><br><br>### 可重复注解实战<br><span class="hljs-number">1.</span> 定义 @Log 的容器注解 @Logs   <br><br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">
+## Java8可重复注解的理解与应用
+
+### 参考：  
+基于 隔叶黄莺 的博文修改，重新实现代码  
+https:&#x2F;&#x2F;yanbin.blog&#x2F;java8-repeatable-annotations&#x2F;
+
+
+### 可重复注解实战
+1. 定义 @Log 的容器注解 @Logs   
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 <p>import java.lang.annotation.*;</p>
 <p>@Retention(RetentionPolicy.RUNTIME)//注解会在class中存在，运行时可通过反射获取<br>@Documented//文档生成时，该注解将被包含在javadoc中，可去掉<br>@Target(ElementType.METHOD)//目标是方法<br>public @interface Logs {<br>    Log[] value();<br>}</p>
-<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><br><span class="hljs-number">2.</span> <span class="hljs-meta">@Repeatable</span> 是 Java8 开始提供的，现在由它来告诉 Java <span class="hljs-meta">@Logs</span> 是 <span class="hljs-meta">@Log</span> 的容器注解，不需要用嵌套的方式来使用它们了，可以在一个类型重复使用同一个注解。   <br><br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">
+2. @Repeatable 是 Java8 开始提供的，现在由它来告诉 Java @Logs 是 @Log 的容器注解，不需要用嵌套的方式来使用它们了，可以在一个类型重复使用同一个注解。   
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></div>
 <p>@Retention(RetentionPolicy.RUNTIME)//注解会在class中存在，运行时可通过反射获取<br>@Target(ElementType.METHOD)//目标是方法<br>@Documented//文档生成时，该注解将被包含在javadoc中，可去掉<br>@Repeatable(Logs.class)//这行建立了@Log和@Logs的关系<br>public @interface Log {</p>
-<div class="hljs code-wrapper"><pre><code>String value() default &quot;&quot;;
+<div class="code-wrapper"><pre><code>String value() default &quot;&quot;;
 /**
  * 模块名字
  */
@@ -376,10 +416,19 @@ String modelName() default &quot;&quot;;
  */
 String option() default &quot;&quot;;</code></pre></div>
 <p>}</p>
-<figure class="highlight reasonml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs reasonml"><br><span class="hljs-number">3.</span> 反射获得注解内容   <br>Java8 为了避免在使用重复注解时的编码与反射时的尴尬，引入了一个新的反射注解的 API get<span class="hljs-constructor">AnnotationByType(Class&lt;A&gt; <span class="hljs-params">annotationClass</span>)</span>, 该 API 的参数可接受 <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Log</span>.</span></span><span class="hljs-keyword">class</span>, 并且返回一个 @Log 的数组。   <br>&lt;span style=<span class="hljs-string">&quot;color: red&quot;</span>&gt;*&lt;/span&gt; 解释 <span class="hljs-keyword">method</span>.get<span class="hljs-constructor">AnnotationsByType(Log.<span class="hljs-params">class</span>)</span> 的执行过程:  <br>如果能找到 @Repeatable 关联的容器注解类 @Logs, 就获得 @Logs 的所有 value(类型为 @Log) 值组成的数组；  <br>如果未有关联的容器注解类，则返回 @Log 本身组成的数组(只有一个元素), 此时和 <span class="hljs-keyword">method</span>.get<span class="hljs-constructor">Annotation(Log.<span class="hljs-params">class</span>)</span> 是一样的。  <br>因此，在 Java <span class="hljs-number">8</span> 中对于可重复注解应该调用 get<span class="hljs-constructor">AnnotationsByType(Class&lt;A&gt; <span class="hljs-params">annotationClass</span>)</span> 来反射得到，如果是不可重复注解建议还是调用原来的 get<span class="hljs-constructor">Annotation(Class&lt;A&gt; <span class="hljs-params">annotationClass</span>)</span>, 因为没必要使用 get<span class="hljs-constructor">AnnotationsByType(Class&lt;A&gt; <span class="hljs-params">annotationClass</span>)</span> 获得一个空的或 <span class="hljs-number">1</span> 个元素的数组。  <br><br>最终 Java <span class="hljs-number">8</span> 推荐我们反射重复注解的途径就是下面那样:  <br><br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">
+3. 反射获得注解内容   
+Java8 为了避免在使用重复注解时的编码与反射时的尴尬，引入了一个新的反射注解的 API getAnnotationByType(Class&lt;A&gt; annotationClass), 该 API 的参数可接受 Log.class, 并且返回一个 @Log 的数组。   
+&lt;span style&#x3D;&quot;color: red&quot;&gt;*&lt;&#x2F;span&gt; 解释 method.getAnnotationsByType(Log.class) 的执行过程:  
+如果能找到 @Repeatable 关联的容器注解类 @Logs, 就获得 @Logs 的所有 value(类型为 @Log) 值组成的数组；  
+如果未有关联的容器注解类，则返回 @Log 本身组成的数组(只有一个元素), 此时和 method.getAnnotation(Log.class) 是一样的。  
+因此，在 Java 8 中对于可重复注解应该调用 getAnnotationsByType(Class&lt;A&gt; annotationClass) 来反射得到，如果是不可重复注解建议还是调用原来的 getAnnotation(Class&lt;A&gt; annotationClass), 因为没必要使用 getAnnotationsByType(Class&lt;A&gt; annotationClass) 获得一个空的或 1 个元素的数组。  
+
+最终 Java 8 推荐我们反射重复注解的途径就是下面那样:  
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 <p>import java.lang.reflect.Method;</p>
 <p>public class RepeatTest {</p>
-<div class="hljs code-wrapper"><pre><code>@Log(modelName = &quot;demo&quot;, option = &quot;test&quot;, value = &quot;ds&quot;)
+<div class="code-wrapper"><pre><code>@Log(modelName = &quot;demo&quot;, option = &quot;test&quot;, value = &quot;ds&quot;)
 @Log(modelName = &quot;demo2&quot;, option = &quot;test&quot;, value = &quot;ds&quot;)
 private static boolean demo() &#123;
     System.out.println(&quot;demo Method.&quot;);
@@ -401,7 +450,7 @@ public static void main(String[] args) &#123;
     &#125;
 &#125;</code></pre></div>
 <p>}</p>
-<div class="hljs code-wrapper"><pre><code>
+<div class="code-wrapper"><pre><code>
 #### 注意
 实际上在字节码中 Java8 前后对重复注解的内部实现也确实是一样的，@Repeatable 就是个语法糖而已。
 
@@ -460,7 +509,7 @@ public static void main(String[] args) &#123;
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2020/01/07/2020/2020-03-16-everydayEnglish/">
+                      <a href="/2020/01/07/2020/2020-03-17-everydayEnglish/">
                         <span class="hidden-mobile">每日英语</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
@@ -566,6 +615,8 @@ public static void main(String[] args) &#123;
 
 
 
+  
+    
   
 
 

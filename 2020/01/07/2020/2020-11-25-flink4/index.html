@@ -32,7 +32,15 @@
     
     
       
-      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/darcula.min.css" />
+      
+        
+          
+        
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.22.0/themes/prism.min.css" />
+      
+      
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.22.0/plugins/line-numbers/prism-line-numbers.min.css" />
+      
     
   
 
@@ -197,7 +205,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      17
+      18
        分钟
     </span>
   
@@ -231,10 +239,151 @@
             
             <div class="markdown-body">
               <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>接上节Data Source 实战，Source 就是数据的来源，中间的Compute其实就是Flink干的事情，可以做一系列的操作，操作完后就把计算后的数据结果 Sink 到某个地方。（可以是 MySQL、ElasticSearch、Kafka、Cassandra 等）。趁热打铁干起来！</p>
-<h2 id="Flink-从-Kafka-topic-中获取数据并写入mysql的-demo"><a href="#Flink-从-Kafka-topic-中获取数据并写入mysql的-demo" class="headerlink" title="Flink 从 Kafka topic 中获取数据并写入mysql的 demo"></a>Flink 从 Kafka topic 中获取数据并写入mysql的 demo</h2><h3 id="工具类往-kafka-topic-student-发送数据"><a href="#工具类往-kafka-topic-student-发送数据" class="headerlink" title="工具类往 kafka topic student 发送数据"></a>工具类往 kafka topic student 发送数据</h3><figure class="highlight arduino"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs arduino">package raines.sink;<br><br><span class="hljs-keyword">import</span> com.alibaba.fastjson.JSON;<br><span class="hljs-keyword">import</span> org.apache.kafka.clients.producer.KafkaProducer;<br><span class="hljs-keyword">import</span> org.apache.kafka.clients.producer.ProducerRecord;<br><span class="hljs-keyword">import</span> raines.mysql.Student;<br><br><span class="hljs-keyword">import</span> java.util.Properties;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 往kafka中写数据</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">KafkaUtils2</span> &#123;</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">String</span> broker_list = <span class="hljs-string">&quot;localhost:9092&quot;</span>;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">String</span> topic = <span class="hljs-string">&quot;student&quot;</span>;  <span class="hljs-comment">//kafka topic 需要和 flink 程序用同一个 topic</span><br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">writeToKafka</span><span class="hljs-params">()</span> throws InterruptedException </span>&#123;<br>        Properties props = <span class="hljs-keyword">new</span> Properties();<br>        props.<span class="hljs-built_in">put</span>(<span class="hljs-string">&quot;bootstrap.servers&quot;</span>, broker_list);<br>        props.<span class="hljs-built_in">put</span>(<span class="hljs-string">&quot;key.serializer&quot;</span>, <span class="hljs-string">&quot;org.apache.kafka.common.serialization.StringSerializer&quot;</span>);<br>        props.<span class="hljs-built_in">put</span>(<span class="hljs-string">&quot;value.serializer&quot;</span>, <span class="hljs-string">&quot;org.apache.kafka.common.serialization.StringSerializer&quot;</span>);<br>        KafkaProducer producer = <span class="hljs-keyword">new</span> KafkaProducer&lt;<span class="hljs-keyword">String</span>, <span class="hljs-keyword">String</span>&gt;(props);<br><br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">101</span>; i &lt;= <span class="hljs-number">200</span>; i++) &#123;<br>            Student student = <span class="hljs-keyword">new</span> Student(i, <span class="hljs-string">&quot;zhisheng&quot;</span> + i, <span class="hljs-string">&quot;password&quot;</span> + i, <span class="hljs-number">18</span> + i);<br>            ProducerRecord record = <span class="hljs-keyword">new</span> ProducerRecord&lt;<span class="hljs-keyword">String</span>, <span class="hljs-keyword">String</span>&gt;(topic, null, null, JSON.toJSONString(student));<br>            producer.send(record);<br>            System.out.<span class="hljs-built_in">println</span>(<span class="hljs-string">&quot;发送数据: &quot;</span> + JSON.toJSONString(student));<br>        &#125;<br>        producer.<span class="hljs-built_in">flush</span>();<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">String</span>[] args)</span> throws InterruptedException </span>&#123;<br>        writeToKafka();<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
-<h3 id="编写SinkToMySQL，该类就是-SinkFunction，继承了RichSinkFunction，然后重写了里面的方法。在invoke方法中将数据插入到MySQL-中。"><a href="#编写SinkToMySQL，该类就是-SinkFunction，继承了RichSinkFunction，然后重写了里面的方法。在invoke方法中将数据插入到MySQL-中。" class="headerlink" title="编写SinkToMySQL，该类就是 SinkFunction，继承了RichSinkFunction，然后重写了里面的方法。在invoke方法中将数据插入到MySQL 中。"></a>编写SinkToMySQL，该类就是 SinkFunction，继承了RichSinkFunction，然后重写了里面的方法。在invoke方法中将数据插入到MySQL 中。</h3><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">package</span> raines.sink;<br><br><span class="hljs-keyword">import</span> org.apache.flink.configuration.Configuration;<br><span class="hljs-keyword">import</span> org.apache.flink.streaming.api.functions.sink.RichSinkFunction;<br><span class="hljs-keyword">import</span> raines.mysql.Student;<br><br><span class="hljs-keyword">import</span> java.sql.Connection;<br><span class="hljs-keyword">import</span> java.sql.DriverManager;<br><span class="hljs-keyword">import</span> java.sql.PreparedStatement;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 该类就是 Sink Function，继承了 RichSinkFunction ，然后重写了里面的方法。在 invoke 方法中将数据插入到 MySQL 中。</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SinkToMySQL</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">RichSinkFunction</span>&lt;<span class="hljs-title">Student</span>&gt; </span>&#123;<br>    PreparedStatement ps;<br>    <span class="hljs-keyword">private</span> Connection connection;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * open() 方法中建立连接，这样不用每次 invoke 的时候都要建立连接和释放连接</span><br><span class="hljs-comment">     *</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> parameters</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@throws</span> Exception</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">open</span><span class="hljs-params">(Configuration parameters)</span> <span class="hljs-keyword">throws</span> Exception </span>&#123;<br>        <span class="hljs-keyword">super</span>.open(parameters);<br>        connection = getConnection();<br>        String sql = <span class="hljs-string">&quot;insert into Student(id, name, password, age) values(?, ?, ?, ?);&quot;</span>;<br>        ps = <span class="hljs-keyword">this</span>.connection.prepareStatement(sql);<br>    &#125;<br><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">close</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> Exception </span>&#123;<br>        <span class="hljs-keyword">super</span>.close();<br>        <span class="hljs-comment">//关闭连接和释放资源</span><br>        <span class="hljs-keyword">if</span> (connection != <span class="hljs-keyword">null</span>) &#123;<br>            connection.close();<br>        &#125;<br>        <span class="hljs-keyword">if</span> (ps != <span class="hljs-keyword">null</span>) &#123;<br>            ps.close();<br>        &#125;<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 每条数据的插入都要调用一次 invoke() 方法</span><br><span class="hljs-comment">     *</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> value</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> context</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@throws</span> Exception</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">invoke</span><span class="hljs-params">(Student value, Context context)</span> <span class="hljs-keyword">throws</span> Exception </span>&#123;<br>        <span class="hljs-comment">//组装数据，执行插入操作</span><br>        ps.setInt(<span class="hljs-number">1</span>, value.getId());<br>        ps.setString(<span class="hljs-number">2</span>, value.getName());<br>        ps.setString(<span class="hljs-number">3</span>, value.getPassword());<br>        ps.setInt(<span class="hljs-number">4</span>, value.getAge());<br>        ps.executeUpdate();<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> Connection <span class="hljs-title">getConnection</span><span class="hljs-params">()</span> </span>&#123;<br>        Connection con = <span class="hljs-keyword">null</span>;<br>        <span class="hljs-keyword">try</span> &#123;<br>            Class.forName(<span class="hljs-string">&quot;com.mysql.jdbc.Driver&quot;</span>);<br>            con = DriverManager.getConnection(<span class="hljs-string">&quot;jdbc:mysql://172.16.63.50:3306/test?useUnicode=true&amp;characterEncoding=UTF-8&quot;</span>, <span class="hljs-string">&quot;root&quot;</span>, <span class="hljs-string">&quot;mysql&quot;</span>);<br>        &#125; <span class="hljs-keyword">catch</span> (Exception e) &#123;<br>            System.out.println(<span class="hljs-string">&quot;-----------mysql get connection has exception , msg = &quot;</span>+ e.getMessage());<br>        &#125;<br>        <span class="hljs-keyword">return</span> con;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<h2 id="Flink-从-Kafka-topic-中获取数据并写入mysql的-demo"><a href="#Flink-从-Kafka-topic-中获取数据并写入mysql的-demo" class="headerlink" title="Flink 从 Kafka topic 中获取数据并写入mysql的 demo"></a>Flink 从 Kafka topic 中获取数据并写入mysql的 demo</h2><h3 id="工具类往-kafka-topic-student-发送数据"><a href="#工具类往-kafka-topic-student-发送数据" class="headerlink" title="工具类往 kafka topic student 发送数据"></a>工具类往 kafka topic student 发送数据</h3><div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">package raines.sink;
+
+import com.alibaba.fastjson.JSON;
+import org.apache.kafka.clients.producer.KafkaProducer;
+import org.apache.kafka.clients.producer.ProducerRecord;
+import raines.mysql.Student;
+
+import java.util.Properties;
+
+&#x2F;**
+ * 往kafka中写数据
+ *&#x2F;
+public class KafkaUtils2 &#123;
+    public static final String broker_list &#x3D; &quot;localhost:9092&quot;;
+    public static final String topic &#x3D; &quot;student&quot;;  &#x2F;&#x2F;kafka topic 需要和 flink 程序用同一个 topic
+
+    public static void writeToKafka() throws InterruptedException &#123;
+        Properties props &#x3D; new Properties();
+        props.put(&quot;bootstrap.servers&quot;, broker_list);
+        props.put(&quot;key.serializer&quot;, &quot;org.apache.kafka.common.serialization.StringSerializer&quot;);
+        props.put(&quot;value.serializer&quot;, &quot;org.apache.kafka.common.serialization.StringSerializer&quot;);
+        KafkaProducer producer &#x3D; new KafkaProducer&lt;String, String&gt;(props);
+
+        for (int i &#x3D; 101; i &lt;&#x3D; 200; i++) &#123;
+            Student student &#x3D; new Student(i, &quot;zhisheng&quot; + i, &quot;password&quot; + i, 18 + i);
+            ProducerRecord record &#x3D; new ProducerRecord&lt;String, String&gt;(topic, null, null, JSON.toJSONString(student));
+            producer.send(record);
+            System.out.println(&quot;发送数据: &quot; + JSON.toJSONString(student));
+        &#125;
+        producer.flush();
+    &#125;
+
+    public static void main(String[] args) throws InterruptedException &#123;
+        writeToKafka();
+    &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+<h3 id="编写SinkToMySQL，该类就是-SinkFunction，继承了RichSinkFunction，然后重写了里面的方法。在invoke方法中将数据插入到MySQL-中。"><a href="#编写SinkToMySQL，该类就是-SinkFunction，继承了RichSinkFunction，然后重写了里面的方法。在invoke方法中将数据插入到MySQL-中。" class="headerlink" title="编写SinkToMySQL，该类就是 SinkFunction，继承了RichSinkFunction，然后重写了里面的方法。在invoke方法中将数据插入到MySQL 中。"></a>编写SinkToMySQL，该类就是 SinkFunction，继承了RichSinkFunction，然后重写了里面的方法。在invoke方法中将数据插入到MySQL 中。</h3><div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">package raines.sink;
+
+import org.apache.flink.configuration.Configuration;
+import org.apache.flink.streaming.api.functions.sink.RichSinkFunction;
+import raines.mysql.Student;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+
+&#x2F;**
+ * 该类就是 Sink Function，继承了 RichSinkFunction ，然后重写了里面的方法。在 invoke 方法中将数据插入到 MySQL 中。
+ *&#x2F;
+public class SinkToMySQL extends RichSinkFunction&lt;Student&gt; &#123;
+    PreparedStatement ps;
+    private Connection connection;
+
+    &#x2F;**
+     * open() 方法中建立连接，这样不用每次 invoke 的时候都要建立连接和释放连接
+     *
+     * @param parameters
+     * @throws Exception
+     *&#x2F;
+    @Override
+    public void open(Configuration parameters) throws Exception &#123;
+        super.open(parameters);
+        connection &#x3D; getConnection();
+        String sql &#x3D; &quot;insert into Student(id, name, password, age) values(?, ?, ?, ?);&quot;;
+        ps &#x3D; this.connection.prepareStatement(sql);
+    &#125;
+
+    @Override
+    public void close() throws Exception &#123;
+        super.close();
+        &#x2F;&#x2F;关闭连接和释放资源
+        if (connection !&#x3D; null) &#123;
+            connection.close();
+        &#125;
+        if (ps !&#x3D; null) &#123;
+            ps.close();
+        &#125;
+    &#125;
+
+    &#x2F;**
+     * 每条数据的插入都要调用一次 invoke() 方法
+     *
+     * @param value
+     * @param context
+     * @throws Exception
+     *&#x2F;
+    @Override
+    public void invoke(Student value, Context context) throws Exception &#123;
+        &#x2F;&#x2F;组装数据，执行插入操作
+        ps.setInt(1, value.getId());
+        ps.setString(2, value.getName());
+        ps.setString(3, value.getPassword());
+        ps.setInt(4, value.getAge());
+        ps.executeUpdate();
+    &#125;
+
+    private static Connection getConnection() &#123;
+        Connection con &#x3D; null;
+        try &#123;
+            Class.forName(&quot;com.mysql.jdbc.Driver&quot;);
+            con &#x3D; DriverManager.getConnection(&quot;jdbc:mysql:&#x2F;&#x2F;172.16.63.50:3306&#x2F;test?useUnicode&#x3D;true&amp;characterEncoding&#x3D;UTF-8&quot;, &quot;root&quot;, &quot;mysql&quot;);
+        &#125; catch (Exception e) &#123;
+            System.out.println(&quot;-----------mysql get connection has exception , msg &#x3D; &quot;+ e.getMessage());
+        &#125;
+        return con;
+    &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 <h3 id="Flink-程序"><a href="#Flink-程序" class="headerlink" title="Flink 程序"></a>Flink 程序</h3><p>这里的 source 是从 kafka 读取数据的，然后 Flink 从 Kafka 读取到数据（JSON）后用阿里 fastjson 来解析成 student 对象，然后在 addSink 中使用我们创建的 SinkToMySQL，这样就可以把数据存储到 MySQL 了。</p>
-<figure class="highlight arduino"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs arduino">package raines.sink;<br><br><span class="hljs-keyword">import</span> com.alibaba.fastjson.JSON;<br><span class="hljs-keyword">import</span> org.apache.flink.api.common.serialization.SimpleStringSchema;<br><span class="hljs-keyword">import</span> org.apache.flink.streaming.api.datastream.SingleOutputStreamOperator;<br><span class="hljs-keyword">import</span> org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;<br><span class="hljs-keyword">import</span> org.apache.flink.streaming.connectors.kafka.FlinkKafkaConsumer011;<br><span class="hljs-keyword">import</span> raines.mysql.Student;<br><br><span class="hljs-keyword">import</span> java.util.Properties;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 这里的 source 是从 kafka 读取数据的，然后 Flink 从 Kafka 读取到数据（JSON）后用阿里 fastjson 来解析成 student 对象，然后在 addSink 中使用我们创建的 SinkToMySQL，这样就可以把数据存储到 MySQL 了。</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Main3</span> &#123;</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">String</span>[] args)</span> throws Exception </span>&#123;<br>        <span class="hljs-keyword">final</span> StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();<br><br>        Properties props = <span class="hljs-keyword">new</span> Properties();<br>        props.<span class="hljs-built_in">put</span>(<span class="hljs-string">&quot;bootstrap.servers&quot;</span>, <span class="hljs-string">&quot;localhost:9092&quot;</span>);<br>        props.<span class="hljs-built_in">put</span>(<span class="hljs-string">&quot;zookeeper.connect&quot;</span>, <span class="hljs-string">&quot;localhost:2181&quot;</span>);<br>        props.<span class="hljs-built_in">put</span>(<span class="hljs-string">&quot;group.id&quot;</span>, <span class="hljs-string">&quot;metric-group&quot;</span>);<br>        props.<span class="hljs-built_in">put</span>(<span class="hljs-string">&quot;key.deserializer&quot;</span>, <span class="hljs-string">&quot;org.apache.kafka.common.serialization.StringDeserializer&quot;</span>);<br>        props.<span class="hljs-built_in">put</span>(<span class="hljs-string">&quot;value.deserializer&quot;</span>, <span class="hljs-string">&quot;org.apache.kafka.common.serialization.StringDeserializer&quot;</span>);<br>        props.<span class="hljs-built_in">put</span>(<span class="hljs-string">&quot;auto.offset.reset&quot;</span>, <span class="hljs-string">&quot;latest&quot;</span>);<br><br>        SingleOutputStreamOperator&lt;Student&gt; student = env.addSource(<span class="hljs-keyword">new</span> FlinkKafkaConsumer011&lt;&gt;(<br>                <span class="hljs-string">&quot;student&quot;</span>,   <span class="hljs-comment">//这个 kafka topic 需要和上面的工具类的 topic 一致</span><br>                <span class="hljs-keyword">new</span> SimpleStringSchema(),<br>                props)).setParallelism(<span class="hljs-number">1</span>)<br>                .<span class="hljs-built_in">map</span>(<span class="hljs-built_in">string</span> -&gt; JSON.parseObject(<span class="hljs-built_in">string</span>, Student.class)); <span class="hljs-comment">//Fastjson 解析字符串成 student 对象</span><br><br>        student.addSink(<span class="hljs-keyword">new</span> SinkToMySQL()); <span class="hljs-comment">//数据 sink 到 mysql</span><br><br>        env.execute(<span class="hljs-string">&quot;Flink add sink&quot;</span>);<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">package raines.sink;
+
+import com.alibaba.fastjson.JSON;
+import org.apache.flink.api.common.serialization.SimpleStringSchema;
+import org.apache.flink.streaming.api.datastream.SingleOutputStreamOperator;
+import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
+import org.apache.flink.streaming.connectors.kafka.FlinkKafkaConsumer011;
+import raines.mysql.Student;
+
+import java.util.Properties;
+
+&#x2F;**
+ * 这里的 source 是从 kafka 读取数据的，然后 Flink 从 Kafka 读取到数据（JSON）后用阿里 fastjson 来解析成 student 对象，然后在 addSink 中使用我们创建的 SinkToMySQL，这样就可以把数据存储到 MySQL 了。
+ *&#x2F;
+public class Main3 &#123;
+    public static void main(String[] args) throws Exception &#123;
+        final StreamExecutionEnvironment env &#x3D; StreamExecutionEnvironment.getExecutionEnvironment();
+
+        Properties props &#x3D; new Properties();
+        props.put(&quot;bootstrap.servers&quot;, &quot;localhost:9092&quot;);
+        props.put(&quot;zookeeper.connect&quot;, &quot;localhost:2181&quot;);
+        props.put(&quot;group.id&quot;, &quot;metric-group&quot;);
+        props.put(&quot;key.deserializer&quot;, &quot;org.apache.kafka.common.serialization.StringDeserializer&quot;);
+        props.put(&quot;value.deserializer&quot;, &quot;org.apache.kafka.common.serialization.StringDeserializer&quot;);
+        props.put(&quot;auto.offset.reset&quot;, &quot;latest&quot;);
+
+        SingleOutputStreamOperator&lt;Student&gt; student &#x3D; env.addSource(new FlinkKafkaConsumer011&lt;&gt;(
+                &quot;student&quot;,   &#x2F;&#x2F;这个 kafka topic 需要和上面的工具类的 topic 一致
+                new SimpleStringSchema(),
+                props)).setParallelism(1)
+                .map(string -&gt; JSON.parseObject(string, Student.class)); &#x2F;&#x2F;Fastjson 解析字符串成 student 对象
+
+        student.addSink(new SinkToMySQL()); &#x2F;&#x2F;数据 sink 到 mysql
+
+        env.execute(&quot;Flink add sink&quot;);
+    &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 <h3 id="运行-Flink-程序，然后再运行-KafkaUtils2-java-工具类，这样就可以了。"><a href="#运行-Flink-程序，然后再运行-KafkaUtils2-java-工具类，这样就可以了。" class="headerlink" title="运行 Flink 程序，然后再运行 KafkaUtils2.java 工具类，这样就可以了。"></a>运行 Flink 程序，然后再运行 KafkaUtils2.java 工具类，这样就可以了。</h3><p>该demo展示如何自定义 Sink Function，将从 Kafka 的数据 Sink 到 MySQL 中，如果你项目中有其他的数据来源，你也可以换成对应的 Source，也有可能你的 Sink 是到其他的地方或者其他不同的方式，那么依旧是这个套路：继承 RichSinkFunction 抽象类，重写 invoke 方法。</p>
 
             </div>
@@ -273,8 +422,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2020/01/07/2020/2020-11-25-flink5/">
-                        <span class="hidden-mobile">Flink之Data transformation(转换)</span>
+                      <a href="/2020/01/07/2020/2020-11-25-hdfsShell/">
+                        <span class="hidden-mobile">HDFS常用Shell操作</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -379,6 +528,8 @@
 
 
 
+  
+    
   
 
 

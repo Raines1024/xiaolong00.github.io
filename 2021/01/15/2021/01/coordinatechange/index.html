@@ -32,7 +32,15 @@
     
     
       
-      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/darcula.min.css" />
+      
+        
+          
+        
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.22.0/themes/prism.min.css" />
+      
+      
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.22.0/plugins/line-numbers/prism-line-numbers.min.css" />
+      
     
   
 
@@ -187,7 +195,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.2k 字
+      1.3k 字
     </span>
   
 
@@ -197,7 +205,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      21
+      24
        分钟
     </span>
   
@@ -231,8 +239,235 @@
             
             <div class="markdown-body">
               <h2 id="使用：Mysql连接封装脚本"><a href="#使用：Mysql连接封装脚本" class="headerlink" title="使用：Mysql连接封装脚本"></a>使用：Mysql连接封装脚本</h2><h2 id="地理坐标转换"><a href="#地理坐标转换" class="headerlink" title="地理坐标转换"></a>地理坐标转换</h2><h3 id="通用地理位置计算工具类"><a href="#通用地理位置计算工具类" class="headerlink" title="通用地理位置计算工具类"></a>通用地理位置计算工具类</h3><ul>
-<li>已使用将火星坐标转wgs84坐标系，使用AbcMapToGpsExact方法，结果比较精确，会丢失精度。  <figure class="highlight arduino"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs arduino"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MapUtil</span> &#123;</span><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> Logger logger = LoggerFactory.getLogger(MapUtil.class);<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">double</span> x_pi = <span class="hljs-number">3.14159265358979324</span> * <span class="hljs-number">3000.0</span> / <span class="hljs-number">180.0</span>;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 计算两经纬度点之间的距离（单位：米）</span><br><span class="hljs-comment">     *</span><br><span class="hljs-comment">     * @param lng1 经度1</span><br><span class="hljs-comment">     * @param lat1 纬度1</span><br><span class="hljs-comment">     * @param lng2 经度2</span><br><span class="hljs-comment">     * @param lat2 纬度2</span><br><span class="hljs-comment">     * @return 距离，单位：米</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">double</span> <span class="hljs-title">getDistance</span><span class="hljs-params">(<span class="hljs-keyword">double</span> lng1, <span class="hljs-keyword">double</span> lat1, <span class="hljs-keyword">double</span> lng2, <span class="hljs-keyword">double</span> lat2)</span> </span>&#123;<br>        <span class="hljs-keyword">double</span> radLat1 = Math.toRadians(lat1);<br>        <span class="hljs-keyword">double</span> radLat2 = Math.toRadians(lat2);<br>        <span class="hljs-keyword">double</span> a = radLat1 - radLat2;<br>        <span class="hljs-keyword">double</span> b = Math.toRadians(lng1) - Math.toRadians(lng2);<br>        <span class="hljs-keyword">double</span> s = <span class="hljs-number">2</span> * Math.<span class="hljs-built_in">asin</span>(Math.<span class="hljs-built_in">sqrt</span>(Math.<span class="hljs-built_in">pow</span>(Math.<span class="hljs-built_in">sin</span>(a / <span class="hljs-number">2</span>), <span class="hljs-number">2</span>) + Math.<span class="hljs-built_in">cos</span>(radLat1)<br>                * Math.<span class="hljs-built_in">cos</span>(radLat2) * Math.<span class="hljs-built_in">pow</span>(Math.<span class="hljs-built_in">sin</span>(b / <span class="hljs-number">2</span>), <span class="hljs-number">2</span>)));<br>        s = s * <span class="hljs-number">6378137.0</span>;<span class="hljs-comment">// 取WGS84标准参考椭球中的地球长半径(单位:m)</span><br>        s = Math.round(s * <span class="hljs-number">10000</span>) / <span class="hljs-number">10000</span>;<br>        <span class="hljs-keyword">return</span> s;<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 把gps坐标转换成百度坐标 (BD-09)</span><br><span class="hljs-comment">     *</span><br><span class="hljs-comment">     * @param gpsLatLng</span><br><span class="hljs-comment">     * @return</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> LatLng <span class="hljs-title">gpsToBaiDu</span><span class="hljs-params">(LatLng gpsLatLng)</span> </span>&#123;<br>        LatLng ggLatLng = GpsToAbcMap(gpsLatLng);<br>        <span class="hljs-keyword">return</span> ggToBaiDu(ggLatLng);<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 把火星坐标转换成百度坐标 (BD-09)</span><br><span class="hljs-comment">     *</span><br><span class="hljs-comment">     * @param gpsLatLng</span><br><span class="hljs-comment">     * @return</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> LatLng <span class="hljs-title">ggToBaiDu</span><span class="hljs-params">(LatLng gpsLatLng)</span> </span>&#123;<br>        LatLng bdLatLng = null;<br>        <span class="hljs-keyword">double</span> huo_x = gpsLatLng.longitude;<br>        <span class="hljs-keyword">double</span> huo_y = gpsLatLng.latitude;<br>        <span class="hljs-keyword">double</span> z = Math.<span class="hljs-built_in">sqrt</span>(huo_x * huo_x + huo_y * huo_y) + <span class="hljs-number">0.00002</span> * Math.<span class="hljs-built_in">sin</span>(huo_y * x_pi);<br>        <span class="hljs-keyword">double</span> theta = Math.<span class="hljs-built_in">atan2</span>(huo_y, huo_x) + <span class="hljs-number">0.000003</span> * Math.<span class="hljs-built_in">cos</span>(huo_x * x_pi);<br>        bdLatLng = <span class="hljs-keyword">new</span> LatLng(z * Math.<span class="hljs-built_in">sin</span>(theta) + <span class="hljs-number">0.006</span>, z * Math.<span class="hljs-built_in">cos</span>(theta) + <span class="hljs-number">0.0065</span>);<br>        <span class="hljs-keyword">return</span> bdLatLng;<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 将百度坐标转换为Gps坐标</span><br><span class="hljs-comment">     *</span><br><span class="hljs-comment">     * @param baiduLatLng</span><br><span class="hljs-comment">     * @return</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> LatLng <span class="hljs-title">baiduToGps</span><span class="hljs-params">(LatLng baiduLatLng)</span> </span>&#123;<br>        LatLng ggLatLng = baiDuToGg(baiduLatLng);<br>        <span class="hljs-keyword">return</span> AbcMapToGpsExact(ggLatLng);<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 将百度坐标 (BD-09)转换为火星坐标</span><br><span class="hljs-comment">     *</span><br><span class="hljs-comment">     * @param bdLatLng</span><br><span class="hljs-comment">     * @return</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> LatLng <span class="hljs-title">baiDuToGg</span><span class="hljs-params">(LatLng bdLatLng)</span> </span>&#123;<br>        LatLng googleGps = null;<br>        <span class="hljs-keyword">double</span> bd_x = bdLatLng.longitude - <span class="hljs-number">0.0065</span>;<br>        <span class="hljs-keyword">double</span> bd_y = bdLatLng.latitude - <span class="hljs-number">0.006</span>;<br>        <span class="hljs-keyword">double</span> z = Math.<span class="hljs-built_in">sqrt</span>(bd_x * bd_x + bd_y * bd_y) - <span class="hljs-number">0.00002</span> * Math.<span class="hljs-built_in">sin</span>(bd_y * x_pi);<br>        <span class="hljs-keyword">double</span> theta = Math.<span class="hljs-built_in">atan2</span>(bd_y, bd_x) - <span class="hljs-number">0.000003</span> * Math.<span class="hljs-built_in">cos</span>(bd_x * x_pi);<br>        googleGps = <span class="hljs-keyword">new</span> LatLng(z * Math.<span class="hljs-built_in">sin</span>(theta), z * Math.<span class="hljs-built_in">cos</span>(theta));<br>        <span class="hljs-keyword">return</span> googleGps;<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 求出gps转高德坐标的偏移量</span><br><span class="hljs-comment">     *</span><br><span class="hljs-comment">     * @param latLng</span><br><span class="hljs-comment">     * @return</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> LatLng <span class="hljs-title">abcDelta</span><span class="hljs-params">(LatLng latLng)</span> </span>&#123;<br>        LatLng reLatLng;<br>        <span class="hljs-keyword">if</span> (outOfChina(latLng.latitude, latLng.longitude)) &#123;<br>            reLatLng = <span class="hljs-keyword">new</span> LatLng(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>);<br>            <span class="hljs-keyword">return</span> reLatLng;<br>        &#125;<br>        <span class="hljs-keyword">double</span> dLat = transformLat(latLng.longitude - <span class="hljs-number">105.0</span>, latLng.latitude - <span class="hljs-number">35.0</span>);<br>        <span class="hljs-keyword">double</span> dLon = transformLon(latLng.longitude - <span class="hljs-number">105.0</span>, latLng.latitude - <span class="hljs-number">35.0</span>);<br>        <span class="hljs-keyword">double</span> radLat = latLng.latitude / <span class="hljs-number">180.0</span> * pi;<br>        <span class="hljs-keyword">double</span> magic = Math.<span class="hljs-built_in">sin</span>(radLat);<br>        magic = <span class="hljs-number">1</span> - ee * magic * magic;<br>        <span class="hljs-keyword">double</span> sqrtMagic = Math.<span class="hljs-built_in">sqrt</span>(magic);<br>        dLat = (dLat * <span class="hljs-number">180.0</span>) / ((a * (<span class="hljs-number">1</span> - ee)) / (magic * sqrtMagic) * pi);<br>        dLon = (dLon * <span class="hljs-number">180.0</span>) / (a / sqrtMagic * Math.<span class="hljs-built_in">cos</span>(radLat) * pi);<br>        reLatLng = <span class="hljs-keyword">new</span> LatLng(dLat, dLon);<br>        <span class="hljs-keyword">return</span> reLatLng;<br><br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 将高德坐标转换为gps坐标，结果比较精确</span><br><span class="hljs-comment">     *</span><br><span class="hljs-comment">     * @param abcLatLng</span><br><span class="hljs-comment">     * @return</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> LatLng <span class="hljs-title">AbcMapToGpsExact</span><span class="hljs-params">(LatLng abcLatLng)</span> </span>&#123;<br>        <span class="hljs-keyword">double</span> initDelta = <span class="hljs-number">0.01</span>;<br>        <span class="hljs-keyword">double</span> threshold = <span class="hljs-number">0.000000001</span>;<br>        <span class="hljs-keyword">double</span> dLat = initDelta, dLon = initDelta;<br>        <span class="hljs-keyword">double</span> mLat = abcLatLng.latitude - dLat;<br>        <span class="hljs-keyword">double</span> mLon = abcLatLng.longitude - dLon;<br>        <span class="hljs-keyword">double</span> pLat = abcLatLng.latitude + dLat;<br>        <span class="hljs-keyword">double</span> pLon = abcLatLng.longitude + dLon;<br>        <span class="hljs-keyword">double</span> wgsLat, wgsLon, i = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">while</span> (<span class="hljs-literal">true</span>) &#123;<br>            wgsLat = (mLat + pLat) / <span class="hljs-number">2</span>;<br>            wgsLon = (mLon + pLon) / <span class="hljs-number">2</span>;<br>            LatLng tmp = GpsToAbcMap(<span class="hljs-keyword">new</span> LatLng(wgsLat, wgsLon));<br>            dLat = tmp.latitude - abcLatLng.latitude;<br>            dLon = tmp.longitude - abcLatLng.longitude;<br>            <span class="hljs-keyword">if</span> ((Math.<span class="hljs-built_in">abs</span>(dLat) &lt; threshold) &amp;&amp; (Math.<span class="hljs-built_in">abs</span>(dLon) &lt; threshold))<br>                <span class="hljs-keyword">break</span>;<br><br>            <span class="hljs-keyword">if</span> (dLat &gt; <span class="hljs-number">0</span>) pLat = wgsLat;<br>            <span class="hljs-keyword">else</span> mLat = wgsLat;<br>            <span class="hljs-keyword">if</span> (dLon &gt; <span class="hljs-number">0</span>) pLon = wgsLon;<br>            <span class="hljs-keyword">else</span> mLon = wgsLon;<br><br>            <span class="hljs-keyword">if</span> (++i &gt; <span class="hljs-number">10000</span>) <span class="hljs-keyword">break</span>;<br>        &#125;<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> LatLng(wgsLat, wgsLon);<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 采用模糊算法计算将高德坐标转换为gps坐标，结果不精确</span><br><span class="hljs-comment">     *</span><br><span class="hljs-comment">     * @param abcLatLng</span><br><span class="hljs-comment">     * @return</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> LatLng <span class="hljs-title">AbcMapToGps</span><span class="hljs-params">(LatLng abcLatLng)</span> </span>&#123;<br>        LatLng gpsLatLng;<br>        LatLng delta = abcDelta(abcLatLng);<br>        gpsLatLng = <span class="hljs-keyword">new</span> LatLng(abcLatLng.latitude - delta.latitude, abcLatLng.longitude - delta.longitude);<br>        <span class="hljs-keyword">return</span> gpsLatLng;<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 将gps坐标转换为高德坐标</span><br><span class="hljs-comment">     *</span><br><span class="hljs-comment">     * @param gpsLatLng</span><br><span class="hljs-comment">     * @return</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> LatLng <span class="hljs-title">GpsToAbcMap</span><span class="hljs-params">(LatLng gpsLatLng)</span> </span>&#123;<br>        LatLng abcLatLng = null;<br>        <span class="hljs-keyword">if</span> (outOfChina(gpsLatLng.latitude, gpsLatLng.longitude)) &#123;<br>            abcLatLng = <span class="hljs-keyword">new</span> LatLng(gpsLatLng.latitude, gpsLatLng.longitude);<br>            <span class="hljs-keyword">return</span> abcLatLng;<br>        &#125;<br>        <span class="hljs-keyword">double</span> dLat = transformLat(gpsLatLng.longitude - <span class="hljs-number">105.0</span>, gpsLatLng.latitude - <span class="hljs-number">35.0</span>);<br>        <span class="hljs-keyword">double</span> dLon = transformLon(gpsLatLng.longitude - <span class="hljs-number">105.0</span>, gpsLatLng.latitude - <span class="hljs-number">35.0</span>);<br>        <span class="hljs-keyword">double</span> radLat = gpsLatLng.latitude / <span class="hljs-number">180.0</span> * pi;<br>        <span class="hljs-keyword">double</span> magic = Math.<span class="hljs-built_in">sin</span>(radLat);<br>        magic = <span class="hljs-number">1</span> - ee * magic * magic;<br>        <span class="hljs-keyword">double</span> sqrtMagic = Math.<span class="hljs-built_in">sqrt</span>(magic);<br>        dLat = (dLat * <span class="hljs-number">180.0</span>) / ((a * (<span class="hljs-number">1</span> - ee)) / (magic * sqrtMagic) * pi);<br>        dLon = (dLon * <span class="hljs-number">180.0</span>) / (a / sqrtMagic * Math.<span class="hljs-built_in">cos</span>(radLat) * pi);<br>        abcLatLng = <span class="hljs-keyword">new</span> LatLng(gpsLatLng.latitude + dLat, gpsLatLng.longitude + dLon);<br>        <span class="hljs-keyword">return</span> abcLatLng;<br>    &#125;<br><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">double</span> pi = <span class="hljs-number">3.14159265358979324</span>;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">double</span> a = <span class="hljs-number">6378245.0</span>;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">double</span> ee = <span class="hljs-number">0.00669342162296594323</span>;<br><br>    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">outOfChina</span><span class="hljs-params">(<span class="hljs-keyword">double</span> lat, <span class="hljs-keyword">double</span> lon)</span> </span>&#123;<br>        <span class="hljs-keyword">if</span> (lon &lt; <span class="hljs-number">72.004</span> || lon &gt; <span class="hljs-number">137.8347</span>)<br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>        <span class="hljs-keyword">if</span> (lat &lt; <span class="hljs-number">0.8293</span> || lat &gt; <span class="hljs-number">55.8271</span>)<br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">double</span> <span class="hljs-title">transformLat</span><span class="hljs-params">(<span class="hljs-keyword">double</span> x, <span class="hljs-keyword">double</span> y)</span> </span>&#123;<br>        <span class="hljs-keyword">double</span> ret = <span class="hljs-number">-100.0</span> + <span class="hljs-number">2.0</span> * x + <span class="hljs-number">3.0</span> * y + <span class="hljs-number">0.2</span> * y * y + <span class="hljs-number">0.1</span> * x * y + <span class="hljs-number">0.2</span> * Math.<span class="hljs-built_in">sqrt</span>(Math.<span class="hljs-built_in">abs</span>(x));<br>        ret += (<span class="hljs-number">20.0</span> * Math.<span class="hljs-built_in">sin</span>(<span class="hljs-number">6.0</span> * x * pi) + <span class="hljs-number">20.0</span> * Math.<span class="hljs-built_in">sin</span>(<span class="hljs-number">2.0</span> * x * pi)) * <span class="hljs-number">2.0</span> / <span class="hljs-number">3.0</span>;<br>        ret += (<span class="hljs-number">20.0</span> * Math.<span class="hljs-built_in">sin</span>(y * pi) + <span class="hljs-number">40.0</span> * Math.<span class="hljs-built_in">sin</span>(y / <span class="hljs-number">3.0</span> * pi)) * <span class="hljs-number">2.0</span> / <span class="hljs-number">3.0</span>;<br>        ret += (<span class="hljs-number">160.0</span> * Math.<span class="hljs-built_in">sin</span>(y / <span class="hljs-number">12.0</span> * pi) + <span class="hljs-number">320</span> * Math.<span class="hljs-built_in">sin</span>(y * pi / <span class="hljs-number">30.0</span>)) * <span class="hljs-number">2.0</span> / <span class="hljs-number">3.0</span>;<br>        <span class="hljs-keyword">return</span> ret;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">double</span> <span class="hljs-title">transformLon</span><span class="hljs-params">(<span class="hljs-keyword">double</span> x, <span class="hljs-keyword">double</span> y)</span> </span>&#123;<br>        <span class="hljs-keyword">double</span> ret = <span class="hljs-number">300.0</span> + x + <span class="hljs-number">2.0</span> * y + <span class="hljs-number">0.1</span> * x * x + <span class="hljs-number">0.1</span> * x * y + <span class="hljs-number">0.1</span> * Math.<span class="hljs-built_in">sqrt</span>(Math.<span class="hljs-built_in">abs</span>(x));<br>        ret += (<span class="hljs-number">20.0</span> * Math.<span class="hljs-built_in">sin</span>(<span class="hljs-number">6.0</span> * x * pi) + <span class="hljs-number">20.0</span> * Math.<span class="hljs-built_in">sin</span>(<span class="hljs-number">2.0</span> * x * pi)) * <span class="hljs-number">2.0</span> / <span class="hljs-number">3.0</span>;<br>        ret += (<span class="hljs-number">20.0</span> * Math.<span class="hljs-built_in">sin</span>(x * pi) + <span class="hljs-number">40.0</span> * Math.<span class="hljs-built_in">sin</span>(x / <span class="hljs-number">3.0</span> * pi)) * <span class="hljs-number">2.0</span> / <span class="hljs-number">3.0</span>;<br>        ret += (<span class="hljs-number">150.0</span> * Math.<span class="hljs-built_in">sin</span>(x / <span class="hljs-number">12.0</span> * pi) + <span class="hljs-number">300.0</span> * Math.<span class="hljs-built_in">sin</span>(x / <span class="hljs-number">30.0</span> * pi)) * <span class="hljs-number">2.0</span> / <span class="hljs-number">3.0</span>;<br>        <span class="hljs-keyword">return</span> ret;<br>    &#125;<br>&#125;<br><br></code></pre></div></td></tr></table></figure>
-<h3 id="经纬度坐标类"><a href="#经纬度坐标类" class="headerlink" title="经纬度坐标类"></a>经纬度坐标类</h3><figure class="highlight arduino"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs arduino"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">LatLng</span> &#123;</span><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">String</span> a = LatLng.class.getSimpleName();<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">double</span> latitude;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">double</span> longitude;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     *</span><br><span class="hljs-comment">     * @param lat latitude</span><br><span class="hljs-comment">     * @param lng longitude</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">LatLng</span><span class="hljs-params">(<span class="hljs-keyword">double</span> lat, <span class="hljs-keyword">double</span> lng)</span> </span>&#123;<br>        <span class="hljs-keyword">int</span> var5 = (<span class="hljs-keyword">int</span>) (lat * <span class="hljs-number">1000000.0</span>D);<br>        <span class="hljs-keyword">int</span> var6 = (<span class="hljs-keyword">int</span>) (lng * <span class="hljs-number">1000000.0</span>D);<br>        <span class="hljs-keyword">this</span>.latitude = (<span class="hljs-keyword">double</span>) var5 / <span class="hljs-number">1000000.0</span>D;<br>        <span class="hljs-keyword">this</span>.longitude = (<span class="hljs-keyword">double</span>) var6 / <span class="hljs-number">1000000.0</span>D;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">String</span> <span class="hljs-title">toString</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-keyword">String</span> var1 = <span class="hljs-keyword">new</span> <span class="hljs-keyword">String</span>(<span class="hljs-string">&quot;latitude: &quot;</span>);<br>        var1 = var1 + <span class="hljs-keyword">this</span>.latitude;<br>        var1 = var1 + <span class="hljs-string">&quot;, longitude: &quot;</span>;<br>        var1 = var1 + <span class="hljs-keyword">this</span>.longitude;<br>        <span class="hljs-keyword">return</span> var1;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<li>已使用将火星坐标转wgs84坐标系，使用AbcMapToGpsExact方法，结果比较精确，会丢失精度。  <div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">public class MapUtil &#123;
+    private static final Logger logger &#x3D; LoggerFactory.getLogger(MapUtil.class);
+    private static double x_pi &#x3D; 3.14159265358979324 * 3000.0 &#x2F; 180.0;
+
+    &#x2F;**
+     * 计算两经纬度点之间的距离（单位：米）
+     *
+     * @param lng1 经度1
+     * @param lat1 纬度1
+     * @param lng2 经度2
+     * @param lat2 纬度2
+     * @return 距离，单位：米
+     *&#x2F;
+    public static double getDistance(double lng1, double lat1, double lng2, double lat2) &#123;
+        double radLat1 &#x3D; Math.toRadians(lat1);
+        double radLat2 &#x3D; Math.toRadians(lat2);
+        double a &#x3D; radLat1 - radLat2;
+        double b &#x3D; Math.toRadians(lng1) - Math.toRadians(lng2);
+        double s &#x3D; 2 * Math.asin(Math.sqrt(Math.pow(Math.sin(a &#x2F; 2), 2) + Math.cos(radLat1)
+                * Math.cos(radLat2) * Math.pow(Math.sin(b &#x2F; 2), 2)));
+        s &#x3D; s * 6378137.0;&#x2F;&#x2F; 取WGS84标准参考椭球中的地球长半径(单位:m)
+        s &#x3D; Math.round(s * 10000) &#x2F; 10000;
+        return s;
+    &#125;
+
+    &#x2F;**
+     * 把gps坐标转换成百度坐标 (BD-09)
+     *
+     * @param gpsLatLng
+     * @return
+     *&#x2F;
+    public static LatLng gpsToBaiDu(LatLng gpsLatLng) &#123;
+        LatLng ggLatLng &#x3D; GpsToAbcMap(gpsLatLng);
+        return ggToBaiDu(ggLatLng);
+    &#125;
+
+    &#x2F;**
+     * 把火星坐标转换成百度坐标 (BD-09)
+     *
+     * @param gpsLatLng
+     * @return
+     *&#x2F;
+    public static LatLng ggToBaiDu(LatLng gpsLatLng) &#123;
+        LatLng bdLatLng &#x3D; null;
+        double huo_x &#x3D; gpsLatLng.longitude;
+        double huo_y &#x3D; gpsLatLng.latitude;
+        double z &#x3D; Math.sqrt(huo_x * huo_x + huo_y * huo_y) + 0.00002 * Math.sin(huo_y * x_pi);
+        double theta &#x3D; Math.atan2(huo_y, huo_x) + 0.000003 * Math.cos(huo_x * x_pi);
+        bdLatLng &#x3D; new LatLng(z * Math.sin(theta) + 0.006, z * Math.cos(theta) + 0.0065);
+        return bdLatLng;
+    &#125;
+
+    &#x2F;**
+     * 将百度坐标转换为Gps坐标
+     *
+     * @param baiduLatLng
+     * @return
+     *&#x2F;
+    public static LatLng baiduToGps(LatLng baiduLatLng) &#123;
+        LatLng ggLatLng &#x3D; baiDuToGg(baiduLatLng);
+        return AbcMapToGpsExact(ggLatLng);
+    &#125;
+
+    &#x2F;**
+     * 将百度坐标 (BD-09)转换为火星坐标
+     *
+     * @param bdLatLng
+     * @return
+     *&#x2F;
+    public static LatLng baiDuToGg(LatLng bdLatLng) &#123;
+        LatLng googleGps &#x3D; null;
+        double bd_x &#x3D; bdLatLng.longitude - 0.0065;
+        double bd_y &#x3D; bdLatLng.latitude - 0.006;
+        double z &#x3D; Math.sqrt(bd_x * bd_x + bd_y * bd_y) - 0.00002 * Math.sin(bd_y * x_pi);
+        double theta &#x3D; Math.atan2(bd_y, bd_x) - 0.000003 * Math.cos(bd_x * x_pi);
+        googleGps &#x3D; new LatLng(z * Math.sin(theta), z * Math.cos(theta));
+        return googleGps;
+    &#125;
+
+    &#x2F;**
+     * 求出gps转高德坐标的偏移量
+     *
+     * @param latLng
+     * @return
+     *&#x2F;
+    private static LatLng abcDelta(LatLng latLng) &#123;
+        LatLng reLatLng;
+        if (outOfChina(latLng.latitude, latLng.longitude)) &#123;
+            reLatLng &#x3D; new LatLng(0, 0);
+            return reLatLng;
+        &#125;
+        double dLat &#x3D; transformLat(latLng.longitude - 105.0, latLng.latitude - 35.0);
+        double dLon &#x3D; transformLon(latLng.longitude - 105.0, latLng.latitude - 35.0);
+        double radLat &#x3D; latLng.latitude &#x2F; 180.0 * pi;
+        double magic &#x3D; Math.sin(radLat);
+        magic &#x3D; 1 - ee * magic * magic;
+        double sqrtMagic &#x3D; Math.sqrt(magic);
+        dLat &#x3D; (dLat * 180.0) &#x2F; ((a * (1 - ee)) &#x2F; (magic * sqrtMagic) * pi);
+        dLon &#x3D; (dLon * 180.0) &#x2F; (a &#x2F; sqrtMagic * Math.cos(radLat) * pi);
+        reLatLng &#x3D; new LatLng(dLat, dLon);
+        return reLatLng;
+
+    &#125;
+
+    &#x2F;**
+     * 将高德坐标转换为gps坐标，结果比较精确
+     *
+     * @param abcLatLng
+     * @return
+     *&#x2F;
+    public static LatLng AbcMapToGpsExact(LatLng abcLatLng) &#123;
+        double initDelta &#x3D; 0.01;
+        double threshold &#x3D; 0.000000001;
+        double dLat &#x3D; initDelta, dLon &#x3D; initDelta;
+        double mLat &#x3D; abcLatLng.latitude - dLat;
+        double mLon &#x3D; abcLatLng.longitude - dLon;
+        double pLat &#x3D; abcLatLng.latitude + dLat;
+        double pLon &#x3D; abcLatLng.longitude + dLon;
+        double wgsLat, wgsLon, i &#x3D; 0;
+        while (true) &#123;
+            wgsLat &#x3D; (mLat + pLat) &#x2F; 2;
+            wgsLon &#x3D; (mLon + pLon) &#x2F; 2;
+            LatLng tmp &#x3D; GpsToAbcMap(new LatLng(wgsLat, wgsLon));
+            dLat &#x3D; tmp.latitude - abcLatLng.latitude;
+            dLon &#x3D; tmp.longitude - abcLatLng.longitude;
+            if ((Math.abs(dLat) &lt; threshold) &amp;&amp; (Math.abs(dLon) &lt; threshold))
+                break;
+
+            if (dLat &gt; 0) pLat &#x3D; wgsLat;
+            else mLat &#x3D; wgsLat;
+            if (dLon &gt; 0) pLon &#x3D; wgsLon;
+            else mLon &#x3D; wgsLon;
+
+            if (++i &gt; 10000) break;
+        &#125;
+        return new LatLng(wgsLat, wgsLon);
+    &#125;
+
+    &#x2F;**
+     * 采用模糊算法计算将高德坐标转换为gps坐标，结果不精确
+     *
+     * @param abcLatLng
+     * @return
+     *&#x2F;
+    public static LatLng AbcMapToGps(LatLng abcLatLng) &#123;
+        LatLng gpsLatLng;
+        LatLng delta &#x3D; abcDelta(abcLatLng);
+        gpsLatLng &#x3D; new LatLng(abcLatLng.latitude - delta.latitude, abcLatLng.longitude - delta.longitude);
+        return gpsLatLng;
+    &#125;
+
+    &#x2F;**
+     * 将gps坐标转换为高德坐标
+     *
+     * @param gpsLatLng
+     * @return
+     *&#x2F;
+    public static LatLng GpsToAbcMap(LatLng gpsLatLng) &#123;
+        LatLng abcLatLng &#x3D; null;
+        if (outOfChina(gpsLatLng.latitude, gpsLatLng.longitude)) &#123;
+            abcLatLng &#x3D; new LatLng(gpsLatLng.latitude, gpsLatLng.longitude);
+            return abcLatLng;
+        &#125;
+        double dLat &#x3D; transformLat(gpsLatLng.longitude - 105.0, gpsLatLng.latitude - 35.0);
+        double dLon &#x3D; transformLon(gpsLatLng.longitude - 105.0, gpsLatLng.latitude - 35.0);
+        double radLat &#x3D; gpsLatLng.latitude &#x2F; 180.0 * pi;
+        double magic &#x3D; Math.sin(radLat);
+        magic &#x3D; 1 - ee * magic * magic;
+        double sqrtMagic &#x3D; Math.sqrt(magic);
+        dLat &#x3D; (dLat * 180.0) &#x2F; ((a * (1 - ee)) &#x2F; (magic * sqrtMagic) * pi);
+        dLon &#x3D; (dLon * 180.0) &#x2F; (a &#x2F; sqrtMagic * Math.cos(radLat) * pi);
+        abcLatLng &#x3D; new LatLng(gpsLatLng.latitude + dLat, gpsLatLng.longitude + dLon);
+        return abcLatLng;
+    &#125;
+
+    private final static double pi &#x3D; 3.14159265358979324;
+    private final static double a &#x3D; 6378245.0;
+    private final static double ee &#x3D; 0.00669342162296594323;
+
+    private static boolean outOfChina(double lat, double lon) &#123;
+        if (lon &lt; 72.004 || lon &gt; 137.8347)
+            return true;
+        if (lat &lt; 0.8293 || lat &gt; 55.8271)
+            return true;
+        return false;
+    &#125;
+
+    private static double transformLat(double x, double y) &#123;
+        double ret &#x3D; -100.0 + 2.0 * x + 3.0 * y + 0.2 * y * y + 0.1 * x * y + 0.2 * Math.sqrt(Math.abs(x));
+        ret +&#x3D; (20.0 * Math.sin(6.0 * x * pi) + 20.0 * Math.sin(2.0 * x * pi)) * 2.0 &#x2F; 3.0;
+        ret +&#x3D; (20.0 * Math.sin(y * pi) + 40.0 * Math.sin(y &#x2F; 3.0 * pi)) * 2.0 &#x2F; 3.0;
+        ret +&#x3D; (160.0 * Math.sin(y &#x2F; 12.0 * pi) + 320 * Math.sin(y * pi &#x2F; 30.0)) * 2.0 &#x2F; 3.0;
+        return ret;
+    &#125;
+
+    private static double transformLon(double x, double y) &#123;
+        double ret &#x3D; 300.0 + x + 2.0 * y + 0.1 * x * x + 0.1 * x * y + 0.1 * Math.sqrt(Math.abs(x));
+        ret +&#x3D; (20.0 * Math.sin(6.0 * x * pi) + 20.0 * Math.sin(2.0 * x * pi)) * 2.0 &#x2F; 3.0;
+        ret +&#x3D; (20.0 * Math.sin(x * pi) + 40.0 * Math.sin(x &#x2F; 3.0 * pi)) * 2.0 &#x2F; 3.0;
+        ret +&#x3D; (150.0 * Math.sin(x &#x2F; 12.0 * pi) + 300.0 * Math.sin(x &#x2F; 30.0 * pi)) * 2.0 &#x2F; 3.0;
+        return ret;
+    &#125;
+&#125;
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+<h3 id="经纬度坐标类"><a href="#经纬度坐标类" class="headerlink" title="经纬度坐标类"></a>经纬度坐标类</h3><div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">public class LatLng &#123;
+    private static final String a &#x3D; LatLng.class.getSimpleName();
+    public final double latitude;
+    public final double longitude;
+
+    &#x2F;**
+     *
+     * @param lat latitude
+     * @param lng longitude
+     *&#x2F;
+    public LatLng(double lat, double lng) &#123;
+        int var5 &#x3D; (int) (lat * 1000000.0D);
+        int var6 &#x3D; (int) (lng * 1000000.0D);
+        this.latitude &#x3D; (double) var5 &#x2F; 1000000.0D;
+        this.longitude &#x3D; (double) var6 &#x2F; 1000000.0D;
+    &#125;
+
+    public String toString() &#123;
+        String var1 &#x3D; new String(&quot;latitude: &quot;);
+        var1 &#x3D; var1 + this.latitude;
+        var1 &#x3D; var1 + &quot;, longitude: &quot;;
+        var1 &#x3D; var1 + this.longitude;
+        return var1;
+    &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 
 
 
@@ -413,6 +648,8 @@
 
 
 
+  
+    
   
 
 

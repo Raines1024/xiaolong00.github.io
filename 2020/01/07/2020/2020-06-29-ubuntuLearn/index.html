@@ -32,7 +32,15 @@
     
     
       
-      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/darcula.min.css" />
+      
+        
+          
+        
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.22.0/themes/prism.min.css" />
+      
+      
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.22.0/plugins/line-numbers/prism-line-numbers.min.css" />
+      
     
   
 
@@ -237,7 +245,27 @@
 <li><p>ubuntu16.04下安装如何安装.deb安装包   </p>
 </li>
 </ul>
-<figure class="highlight vim"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs vim">在Ubuntu下安装<span class="hljs-keyword">deb</span>包需要使用dpkg命令.  <br>Dpkg 的普通用法：   <br><span class="hljs-number">1</span>、sudo dpkg -i &lt;package.<span class="hljs-keyword">deb</span>&gt;  <br>安装一个 Debian 软件包，如你手动下载的文件。  <br><span class="hljs-number">2</span>、sudo dpkg -<span class="hljs-keyword">c</span> &lt;package.<span class="hljs-keyword">deb</span>&gt;  <br>列出 &lt;package.<span class="hljs-keyword">deb</span>&gt; 的内容。  <br><span class="hljs-number">3</span>、sudo dpkg -I &lt;package.<span class="hljs-keyword">deb</span>&gt;  <br>从 &lt;package.<span class="hljs-keyword">deb</span>&gt; 中提取包裹信息。  <br><span class="hljs-number">4</span>、sudo dpkg -r <span class="hljs-symbol">&lt;package&gt;</span>  <br>移除一个已安装的包裹。  <br><span class="hljs-number">5</span>、sudo dpkg -<span class="hljs-keyword">P</span> <span class="hljs-symbol">&lt;package&gt;</span>  <br>完全清除一个已安装的包裹。和 <span class="hljs-built_in">remove</span> 不同的是，<span class="hljs-built_in">remove</span> 只是删掉数据和可执行文件，purge 另外还删除所有的配制文件。  <br><span class="hljs-number">6</span>、sudo dpkg -L <span class="hljs-symbol">&lt;package&gt;</span>  <br>列出 <span class="hljs-symbol">&lt;package&gt;</span> 安装的所有文件清单。同时请看 dpkg -<span class="hljs-keyword">c</span> 来检查一个 .<span class="hljs-keyword">deb</span> 文件的内容。  <br><span class="hljs-number">7</span>、sudo dpkg -s <span class="hljs-symbol">&lt;package&gt;</span>  <br>显示已安装包裹的信息。同时请看 apt-cache 显示 Debian 存档中的包裹信息，以及 dpkg -I 来显示从一个 .<span class="hljs-keyword">deb</span> 文件中提取的包裹信息。  <br><span class="hljs-number">8</span>、sudo dpkg-reconfigure <span class="hljs-symbol">&lt;package&gt;</span>  <br>重新配制一个已经安装的包裹，如果它使用的是 debconf (debconf 为包裹安装提供了一个统一的配制界面)。  <br>如果安装过程中出现问题,可以先使用命令:  <br>sudo apt-<span class="hljs-built_in">get</span> <span class="hljs-keyword">update</span>  <br>更新后再执行相应操作。  <br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">在Ubuntu下安装deb包需要使用dpkg命令.  
+Dpkg 的普通用法：   
+1、sudo dpkg -i &lt;package.deb&gt;  
+安装一个 Debian 软件包，如你手动下载的文件。  
+2、sudo dpkg -c &lt;package.deb&gt;  
+列出 &lt;package.deb&gt; 的内容。  
+3、sudo dpkg -I &lt;package.deb&gt;  
+从 &lt;package.deb&gt; 中提取包裹信息。  
+4、sudo dpkg -r &lt;package&gt;  
+移除一个已安装的包裹。  
+5、sudo dpkg -P &lt;package&gt;  
+完全清除一个已安装的包裹。和 remove 不同的是，remove 只是删掉数据和可执行文件，purge 另外还删除所有的配制文件。  
+6、sudo dpkg -L &lt;package&gt;  
+列出 &lt;package&gt; 安装的所有文件清单。同时请看 dpkg -c 来检查一个 .deb 文件的内容。  
+7、sudo dpkg -s &lt;package&gt;  
+显示已安装包裹的信息。同时请看 apt-cache 显示 Debian 存档中的包裹信息，以及 dpkg -I 来显示从一个 .deb 文件中提取的包裹信息。  
+8、sudo dpkg-reconfigure &lt;package&gt;  
+重新配制一个已经安装的包裹，如果它使用的是 debconf (debconf 为包裹安装提供了一个统一的配制界面)。  
+如果安装过程中出现问题,可以先使用命令:  
+sudo apt-get update  
+更新后再执行相应操作。  <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 <h2 id="快捷键"><a href="#快捷键" class="headerlink" title="快捷键"></a>快捷键</h2><p>作为之前mbp的无鼠标开发人士，不得不吐槽thinkpad的触控板实在是渣渣。<br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/45535756">https://zhuanlan.zhihu.com/p/45535756</a>   </p>
 <h2 id="日常使用"><a href="#日常使用" class="headerlink" title="日常使用"></a>日常使用</h2><h3 id="远程连接"><a href="#远程连接" class="headerlink" title="远程连接"></a>远程连接</h3><ul>
 <li>安装ssh<br>sudo apt install ssh  </li>
@@ -284,8 +312,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2020/01/07/2020/2020-08-19-k8sinstall/">
-                        <span class="hidden-mobile">Centos7.6部署k8s(v1.18.2)集群</span>
+                      <a href="/2020/01/07/2020/2020-11-25-centosLearn/">
+                        <span class="hidden-mobile">CentOS必知必会</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -390,6 +418,8 @@
 
 
 
+  
+    
   
 
 

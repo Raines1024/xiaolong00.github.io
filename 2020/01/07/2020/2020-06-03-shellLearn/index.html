@@ -32,7 +32,15 @@
     
     
       
-      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/darcula.min.css" />
+      
+        
+          
+        
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.22.0/themes/prism.min.css" />
+      
+      
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.22.0/plugins/line-numbers/prism-line-numbers.min.css" />
+      
     
   
 
@@ -187,7 +195,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      370 字
+      369 字
     </span>
   
 
@@ -237,7 +245,25 @@
 <h3 id="查看当前运行的-Shell"><a href="#查看当前运行的-Shell" class="headerlink" title="查看当前运行的 Shell"></a>查看当前运行的 Shell</h3><p>echo $SHELL  </p>
 <h3 id="查看当前的-Linux-系统安装的所有-Shell"><a href="#查看当前的-Linux-系统安装的所有-Shell" class="headerlink" title="查看当前的 Linux 系统安装的所有 Shell"></a>查看当前的 Linux 系统安装的所有 Shell</h3><p>cat /etc/shells</p>
 <h2 id="Bash-变量"><a href="#Bash-变量" class="headerlink" title="Bash 变量"></a>Bash 变量</h2><p>env命令或printenv命令，可以显示所有环境变量。  </p>
-<figure class="highlight dockerfile"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs dockerfile">常见的环境变量。<br>BASHPID：Bash 进程的进程 ID。  <br>BASHOPTS：当前 <span class="hljs-keyword">Shell</span><span class="bash"> 的参数，可以用<span class="hljs-built_in">shopt</span>命令修改。</span><br>DISPLAY：图形环境的显示器名字，通常是:<span class="hljs-number">0</span>，表示 X Server 的第一个显示器。<br>EDITOR：默认的文本编辑器。<br>HOME：用户的主目录。<br>HOST：当前主机的名称。<br>IFS：词与词之间的分隔符，默认为空格。<br>LANG：字符集以及语言编码，比如zh_CN.UTF-<span class="hljs-number">8</span>。<br>PATH：由冒号分开的目录列表，当输入可执行程序名后，会搜索这个目录列表。<br>PS1：<span class="hljs-keyword">Shell</span><span class="bash"> 提示符。</span><br>PS2： 输入多行命令时，次要的 <span class="hljs-keyword">Shell</span><span class="bash"> 提示符。</span><br>PWD：当前工作目录。<br>RANDOM：返回一个<span class="hljs-number">0</span>到<span class="hljs-number">32767</span>之间的随机数。<br><span class="hljs-keyword">SHELL</span><span class="bash">：Shell 的名字。</span><br>SHELLOPTS：启动当前 <span class="hljs-keyword">Shell</span><span class="bash"> 的<span class="hljs-built_in">set</span>命令的参数，参见《<span class="hljs-built_in">set</span> 命令》一章。</span><br>TERM：终端类型名，即终端仿真器所用的协议。<br>UID：当前用户的 ID 编号。<br><span class="hljs-keyword">USER</span>：当前用户的用户名。<br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">常见的环境变量。
+BASHPID：Bash 进程的进程 ID。  
+BASHOPTS：当前 Shell 的参数，可以用shopt命令修改。
+DISPLAY：图形环境的显示器名字，通常是:0，表示 X Server 的第一个显示器。
+EDITOR：默认的文本编辑器。
+HOME：用户的主目录。
+HOST：当前主机的名称。
+IFS：词与词之间的分隔符，默认为空格。
+LANG：字符集以及语言编码，比如zh_CN.UTF-8。
+PATH：由冒号分开的目录列表，当输入可执行程序名后，会搜索这个目录列表。
+PS1：Shell 提示符。
+PS2： 输入多行命令时，次要的 Shell 提示符。
+PWD：当前工作目录。
+RANDOM：返回一个0到32767之间的随机数。
+SHELL：Shell 的名字。
+SHELLOPTS：启动当前 Shell 的set命令的参数，参见《set 命令》一章。
+TERM：终端类型名，即终端仿真器所用的协议。
+UID：当前用户的 ID 编号。
+USER：当前用户的用户名。<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 <p>set命令可以显示所有变量（包括环境变量和自定义变量），以及所有的 Bash 函数。<br>查看单个环境变量的值，可以使用printenv命令或echo命令。<br>注意，printenv命令后面的变量名，不用加前缀$。  </p>
 
             </div>
@@ -382,6 +408,8 @@
 
 
 
+  
+    
   
 
 

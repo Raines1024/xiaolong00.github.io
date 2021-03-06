@@ -32,7 +32,15 @@
     
     
       
-      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/darcula.min.css" />
+      
+        
+          
+        
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.22.0/themes/prism.min.css" />
+      
+      
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.22.0/plugins/line-numbers/prism-line-numbers.min.css" />
+      
     
   
 
@@ -187,7 +195,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      4k 字
+      4.2k 字
     </span>
   
 
@@ -197,7 +205,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      47
+      51
        分钟
     </span>
   
@@ -246,12 +254,56 @@
 <li><p>并发问题的小疑惑<br>既然CPU同一时间只能执行一个线程，为什么存在并发问题<br>CPU的时间是按时间片分的，而不是一个时间点，并发问题是由于CPU线程切换导致的。<br>现在假设有一段代码如下：</p>
 </li>
 </ul>
-<figure class="highlight awk"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs awk"><span class="hljs-keyword">if</span>(i == <span class="hljs-number">1</span>) &#123;<br>    i++;　　<span class="hljs-regexp">//</span>断点<span class="hljs-number">1</span><br>    system.out.print(i);       <br>&#125;　<span class="hljs-regexp">//</span>断点<span class="hljs-number">2</span><br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">if(i &#x3D;&#x3D; 1) &#123;
+    i++;　　&#x2F;&#x2F;断点1
+    system.out.print(i);       
+&#125;　&#x2F;&#x2F;断点2<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre></div>
 <p>有两个线程A，B同时执行这一段代码，假设A线程先被CPU调度，然而A线程在断点1处，时间片到期了，此时A线程的代码并没有执行完，但是CPU此时会调度B线程，并不会管A线程是不是执行完了这一段代码。<br>再接着假设B线程现在执行完了这一段代码(当然也可能没有执行完)，CPU 现在就又会调度A线程，并且从A线程的断点1处继续执行(注意不是重新执行，CPU切换的时候保存了线程的上下文)<br>总结一下：CPU切换线程并不会管你线程是否将代码执行完，而是和分给线程的时间片是否到期有关，时间片到期了就会切换线程，并发也就由此产生了。  </p>
 <h4 id="方式"><a href="#方式" class="headerlink" title="方式"></a>方式</h4><ol>
 <li>实现java.lang.Runnable接口的run方法，然后传递Runnable接口的实现类作为创建Thread时的参数，启动线程。  </li>
 </ol>
-<figure class="highlight reasonml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs reasonml">public <span class="hljs-keyword">class</span> AsyncThreadExample&#123;<br>    public static void <span class="hljs-constructor">A()</span>&#123;<br>        <span class="hljs-keyword">try</span>&#123;<br>            <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Thread</span>.</span></span>sleep(<span class="hljs-number">2000</span>);<br>        &#125;catch(InterruptedException e)&#123;<br>            e.print<span class="hljs-constructor">StackTrace()</span>;<br>        &#125;<br>        <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">System</span>.</span></span>out.println(<span class="hljs-string">&quot;----deSomethingA--&quot;</span>);<br>    &#125;<br><br>    public static void <span class="hljs-constructor">B()</span>&#123;<br>        <span class="hljs-keyword">try</span>&#123;<br>            <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Thread</span>.</span></span>sleep(<span class="hljs-number">2000</span>);<br>        &#125;catch(InterruptedException e)&#123;<br>            e.print<span class="hljs-constructor">StackTrance()</span>;<br>        &#125;<br>        <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">System</span>.</span></span>out.println(<span class="hljs-string">&quot;---doSomethingB--&quot;</span>);<br>    &#125;<br><br>    public static void main(String<span class="hljs-literal">[]</span> args) throws InterruptedException &#123;<br>        long start = <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">System</span>.</span></span>current<span class="hljs-constructor">TimeMillis()</span>;<br>        <br>        <span class="hljs-comment">//方式1启动线程执行A</span><br>        Thread thread = <span class="hljs-keyword">new</span> <span class="hljs-constructor">Thread( ()</span> -&gt; &#123;<br>            <span class="hljs-keyword">try</span>&#123;<br>                <span class="hljs-constructor">A()</span>;<br>            &#125;catch(Exception e)&#123;<br>                e.print<span class="hljs-constructor">StackTrace()</span>;<br>            &#125;<br>        &#125;,<span class="hljs-string">&quot;threadA&quot;</span>);<br>        thread.start<span class="hljs-literal">()</span>;<br><br>        <span class="hljs-comment">//main线程继续执行B</span><br>        <span class="hljs-constructor">B()</span>;<br><br>        <span class="hljs-comment">//同步等待线程threadA运行结束</span><br>        thread.join<span class="hljs-literal">()</span>;<br>        <br>        <span class="hljs-comment">//打印运行时间</span><br>        <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">System</span>.</span></span>out.println(<span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">System</span>.</span></span>current<span class="hljs-constructor">TimeMillis()</span> - start);<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">public class AsyncThreadExample&#123;
+    public static void A()&#123;
+        try&#123;
+            Thread.sleep(2000);
+        &#125;catch(InterruptedException e)&#123;
+            e.printStackTrace();
+        &#125;
+        System.out.println(&quot;----deSomethingA--&quot;);
+    &#125;
+
+    public static void B()&#123;
+        try&#123;
+            Thread.sleep(2000);
+        &#125;catch(InterruptedException e)&#123;
+            e.printStackTrance();
+        &#125;
+        System.out.println(&quot;---doSomethingB--&quot;);
+    &#125;
+
+    public static void main(String[] args) throws InterruptedException &#123;
+        long start &#x3D; System.currentTimeMillis();
+        
+        &#x2F;&#x2F;方式1启动线程执行A
+        Thread thread &#x3D; new Thread( () -&gt; &#123;
+            try&#123;
+                A();
+            &#125;catch(Exception e)&#123;
+                e.printStackTrace();
+            &#125;
+        &#125;,&quot;threadA&quot;);
+        thread.start();
+
+        &#x2F;&#x2F;main线程继续执行B
+        B();
+
+        &#x2F;&#x2F;同步等待线程threadA运行结束
+        thread.join();
+        
+        &#x2F;&#x2F;打印运行时间
+        System.out.println(System.currentTimeMillis() - start);
+    &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 <p><span style="color: red">*</span>注意：    </p>
 <ul>
 <li>如果去掉同步等待threadA运行结束的代码，则main线程执行完毕后先行死亡。留下threadA线程继续执行（JVM发现有非守护线程在运行就不会停止），等threadA执行完毕后JVM关闭。  </li>
@@ -259,7 +311,17 @@
 <ol start="2">
 <li>开启线程进行异步执行的方式是实现Thread类，并重写run方法（创建了Thread的匿名类的实现，并重写了run方法，然后启动了线程执行。）  </li>
 </ol>
-<figure class="highlight typescript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs typescript">Thread thread = <span class="hljs-keyword">new</span> <span class="hljs-function"><span class="hljs-title">Thread</span>(<span class="hljs-params"><span class="hljs-string">&quot;threadA&quot;</span></span>)</span> &#123;<br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-built_in">void</span> <span class="hljs-function"><span class="hljs-title">run</span>(<span class="hljs-params"></span>)</span> &#123;<br>        <span class="hljs-keyword">try</span> &#123;<br>            doSomethingA();<br>        &#125; <span class="hljs-keyword">catch</span> (Exception e) &#123;<br>            e.printStackTrace();<br>        &#125;<br>    &#125;<br>&#125;;<br>thread.start();<br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">Thread thread &#x3D; new Thread(&quot;threadA&quot;) &#123;
+    @Override
+    public void run() &#123;
+        try &#123;
+            doSomethingA();
+        &#125; catch (Exception e) &#123;
+            e.printStackTrace();
+        &#125;
+    &#125;
+&#125;;
+thread.start();<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 <p><span style="color: red">*</span>总结：  </p>
 <ul>
 <li>Runnable相较于Thread的优势   </li>
@@ -268,7 +330,7 @@
 <h4 id="Java三种创建线程的方法"><a href="#Java三种创建线程的方法" class="headerlink" title="Java三种创建线程的方法"></a>Java三种创建线程的方法</h4><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/u012894692/article/details/80215140">https://blog.csdn.net/u012894692/article/details/80215140</a></p>
 <h2 id="线程池"><a href="#线程池" class="headerlink" title="线程池"></a>线程池</h2><h3 id="向线程池投递一个Callable类型的异步任务，并且获取其执行结果"><a href="#向线程池投递一个Callable类型的异步任务，并且获取其执行结果" class="headerlink" title="向线程池投递一个Callable类型的异步任务，并且获取其执行结果"></a>向线程池投递一个Callable类型的异步任务，并且获取其执行结果</h3><h4 id="解读"><a href="#解读" class="headerlink" title="解读"></a>解读</h4><ul>
 <li>Runtime.getRuntime().availableProcessors()<br>获取当前物理机的CPU核数  </li>
-<li>new ThreadPoolExecutor(AVALIABLE_PROCESSORS,  //设置线程池核心线程个数为当前物理机的CPU核数  <div class="hljs code-wrapper"><pre><code>        AVALIABLE_PROCESSORS * 2,  //最大线程个数为当前物理机CPU核数的2倍   
+<li>new ThreadPoolExecutor(AVALIABLE_PROCESSORS,  //设置线程池核心线程个数为当前物理机的CPU核数  <div class="code-wrapper"><pre><code>        AVALIABLE_PROCESSORS * 2,  //最大线程个数为当前物理机CPU核数的2倍   
         1,  //当线程数大于内核数时，这是多余的空闲线程在终止之前等待新任务的最长时间。    
         TimeUnit.MINUTES,   //时间单位  
         new LinkedBlockingQueue&lt;&gt;(5),  //设置线程池阻塞队列的大小为5  
@@ -276,7 +338,38 @@
         new ThreadPoolExecutor.CallerRunsPolicy());  //将线程池的拒绝策略设置为CallerRunsPolicy，即当线程池任务饱和，执行拒绝策略时不会丢弃新的任务，而是会使用调用线程来执行   </code></pre></div>
 </li>
 </ul>
-<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">import</span> java.util.concurrent.*;<br><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AsyncThreadPoolExample3</span> </span>&#123;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> String <span class="hljs-title">doSomethingA</span><span class="hljs-params">()</span> </span>&#123;<br>		<span class="hljs-keyword">try</span> &#123;<br>			Thread.sleep(<span class="hljs-number">2000</span>);<br>		&#125; <span class="hljs-keyword">catch</span> (InterruptedException e) &#123;<br>			e.printStackTrace();<br>		&#125;<br>        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;A Task Done&quot;</span>;<br>    &#125;<br><br>    <span class="hljs-comment">// 0自定义线程池</span><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> AVALIABLE_PROCESSORS = Runtime.getRuntime().availableProcessors();<br>    <span class="hljs-comment">//设置线程池核心线程个数为当前物理机的CPU核数，最大线程个数为当前物理机CPU核数的2倍；设置线程池阻塞队列的大小为5；</span><br>    <span class="hljs-comment">//需要注意的是，我们将线程池的拒绝策略设置为CallerRunsPolicy，即当线程池任务饱和，执行拒绝策略时不会丢弃新的任务，而是会使用调用线程来执行；</span><br>    <span class="hljs-comment">// 另外我们使用了命名的线程创建工厂，以便排查问题时可以方便追溯是哪个相关业务。</span><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">static</span> ThreadPoolExecutor POOL_EXECUTOR = <span class="hljs-keyword">new</span> ThreadPoolExecutor(AVALIABLE_PROCESSORS,<br>            AVALIABLE_PROCESSORS * <span class="hljs-number">2</span>, <span class="hljs-number">1</span>, TimeUnit.MINUTES, <span class="hljs-keyword">new</span> LinkedBlockingQueue&lt;&gt;(<span class="hljs-number">5</span>),<br>            <span class="hljs-keyword">new</span> NamedThreadFactory(<span class="hljs-string">&quot;ASYNC-POOL&quot;</span>), <span class="hljs-keyword">new</span> ThreadPoolExecutor.CallerRunsPolicy());<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> InterruptedException, ExecutionException </span>&#123;<br>		<span class="hljs-comment">// 1.开启异步单元执行任务A</span><br>		<span class="hljs-comment">//使用lambda表达式将Callable类型的任务提交到线程池，提交后会马上返回一个Future对象</span><br>        Future&lt;?&gt; resultA = POOL_EXECUTOR.submit(() -&gt; doSomethingA());<br>        <span class="hljs-comment">// 2.同步等待执行结果</span><br>		<span class="hljs-comment">//调用get()方法阻塞等待异步任务的执行结果</span><br>        System.out.println(resultA.get());<br>    &#125;<br>    <br>&#125;<br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">import java.util.concurrent.*;
+
+public class AsyncThreadPoolExample3 &#123;
+
+    public static String doSomethingA() &#123;
+		try &#123;
+			Thread.sleep(2000);
+		&#125; catch (InterruptedException e) &#123;
+			e.printStackTrace();
+		&#125;
+        return &quot;A Task Done&quot;;
+    &#125;
+
+    &#x2F;&#x2F; 0自定义线程池
+    private final static int AVALIABLE_PROCESSORS &#x3D; Runtime.getRuntime().availableProcessors();
+    &#x2F;&#x2F;设置线程池核心线程个数为当前物理机的CPU核数，最大线程个数为当前物理机CPU核数的2倍；设置线程池阻塞队列的大小为5；
+    &#x2F;&#x2F;需要注意的是，我们将线程池的拒绝策略设置为CallerRunsPolicy，即当线程池任务饱和，执行拒绝策略时不会丢弃新的任务，而是会使用调用线程来执行；
+    &#x2F;&#x2F; 另外我们使用了命名的线程创建工厂，以便排查问题时可以方便追溯是哪个相关业务。
+    private final static ThreadPoolExecutor POOL_EXECUTOR &#x3D; new ThreadPoolExecutor(AVALIABLE_PROCESSORS,
+            AVALIABLE_PROCESSORS * 2, 1, TimeUnit.MINUTES, new LinkedBlockingQueue&lt;&gt;(5),
+            new NamedThreadFactory(&quot;ASYNC-POOL&quot;), new ThreadPoolExecutor.CallerRunsPolicy());
+
+    public static void main(String[] args) throws InterruptedException, ExecutionException &#123;
+		&#x2F;&#x2F; 1.开启异步单元执行任务A
+		&#x2F;&#x2F;使用lambda表达式将Callable类型的任务提交到线程池，提交后会马上返回一个Future对象
+        Future&lt;?&gt; resultA &#x3D; POOL_EXECUTOR.submit(() -&gt; doSomethingA());
+        &#x2F;&#x2F; 2.同步等待执行结果
+		&#x2F;&#x2F;调用get()方法阻塞等待异步任务的执行结果
+        System.out.println(resultA.get());
+    &#125;
+    
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 <h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><ul>
 <li><p>自定义拒绝策略  </p>
 </li>
@@ -286,22 +379,92 @@
 <ol>
 <li>基础回顾<br>@bean 和 @component 的理解<br>Spring帮助我们管理Bean分为两个部分，一个是注册Bean，一个装配Bean。<br>完成这两个动作有三种方式，一种是使用自动配置的方式、一种是使用 JavaConfig 的方式，一种就是使用XML配置的方式。<br>在自动配置的方式中，使用 @Component 去告诉 Spring ，我是一个 bean，你要来管理我，然后使用 @Resource(@AutoWired) 注解去装配Bean(所谓装配，就是管理对象直接的协作关系)。然后在 JavaConfig 中，@Configuration 其实就是告诉spring，spring容器要怎么配置（怎么去注册bean，怎么去处理bean之间的关系（装配））。那么就很好理解了，@Bean 的意思就是，我要获取这个bean的时候，你spring要按照这种方式去帮我获取到这个bean。<br>用@Bean注解的方法：会实例化、配置并初始化一个新的对象，这个对象会由spring IOC 容器管理。例如：  </li>
 </ol>
-<figure class="highlight typescript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs typescript"><span class="hljs-meta">@Configuration</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AppConfig</span> </span>&#123;<br><br>    <span class="hljs-meta">@Bean</span><br>    <span class="hljs-keyword">public</span> MyService <span class="hljs-function"><span class="hljs-title">myService</span>(<span class="hljs-params"></span>)</span> &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> MyServiceImpl();<br>    &#125;<br><br>&#125;<br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">@Configuration
+public class AppConfig &#123;
+
+    @Bean
+    public MyService myService() &#123;
+        return new MyServiceImpl();
+    &#125;
+
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 <p>生成对象的名字：默认情况下用 @Bean 注解的方法名作为对象的名字。但是可以用 name 属性定义对象的名字.    </p>
 <p>@component 和 @Configuration 的区别：<br>在 @Component 注解的类中不能定义 类内依赖的 @Bean注解的方法。@Configuration 可以。例如：    </p>
-<figure class="highlight typescript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs typescript"><span class="hljs-meta">@Configuration</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AppConfig</span> </span>&#123;<br><br>    <span class="hljs-meta">@Bean</span><br>    <span class="hljs-keyword">public</span> Foo <span class="hljs-function"><span class="hljs-title">foo</span>(<span class="hljs-params"></span>)</span> &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Foo(bar());<br>    &#125;<br><br>    <span class="hljs-meta">@Bean</span><br>    <span class="hljs-keyword">public</span> Bar <span class="hljs-function"><span class="hljs-title">bar</span>(<span class="hljs-params"></span>)</span> &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Bar();<br>    &#125;<br><br>&#125;<br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">@Configuration
+public class AppConfig &#123;
+
+    @Bean
+    public Foo foo() &#123;
+        return new Foo(bar());
+    &#125;
+
+    @Bean
+    public Bar bar() &#123;
+        return new Bar();
+    &#125;
+
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 <ol start="2">
 <li>创建 Bean   </li>
 </ol>
-<figure class="highlight haxe"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs haxe"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 所有的线程池类型都从此类获取</span><br><span class="hljs-comment"> */</span><br>@Component<br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AllThreadPool</span> </span>&#123;<br><br>    @Bean(name = <span class="hljs-string">&quot;rejectThreadPool&quot;</span>)<br>    <span class="hljs-keyword">public</span> ThreadPoolExecutor getRejectExecutor()&#123;<br>        <span class="hljs-comment">/**cpu核心线程数*/</span><br>        <span class="hljs-comment">//8 16</span><br>        <span class="hljs-comment">//左移</span><br>        <span class="hljs-comment">//1000   10000</span><br>        int coreNum=Runtime.getRuntime().availableProcessors();<br>        ThreadPoolExecutor executor = <span class="hljs-keyword">new</span> <span class="hljs-type">ThreadPoolExecutor</span>(<br>                coreNum&lt;&lt;<span class="hljs-number">1</span>,<br>                <span class="hljs-number">20</span>,<br>                <span class="hljs-number">120</span>L,<br>                TimeUnit.SECONDS,<br>                <span class="hljs-keyword">new</span> <span class="hljs-type">ArrayBlockingQueue</span>&lt;&gt;(<span class="hljs-number">50000</span>),<br>                <span class="hljs-keyword">new</span> <span class="hljs-type">NamedThreadFactory</span>(<span class="hljs-string">&quot;ASYNC-Pool&quot;</span>),<br>                <span class="hljs-keyword">new</span> <span class="hljs-type">RejectedTaskPolicyWithReport</span>(<span class="hljs-string">&quot;ASYNC-Pool&quot;</span>));<br>        <span class="hljs-keyword">return</span> executor;<br>    &#125;<br>    <br>&#125;<br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">&#x2F;**
+ * 所有的线程池类型都从此类获取
+ *&#x2F;
+@Component
+public class AllThreadPool &#123;
+
+    @Bean(name &#x3D; &quot;rejectThreadPool&quot;)
+    public ThreadPoolExecutor getRejectExecutor()&#123;
+        &#x2F;**cpu核心线程数*&#x2F;
+        &#x2F;&#x2F;8 16
+        &#x2F;&#x2F;左移
+        &#x2F;&#x2F;1000   10000
+        int coreNum&#x3D;Runtime.getRuntime().availableProcessors();
+        ThreadPoolExecutor executor &#x3D; new ThreadPoolExecutor(
+                coreNum&lt;&lt;1,
+                20,
+                120L,
+                TimeUnit.SECONDS,
+                new ArrayBlockingQueue&lt;&gt;(50000),
+                new NamedThreadFactory(&quot;ASYNC-Pool&quot;),
+                new RejectedTaskPolicyWithReport(&quot;ASYNC-Pool&quot;));
+        return executor;
+    &#125;
+    
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 <ol start="3">
 <li>依赖注入使用   </li>
 </ol>
-<figure class="highlight less"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs less"><span class="hljs-variable">@Resource</span><br>private ThreadPoolExecutor rejectThreadPool;<br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">@Resource
+private ThreadPoolExecutor rejectThreadPool;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></div>
 <h2 id="期间收获"><a href="#期间收获" class="headerlink" title="期间收获"></a>期间收获</h2><h3 id="如何正确的终止一个线程"><a href="#如何正确的终止一个线程" class="headerlink" title="如何正确的终止一个线程"></a>如何正确的终止一个线程</h3><ul>
 <li>我们可以采用设置一个条件变量的方式，run方法中的while循环会不断的检测flag的值，在想要结束线程的地方将flag的值设置为false就可以啦！注意这里要将flag设置成 volatile 的，因为 volatile 可以保证数据的有效性，如果不设置话，可能会造成子线程多执行一次的错误，例如子线程将flag读到自己线程栈中，flag的值为true，此时子线程的交出执行权，操作系统将执行权交给了主线程，主线程执行flag=false；的操作，希望子线程不要再执行了，但是这一改变子线程是不能看到的，所以子线程还会再向下执行一次，然后重新读取flag的值的时候才会终止。   </li>
 </ul>
-<figure class="highlight arduino"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs arduino"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Main</span> &#123;</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">String</span>[] args)</span> throws InterruptedException </span>&#123;<br>        MyThread myThread = <span class="hljs-keyword">new</span> MyThread();<br>        myThread.start();<br>        Thread.sleep(<span class="hljs-number">3000</span>);<br>        myThread.flag = <span class="hljs-literal">false</span>;<br>        System.out.<span class="hljs-built_in">println</span>(<span class="hljs-string">&quot;主线程结束！&quot;</span>);<br>    &#125;<br>&#125;<br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyThread</span> <span class="hljs-title">extends</span> <span class="hljs-title">Thread</span> &#123;</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">volatile</span> <span class="hljs-keyword">boolean</span> flag = <span class="hljs-literal">true</span>;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-keyword">while</span> (flag) &#123;<br>            System.out.<span class="hljs-built_in">println</span>(<span class="hljs-string">&quot;线程正在执行&quot;</span>);<br>            <span class="hljs-keyword">try</span> &#123;<br>                Thread.sleep(<span class="hljs-number">500</span>);<br>            &#125; <span class="hljs-keyword">catch</span> (InterruptedException e) &#123;<br>                e.printStackTrace();<br>            &#125;<br>        &#125;<br>        System.out.<span class="hljs-built_in">println</span>(<span class="hljs-string">&quot;线程已终止&quot;</span>);<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">public class Main &#123;
+    public static void main(String[] args) throws InterruptedException &#123;
+        MyThread myThread &#x3D; new MyThread();
+        myThread.start();
+        Thread.sleep(3000);
+        myThread.flag &#x3D; false;
+        System.out.println(&quot;主线程结束！&quot;);
+    &#125;
+&#125;
+
+class MyThread extends Thread &#123;
+    public volatile boolean flag &#x3D; true;
+
+    public void run() &#123;
+        while (flag) &#123;
+            System.out.println(&quot;线程正在执行&quot;);
+            try &#123;
+                Thread.sleep(500);
+            &#125; catch (InterruptedException e) &#123;
+                e.printStackTrace();
+            &#125;
+        &#125;
+        System.out.println(&quot;线程已终止&quot;);
+    &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 <ul>
 <li>当然你也可以将对flag所有操作都封装在synchronized关键字修饰的方法中，实现互斥访问，也可以达到相同的效果。  </li>
 </ul>
@@ -318,9 +481,15 @@
 <li>本地环境<br>在Java安装bin目录启动jvisualvm，就可以看到本地监控程序，有启动的IDEA，如果有其他依赖于Java平台运行的程序也都会展示。  </li>
 <li>远程环境连接<br>连接远程环境，需要在Java程序启动的时候添加以下参数  </li>
 </ul>
-<figure class="highlight stylus"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs stylus">-Dcom<span class="hljs-selector-class">.sun</span><span class="hljs-selector-class">.management</span><span class="hljs-selector-class">.jmxremote</span>.port=server_port 远程连接需要开放的端口<br><br>-Dcom<span class="hljs-selector-class">.sun</span><span class="hljs-selector-class">.management</span><span class="hljs-selector-class">.jmxremote</span>.ssl=false 禁止使用ssl连接<br><br>-Dcom<span class="hljs-selector-class">.sun</span><span class="hljs-selector-class">.management</span><span class="hljs-selector-class">.jmxremote</span>.authenticate=false 不使用安全认证<br><br>-Djava<span class="hljs-selector-class">.rmi</span><span class="hljs-selector-class">.server</span>.hostname=server_ip 要连接的远程主机的IP<br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">-Dcom.sun.management.jmxremote.port&#x3D;server_port 远程连接需要开放的端口
+
+-Dcom.sun.management.jmxremote.ssl&#x3D;false 禁止使用ssl连接
+
+-Dcom.sun.management.jmxremote.authenticate&#x3D;false 不使用安全认证
+
+-Djava.rmi.server.hostname&#x3D;server_ip 要连接的远程主机的IP<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 <p>然后启动你的Java程序，可以添加在启动参数文件中，也可以用下面方式启动:</p>
-<figure class="highlight stylus"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs stylus">java -Dcom<span class="hljs-selector-class">.sun</span><span class="hljs-selector-class">.management</span><span class="hljs-selector-class">.jmxremote</span>.port=server_port -Dcom<span class="hljs-selector-class">.sun</span><span class="hljs-selector-class">.management</span><span class="hljs-selector-class">.jmxremote</span>.ssl=false  省略...  -jar ./your_jar<br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">java -Dcom.sun.management.jmxremote.port&#x3D;server_port -Dcom.sun.management.jmxremote.ssl&#x3D;false  省略...  -jar .&#x2F;your_jar<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div>
 <p>启动jvisualvm，添加JMX连接，可选不要求SSL连接。若未成功，检查程序是否成功启动，启动参数文件是否使用，防火墙是否开放端口  </p>
 <h3 id="centOS7-查看防火墙状态"><a href="#centOS7-查看防火墙状态" class="headerlink" title="centOS7 查看防火墙状态"></a>centOS7 查看防火墙状态</h3><p> 一、防火墙的开启、关闭、禁用命令</p>
 <p>（1）设置开机启用防火墙：systemctl enable firewalld.service</p>
@@ -345,7 +514,19 @@
 <p>输入：yum install ifconfig，会发现输出了如下错误信息：</p>
 <p>没有可用软件包 ifconfig。</p>
 <p>错误：无须任何处理<br>2. 通过命令：yum search ifconfig，来搜索可用或者匹配的安装包程序。会输入如下信息：</p>
-<figure class="highlight vim"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs vim">已加载插件：fastestmirror<br><br>Loading mirror speeds from cached hostfile<br><br> * base: mirrors.tuna.tsinghua.edu.<span class="hljs-keyword">cn</span><br><br> * extra<span class="hljs-variable">s:</span> mirrors.tuna.tsinghua.edu.<span class="hljs-keyword">cn</span><br><br> * <span class="hljs-keyword">update</span><span class="hljs-variable">s:</span> mirrors.tuna.tsinghua.edu.<span class="hljs-keyword">cn</span><br><br>=================================================================== 匹配：ifconfig ====================================================================<br><br>net-tools.x86_64 : Basic networking tools<br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">已加载插件：fastestmirror
+
+Loading mirror speeds from cached hostfile
+
+ * base: mirrors.tuna.tsinghua.edu.cn
+
+ * extras: mirrors.tuna.tsinghua.edu.cn
+
+ * updates: mirrors.tuna.tsinghua.edu.cn
+
+&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D; 匹配：ifconfig &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;
+
+net-tools.x86_64 : Basic networking tools<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 <ol start="3">
 <li>上面的搜索结果匹配ifconfig的安装包是net-tools.x86_64，这时，可以通过：yum install -y net-tools.x86_64命令来安装ifconfig命令组件了。  </li>
 <li>到此我们安装成功  </li>
@@ -493,6 +674,8 @@
 
 
 
+  
+    
   
 
 

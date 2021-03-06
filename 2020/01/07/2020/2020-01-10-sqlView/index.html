@@ -32,7 +32,15 @@
     
     
       
-      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/darcula.min.css" />
+      
+        
+          
+        
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.22.0/themes/prism.min.css" />
+      
+      
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.22.0/plugins/line-numbers/prism-line-numbers.min.css" />
+      
     
   
 
@@ -242,7 +250,7 @@
 <li>更改数据格式和表示。</li>
 </ul>
 <h2 id="视图的写法"><a href="#视图的写法" class="headerlink" title="视图的写法"></a>视图的写法</h2><p>eg：</p>
-<div class="hljs code-wrapper"><pre><code>CREATE VIEW myview AS
+<div class="code-wrapper"><pre><code>CREATE VIEW myview AS
 SELECT fen.name,rec.state,rec.name la
 FROM t_fence fen
 LEFT JOIN t_fence_record rec ON fen.id = rec.fenceId
@@ -252,7 +260,7 @@ LEFT JOIN t_fence_record rec ON fen.id = rec.fenceId
 <li>fen.name,rec.state,rec.name la:表字段，如果多表中有重复字段，则需要对重复字段重命名。</li>
 </ul>
 <hr>
-<div class="hljs code-wrapper"><pre><code>CREATE VIEW myview AS
+<div class="code-wrapper"><pre><code>CREATE VIEW myview AS
 SELECT Concat(name, &quot;,&quot;,depCode) AS concat_col, id*createTime AS compute_col
 FROM t_fence
 ;</code></pre></div>
@@ -287,9 +295,9 @@ FROM t_fence
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2020/01/07/2020/2020-01-10-manualMavenJar/">
+                      <a href="/2020/01/07/2020/2020-01-09-viewpoint/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Maven手动导入jar包</span>
+                        <span class="hidden-mobile">观点</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -403,6 +411,8 @@ FROM t_fence
 
 
 
+  
+    
   
 
 

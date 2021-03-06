@@ -32,7 +32,15 @@
     
     
       
-      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/darcula.min.css" />
+      
+        
+          
+        
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.22.0/themes/prism.min.css" />
+      
+      
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.22.0/plugins/line-numbers/prism-line-numbers.min.css" />
+      
     
   
 
@@ -187,7 +195,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1k 字
+      1.1k 字
     </span>
   
 
@@ -197,7 +205,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      12
+      13
        分钟
     </span>
   
@@ -234,25 +242,56 @@
 <h2 id="Base是什么"><a href="#Base是什么" class="headerlink" title="Base是什么"></a>Base是什么</h2><p>Base64是一种用64个字符来表示任意二进制数据的方法。</p>
 <h2 id="Base64原理"><a href="#Base64原理" class="headerlink" title="Base64原理"></a>Base64原理</h2><h3 id="Base64编码"><a href="#Base64编码" class="headerlink" title="Base64编码"></a>Base64编码</h3><p>Base64编码，范围是”A-Z“、”a-z“、”0-9“、”+“、”/“一共64个字符（0-63）。这个比ASCII编码要简单多了，只有64个。</p>
 <h3 id="Base64基本原理"><a href="#Base64基本原理" class="headerlink" title="Base64基本原理"></a>Base64基本原理</h3><p>首先，准备一个包含64个字符的数组： </p>
-<div class="hljs code-wrapper"><pre><code>[&#39;A&#39;, &#39;B&#39;, &#39;C&#39;, ... &#39;a&#39;, &#39;b&#39;, &#39;c&#39;, ... &#39;0&#39;, &#39;1&#39;, ... &#39;+&#39;, &#39;/&#39;]</code></pre></div>
+<div class="code-wrapper"><pre><code>[&#39;A&#39;, &#39;B&#39;, &#39;C&#39;, ... &#39;a&#39;, &#39;b&#39;, &#39;c&#39;, ... &#39;0&#39;, &#39;1&#39;, ... &#39;+&#39;, &#39;/&#39;]</code></pre></div>
 <p>然后，对二进制数据进行处理，每3个字节一组，一共是3x8=24bit，划为4组，每组正好6个bit：<br>这样我们得到4个数字作为索引，然后查表，获得相应的4个字符，就是编码后的字符串。<br>所以，Base64编码会把3字节的二进制数据编码为4字节的文本数据，长度增加33%，好处是编码后的文本数据可以在邮件正文、网页等直接显示。<br>如果要编码的二进制数据不是3的倍数，最后会剩下1个或2个字节怎么办？Base64用\x00字节在末尾补足后，再在编码的末尾加上1个或2个=号，表示补了多少字节，解码的时候，会自动去掉。  </p>
 <h3 id="实战：ASCII编码转Base64"><a href="#实战：ASCII编码转Base64" class="headerlink" title="实战：ASCII编码转Base64"></a>实战：ASCII编码转Base64</h3><h4 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h4><p>比如说有一封邮件，我们想要对其使用Base64进行编码。怎么办呢？基本步骤如下：<br>（1）对邮件的数据进行切分，每三个字节一组，一共24个bit。<br>（2）对切分后的数据重组，24个bit重组为4组，每组6个bit。<br>（3）对重组后的数据处理，每组最前面添加两个“0”，构成每组8个bit。此时一共32个bit。<br>（4）根据Base64编码表，获取相应的编码值。<br>此时一封完整的邮件，被切分重组处理之后就变成了Base64编码了。  </p>
 <h4 id="实例验证"><a href="#实例验证" class="headerlink" title="实例验证"></a>实例验证</h4><p>比如说电子邮件里面出现了三个字母sky。我们要对这个三个字符使用Base64进行编码。<br>（1）对邮件的数据进行切分，每三个字节一组，一共24个bit  </p>
-<figure class="highlight tap"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs tap">数据          s            k       y<br>ASCII编码    <span class="hljs-number"> 115 </span>       <span class="hljs-number"> 107 </span>    121<br>二进制       <span class="hljs-number"> 01110011 </span><span class="hljs-number"> 01101011 </span> 01111001<br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">数据          s            k       y
+ASCII编码     115         107     121
+二进制        01110011  01101011  01111001<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></div>
 
 <p>（2）对切分后的数据重组，24个bit重组为4组，每组6个bit<br>原二进制</p>
-<figure class="highlight basic"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs basic"><span class="hljs-symbol">01110011 </span> <span class="hljs-number">01101011</span>  <span class="hljs-number">01111001</span><br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">01110011  01101011  01111001<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div>
 <p>转换后（将三组切分为4组）</p>
-<figure class="highlight basic"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs basic"><span class="hljs-symbol">011100 </span> <span class="hljs-number">110110</span>  <span class="hljs-number">101101</span>  <span class="hljs-number">111001</span><br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">011100  110110  101101  111001<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div>
 <p>（3）对重组后的数据处理，每组最前面添加两个“0”，构成每组8个bit。由于在最前面添加的0，所以对数值不构成影响。<br>（4）根据Base64编码表，获取相应的编码值。<br>转换后二进制  </p>
-<figure class="highlight basic"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs basic"><span class="hljs-symbol">011100 </span> <span class="hljs-number">110110</span>  <span class="hljs-number">101101</span>  <span class="hljs-number">111001</span><br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">011100  110110  101101  111001<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div>
 <p>相应的编码值(二进制转十进制）  </p>
-<figure class="highlight apache"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs apache"><span class="hljs-attribute">0</span> <span class="hljs-number">16</span> <span class="hljs-number">8</span> <span class="hljs-number">4</span> <span class="hljs-number">0</span> <span class="hljs-number">0</span> ; <span class="hljs-number">32</span> <span class="hljs-number">16</span> <span class="hljs-number">0</span> <span class="hljs-number">4</span> <span class="hljs-number">2</span> <span class="hljs-number">0</span> ; <span class="hljs-number">32</span> <span class="hljs-number">0</span> <span class="hljs-number">8</span> <span class="hljs-number">4</span> <span class="hljs-number">0</span> <span class="hljs-number">1</span> ; <span class="hljs-number">32</span> <span class="hljs-number">16</span> <span class="hljs-number">8</span> <span class="hljs-number">0</span> <span class="hljs-number">0</span> <span class="hljs-number">1</span> <br>    <span class="hljs-attribute">28</span>              <span class="hljs-number">54</span>               <span class="hljs-number">45</span>              <span class="hljs-number">57</span><br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">0 16 8 4 0 0 ; 32 16 0 4 2 0 ; 32 0 8 4 0 1 ; 32 16 8 0 0 1 
+    28              54               45              57<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></div>
 <p>（5）完成编码的转换<br>根据相应编码值对照Base64编码表</p>
-<figure class="highlight apache"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs apache"><span class="hljs-attribute">28</span>              <span class="hljs-number">54</span>               <span class="hljs-number">45</span>              <span class="hljs-number">57</span><br><span class="hljs-attribute">c</span>               <span class="hljs-number">2</span>                t               <span class="hljs-number">5</span><br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">28              54               45              57
+c               2                t               5<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></div>
 <p>到这我们基本上就是实现了Base64编码机制从sky到c2t5的转换。</p>
 <h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>（1）在第三步中，最前面添加了两个0，所以最终编码之后要比之前多出三分之一的大小。<br>（2）上面的例子中，我们使用的是ASCII编码，但是如果我们使用UTF-8，对应Base64编码的结果是不一样的。<br>（3）Base64只是进行了编码，方便数据的传输而已。Base64具有不可读性，即所编码的数据不会被人用肉眼所直接看到。这可不是加密。  </p>
-<h3 id="Java代码实现-java的base64与byte-字节数组之间的相互转换"><a href="#Java代码实现-java的base64与byte-字节数组之间的相互转换" class="headerlink" title="Java代码实现(java的base64与byte[]字节数组之间的相互转换)"></a>Java代码实现(java的base64与byte[]字节数组之间的相互转换)</h3><figure class="highlight arduino"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs arduino"><span class="hljs-keyword">import</span> sun.misc.BASE64Decoder;<br><span class="hljs-keyword">import</span> sun.misc.BASE64Encoder;<br><br><span class="hljs-keyword">import</span> java.io.IOException;<br><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Base64_ByteTest</span> &#123;</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">String</span> args[])</span> throws IOException </span>&#123;<br>        <span class="hljs-comment">/**</span><br><span class="hljs-comment">         * 编码</span><br><span class="hljs-comment">         */</span><br>        <span class="hljs-comment">// 定义一个BASE64Encoder</span><br>        BASE64Encoder encode = <span class="hljs-keyword">new</span> BASE64Encoder();<br>        <span class="hljs-comment">// 将byte[]转换为base64</span><br>        <span class="hljs-keyword">String</span> base64 = encode.encode(<span class="hljs-string">&quot;五笔字型电子计算机&quot;</span>.getBytes());<br>        <span class="hljs-comment">// 输出base64</span><br>        System.out.<span class="hljs-built_in">println</span>(base64);<br><br>        <span class="hljs-comment">/**</span><br><span class="hljs-comment">         * 解码</span><br><span class="hljs-comment">         */</span><br>        <span class="hljs-comment">// 新建一个BASE64Decoder</span><br>        BASE64Decoder decode = <span class="hljs-keyword">new</span> BASE64Decoder();<br>        <span class="hljs-comment">// 将base64转换为byte[]</span><br>        <span class="hljs-keyword">byte</span>[] b = decode.decodeBuffer(base64);<br>        <span class="hljs-comment">// 输出转换后的byte[]</span><br>        System.out.<span class="hljs-built_in">println</span>(<span class="hljs-keyword">new</span> <span class="hljs-keyword">String</span>(b));<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<h3 id="Java代码实现-java的base64与byte-字节数组之间的相互转换"><a href="#Java代码实现-java的base64与byte-字节数组之间的相互转换" class="headerlink" title="Java代码实现(java的base64与byte[]字节数组之间的相互转换)"></a>Java代码实现(java的base64与byte[]字节数组之间的相互转换)</h3><div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">import sun.misc.BASE64Decoder;
+import sun.misc.BASE64Encoder;
+
+import java.io.IOException;
+
+public class Base64_ByteTest &#123;
+    public static void main(String args[]) throws IOException &#123;
+        &#x2F;**
+         * 编码
+         *&#x2F;
+        &#x2F;&#x2F; 定义一个BASE64Encoder
+        BASE64Encoder encode &#x3D; new BASE64Encoder();
+        &#x2F;&#x2F; 将byte[]转换为base64
+        String base64 &#x3D; encode.encode(&quot;五笔字型电子计算机&quot;.getBytes());
+        &#x2F;&#x2F; 输出base64
+        System.out.println(base64);
+
+        &#x2F;**
+         * 解码
+         *&#x2F;
+        &#x2F;&#x2F; 新建一个BASE64Decoder
+        BASE64Decoder decode &#x3D; new BASE64Decoder();
+        &#x2F;&#x2F; 将base64转换为byte[]
+        byte[] b &#x3D; decode.decodeBuffer(base64);
+        &#x2F;&#x2F; 输出转换后的byte[]
+        System.out.println(new String(b));
+    &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 
 
 
@@ -463,6 +502,8 @@
 
 
 
+  
+    
   
 
 

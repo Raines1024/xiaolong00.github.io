@@ -32,7 +32,15 @@
     
     
       
-      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/darcula.min.css" />
+      
+        
+          
+        
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.22.0/themes/prism.min.css" />
+      
+      
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.22.0/plugins/line-numbers/prism-line-numbers.min.css" />
+      
     
   
 
@@ -197,7 +205,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      26
+      27
        分钟
     </span>
   
@@ -279,30 +287,76 @@
 <li>使用比主库更好的硬件设备作为slave，mysql压力小，延迟自然会变小。</li>
 <li>使用更加强劲的硬件设备。</li>
 </ul>
-<h2 id="MySQL-主从复制安装配置"><a href="#MySQL-主从复制安装配置" class="headerlink" title="MySQL 主从复制安装配置"></a>MySQL 主从复制安装配置</h2><h3 id="基础设置准备"><a href="#基础设置准备" class="headerlink" title="基础设置准备"></a>基础设置准备</h3><figure class="highlight apache"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs apache"><span class="hljs-comment">#操作系统：</span><br><span class="hljs-attribute">centos7</span>.<span class="hljs-number">7</span><br><span class="hljs-comment">#mysql版本：</span><br><span class="hljs-attribute">5</span>.<span class="hljs-number">7</span><br><span class="hljs-comment">#两台虚拟机：</span><br><span class="hljs-attribute">node1</span>:<span class="hljs-number">172.29.32.21</span>（主）<br><span class="hljs-attribute">node2</span>:<span class="hljs-number">172.29.32.20</span>（从）<br></code></pre></div></td></tr></table></figure>
-<h3 id="安装-MySQL-数据库"><a href="#安装-MySQL-数据库" class="headerlink" title="安装 MySQL 数据库"></a>安装 MySQL 数据库</h3><figure class="highlight pgsql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs pgsql">### 在两台数据库中分别创建数据库<br>​```<span class="hljs-keyword">sql</span><br><span class="hljs-comment">--注意两台必须全部执行</span><br><span class="hljs-keyword">create</span> <span class="hljs-keyword">database</span> demo;<br></code></pre></div></td></tr></table></figure>
-<h3 id="在主（node1）服务器进行如下配置："><a href="#在主（node1）服务器进行如下配置：" class="headerlink" title="在主（node1）服务器进行如下配置："></a>在主（node1）服务器进行如下配置：</h3><figure class="highlight routeros"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs routeros"><span class="hljs-comment">#修改配置文件，执行以下命令打开mysql配置文件</span><br>vi /etc/my.cnf<br><span class="hljs-comment">#在mysqld模块中添加如下配置信息</span><br><span class="hljs-attribute">log-bin</span>=master-bin #二进制文件名称<br><span class="hljs-attribute">binlog-format</span>=ROW  #二进制日志格式，有row、statement、mixed三种格式，row指的是把改变的内容复制过去，而不是把命令在从服务器上执行一遍，statement指的是在主服务器上执行的SQL语句，在从服务器上执行同样的语句。MySQL默认采用基于语句的复制，效率比较高。mixed指的是默认采用基于语句的复制，一旦发现基于语句的无法精确的复制时，就会采用基于行的复制。<br><span class="hljs-attribute">server-id</span>=1		   #要求各个服务器的id必须不一样<br><span class="hljs-attribute">binlog-do-db</span>=demo   #同步的数据库名称<br></code></pre></div></td></tr></table></figure>
-<h3 id="配置从服务器登录主服务器的账号授权（主服务器执行sql）"><a href="#配置从服务器登录主服务器的账号授权（主服务器执行sql）" class="headerlink" title="配置从服务器登录主服务器的账号授权（主服务器执行sql）"></a>配置从服务器登录主服务器的账号授权（主服务器执行sql）</h3><figure class="highlight pgsql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs pgsql"><span class="hljs-comment">--授权操作</span><br><span class="hljs-keyword">set</span> <span class="hljs-keyword">global</span> validate_password_policy=<span class="hljs-number">0</span>;<br><span class="hljs-keyword">set</span> <span class="hljs-keyword">global</span> validate_password_length=<span class="hljs-number">1</span>;<br>## 上面两个命令如果没有mysql没有该参数可以略过，原因是mysql缺少密码策略<br><span class="hljs-keyword">grant</span> <span class="hljs-keyword">replication</span> slave <span class="hljs-keyword">on</span> *.* <span class="hljs-keyword">to</span> <span class="hljs-string">&#x27;root&#x27;</span>@<span class="hljs-string">&#x27;%&#x27;</span> identified <span class="hljs-keyword">by</span> <span class="hljs-string">&#x27;123456&#x27;</span>;<br><span class="hljs-comment">--刷新权限</span><br>flush <span class="hljs-keyword">privileges</span>;<br></code></pre></div></td></tr></table></figure>
-<h3 id="从服务器的配置"><a href="#从服务器的配置" class="headerlink" title="从服务器的配置"></a>从服务器的配置</h3><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-comment">#修改配置文件，执行以下命令打开mysql配置文件</span><br>vi /etc/my.cnf<br><span class="hljs-comment">#在mysqld模块中添加如下配置信息</span><br>log-<span class="hljs-built_in">bin</span>=master-<span class="hljs-built_in">bin</span>	<span class="hljs-comment">#二进制文件的名称</span><br>binlog-<span class="hljs-built_in">format</span>=ROW	<span class="hljs-comment">#二进制文件的格式</span><br>server-<span class="hljs-built_in">id</span>=<span class="hljs-number">2</span>			<span class="hljs-comment">#服务器的id</span><br></code></pre></div></td></tr></table></figure>
-<h3 id="重启主服务器的mysqld服务"><a href="#重启主服务器的mysqld服务" class="headerlink" title="重启主服务器的mysqld服务"></a>重启主服务器的mysqld服务</h3><figure class="highlight vala"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs vala"><span class="hljs-meta">#重启mysql服务</span><br>service mysql restart<br><span class="hljs-meta">#登录mysql数据库</span><br>mysql -uroot -p<br><span class="hljs-meta">#查看master的状态</span><br>show master status;<br></code></pre></div></td></tr></table></figure>
-<h3 id="重启从服务器并进行相关配置"><a href="#重启从服务器并进行相关配置" class="headerlink" title="重启从服务器并进行相关配置"></a>重启从服务器并进行相关配置</h3><figure class="highlight vala"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs vala"><span class="hljs-meta">#重启mysql服务</span><br>service mysql restart<br><span class="hljs-meta">#登录mysql</span><br>mysql -uroot -p<br><span class="hljs-meta">#连接主服务器</span><br>change master to master_host=<span class="hljs-string">&#x27;172.29.32.21&#x27;</span>,master_user=<span class="hljs-string">&#x27;root&#x27;</span>,master_password=<span class="hljs-string">&#x27;123456&#x27;</span>,master_port=<span class="hljs-number">3306</span>,master_log_file=<span class="hljs-string">&#x27;master-bin.000001&#x27;</span>,master_log_pos=<span class="hljs-number">154</span>;<br><span class="hljs-meta">#启动slave</span><br>start slave<br><span class="hljs-meta">#查看slave的状态</span><br>show slave status<br></code></pre></div></td></tr></table></figure>
+<h2 id="MySQL-主从复制安装配置"><a href="#MySQL-主从复制安装配置" class="headerlink" title="MySQL 主从复制安装配置"></a>MySQL 主从复制安装配置</h2><h3 id="基础设置准备"><a href="#基础设置准备" class="headerlink" title="基础设置准备"></a>基础设置准备</h3><div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">#操作系统：
+centos7.7
+#mysql版本：
+5.7
+#两台虚拟机：
+node1:172.29.32.21（主）
+node2:172.29.32.20（从）<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+<h3 id="安装-MySQL-数据库"><a href="#安装-MySQL-数据库" class="headerlink" title="安装 MySQL 数据库"></a>安装 MySQL 数据库</h3><div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">### 在两台数据库中分别创建数据库
+​&#96;&#96;&#96;sql
+--注意两台必须全部执行
+create database demo;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre></div>
+<h3 id="在主（node1）服务器进行如下配置："><a href="#在主（node1）服务器进行如下配置：" class="headerlink" title="在主（node1）服务器进行如下配置："></a>在主（node1）服务器进行如下配置：</h3><div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">#修改配置文件，执行以下命令打开mysql配置文件
+vi &#x2F;etc&#x2F;my.cnf
+#在mysqld模块中添加如下配置信息
+log-bin&#x3D;master-bin #二进制文件名称
+binlog-format&#x3D;ROW  #二进制日志格式，有row、statement、mixed三种格式，row指的是把改变的内容复制过去，而不是把命令在从服务器上执行一遍，statement指的是在主服务器上执行的SQL语句，在从服务器上执行同样的语句。MySQL默认采用基于语句的复制，效率比较高。mixed指的是默认采用基于语句的复制，一旦发现基于语句的无法精确的复制时，就会采用基于行的复制。
+server-id&#x3D;1		   #要求各个服务器的id必须不一样
+binlog-do-db&#x3D;demo   #同步的数据库名称<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+<h3 id="配置从服务器登录主服务器的账号授权（主服务器执行sql）"><a href="#配置从服务器登录主服务器的账号授权（主服务器执行sql）" class="headerlink" title="配置从服务器登录主服务器的账号授权（主服务器执行sql）"></a>配置从服务器登录主服务器的账号授权（主服务器执行sql）</h3><div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">--授权操作
+set global validate_password_policy&#x3D;0;
+set global validate_password_length&#x3D;1;
+## 上面两个命令如果没有mysql没有该参数可以略过，原因是mysql缺少密码策略
+grant replication slave on *.* to &#39;root&#39;@&#39;%&#39; identified by &#39;123456&#39;;
+--刷新权限
+flush privileges;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+<h3 id="从服务器的配置"><a href="#从服务器的配置" class="headerlink" title="从服务器的配置"></a>从服务器的配置</h3><div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">#修改配置文件，执行以下命令打开mysql配置文件
+vi &#x2F;etc&#x2F;my.cnf
+#在mysqld模块中添加如下配置信息
+log-bin&#x3D;master-bin	#二进制文件的名称
+binlog-format&#x3D;ROW	#二进制文件的格式
+server-id&#x3D;2			#服务器的id<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+<h3 id="重启主服务器的mysqld服务"><a href="#重启主服务器的mysqld服务" class="headerlink" title="重启主服务器的mysqld服务"></a>重启主服务器的mysqld服务</h3><div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">#重启mysql服务
+service mysql restart
+#登录mysql数据库
+mysql -uroot -p
+#查看master的状态
+show master status;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+<h3 id="重启从服务器并进行相关配置"><a href="#重启从服务器并进行相关配置" class="headerlink" title="重启从服务器并进行相关配置"></a>重启从服务器并进行相关配置</h3><div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">#重启mysql服务
+service mysql restart
+#登录mysql
+mysql -uroot -p
+#连接主服务器
+change master to master_host&#x3D;&#39;172.29.32.21&#39;,master_user&#x3D;&#39;root&#39;,master_password&#x3D;&#39;123456&#39;,master_port&#x3D;3306,master_log_file&#x3D;&#39;master-bin.000001&#39;,master_log_pos&#x3D;154;
+#启动slave
+start slave
+#查看slave的状态
+show slave status<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 <ul>
 <li><p>master_log_file和master_log_pos参数</p>
 <p>主服务器执行 <code>show master status;</code> </p>
 <p>提供本机二进制日志文件的状态信息，显示正在写入的二进制文件，以及当前的position。比如：</p>
-<figure class="highlight asciidoc"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs asciidoc">mysql&gt; show master status;<br><span class="hljs-code">+------------------+</span>----------<span class="hljs-code">+--------------+</span>------------------+<br>| File             | Position | Binlog_Do_DB | Binlog_Ignore_DB |<br><span class="hljs-code">+------------------+</span>----------<span class="hljs-code">+--------------+</span>------------------+<br>| master-bin.000001 | 154 |              |                  |<br><span class="hljs-code">+------------------+</span>----------<span class="hljs-code">+--------------+</span>------------------+<br>1 row in set (0.00 sec) <br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">mysql&gt; show master status;
++------------------+----------+--------------+------------------+
+| File             | Position | Binlog_Do_DB | Binlog_Ignore_DB |
++------------------+----------+--------------+------------------+
+| master-bin.000001 | 154 |              |                  |
++------------------+----------+--------------+------------------+
+1 row in set (0.00 sec) <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 <p>File列显示日志名，而Position显示偏移量。设置从服务器时需要使用这些值。它们表示复制坐标，从服务器应从该点（也可以是任何点）开始从主服务器上进行新的更新。</p>
 </li>
 </ul>
 <h2 id="坑"><a href="#坑" class="headerlink" title="坑"></a>坑</h2><h3 id="mysql主从赋值，从机验证报错：ERROR-3021-HY000-this-operation-cannot-be-performed-with-a-running-salve-io-thread"><a href="#mysql主从赋值，从机验证报错：ERROR-3021-HY000-this-operation-cannot-be-performed-with-a-running-salve-io-thread" class="headerlink" title="mysql主从赋值，从机验证报错：ERROR 3021(HY000):this operation cannot be performed with a running salve io thread"></a>mysql主从赋值，从机验证报错：ERROR 3021(HY000):this operation cannot be performed with a running salve io thread</h3><h4 id="原因："><a href="#原因：" class="headerlink" title="原因："></a>原因：</h4><p>mysql从机上已经进行过绑定了，如果继续绑定需要先进行重置。</p>
 <h4 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h4><p>1、停止已经启动的绑定</p>
-<figure class="highlight crmsh"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs crmsh"><span class="hljs-literal">stop</span> <span class="hljs-literal">slave</span><br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">stop slave<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div>
 <p>2、重置绑定</p>
-<figure class="highlight crmsh"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs crmsh">reset <span class="hljs-literal">master</span><br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">reset master<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div>
 <p>3、执行复制主机命令</p>
-<figure class="highlight vim"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs vim"><span class="hljs-keyword">change</span> master <span class="hljs-keyword">to</span> master_host = <span class="hljs-string">&#x27;172.29.32.21&#x27;</span> master_user = <span class="hljs-string">&#x27;slave&#x27;</span> ,master_password =<span class="hljs-string">&#x27;123456&#x27;</span> ,master_log_file = <span class="hljs-string">&#x27;mysql-bin.000004&#x27;</span>,master_log_pos = <span class="hljs-string">&#x27;881&#x27;</span><br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">change master to master_host &#x3D; &#39;172.29.32.21&#39; master_user &#x3D; &#39;slave&#39; ,master_password &#x3D;&#39;123456&#39; ,master_log_file &#x3D; &#39;mysql-bin.000004&#39;,master_log_pos &#x3D; &#39;881&#39;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div>
 <p>4、发现此时已经不报错<br>5、启动复制</p>
-<figure class="highlight crmsh"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs crmsh"><span class="hljs-literal">start</span> <span class="hljs-literal">slave</span><br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">start slave<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div>
 
 
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>至此，mysql的主从便基本学习了，对于mysql的学习也暂告一段落。工作中断断续续的学习了五天，从一开始想学习主从配置的初衷，到简单demo搭建起后对log文件的学习，至后来顺便总结了一下mysql的引擎，中间更是穿插之前用过却未及时总结的通过数据文件备份mysql单/多表，以及测试环境突发的连接数过少的小问题，可谓收获颇多。</p>
@@ -463,6 +517,8 @@
 
 
 
+  
+    
   
 
 

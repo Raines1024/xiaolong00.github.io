@@ -32,7 +32,15 @@
     
     
       
-      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/darcula.min.css" />
+      
+        
+          
+        
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.22.0/themes/prism.min.css" />
+      
+      
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.22.0/plugins/line-numbers/prism-line-numbers.min.css" />
+      
     
   
 
@@ -187,7 +195,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      2.3k 字
+      2.4k 字
     </span>
   
 
@@ -197,7 +205,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      33
+      35
        分钟
     </span>
   
@@ -263,7 +271,14 @@
 <li>1 登陆阿里云容器模块<br>登陆地址为：<a target="_blank" rel="noopener" href="https://cr.console.aliyun.com/">https://cr.console.aliyun.com</a> ,未注册的可以先注册阿里云账户  </li>
 <li>2 配置镜像加速器<br>配置daemon.json文件   </li>
 </ol>
-<figure class="highlight awk"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs awk">sudo mkdir -p <span class="hljs-regexp">/etc/</span>docker<br>sudo tee <span class="hljs-regexp">/etc/</span>docker/daemon.json &lt;&lt;-<span class="hljs-string">&#x27;EOF&#x27;</span><br>&#123;<br>  <span class="hljs-string">&quot;registry-mirrors&quot;</span>: [<span class="hljs-string">&quot;https://tvgm2f32.mirror.aliyuncs.com&quot;</span>]<br>&#125;<br>EOF<br>sudo systemctl daemon-reload<br>sudo systemctl restart docker<br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">sudo mkdir -p &#x2F;etc&#x2F;docker
+sudo tee &#x2F;etc&#x2F;docker&#x2F;daemon.json &lt;&lt;-&#39;EOF&#39;
+&#123;
+  &quot;registry-mirrors&quot;: [&quot;https:&#x2F;&#x2F;tvgm2f32.mirror.aliyuncs.com&quot;]
+&#125;
+EOF
+sudo systemctl daemon-reload
+sudo systemctl restart docker<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 <ol start="7">
 <li>验证<br>docker –version<br>docker run hello-world<br>通过查询docker版本和运行容器hello-world来验证docker是否安装成功。  </li>
 </ol>
@@ -273,11 +288,26 @@
 <li>1 修改主机名<br>hostnamectl set-hostname master<br>more /etc/hostname<br>退出重新登陆即可显示新设置的主机名master  </li>
 <li>2 修改hosts文件  </li>
 </ol>
-<figure class="highlight accesslog"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs accesslog">cat &gt;&gt; /etc/hosts &lt;&lt; EOF<br><span class="hljs-number">172.27.9.131</span>    master<br><span class="hljs-number">172.27.9.135</span>    node01<br><span class="hljs-number">172.27.9.136</span>    node02<br>EOF<br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">cat &gt;&gt; &#x2F;etc&#x2F;hosts &lt;&lt; EOF
+172.27.9.131    master
+172.27.9.135    node01
+172.27.9.136    node02
+EOF<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 <p>more /etc/hosts<br>2. 验证mac地址uuid<br>cat /sys/class/net/eth0/address<br>cat /sys/class/dmi/id/product_uuid<br>保证各节点mac和uuid唯一<br>3. 禁用swap<br>3.1 临时禁用<br>swapoff -a<br>3.2 永久禁用<br>若需要重启后也生效，在禁用swap后还需修改配置文件/etc/fstab，注释swap<br>sed -i.bak ‘/swap/s/^/#/‘ /etc/fstab<br>4. 内核参数修改<br>4.1 临时修改<br>sysctl net.bridge.bridge-nf-call-iptables=1<br>sysctl net.bridge.bridge-nf-call-ip6tables=1<br>4.2 永久修改  </p>
-<figure class="highlight stylus"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs stylus">cat &lt;&lt;EOF &gt;  /etc/sysctl.d/k8s.conf<br>net<span class="hljs-selector-class">.bridge</span><span class="hljs-selector-class">.bridge-nf-call-ip6tables</span> = <span class="hljs-number">1</span><br>net<span class="hljs-selector-class">.bridge</span><span class="hljs-selector-class">.bridge-nf-call-iptables</span> = <span class="hljs-number">1</span><br>EOF<br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">cat &lt;&lt;EOF &gt;  &#x2F;etc&#x2F;sysctl.d&#x2F;k8s.conf
+net.bridge.bridge-nf-call-ip6tables &#x3D; 1
+net.bridge.bridge-nf-call-iptables &#x3D; 1
+EOF<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre></div>
 <p>sysctl -p /etc/sysctl.d/k8s.conf<br>5. 修改Cgroup Driver<br>5.1 修改daemon.json<br>修改daemon.json，新增‘“exec-opts”: [“native.cgroupdriver=systemd”]’<br>more /etc/docker/daemon.json<br>{<br>  “registry-mirrors”: [“<a href="https://v16stybc.mirror.aliyuncs.com&quot;]">https://v16stybc.mirror.aliyuncs.com&quot;]</a>,<br>  “exec-opts”: [“native.cgroupdriver=systemd”]<br>}<br>5.2 重新加载docker<br>systemctl daemon-reload<br>systemctl restart docker<br>6. 设置kubernetes源<br>6.1 新增kubernetes源  </p>
-<figure class="highlight awk"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs awk">cat &lt;&lt;EOF &gt; <span class="hljs-regexp">/etc/yum</span>.repos.d/kubernetes.repo<br>[kubernetes]<br>name=Kubernetes<br>baseurl=https:<span class="hljs-regexp">//mi</span>rrors.aliyun.com<span class="hljs-regexp">/kubernetes/yum</span><span class="hljs-regexp">/repos/</span>kubernetes-el7-x86_64/<br>enabled=<span class="hljs-number">1</span><br>gpgcheck=<span class="hljs-number">1</span><br>repo_gpgcheck=<span class="hljs-number">1</span><br>gpgkey=https:<span class="hljs-regexp">//mi</span>rrors.aliyun.com<span class="hljs-regexp">/kubernetes/yum</span><span class="hljs-regexp">/doc/yum</span>-key.gpg https:<span class="hljs-regexp">//mi</span>rrors.aliyun.com<span class="hljs-regexp">/kubernetes/yum</span><span class="hljs-regexp">/doc/</span>rpm-package-key.gpg<br>EOF<br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">cat &lt;&lt;EOF &gt; &#x2F;etc&#x2F;yum.repos.d&#x2F;kubernetes.repo
+[kubernetes]
+name&#x3D;Kubernetes
+baseurl&#x3D;https:&#x2F;&#x2F;mirrors.aliyun.com&#x2F;kubernetes&#x2F;yum&#x2F;repos&#x2F;kubernetes-el7-x86_64&#x2F;
+enabled&#x3D;1
+gpgcheck&#x3D;1
+repo_gpgcheck&#x3D;1
+gpgkey&#x3D;https:&#x2F;&#x2F;mirrors.aliyun.com&#x2F;kubernetes&#x2F;yum&#x2F;doc&#x2F;yum-key.gpg https:&#x2F;&#x2F;mirrors.aliyun.com&#x2F;kubernetes&#x2F;yum&#x2F;doc&#x2F;rpm-package-key.gpg
+EOF<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 <ul>
 <li>[] 中括号中的是repository id，唯一，用来标识不同仓库</li>
 <li>name  仓库名称，自定义</li>
@@ -298,9 +328,23 @@
 <li>下载镜像  </li>
 <li>1 镜像下载的脚本<br>Kubernetes几乎所有的安装组件和Docker镜像都放在goolge自己的网站上,直接访问可能会有网络问题，这里的解决办法是从阿里云镜像仓库下载镜像，拉取到本地以后改回默认的镜像tag。  </li>
 </ol>
-<figure class="highlight routeros"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs routeros">more image.sh <br><span class="hljs-comment">#!/bin/bash</span><br><span class="hljs-attribute">url</span>=registry.cn-hangzhou.aliyuncs.com/google_containers<br><span class="hljs-attribute">version</span>=v1.18.2<br>images=(`kubeadm<span class="hljs-built_in"> config </span>images list <span class="hljs-attribute">--kubernetes-version</span>=<span class="hljs-variable">$version</span>|awk -F <span class="hljs-string">&#x27;/&#x27;</span> <span class="hljs-string">&#x27;&#123;print $2&#125;&#x27;</span>`)<br><span class="hljs-keyword">for</span> imagename <span class="hljs-keyword">in</span> <span class="hljs-variable">$&#123;images[@]&#125;</span> ; <span class="hljs-keyword">do</span><br>  docker pull <span class="hljs-variable">$url</span>/<span class="hljs-variable">$imagename</span><br>  docker tag <span class="hljs-variable">$url</span>/<span class="hljs-variable">$imagename</span> k8s.gcr.io/<span class="hljs-variable">$imagename</span><br>  docker rmi -f <span class="hljs-variable">$url</span>/<span class="hljs-variable">$imagename</span><br>done<br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">more image.sh 
+#!&#x2F;bin&#x2F;bash
+url&#x3D;registry.cn-hangzhou.aliyuncs.com&#x2F;google_containers
+version&#x3D;v1.18.2
+images&#x3D;(&#96;kubeadm config images list --kubernetes-version&#x3D;$version|awk -F &#39;&#x2F;&#39; &#39;&#123;print $2&#125;&#39;&#96;)
+for imagename in $&#123;images[@]&#125; ; do
+  docker pull $url&#x2F;$imagename
+  docker tag $url&#x2F;$imagename k8s.gcr.io&#x2F;$imagename
+  docker rmi -f $url&#x2F;$imagename
+done<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 <p>url为阿里云镜像仓库地址，version为安装的kubernetes版本。<br>3.2 下载镜像<br>运行脚本image.sh，下载指定版本的镜像<br>./image.sh<br>docker images<br>4. 初始化Master<br>4.1 初始化  </p>
-<figure class="highlight routeros"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs routeros">kubeadm init \<br><span class="hljs-attribute">--apiserver-advertise-address</span>=172.27.9.131 \<br>--image-repository registry.aliyuncs.com/google_containers \<br>--kubernetes-version v1.18.2 \<br><span class="hljs-attribute">--service-cidr</span>=10.1.0.0/16 \<br><span class="hljs-attribute">--pod-network-cidr</span>=10.244.0.0/16  <br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">kubeadm init \
+--apiserver-advertise-address&#x3D;172.27.9.131 \
+--image-repository registry.aliyuncs.com&#x2F;google_containers \
+--kubernetes-version v1.18.2 \
+--service-cidr&#x3D;10.1.0.0&#x2F;16 \
+--pod-network-cidr&#x3D;10.244.0.0&#x2F;16  <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 <p>apiserver-advertise-address指定master的interface，pod-network-cidr指定Pod网络的范围，这里使用flannel网络方案。<br>记录kubeadm join的输出，后面需要这个命令将各个节点加入集群中。<br>4.2 加载环境变量<br>echo “export KUBECONFIG=/etc/kubernetes/admin.conf” &gt;&gt; ~/.bash_profile<br>source .bash_profile<br>本文所有操作都在root用户下执行，若为非root用户，则执行如下操作：<br>mkdir -p $HOME/.kube<br>cp -i /etc/kubernetes/admin.conf $HOME/.kube/config<br>chown $(id -u):$(id -g) $HOME/.kube/config<br>5. 安装pod网络<br>kubectl apply -f <a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml">https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml</a><br>6. master节点配置<br>taint：污点的意思。如果一个节点被打上了污点，那么pod是不允许运行在这个节点上面的<br>6.1 删除master节点默认污点<br>默认情况下集群不会在master上调度pod，如果偏想在master上调度Pod，可以执行如下操作：<br>查看污点：<br>kubectl describe node master|grep -i taints<br>Taints:             node-role.kubernetes.io/master:NoSchedule<br>删除默认污点：kubectl taint nodes master node-role.kubernetes.io/master-node/master untainted<br>6.2 污点机制  </p>
 <p>语法：</p>
 <p>kubectl taint node [node] key=value[effect]<br>     其中[effect] 可取值: [ NoSchedule | PreferNoSchedule | NoExecute ]<br>      NoSchedule: 一定不能被调度<br>      PreferNoSchedule: 尽量不要调度<br>      NoExecute: 不仅不会调度, 还会驱逐Node上已有的Pod<br>打污点</p>
@@ -324,9 +368,46 @@
 <li>1 vim recommended.yaml  </li>
 <li>2 修改Service部分   </li>
 </ol>
-<figure class="highlight yaml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs yaml"><br><span class="hljs-string">-----------------------------------------------</span><br><span class="hljs-attr">kind:</span> <span class="hljs-string">Service</span><br><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">v1</span><br><span class="hljs-attr">metadata:</span><br>  <span class="hljs-attr">labels:</span><br>    <span class="hljs-attr">k8s-app:</span> <span class="hljs-string">kubernetes-dashboard</span><br>  <span class="hljs-attr">name:</span> <span class="hljs-string">kubernetes-dashboard</span><br>  <span class="hljs-attr">namespace:</span> <span class="hljs-string">kubernetes-dashboard</span><br><span class="hljs-attr">spec:</span><br>  <span class="hljs-attr">type:</span> <span class="hljs-string">NodePort</span><br>  <span class="hljs-attr">ports:</span><br>    <span class="hljs-bullet">-</span> <span class="hljs-attr">port:</span> <span class="hljs-number">443</span><br>      <span class="hljs-attr">targetPort:</span> <span class="hljs-number">8443</span><br>      <span class="hljs-attr">nodePort:</span> <span class="hljs-number">30443</span><br>  <span class="hljs-attr">selector:</span><br>    <span class="hljs-attr">k8s-app:</span> <span class="hljs-string">kubernetes-dashboard</span><br> <span class="hljs-string">----------------------------------------------</span><br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">
+-----------------------------------------------
+kind: Service
+apiVersion: v1
+metadata:
+  labels:
+    k8s-app: kubernetes-dashboard
+  name: kubernetes-dashboard
+  namespace: kubernetes-dashboard
+spec:
+  type: NodePort
+  ports:
+    - port: 443
+      targetPort: 8443
+      nodePort: 30443
+  selector:
+    k8s-app: kubernetes-dashboard
+ ----------------------------------------------<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 <p>注意如果这里的nodePort写成nodeport或者存在其他书写问题，就会报错<br>不能用tab缩进，冒号后有空格<br>3. 更新配置<br>kubectl apply -f recommended.yaml<br>状态查看  kubectl get deployment kubernetes-dashboard -n kube-system<br>kubectl get pods -n kube-system -o wide<br>kubectl get services -n kube-system<br>4. 登录dashboard<br>浏览器访问dashboard：<br>https://<any_node_ip>:30443<br>5. Token认证方式登录<br>5.1 创建dashboard-adminuser.yaml：  </p>
-<figure class="highlight yaml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs yaml"><span class="hljs-string">cat</span> <span class="hljs-string">&gt;</span> <span class="hljs-string">dashboard-adminuser.yaml</span> <span class="hljs-string">&lt;&lt;</span> <span class="hljs-string">EOF</span><br> <span class="hljs-attr">apiVersion:</span> <span class="hljs-string">v1</span><br> <span class="hljs-attr">kind:</span> <span class="hljs-string">ServiceAccount</span><br> <span class="hljs-attr">metadata:</span><br>   <span class="hljs-attr">name:</span> <span class="hljs-string">admin-user</span><br>   <span class="hljs-attr">namespace:</span> <span class="hljs-string">kubernetes-dashboard</span><br> <br> <span class="hljs-string">---</span><br> <span class="hljs-attr">apiVersion:</span> <span class="hljs-string">rbac.authorization.k8s.io/v1</span><br> <span class="hljs-attr">kind:</span> <span class="hljs-string">ClusterRoleBinding</span><br> <span class="hljs-attr">metadata:</span><br>   <span class="hljs-attr">name:</span> <span class="hljs-string">admin-user</span><br> <span class="hljs-attr">roleRef:</span><br>   <span class="hljs-attr">apiGroup:</span> <span class="hljs-string">rbac.authorization.k8s.io</span><br>   <span class="hljs-attr">kind:</span> <span class="hljs-string">ClusterRole</span><br>   <span class="hljs-attr">name:</span> <span class="hljs-string">cluster-admin</span><br> <span class="hljs-attr">subjects:</span><br> <span class="hljs-bullet">-</span> <span class="hljs-attr">kind:</span> <span class="hljs-string">ServiceAccount</span><br>   <span class="hljs-attr">name:</span> <span class="hljs-string">admin-user</span><br>   <span class="hljs-attr">namespace:</span> <span class="hljs-string">kubernetes-dashboard</span><br><span class="hljs-string">&gt;</span> <span class="hljs-string">EOF</span><br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">cat &gt; dashboard-adminuser.yaml &lt;&lt; EOF
+ apiVersion: v1
+ kind: ServiceAccount
+ metadata:
+   name: admin-user
+   namespace: kubernetes-dashboard
+ 
+ ---
+ apiVersion: rbac.authorization.k8s.io&#x2F;v1
+ kind: ClusterRoleBinding
+ metadata:
+   name: admin-user
+ roleRef:
+   apiGroup: rbac.authorization.k8s.io
+   kind: ClusterRole
+   name: cluster-admin
+ subjects:
+ - kind: ServiceAccount
+   name: admin-user
+   namespace: kubernetes-dashboard
+&gt; EOF<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 <p>5.2 创建登录用户<br>kubectl apply -f dashboard-adminuser.yaml  </p>
 <ul>
 <li>说明：上面创建了一个叫admin-user的服务账号，并放在kubernetes-dashboard命名空间下，并将cluster-admin角色绑定到admin-user账户，这样admin-user账户就有了管理员的权限。默认情况下，kubeadm创建集群时已经创建了cluster-admin角色，我们直接绑定即可。  </li>
@@ -361,9 +442,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2020/01/07/2020/2020-06-29-ubuntuLearn/">
+                      <a href="/2020/01/07/2020/2020-11-25-flink1/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Ubuntu 桌面版</span>
+                        <span class="hidden-mobile">Flink入门</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -371,8 +452,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2020/01/07/2020/2020-11-25-centosLearn/">
-                        <span class="hidden-mobile">CentOS必知必会</span>
+                      <a href="/2020/01/07/2020/2020-11-25-flink2/">
+                        <span class="hidden-mobile">Flink之Data Source 介绍</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -477,6 +558,8 @@
 
 
 
+  
+    
   
 
 

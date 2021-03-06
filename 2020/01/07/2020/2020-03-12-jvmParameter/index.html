@@ -32,7 +32,15 @@
     
     
       
-      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/darcula.min.css" />
+      
+        
+          
+        
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.22.0/themes/prism.min.css" />
+      
+      
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.22.0/plugins/line-numbers/prism-line-numbers.min.css" />
+      
     
   
 
@@ -254,8 +262,70 @@
 <p>参考链接：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/jpfss/p/8618297.html">https://www.cnblogs.com/jpfss/p/8618297.html</a>  </p>
 <h3 id="java-xx参数介绍及调优总结"><a href="#java-xx参数介绍及调优总结" class="headerlink" title="java-xx参数介绍及调优总结"></a>java-xx参数介绍及调优总结</h3><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_39407066/article/details/84582380">https://blog.csdn.net/weixin_39407066/article/details/84582380</a></p>
 <h3 id="实战-通过gc比较String-replace性能差异"><a href="#实战-通过gc比较String-replace性能差异" class="headerlink" title="实战:通过gc比较String.replace性能差异"></a>实战:通过gc比较String.replace性能差异</h3><ol>
-<li>代码  <figure class="highlight arduino"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs arduino"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TestStringReplace</span> &#123;</span><br><br>    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">String</span> <span class="hljs-title">replace</span><span class="hljs-params">(<span class="hljs-keyword">String</span> src, <span class="hljs-keyword">String</span> pattern, <span class="hljs-keyword">String</span> replacement)</span> </span>&#123;<br>        <span class="hljs-keyword">int</span> i = src.indexOf(pattern);<br>        <span class="hljs-keyword">if</span> (i &gt;= <span class="hljs-number">0</span>) &#123;<br>            <span class="hljs-keyword">int</span> ptnLen = pattern.length();<br>            StringBuilder sb = <span class="hljs-keyword">new</span> StringBuilder(src.length());<br>            sb.append(src, <span class="hljs-number">0</span>, i).append(replacement);<br>            i += ptnLen;<br>            <span class="hljs-keyword">for</span> (;;) &#123;<br>                <span class="hljs-keyword">int</span> j = src.indexOf(pattern, i);<br>                <span class="hljs-keyword">if</span> (j &gt;= <span class="hljs-number">0</span>) &#123;<br>                    sb.append(src, i, j).append(replacement);<br>                    i = j + ptnLen;<br>                &#125; <span class="hljs-keyword">else</span> &#123;<br>                    <span class="hljs-keyword">return</span> sb.append(src, i, src.length()).toString();<br>                &#125;<br>            &#125;<br>        &#125; <span class="hljs-keyword">else</span> &#123;<br>            <span class="hljs-keyword">return</span> src;<br>        &#125;<br>    &#125;<br><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> LOOPS = <span class="hljs-number">100</span> * <span class="hljs-number">10000</span>;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">String</span> SRC = <span class="hljs-string">&quot;asdfasdfassdd2edsdfasdfasdfasdfasdfasdfasdsdfasdfasdfasdfasdfasdfasdsdfasdfasdfasdfsd&quot;</span>;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">String</span> PATTERN = <span class="hljs-string">&quot;sdf&quot;</span>;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">String</span> REP = <span class="hljs-string">&quot;ijkk2eeew;&quot;</span>;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">String</span>[] args)</span> </span>&#123;<br>        System.out.<span class="hljs-built_in">println</span>(replace(SRC, PATTERN, REP));<br>        System.out.<span class="hljs-built_in">println</span>(replace(SRC, PATTERN, REP).equals(SRC.replace(PATTERN, REP)));<br><br>        System.out.<span class="hljs-built_in">println</span>(<span class="hljs-string">&quot;test replace1---------------------------------------&quot;</span>);<br>        timeit(() -&gt; &#123;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; LOOPS; i++) &#123;<br>                replace(SRC, PATTERN, REP);<br>            &#125;<br>        &#125;, <span class="hljs-number">6</span>);<br><br>        System.out.<span class="hljs-built_in">println</span>(<span class="hljs-string">&quot;test string.replace-------------------------------------&quot;</span>);<br>        timeit(() -&gt; &#123;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; LOOPS; i++) &#123;<br>                SRC.replace(PATTERN, REP);<br>            &#125;<br>        &#125;, <span class="hljs-number">6</span>);<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">timeit</span><span class="hljs-params">(Runnable r, <span class="hljs-keyword">int</span> times)</span> </span>&#123;<br>        <span class="hljs-keyword">long</span> total = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; times; i++) &#123;<br>            <span class="hljs-keyword">long</span> start = System.currentTimeMillis();<br>            r.<span class="hljs-built_in">run</span>();<br>            <span class="hljs-keyword">long</span> <span class="hljs-built_in">end</span> = System.currentTimeMillis();<br>            total += <span class="hljs-built_in">end</span> - start;<br>            System.out.<span class="hljs-built_in">println</span>(<span class="hljs-built_in">end</span> - start);<br>        &#125;<br>        System.out.<span class="hljs-built_in">println</span>(<span class="hljs-string">&quot;AVG &quot;</span> + total / times);<br>    &#125;<br><br>&#125;<br>```  <br><span class="hljs-number">2.</span> 执行命令运行TestStringReplace  <br>time java -XX:+UseG1GC -Xmx4G -Xms4G -XX:+PrintGC TestStringReplace  <br></code></pre></div></td></tr></table></figure>
-true<br>test replace1—————————————<br>[GC pause (G1 Evacuation Pause) (young) 204M-&gt;608K(4096M), 0.0016481 secs]<br>[GC pause (G1 Evacuation Pause) (young) 236M-&gt;709K(4096M), 0.0017248 secs]<br>1333<br>[GC pause (G1 Evacuation Pause) (young) 2454M-&gt;750K(4096M), 0.0036411 secs]<br>1239<br>688<br>[GC pause (G1 Evacuation Pause) (young) 2454M-&gt;684K(4096M), 0.0019600 secs]<br>593<br>[GC pause (G1 Evacuation Pause) (young) 2454M-&gt;666K(4096M), 0.0023456 secs]<br>579<br>572<br>AVG 834<br>test string.replace————————————-<br>[GC pause (G1 Evacuation Pause) (young) 2454M-&gt;662K(4096M), 0.0020937 secs]<br>[GC pause (G1 Evacuation Pause) (young) 2454M-&gt;689K(4096M), 0.0025844 secs]<br>1857<br>[GC pause (G1 Evacuation Pause) (young) 2454M-&gt;729K(4096M), 0.0022971 secs]<br>1789<br>[GC pause (G1 Evacuation Pause) (young) 2454M-&gt;708K(4096M), 0.0021608 secs]<br>1792<br>[GC pause (G1 Evacuation Pause) (young) 2454M-&gt;710K(4096M), 0.0023275 secs]<br>1781<br>[GC pause (G1 Evacuation Pause) (young) 2454M-&gt;661K(4096M), 0.0022797 secs]<br>1809<br>[GC pause (G1 Evacuation Pause) (young) 2454M-&gt;662K(4096M), 0.0020625 secs]<br>[GC pause (G1 Evacuation Pause) (young) 2454M-&gt;778K(4096M), 0.0023225 secs]<br>1787<br>AVG 1802<br>java -XX:+UseG1GC -Xmx4G -Xms4G -XX:+PrintGC TestStringReplace  15.63s user 1.02s system 102% cpu 16.233 total<div class="hljs code-wrapper"><pre><code>总结：主要是节省了官方实现通过Regex这一步，虽然性能差距不大，但是这并非是对性能的吹毛求疵，而是一眼看过去的直觉就感觉不是很舒服。  
+<li>代码  <div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">public class TestStringReplace &#123;
+
+    private static String replace(String src, String pattern, String replacement) &#123;
+        int i &#x3D; src.indexOf(pattern);
+        if (i &gt;&#x3D; 0) &#123;
+            int ptnLen &#x3D; pattern.length();
+            StringBuilder sb &#x3D; new StringBuilder(src.length());
+            sb.append(src, 0, i).append(replacement);
+            i +&#x3D; ptnLen;
+            for (;;) &#123;
+                int j &#x3D; src.indexOf(pattern, i);
+                if (j &gt;&#x3D; 0) &#123;
+                    sb.append(src, i, j).append(replacement);
+                    i &#x3D; j + ptnLen;
+                &#125; else &#123;
+                    return sb.append(src, i, src.length()).toString();
+                &#125;
+            &#125;
+        &#125; else &#123;
+            return src;
+        &#125;
+    &#125;
+
+    private static final int LOOPS &#x3D; 100 * 10000;
+    private static final String SRC &#x3D; &quot;asdfasdfassdd2edsdfasdfasdfasdfasdfasdfasdsdfasdfasdfasdfasdfasdfasdsdfasdfasdfasdfsd&quot;;
+    private static final String PATTERN &#x3D; &quot;sdf&quot;;
+    private static final String REP &#x3D; &quot;ijkk2eeew;&quot;;
+
+    public static void main(String[] args) &#123;
+        System.out.println(replace(SRC, PATTERN, REP));
+        System.out.println(replace(SRC, PATTERN, REP).equals(SRC.replace(PATTERN, REP)));
+
+        System.out.println(&quot;test replace1---------------------------------------&quot;);
+        timeit(() -&gt; &#123;
+            for (int i &#x3D; 0; i &lt; LOOPS; i++) &#123;
+                replace(SRC, PATTERN, REP);
+            &#125;
+        &#125;, 6);
+
+        System.out.println(&quot;test string.replace-------------------------------------&quot;);
+        timeit(() -&gt; &#123;
+            for (int i &#x3D; 0; i &lt; LOOPS; i++) &#123;
+                SRC.replace(PATTERN, REP);
+            &#125;
+        &#125;, 6);
+    &#125;
+
+    private static void timeit(Runnable r, int times) &#123;
+        long total &#x3D; 0;
+        for (int i &#x3D; 0; i &lt; times; i++) &#123;
+            long start &#x3D; System.currentTimeMillis();
+            r.run();
+            long end &#x3D; System.currentTimeMillis();
+            total +&#x3D; end - start;
+            System.out.println(end - start);
+        &#125;
+        System.out.println(&quot;AVG &quot; + total &#x2F; times);
+    &#125;
+
+&#125;
+&#96;&#96;&#96;  
+2. 执行命令运行TestStringReplace  
+time java -XX:+UseG1GC -Xmx4G -Xms4G -XX:+PrintGC TestStringReplace  <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+true<br>test replace1—————————————<br>[GC pause (G1 Evacuation Pause) (young) 204M-&gt;608K(4096M), 0.0016481 secs]<br>[GC pause (G1 Evacuation Pause) (young) 236M-&gt;709K(4096M), 0.0017248 secs]<br>1333<br>[GC pause (G1 Evacuation Pause) (young) 2454M-&gt;750K(4096M), 0.0036411 secs]<br>1239<br>688<br>[GC pause (G1 Evacuation Pause) (young) 2454M-&gt;684K(4096M), 0.0019600 secs]<br>593<br>[GC pause (G1 Evacuation Pause) (young) 2454M-&gt;666K(4096M), 0.0023456 secs]<br>579<br>572<br>AVG 834<br>test string.replace————————————-<br>[GC pause (G1 Evacuation Pause) (young) 2454M-&gt;662K(4096M), 0.0020937 secs]<br>[GC pause (G1 Evacuation Pause) (young) 2454M-&gt;689K(4096M), 0.0025844 secs]<br>1857<br>[GC pause (G1 Evacuation Pause) (young) 2454M-&gt;729K(4096M), 0.0022971 secs]<br>1789<br>[GC pause (G1 Evacuation Pause) (young) 2454M-&gt;708K(4096M), 0.0021608 secs]<br>1792<br>[GC pause (G1 Evacuation Pause) (young) 2454M-&gt;710K(4096M), 0.0023275 secs]<br>1781<br>[GC pause (G1 Evacuation Pause) (young) 2454M-&gt;661K(4096M), 0.0022797 secs]<br>1809<br>[GC pause (G1 Evacuation Pause) (young) 2454M-&gt;662K(4096M), 0.0020625 secs]<br>[GC pause (G1 Evacuation Pause) (young) 2454M-&gt;778K(4096M), 0.0023225 secs]<br>1787<br>AVG 1802<br>java -XX:+UseG1GC -Xmx4G -Xms4G -XX:+PrintGC TestStringReplace  15.63s user 1.02s system 102% cpu 16.233 total<div class="code-wrapper"><pre><code>总结：主要是节省了官方实现通过Regex这一步，虽然性能差距不大，但是这并非是对性能的吹毛求疵，而是一眼看过去的直觉就感觉不是很舒服。  
 
 
 
@@ -474,6 +544,8 @@ true<br>test replace1—————————————<br>[GC pause (G1 Ev
 
 
 
+  
+    
   
 
 

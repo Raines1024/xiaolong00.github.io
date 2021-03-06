@@ -32,7 +32,15 @@
     
     
       
-      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/darcula.min.css" />
+      
+        
+          
+        
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.22.0/themes/prism.min.css" />
+      
+      
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.22.0/plugins/line-numbers/prism-line-numbers.min.css" />
+      
     
   
 
@@ -232,15 +240,43 @@
             <div class="markdown-body">
               <h2 id="Data-Sources-是什么"><a href="#Data-Sources-是什么" class="headerlink" title="Data Sources 是什么"></a>Data Sources 是什么</h2><p>Data Sources 是什么呢？就字面意思其实就可以知道：数据来源。<br>Flink 做为一款流式计算框架，它可用来做批处理，即处理静态的数据集、历史的数据集；也可以用来做流处理，即实时的处理些实时数据流，实时的产生数据流结果，只要数据源源不断的过来，Flink 就能够一直计算下去，这个 Data Sources 就是数据的来源地。<br>Flink 中你可以使用 StreamExecutionEnvironment.addSource(sourceFunction) 来为你的程序添加数据来源。<br>Flink 已经提供了若干实现好了的 source functions，当然你也可以通过实现 SourceFunction 来自定义非并行的 source 或者实现 ParallelSourceFunction 接口或者扩展 RichParallelSourceFunction 来自定义并行的 source   </p>
 <h2 id="StreamExecutionEnvironment-中可以使用以下几个已实现的-stream-sources"><a href="#StreamExecutionEnvironment-中可以使用以下几个已实现的-stream-sources" class="headerlink" title="StreamExecutionEnvironment 中可以使用以下几个已实现的 stream sources"></a>StreamExecutionEnvironment 中可以使用以下几个已实现的 stream sources</h2><h3 id="基于集合"><a href="#基于集合" class="headerlink" title="基于集合"></a>基于集合</h3><p>1、fromCollection(Collection) - 从 Java 的 Java.util.Collection 创建数据流。集合中的所有元素类型必须相同。<br>2、fromCollection(Iterator, Class) - 从一个迭代器中创建数据流。Class 指定了该迭代器返回元素的类型。<br>3、fromElements(T …) - 从给定的对象序列中创建数据流。所有对象类型必须相同。<br>4、fromParallelCollection(SplittableIterator, Class) - 从一个迭代器中创建并行数据流。Class 指定了该迭代器返回元素的类型。<br>5、generateSequence(from, to) - 创建一个生成指定区间范围内的数字序列的并行数据流。   </p>
-<figure class="highlight vbnet"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs vbnet">StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();<br><br>DataStream&lt;<span class="hljs-keyword">Event</span>&gt; input = env.fromElements(<br>	<span class="hljs-built_in">new</span> <span class="hljs-keyword">Event</span>(<span class="hljs-number">1</span>, <span class="hljs-string">&quot;barfoo&quot;</span>, <span class="hljs-number">1.0</span>),<br>	<span class="hljs-built_in">new</span> <span class="hljs-keyword">Event</span>(<span class="hljs-number">2</span>, <span class="hljs-string">&quot;start&quot;</span>, <span class="hljs-number">2.0</span>),<br>	<span class="hljs-built_in">new</span> <span class="hljs-keyword">Event</span>(<span class="hljs-number">3</span>, <span class="hljs-string">&quot;foobar&quot;</span>, <span class="hljs-number">3.0</span>),<br>	...<br>);<br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">StreamExecutionEnvironment env &#x3D; StreamExecutionEnvironment.getExecutionEnvironment();
+
+DataStream&lt;Event&gt; input &#x3D; env.fromElements(
+	new Event(1, &quot;barfoo&quot;, 1.0),
+	new Event(2, &quot;start&quot;, 2.0),
+	new Event(3, &quot;foobar&quot;, 3.0),
+	...
+);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 <h3 id="基于文件"><a href="#基于文件" class="headerlink" title="基于文件"></a>基于文件</h3><p>1、readTextFile(path) - 读取文本文件，即符合 TextInputFormat 规范的文件，并将其作为字符串返回。  </p>
-<figure class="highlight reasonml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs reasonml">final StreamExecutionEnvironment env = <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">StreamExecutionEnvironment</span>.</span></span>get<span class="hljs-constructor">ExecutionEnvironment()</span>;<br><br>DataStream&lt;String&gt; text = env.read<span class="hljs-constructor">TextFile(<span class="hljs-string">&quot;file:///path/to/file&quot;</span>)</span>;<br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">final StreamExecutionEnvironment env &#x3D; StreamExecutionEnvironment.getExecutionEnvironment();
+
+DataStream&lt;String&gt; text &#x3D; env.readTextFile(&quot;file:&#x2F;&#x2F;&#x2F;path&#x2F;to&#x2F;file&quot;);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></div>
 <p>2、readFile(fileInputFormat, path) - 根据指定的文件输入格式读取文件（一次）。<br>3、readFile(fileInputFormat, path, watchType, interval, pathFilter, typeInfo) - 这是上面两个方法内部调用的方法。它根据给定的 fileInputFormat 和读取路径读取文件。根据提供的 watchType，这个 source 可以定期（每隔 interval 毫秒）监测给定路径的新数据（FileProcessingMode.PROCESS_CONTINUOUSLY），或者处理一次路径对应文件的数据并退出（FileProcessingMode.PROCESS_ONCE）。你可以通过 pathFilter 进一步排除掉需要处理的文件。  </p>
-<figure class="highlight dockerfile"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs dockerfile">final StreamExecutionEnvironment <span class="hljs-keyword">env</span> = StreamExecutionEnvironment.getExecutionEnvironment();<br><br>DataStream&lt;MyEvent&gt; stream = <span class="hljs-keyword">env</span>.readFile(<br>        myFormat, myFilePath, FileProcessingMode.PROCESS_CONTINUOUSLY, <span class="hljs-number">100</span>,<br>        FilePathFilter.createDefaultFilter(), typeInfo);<br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">final StreamExecutionEnvironment env &#x3D; StreamExecutionEnvironment.getExecutionEnvironment();
+
+DataStream&lt;MyEvent&gt; stream &#x3D; env.readFile(
+        myFormat, myFilePath, FileProcessingMode.PROCESS_CONTINUOUSLY, 100,
+        FilePathFilter.createDefaultFilter(), typeInfo);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 <h3 id="基于-Socket"><a href="#基于-Socket" class="headerlink" title="基于 Socket"></a>基于 Socket</h3><p>socketTextStream(String hostname, int port) - 从 socket 读取。元素可以用分隔符切分。  </p>
-<figure class="highlight reasonml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs reasonml">StreamExecutionEnvironment env = <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">StreamExecutionEnvironment</span>.</span></span>get<span class="hljs-constructor">ExecutionEnvironment()</span>;<br><br>DataStream&lt;Tuple2&lt;String, Integer&gt;&gt; dataStream = env<br>        .socket<span class="hljs-constructor">TextStream(<span class="hljs-string">&quot;localhost&quot;</span>, 9999)</span> <span class="hljs-comment">// 监听 localhost 的 9999 端口过来的数据</span><br>        .flat<span class="hljs-constructor">Map(<span class="hljs-params">new</span> Splitter()</span>)<br>        .key<span class="hljs-constructor">By(0)</span><br>        .time<span class="hljs-constructor">Window(Time.<span class="hljs-params">seconds</span>(5)</span>)<br>        .sum(<span class="hljs-number">1</span>);<br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">StreamExecutionEnvironment env &#x3D; StreamExecutionEnvironment.getExecutionEnvironment();
+
+DataStream&lt;Tuple2&lt;String, Integer&gt;&gt; dataStream &#x3D; env
+        .socketTextStream(&quot;localhost&quot;, 9999) &#x2F;&#x2F; 监听 localhost 的 9999 端口过来的数据
+        .flatMap(new Splitter())
+        .keyBy(0)
+        .timeWindow(Time.seconds(5))
+        .sum(1);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 <h3 id="自定义"><a href="#自定义" class="headerlink" title="自定义"></a>自定义</h3><p>addSource - 添加一个新的 source function。例如，你可以 addSource(new FlinkKafkaConsumer011&lt;&gt;(…)) 以从 Apache Kafka 读取数据<br>说下上面几种的特点吧：<br>1、基于集合：有界数据集，更偏向于本地测试用<br>2、基于文件：适合监听文件修改并读取其内容<br>3、基于 Socket：监听主机的 host port，从 Socket 中获取数据<br>4、自定义 addSource：大多数的场景数据都是无界的，会源源不断的过来。比如去消费 Kafka 某个 topic 上的数据，这时候就需要用到这个 addSource，可能因为用的比较多的原因吧，Flink 直接提供了 FlinkKafkaConsumer011 等类可供你直接使用。你可以去看看 FlinkKafkaConsumerBase 这个基础类，它是 Flink Kafka 消费的最根本的类。  </p>
-<figure class="highlight haxe"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs haxe">StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();<br><br>DataStream&lt;KafkaEvent&gt; input = env<br>		.addSource(<br>			<span class="hljs-keyword">new</span> <span class="hljs-type">FlinkKafkaConsumer011</span>&lt;&gt;(<br>				parameterTool.getRequired(<span class="hljs-string">&quot;input-topic&quot;</span>), <span class="hljs-comment">//从参数中获取传进来的 topic </span><br>				<span class="hljs-keyword">new</span> <span class="hljs-type">KafkaEventSchema</span>(),<br>				parameterTool.getProperties())<br>			.assignTimestampsAndWatermarks(<span class="hljs-keyword">new</span> <span class="hljs-type">CustomWatermarkExtractor</span>()));<br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">StreamExecutionEnvironment env &#x3D; StreamExecutionEnvironment.getExecutionEnvironment();
+
+DataStream&lt;KafkaEvent&gt; input &#x3D; env
+		.addSource(
+			new FlinkKafkaConsumer011&lt;&gt;(
+				parameterTool.getRequired(&quot;input-topic&quot;), &#x2F;&#x2F;从参数中获取传进来的 topic 
+				new KafkaEventSchema(),
+				parameterTool.getProperties())
+			.assignTimestampsAndWatermarks(new CustomWatermarkExtractor()));<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 <h3 id="自定义自己的-Source"><a href="#自定义自己的-Source" class="headerlink" title="自定义自己的 Source"></a>自定义自己的 Source</h3><p>那么你就需要去了解一下 SourceFunction 接口了，它是所有 stream source 的根接口，它继承自一个标记接口（空接口）Function。<br>SourceFunction 定义了两个接口方法：<br>1、run ： 启动一个 source，即对接一个外部数据源然后 emit 元素形成 stream（大部分情况下会通过在该方法里运行一个 while 循环的形式来产生 stream）。<br>2、cancel ： 取消一个 source，也即将 run 中的循环 emit 元素的行为终止。<br>正常情况下，一个 SourceFunction 实现这两个接口方法就可以了。其实这两个接口方法也固定了一种实现模板。  </p>
 
             </div>
@@ -269,9 +305,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2020/01/07/2020/2020-11-25-flink1/">
+                      <a href="/2020/01/07/2020/2020-08-19-k8sinstall/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Flink入门</span>
+                        <span class="hidden-mobile">Centos7.6部署k8s(v1.18.2)集群</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -385,6 +421,8 @@
 
 
 
+  
+    
   
 
 

@@ -32,7 +32,15 @@
     
     
       
-      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/darcula.min.css" />
+      
+        
+          
+        
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.22.0/themes/prism.min.css" />
+      
+      
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.22.0/plugins/line-numbers/prism-line-numbers.min.css" />
+      
     
   
 
@@ -257,7 +265,7 @@
 </li>
 <li>访问路径<br>在server.location中监听访问路径<br>例如，在以下配置文件下：访问  域名/photo/demo.jpg<br>会去寻找服务器路径 /data/jar/photo下的demo.jpg文件；<br>而访问  域名/photo/<br>会显示photo文件夹的目录</li>
 </ul>
-<h3 id="配置文件详情"><a href="#配置文件详情" class="headerlink" title="配置文件详情"></a>配置文件详情</h3><div class="hljs code-wrapper"><pre><code>#user  nobody;
+<h3 id="配置文件详情"><a href="#配置文件详情" class="headerlink" title="配置文件详情"></a>配置文件详情</h3><div class="code-wrapper"><pre><code>#user  nobody;
 worker_processes  1;
 
 #error_log  logs/error.log;
@@ -523,6 +531,8 @@ http &#123;
 
 
 
+  
+    
   
 
 

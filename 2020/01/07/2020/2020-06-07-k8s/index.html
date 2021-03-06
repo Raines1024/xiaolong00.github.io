@@ -32,7 +32,15 @@
     
     
       
-      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/darcula.min.css" />
+      
+        
+          
+        
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.22.0/themes/prism.min.css" />
+      
+      
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.22.0/plugins/line-numbers/prism-line-numbers.min.css" />
+      
     
   
 
@@ -187,7 +195,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      828 字
+      835 字
     </span>
   
 
@@ -230,15 +238,28 @@
             <h1 style="display: none">kubernetes入门实战</h1>
             
             <div class="markdown-body">
-              <h2 id="docker回顾"><a href="#docker回顾" class="headerlink" title="docker回顾"></a>docker回顾</h2><h3 id="创建一个简单的Node-js应用"><a href="#创建一个简单的Node-js应用" class="headerlink" title="创建一个简单的Node.js应用"></a>创建一个简单的Node.js应用</h3><figure class="highlight qml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs qml"><span class="hljs-keyword">const</span> http = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;http&#x27;</span>);<br><span class="hljs-keyword">const</span> os = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;os&#x27;</span>);<br><br><span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;Kubia server starting...&quot;</span>);<br><span class="hljs-keyword">var</span> handler = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">request,response</span>)</span>&#123;<br><span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;Received request from&quot;</span>+request.connection.remoteAddress);<br>response.writeHead(<span class="hljs-number">200</span>);<br>response.end(<span class="hljs-string">&quot;You&#x27;ve hit &quot;</span>+ os.hostname()+<span class="hljs-string">&quot;\n&quot;</span>);<br>&#125;;<br><br><span class="hljs-keyword">var</span> www = http.createServer(handler);<br>www.listen(<span class="hljs-number">8080</span>);<br></code></pre></div></td></tr></table></figure>
-<h3 id="为镜像创建Dockerfile"><a href="#为镜像创建Dockerfile" class="headerlink" title="为镜像创建Dockerfile"></a>为镜像创建Dockerfile</h3><figure class="highlight dockerfile"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs dockerfile"><span class="hljs-keyword">FROM</span> node:<span class="hljs-number">7</span><br><span class="hljs-keyword">ADD</span><span class="bash"> app.js /app.js</span><br><span class="hljs-keyword">ENTRYPOINT</span><span class="bash"> [<span class="hljs-string">&quot;node&quot;</span>,<span class="hljs-string">&quot;app.js&quot;</span>]</span><br></code></pre></div></td></tr></table></figure>
+              <h2 id="docker回顾"><a href="#docker回顾" class="headerlink" title="docker回顾"></a>docker回顾</h2><h3 id="创建一个简单的Node-js应用"><a href="#创建一个简单的Node-js应用" class="headerlink" title="创建一个简单的Node.js应用"></a>创建一个简单的Node.js应用</h3><div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">const http &#x3D; require(&#39;http&#39;);
+const os &#x3D; require(&#39;os&#39;);
+
+console.log(&quot;Kubia server starting...&quot;);
+var handler &#x3D; function(request,response)&#123;
+console.log(&quot;Received request from&quot;+request.connection.remoteAddress);
+response.writeHead(200);
+response.end(&quot;You&#39;ve hit &quot;+ os.hostname()+&quot;\n&quot;);
+&#125;;
+
+var www &#x3D; http.createServer(handler);
+www.listen(8080);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+<h3 id="为镜像创建Dockerfile"><a href="#为镜像创建Dockerfile" class="headerlink" title="为镜像创建Dockerfile"></a>为镜像创建Dockerfile</h3><div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">FROM node:7
+ADD app.js &#x2F;app.js
+ENTRYPOINT [&quot;node&quot;,&quot;app.js&quot;]<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></div>
 <h3 id="构建容器镜像"><a href="#构建容器镜像" class="headerlink" title="构建容器镜像"></a>构建容器镜像</h3><p>docker build -t kubia .<br>镜像构建的过程：用户告诉 Docker 需要基于当前目录（注意命令 结尾的点）构建一个叫 kubia 的镜像，Docker 会在目录中寻找 Dockerfile，然后基 于其中的指令构建镜像。  </p>
 <h3 id="运行容器镜像"><a href="#运行容器镜像" class="headerlink" title="运行容器镜像"></a>运行容器镜像</h3><p>docker run –name kubia-container -p 8080:8080 -d kubia<br>这条命令告知Docker基于kubia镜像创建一个叫kubia-container的新容器。这个容器与命令行分离 (-d标志），这意味着在后台运行.<br>通过localhost:8080访问应用  </p>
 <h3 id="获取更多容器信息"><a href="#获取更多容器信息" class="headerlink" title="获取更多容器信息"></a>获取更多容器信息</h3><p>docker ps只会展示容器的大部分基础信息。可以使用docker inspect查看更多的信息。<br>docker inspect kubia-container   Docker会打印出包含容器底层信息的长JSON。</p>
 <h3 id="探索容器内部"><a href="#探索容器内部" class="headerlink" title="探索容器内部"></a>探索容器内部</h3><p>docker exec -it kubia-container bash<br>这会在已有的 kubia-container 容器内部运行bash。bash进程会和主容器进程拥有相同的命名空间。<br>-it选项是下面两个选项的简写：<br>• -i，确保标准输入流保待开放。需要在 shell 中输入命令。<br>• -t, 分配一个伪终端(TTY) 。<br>例如： 查询进程：ps -aux  </p>
 <h3 id="停止和删除容器"><a href="#停止和删除容器" class="headerlink" title="停止和删除容器"></a>停止和删除容器</h3><p>docker stop kubia-container<br>docker rm kubia-container  </p>
 <h3 id="向镜像仓库推送镜像"><a href="#向镜像仓库推送镜像" class="headerlink" title="向镜像仓库推送镜像"></a>向镜像仓库推送镜像</h3><ul>
-<li>使用附加标签标注镜像<br>不会重命名标签，而是给同一个镜像创建一个额外的标签<br>docker tag kubia 1150079039/kubia  <div class="hljs code-wrapper"><pre><code>      源               目的   </code></pre></div>
+<li>使用附加标签标注镜像<br>不会重命名标签，而是给同一个镜像创建一个额外的标签<br>docker tag kubia 1150079039/kubia  <div class="code-wrapper"><pre><code>      源               目的   </code></pre></div>
 </li>
 <li>向Docker Hub推送镜像<br>docker push 1150079039/kubia   </li>
 </ul>
@@ -397,6 +418,8 @@
 
 
 
+  
+    
   
 
 

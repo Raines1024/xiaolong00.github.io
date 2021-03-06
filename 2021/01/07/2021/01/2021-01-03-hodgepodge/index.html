@@ -32,7 +32,15 @@
     
     
       
-      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/darcula.min.css" />
+      
+        
+          
+        
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.22.0/themes/prism.min.css" />
+      
+      
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.22.0/plugins/line-numbers/prism-line-numbers.min.css" />
+      
     
   
 
@@ -187,7 +195,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      766 字
+      769 字
     </span>
   
 
@@ -240,7 +248,17 @@
 <h3 id="Nginx-上传大文件超时解决办法"><a href="#Nginx-上传大文件超时解决办法" class="headerlink" title="Nginx 上传大文件超时解决办法"></a>Nginx 上传大文件超时解决办法</h3><ul>
 <li>情况如下：用nginx作代理服务器，上传大文件时（本人测试上传50m的文件），提示上传超时或文件过大。<br>原因是nginx对上传文件大小有限制，而且默认是1M。另外，若上传文件很大，还要适当调整上传超时时间。<br>解决方法是在nginx的配置文件下，加上以下配置：</li>
 </ul>
-<figure class="highlight apache"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs apache"><span class="hljs-attribute">client_max_body_size</span>     <span class="hljs-number">50</span>m; //文件大小限制，默认<span class="hljs-number">1</span>m<br><br><span class="hljs-attribute">client_header_timeout</span>    <span class="hljs-number">1</span>m;<br><br><span class="hljs-attribute">client_body_timeout</span>      <span class="hljs-number">1</span>m;<br><br><span class="hljs-attribute">proxy_connect_timeout</span>     <span class="hljs-number">60</span>s;<br><br><span class="hljs-attribute">proxy_read_timeout</span>      <span class="hljs-number">1</span>m;<br><br><span class="hljs-attribute">proxy_send_timeout</span>      <span class="hljs-number">1</span>m;<br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">client_max_body_size     50m; &#x2F;&#x2F;文件大小限制，默认1m
+
+client_header_timeout    1m;
+
+client_body_timeout      1m;
+
+proxy_connect_timeout     60s;
+
+proxy_read_timeout      1m;
+
+proxy_send_timeout      1m;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 <p>每个参数的意思：</p>
 <p>client_max_body_size</p>
 <p>限制请求体的大小，若超过所设定的大小，返回413错误。</p>
@@ -314,8 +332,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2020/01/07/2020/2020-02-03-JanuarySummary/">
-                        <span class="hidden-mobile">一月总结及二月计划</span>
+                      <a href="/2020/01/07/2020/2020-01-30-haveMoneyThink/">
+                        <span class="hidden-mobile">《有钱人和你想的不一样》读书笔记</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -420,6 +438,8 @@
 
 
 
+  
+    
   
 
 

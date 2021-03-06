@@ -32,7 +32,15 @@
     
     
       
-      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/darcula.min.css" />
+      
+        
+          
+        
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.22.0/themes/prism.min.css" />
+      
+      
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.22.0/plugins/line-numbers/prism-line-numbers.min.css" />
+      
     
   
 
@@ -187,7 +195,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      264 字
+      273 字
     </span>
   
 
@@ -234,13 +242,41 @@
 <h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><ul>
 <li>使用”急切”创建实例（饿汉式）<br>在JVM加载类时创建单例。保证了线程安全。</li>
 </ul>
-<figure class="highlight typescript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs typescript"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Singleton</span> </span>&#123;<br>    <span class="hljs-comment">//静态初始化</span><br>	<span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> Singleton uniqueInstance = <span class="hljs-keyword">new</span> Singleton();<br> <br>	<span class="hljs-keyword">private</span> <span class="hljs-function"><span class="hljs-title">Singleton</span>(<span class="hljs-params"></span>)</span> &#123;&#125;<br> <br>	<span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> Singleton <span class="hljs-function"><span class="hljs-title">getInstance</span>(<span class="hljs-params"></span>)</span> &#123;<br>		<span class="hljs-keyword">return</span> uniqueInstance;<br>	&#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">public class Singleton &#123;
+    &#x2F;&#x2F;静态初始化
+	private static Singleton uniqueInstance &#x3D; new Singleton();
+ 
+	private Singleton() &#123;&#125;
+ 
+	public static Singleton getInstance() &#123;
+		return uniqueInstance;
+	&#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 <ul>
 <li>使用”双重检查加锁”，延迟实例化创建实例（懒汉式）<br>检查实例，如果不存在就进入同步代码块。进入代码块后，再检查一次，如果仍是null，才创建实例。<br>注意：只有第一次才彻底执行同步代码块的代码，大大减少getInstance方法的时候耗费。<br>volatile 关键词确保，当uniqueInstance变量被初始化成Singleton实例时，多个线程正确的处理uniqueInstance变量。  </li>
 </ul>
-<figure class="highlight typescript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs typescript"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Singleton</span> </span>&#123;<br>	<span class="hljs-keyword">private</span> volatile <span class="hljs-keyword">static</span> Singleton uniqueInstance;<br> <br>	<span class="hljs-keyword">private</span> <span class="hljs-function"><span class="hljs-title">Singleton</span>(<span class="hljs-params"></span>)</span> &#123;&#125;<br> <br>	<span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> Singleton <span class="hljs-function"><span class="hljs-title">getInstance</span>(<span class="hljs-params"></span>)</span> &#123;<br>		<span class="hljs-keyword">if</span> (uniqueInstance == <span class="hljs-literal">null</span>) &#123;<br>			synchronized (Singleton.class) &#123;<br>				<span class="hljs-keyword">if</span> (uniqueInstance == <span class="hljs-literal">null</span>) &#123;<br>					uniqueInstance = <span class="hljs-keyword">new</span> Singleton();<br>				&#125;<br>			&#125;<br>		&#125;<br>		<span class="hljs-keyword">return</span> uniqueInstance;<br>	&#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">public class Singleton &#123;
+	private volatile static Singleton uniqueInstance;
+ 
+	private Singleton() &#123;&#125;
+ 
+	public static Singleton getInstance() &#123;
+		if (uniqueInstance &#x3D;&#x3D; null) &#123;
+			synchronized (Singleton.class) &#123;
+				if (uniqueInstance &#x3D;&#x3D; null) &#123;
+					uniqueInstance &#x3D; new Singleton();
+				&#125;
+			&#125;
+		&#125;
+		return uniqueInstance;
+	&#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 <p>使用  </p>
-<figure class="highlight typescript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs typescript"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SingletonClient</span> </span>&#123;<br>	<span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-built_in">void</span> <span class="hljs-function"><span class="hljs-title">main</span>(<span class="hljs-params"><span class="hljs-built_in">String</span>[] args</span>)</span> &#123;<br>		Singleton singleton = Singleton.getInstance();<br>	&#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">public class SingletonClient &#123;
+	public static void main(String[] args) &#123;
+		Singleton singleton &#x3D; Singleton.getInstance();
+	&#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 
 
 
@@ -396,6 +432,8 @@
 
 
 
+  
+    
   
 
 

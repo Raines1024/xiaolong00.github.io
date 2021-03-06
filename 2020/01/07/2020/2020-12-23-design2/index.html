@@ -32,7 +32,15 @@
     
     
       
-      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/darcula.min.css" />
+      
+        
+          
+        
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.22.0/themes/prism.min.css" />
+      
+      
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.22.0/plugins/line-numbers/prism-line-numbers.min.css" />
+      
     
   
 
@@ -187,7 +195,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      716 字
+      766 字
     </span>
   
 
@@ -197,7 +205,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      10
+      11
        分钟
     </span>
   
@@ -232,19 +240,205 @@
             <div class="markdown-body">
               <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>装饰器模式（Decorator Pattern）允许向一个现有的对象添加新的功能，同时又不改变其结构。装饰者模式动态地将责任附加到对象上，若要扩展功能，装饰者提供了比继承更有弹性的替代方案。  </p>
 <h2 id="类图"><a href="#类图" class="headerlink" title="类图"></a>类图</h2><p>Componet<br><img src="/img/develop/design2/Component.png" srcset="/img/loading.gif" alt="avatar"><br>每个组件（ConcreteComponent）都可以单独使用，或者被装饰者包起来使用</p>
-<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><h3 id="定义抽象组件（超类）"><a href="#定义抽象组件（超类）" class="headerlink" title="定义抽象组件（超类）"></a>定义抽象组件（超类）</h3><figure class="highlight php"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs php">package decorate;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 超类：抽象组件</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Beverage</span> </span>&#123;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 饮料描述</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span></span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-keyword">String</span> description = <span class="hljs-string">&quot;Unknown Beverage&quot;</span>;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">String</span> getDescription()&#123;<span class="hljs-keyword">return</span> description;&#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 饮料价钱</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span></span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-keyword">double</span> cost();<br>&#125;<br></code></pre></div></td></tr></table></figure>
-<h3 id="定义装饰者抽象类"><a href="#定义装饰者抽象类" class="headerlink" title="定义装饰者抽象类"></a>定义装饰者抽象类</h3><figure class="highlight scala"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs scala"><span class="hljs-keyword">package</span> decorate;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 抽象装饰者</span><br><span class="hljs-comment"> * 装饰者抽象类</span><br><span class="hljs-comment"> */</span><br>public <span class="hljs-keyword">abstract</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">CondimentDecorator</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Beverage</span></span>&#123;<br><br>    public <span class="hljs-keyword">abstract</span> <span class="hljs-type">String</span> getDescription();<br><br>&#125;<br></code></pre></div></td></tr></table></figure>
-<h3 id="创建三种被装饰者（具体组件）"><a href="#创建三种被装饰者（具体组件）" class="headerlink" title="创建三种被装饰者（具体组件）"></a>创建三种被装饰者（具体组件）</h3><figure class="highlight scala"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs scala"><span class="hljs-keyword">package</span> decorate;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 具体组件</span><br><span class="hljs-comment"> * 扩展自Beverage，因为是饮料：另一种咖啡</span><br><span class="hljs-comment"> */</span><br>public <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">DarkRoast</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Beverage</span> </span>&#123;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 设置饮料描述</span><br><span class="hljs-comment">     */</span><br>    public <span class="hljs-type">DarkRoast</span>()&#123;<br>        description = <span class="hljs-string">&quot;Dark Roast Coffee&quot;</span>;<br>    &#125;<br><br>    public double cost()&#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">0.99</span>;<br>    &#125;<br><br>&#125;<br></code></pre></div></td></tr></table></figure>
+<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><h3 id="定义抽象组件（超类）"><a href="#定义抽象组件（超类）" class="headerlink" title="定义抽象组件（超类）"></a>定义抽象组件（超类）</h3><div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">package decorate;
+
+&#x2F;**
+ * 超类：抽象组件
+ *&#x2F;
+public abstract class Beverage &#123;
+
+    &#x2F;**
+     * 饮料描述
+     * @return
+     *&#x2F;
+    String description &#x3D; &quot;Unknown Beverage&quot;;
+
+    public String getDescription()&#123;return description;&#125;
+
+    &#x2F;**
+     * 饮料价钱
+     * @return
+     *&#x2F;
+    public abstract double cost();
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+<h3 id="定义装饰者抽象类"><a href="#定义装饰者抽象类" class="headerlink" title="定义装饰者抽象类"></a>定义装饰者抽象类</h3><div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">package decorate;
+
+&#x2F;**
+ * 抽象装饰者
+ * 装饰者抽象类
+ *&#x2F;
+public abstract class CondimentDecorator extends Beverage&#123;
+
+    public abstract String getDescription();
+
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+<h3 id="创建三种被装饰者（具体组件）"><a href="#创建三种被装饰者（具体组件）" class="headerlink" title="创建三种被装饰者（具体组件）"></a>创建三种被装饰者（具体组件）</h3><div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">package decorate;
+
+&#x2F;**
+ * 具体组件
+ * 扩展自Beverage，因为是饮料：另一种咖啡
+ *&#x2F;
+public class DarkRoast extends Beverage &#123;
+
+    &#x2F;**
+     * 设置饮料描述
+     *&#x2F;
+    public DarkRoast()&#123;
+        description &#x3D; &quot;Dark Roast Coffee&quot;;
+    &#125;
+
+    public double cost()&#123;
+        return 0.99;
+    &#125;
+
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 <p>另一个被装饰者</p>
-<figure class="highlight scala"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs scala"><span class="hljs-keyword">package</span> decorate;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 具体组件</span><br><span class="hljs-comment"> * 扩展自Beverage，因为是饮料：浓缩咖啡</span><br><span class="hljs-comment"> */</span><br>public <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Espresso</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Beverage</span> </span>&#123;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 设置饮料描述</span><br><span class="hljs-comment">     */</span><br>    public <span class="hljs-type">Espresso</span>()&#123;<br>        description = <span class="hljs-string">&quot;Espresso&quot;</span>;<br>    &#125;<br><br>    public double cost()&#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">1.99</span>;<br>    &#125;<br><br>&#125;<br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">package decorate;
+
+&#x2F;**
+ * 具体组件
+ * 扩展自Beverage，因为是饮料：浓缩咖啡
+ *&#x2F;
+public class Espresso extends Beverage &#123;
+
+    &#x2F;**
+     * 设置饮料描述
+     *&#x2F;
+    public Espresso()&#123;
+        description &#x3D; &quot;Espresso&quot;;
+    &#125;
+
+    public double cost()&#123;
+        return 1.99;
+    &#125;
+
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 <p>另一个被装饰者</p>
-<figure class="highlight scala"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs scala"><span class="hljs-keyword">package</span> decorate;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 具体组件</span><br><span class="hljs-comment"> * 另一种饮料：综合咖啡</span><br><span class="hljs-comment"> */</span><br>public <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">HouseBlend</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Beverage</span></span>&#123;<br><br>    public <span class="hljs-type">HouseBlend</span>()&#123;<br>        description = <span class="hljs-string">&quot;House Blend Coffee&quot;</span>;<br>    &#125;<br><br>    public double cost()&#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">0.89</span>;<br>    &#125;<br><br>&#125;<br></code></pre></div></td></tr></table></figure>
-<h3 id="创建三种装饰者（具体装饰者）"><a href="#创建三种装饰者（具体装饰者）" class="headerlink" title="创建三种装饰者（具体装饰者）"></a>创建三种装饰者（具体装饰者）</h3><figure class="highlight scala"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs scala"><span class="hljs-keyword">package</span> decorate;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 具体装饰者，扩展自装饰者抽象</span><br><span class="hljs-comment"> * 摩卡</span><br><span class="hljs-comment"> */</span><br>public <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Mocha</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">CondimentDecorator</span> </span>&#123;<br>    <span class="hljs-comment">//用一个实例变量记录饮料</span><br>    <span class="hljs-type">Beverage</span> beverage;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 让被装饰者（饮料）当作构造器的参数被记录到实例变量</span><br><span class="hljs-comment">     * @param beverage 被装饰者</span><br><span class="hljs-comment">     */</span><br>    public <span class="hljs-type">Mocha</span>(<span class="hljs-type">Beverage</span> beverage)&#123;<br>        <span class="hljs-keyword">this</span>.beverage = beverage;<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 完成描述饮料及调料</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-meta">@Override</span><br>    public <span class="hljs-type">String</span> getDescription()&#123;<br>        <span class="hljs-keyword">return</span> beverage.getDescription() + <span class="hljs-string">&quot;,Mocha&quot;</span>;<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 调用被装饰对象cost以计算价钱，然后再加上mocha的价钱，得到最后结果</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-meta">@Override</span><br>    public double cost() &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">0.20</span>+beverage.cost();<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">package decorate;
+
+&#x2F;**
+ * 具体组件
+ * 另一种饮料：综合咖啡
+ *&#x2F;
+public class HouseBlend extends Beverage&#123;
+
+    public HouseBlend()&#123;
+        description &#x3D; &quot;House Blend Coffee&quot;;
+    &#125;
+
+    public double cost()&#123;
+        return 0.89;
+    &#125;
+
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+<h3 id="创建三种装饰者（具体装饰者）"><a href="#创建三种装饰者（具体装饰者）" class="headerlink" title="创建三种装饰者（具体装饰者）"></a>创建三种装饰者（具体装饰者）</h3><div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">package decorate;
+
+&#x2F;**
+ * 具体装饰者，扩展自装饰者抽象
+ * 摩卡
+ *&#x2F;
+public class Mocha extends CondimentDecorator &#123;
+    &#x2F;&#x2F;用一个实例变量记录饮料
+    Beverage beverage;
+
+    &#x2F;**
+     * 让被装饰者（饮料）当作构造器的参数被记录到实例变量
+     * @param beverage 被装饰者
+     *&#x2F;
+    public Mocha(Beverage beverage)&#123;
+        this.beverage &#x3D; beverage;
+    &#125;
+
+    &#x2F;**
+     * 完成描述饮料及调料
+     *&#x2F;
+    @Override
+    public String getDescription()&#123;
+        return beverage.getDescription() + &quot;,Mocha&quot;;
+    &#125;
+
+    &#x2F;**
+     * 调用被装饰对象cost以计算价钱，然后再加上mocha的价钱，得到最后结果
+     *&#x2F;
+    @Override
+    public double cost() &#123;
+        return 0.20+beverage.cost();
+    &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 <p>另一个装饰者</p>
-<figure class="highlight typescript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs typescript">package decorate;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 另一个装饰者（调料）</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Soy</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">CondimentDecorator</span></span>&#123;<br>    <span class="hljs-keyword">private</span> Beverage beverage;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-title">Soy</span>(<span class="hljs-params">Beverage beverage</span>)</span> &#123;<br>        <span class="hljs-built_in">this</span>.beverage = beverage;<br>    &#125;<br><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> double <span class="hljs-function"><span class="hljs-title">cost</span>(<span class="hljs-params"></span>)</span> &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">0.5</span>+beverage.cost();<br>    &#125;<br><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-built_in">String</span> <span class="hljs-function"><span class="hljs-title">getDescription</span>(<span class="hljs-params"></span>)</span> &#123;<br>        <span class="hljs-keyword">return</span> beverage.getDescription() + <span class="hljs-string">&quot;,Soy&quot;</span>;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">package decorate;
+
+&#x2F;**
+ * 另一个装饰者（调料）
+ *&#x2F;
+public class Soy extends CondimentDecorator&#123;
+    private Beverage beverage;
+
+    public Soy(Beverage beverage) &#123;
+        this.beverage &#x3D; beverage;
+    &#125;
+
+    @Override
+    public double cost() &#123;
+        return 0.5+beverage.cost();
+    &#125;
+
+    @Override
+    public String getDescription() &#123;
+        return beverage.getDescription() + &quot;,Soy&quot;;
+    &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 <p>另一个装饰者</p>
-<figure class="highlight typescript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs typescript">package decorate;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 另一个装饰者（调料）</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Whip</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">CondimentDecorator</span></span>&#123;<br>    <span class="hljs-keyword">private</span> Beverage beverage;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-title">Whip</span>(<span class="hljs-params">Beverage beverage</span>)</span> &#123;<br>        <span class="hljs-built_in">this</span>.beverage = beverage;<br>    &#125;<br><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> double <span class="hljs-function"><span class="hljs-title">cost</span>(<span class="hljs-params"></span>)</span> &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">0.9</span>+beverage.cost();<br>    &#125;<br><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-built_in">String</span> <span class="hljs-function"><span class="hljs-title">getDescription</span>(<span class="hljs-params"></span>)</span> &#123;<br>        <span class="hljs-keyword">return</span> beverage.getDescription() + <span class="hljs-string">&quot;,Whip&quot;</span>;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
-<h3 id="测试装饰者模式"><a href="#测试装饰者模式" class="headerlink" title="测试装饰者模式"></a>测试装饰者模式</h3><figure class="highlight reasonml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs reasonml">package decorate;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 测试装饰者模式</span><br><span class="hljs-comment"> * 组件（咖啡）+各种装饰者（调料）</span><br><span class="hljs-comment"> */</span><br>public <span class="hljs-keyword">class</span> StarbuzzCoffee &#123;<br> <br>	public static void main(String args<span class="hljs-literal">[]</span>) &#123;<br>		Beverage beverage = <span class="hljs-keyword">new</span> <span class="hljs-constructor">Espresso()</span>;<br>		<span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">System</span>.</span></span>out.println(beverage.get<span class="hljs-constructor">Description()</span> <br>				+ <span class="hljs-string">&quot; $&quot;</span> + beverage.cost<span class="hljs-literal">()</span>);<br> <br>		Beverage beverage2 = <span class="hljs-keyword">new</span> <span class="hljs-constructor">DarkRoast()</span>;<br>		beverage2 = <span class="hljs-keyword">new</span> <span class="hljs-constructor">Mocha(<span class="hljs-params">beverage2</span>)</span>;<br>		beverage2 = <span class="hljs-keyword">new</span> <span class="hljs-constructor">Mocha(<span class="hljs-params">beverage2</span>)</span>;<br>		beverage2 = <span class="hljs-keyword">new</span> <span class="hljs-constructor">Whip(<span class="hljs-params">beverage2</span>)</span>;<br>		<span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">System</span>.</span></span>out.println(beverage2.get<span class="hljs-constructor">Description()</span><br>				+ <span class="hljs-string">&quot; $&quot;</span> + beverage2.cost<span class="hljs-literal">()</span>);<br> <br>		Beverage beverage3 = <span class="hljs-keyword">new</span> <span class="hljs-constructor">HouseBlend()</span>;<br>		beverage3 = <span class="hljs-keyword">new</span> <span class="hljs-constructor">Soy(<span class="hljs-params">beverage3</span>)</span>;<br>		beverage3 = <span class="hljs-keyword">new</span> <span class="hljs-constructor">Mocha(<span class="hljs-params">beverage3</span>)</span>;<br>		beverage3 = <span class="hljs-keyword">new</span> <span class="hljs-constructor">Whip(<span class="hljs-params">beverage3</span>)</span>;<br>		<span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">System</span>.</span></span>out.println(beverage3.get<span class="hljs-constructor">Description()</span> <br>				+ <span class="hljs-string">&quot; $&quot;</span> + beverage3.cost<span class="hljs-literal">()</span>);<br>	&#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">package decorate;
+
+&#x2F;**
+ * 另一个装饰者（调料）
+ *&#x2F;
+public class Whip extends CondimentDecorator&#123;
+    private Beverage beverage;
+
+    public Whip(Beverage beverage) &#123;
+        this.beverage &#x3D; beverage;
+    &#125;
+
+    @Override
+    public double cost() &#123;
+        return 0.9+beverage.cost();
+    &#125;
+
+    @Override
+    public String getDescription() &#123;
+        return beverage.getDescription() + &quot;,Whip&quot;;
+    &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+<h3 id="测试装饰者模式"><a href="#测试装饰者模式" class="headerlink" title="测试装饰者模式"></a>测试装饰者模式</h3><div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">package decorate;
+
+&#x2F;**
+ * 测试装饰者模式
+ * 组件（咖啡）+各种装饰者（调料）
+ *&#x2F;
+public class StarbuzzCoffee &#123;
+ 
+	public static void main(String args[]) &#123;
+		Beverage beverage &#x3D; new Espresso();
+		System.out.println(beverage.getDescription() 
+				+ &quot; $&quot; + beverage.cost());
+ 
+		Beverage beverage2 &#x3D; new DarkRoast();
+		beverage2 &#x3D; new Mocha(beverage2);
+		beverage2 &#x3D; new Mocha(beverage2);
+		beverage2 &#x3D; new Whip(beverage2);
+		System.out.println(beverage2.getDescription()
+				+ &quot; $&quot; + beverage2.cost());
+ 
+		Beverage beverage3 &#x3D; new HouseBlend();
+		beverage3 &#x3D; new Soy(beverage3);
+		beverage3 &#x3D; new Mocha(beverage3);
+		beverage3 &#x3D; new Whip(beverage3);
+		System.out.println(beverage3.getDescription() 
+				+ &quot; $&quot; + beverage3.cost());
+	&#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 
 
 
@@ -434,6 +628,8 @@
 
 
 
+  
+    
   
 
 

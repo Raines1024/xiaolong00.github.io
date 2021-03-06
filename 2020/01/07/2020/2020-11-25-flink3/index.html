@@ -32,7 +32,15 @@
     
     
       
-      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/darcula.min.css" />
+      
+        
+          
+        
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.22.0/themes/prism.min.css" />
+      
+      
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.22.0/plugins/line-numbers/prism-line-numbers.min.css" />
+      
     
   
 
@@ -187,7 +195,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.9k 字
+      2k 字
     </span>
   
 
@@ -197,7 +205,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      34
+      37
        分钟
     </span>
   
@@ -234,29 +242,385 @@
 <li>Flink<br>见Flink入门</li>
 <li>Kafka<br>启动ZooKeeper： bin/zookeeper-server-start.sh config/zookeeper.properties<br>启动Kafka Broker： bin/kafka-server-start.sh config/server.properties<br>创建Kafka主题Hello-Kafka：bin/kafka-topics.sh –create –zookeeper localhost:2181 –replication-factor 1    –partitions 1 –topic Hello-Kafka<br>获取Kafka服务器中的主题列表： bin/kafka-topics.sh –list –zookeeper localhost:2181   </li>
 </ul>
-<h3 id="maven-依赖"><a href="#maven-依赖" class="headerlink" title="maven 依赖"></a>maven 依赖</h3><figure class="highlight dust"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs dust"><span class="xml">		<span class="hljs-comment">&lt;!--flink java--&gt;</span></span><br><span class="xml">		<span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span></span><br><span class="xml">			<span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.apache.flink<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span></span><br><span class="xml">			<span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>flink-java<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span></span><br><span class="xml">			<span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>$</span><span class="hljs-template-variable">&#123;flink.version&#125;</span><span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span></span><br><span class="xml"><span class="hljs-comment">&lt;!--			&lt;scope&gt;provided&lt;/scope&gt;--&gt;</span></span><br><span class="xml">		<span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span></span><br><span class="xml">		<span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span></span><br><span class="xml">			<span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.apache.flink<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span></span><br><span class="xml">			<span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>flink-streaming-java_$</span><span class="hljs-template-variable">&#123;scala.binary.version&#125;</span><span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span></span><br><span class="xml">			<span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>$</span><span class="hljs-template-variable">&#123;flink.version&#125;</span><span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span></span><br><span class="xml"><span class="hljs-comment">&lt;!--			&lt;scope&gt;provided&lt;/scope&gt;--&gt;</span></span><br><span class="xml">		<span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span></span><br><span class="xml">		<span class="hljs-comment">&lt;!--日志--&gt;</span></span><br><span class="xml">		<span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span></span><br><span class="xml">			<span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.slf4j<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span></span><br><span class="xml">			<span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>slf4j-log4j12<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span></span><br><span class="xml">			<span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>1.7.7<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span></span><br><span class="xml">			<span class="hljs-tag">&lt;<span class="hljs-name">scope</span>&gt;</span>runtime<span class="hljs-tag">&lt;/<span class="hljs-name">scope</span>&gt;</span></span><br><span class="xml">		<span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span></span><br><span class="xml">		<span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span></span><br><span class="xml">			<span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>log4j<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span></span><br><span class="xml">			<span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>log4j<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span></span><br><span class="xml">			<span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>1.2.17<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span></span><br><span class="xml">			<span class="hljs-tag">&lt;<span class="hljs-name">scope</span>&gt;</span>runtime<span class="hljs-tag">&lt;/<span class="hljs-name">scope</span>&gt;</span></span><br><span class="xml">		<span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span></span><br><span class="xml">		<span class="hljs-comment">&lt;!--flink kafka connector--&gt;</span></span><br><span class="xml">		<span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span></span><br><span class="xml">			<span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.apache.flink<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span></span><br><span class="xml">			<span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>flink-connector-kafka-0.11_$</span><span class="hljs-template-variable">&#123;scala.binary.version&#125;</span><span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span></span><br><span class="xml">			<span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>$</span><span class="hljs-template-variable">&#123;flink.version&#125;</span><span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span></span><br><span class="xml">		<span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span></span><br><span class="xml">		<span class="hljs-comment">&lt;!--alibaba fastjson--&gt;</span></span><br><span class="xml">		<span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span></span><br><span class="xml">			<span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>com.alibaba<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span></span><br><span class="xml">			<span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>fastjson<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span></span><br><span class="xml">			<span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>1.2.51<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span></span><br><span class="xml">		<span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span></span><br></code></pre></div></td></tr></table></figure>
+<h3 id="maven-依赖"><a href="#maven-依赖" class="headerlink" title="maven 依赖"></a>maven 依赖</h3><div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">		&lt;!--flink java--&gt;
+		&lt;dependency&gt;
+			&lt;groupId&gt;org.apache.flink&lt;&#x2F;groupId&gt;
+			&lt;artifactId&gt;flink-java&lt;&#x2F;artifactId&gt;
+			&lt;version&gt;$&#123;flink.version&#125;&lt;&#x2F;version&gt;
+&lt;!--			&lt;scope&gt;provided&lt;&#x2F;scope&gt;--&gt;
+		&lt;&#x2F;dependency&gt;
+		&lt;dependency&gt;
+			&lt;groupId&gt;org.apache.flink&lt;&#x2F;groupId&gt;
+			&lt;artifactId&gt;flink-streaming-java_$&#123;scala.binary.version&#125;&lt;&#x2F;artifactId&gt;
+			&lt;version&gt;$&#123;flink.version&#125;&lt;&#x2F;version&gt;
+&lt;!--			&lt;scope&gt;provided&lt;&#x2F;scope&gt;--&gt;
+		&lt;&#x2F;dependency&gt;
+		&lt;!--日志--&gt;
+		&lt;dependency&gt;
+			&lt;groupId&gt;org.slf4j&lt;&#x2F;groupId&gt;
+			&lt;artifactId&gt;slf4j-log4j12&lt;&#x2F;artifactId&gt;
+			&lt;version&gt;1.7.7&lt;&#x2F;version&gt;
+			&lt;scope&gt;runtime&lt;&#x2F;scope&gt;
+		&lt;&#x2F;dependency&gt;
+		&lt;dependency&gt;
+			&lt;groupId&gt;log4j&lt;&#x2F;groupId&gt;
+			&lt;artifactId&gt;log4j&lt;&#x2F;artifactId&gt;
+			&lt;version&gt;1.2.17&lt;&#x2F;version&gt;
+			&lt;scope&gt;runtime&lt;&#x2F;scope&gt;
+		&lt;&#x2F;dependency&gt;
+		&lt;!--flink kafka connector--&gt;
+		&lt;dependency&gt;
+			&lt;groupId&gt;org.apache.flink&lt;&#x2F;groupId&gt;
+			&lt;artifactId&gt;flink-connector-kafka-0.11_$&#123;scala.binary.version&#125;&lt;&#x2F;artifactId&gt;
+			&lt;version&gt;$&#123;flink.version&#125;&lt;&#x2F;version&gt;
+		&lt;&#x2F;dependency&gt;
+		&lt;!--alibaba fastjson--&gt;
+		&lt;dependency&gt;
+			&lt;groupId&gt;com.alibaba&lt;&#x2F;groupId&gt;
+			&lt;artifactId&gt;fastjson&lt;&#x2F;artifactId&gt;
+			&lt;version&gt;1.2.51&lt;&#x2F;version&gt;
+		&lt;&#x2F;dependency&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 <h3 id="测试发送数据到-kafka-topic"><a href="#测试发送数据到-kafka-topic" class="headerlink" title="测试发送数据到 kafka topic"></a>测试发送数据到 kafka topic</h3><p>实体类，Metric.java  </p>
-<figure class="highlight typescript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs typescript">package raines.kafka;<br><br><span class="hljs-keyword">import</span> java.util.Map;<br><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Metric</span> </span>&#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-built_in">String</span> name;<br>    <span class="hljs-keyword">public</span> long timestamp;<br>    <span class="hljs-keyword">public</span> <span class="hljs-built_in">Map</span>&lt;<span class="hljs-built_in">String</span>, <span class="hljs-built_in">Object</span>&gt; fields;<br>    <span class="hljs-keyword">public</span> <span class="hljs-built_in">Map</span>&lt;<span class="hljs-built_in">String</span>, <span class="hljs-built_in">String</span>&gt; tags;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-title">Metric</span>(<span class="hljs-params"></span>)</span> &#123;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-title">Metric</span>(<span class="hljs-params"><span class="hljs-built_in">String</span> name, long timestamp, <span class="hljs-built_in">Map</span>&lt;<span class="hljs-built_in">String</span>, <span class="hljs-built_in">Object</span>&gt; fields, <span class="hljs-built_in">Map</span>&lt;<span class="hljs-built_in">String</span>, <span class="hljs-built_in">String</span>&gt; tags</span>)</span> &#123;<br>        <span class="hljs-built_in">this</span>.name = name;<br>        <span class="hljs-built_in">this</span>.timestamp = timestamp;<br>        <span class="hljs-built_in">this</span>.fields = fields;<br>        <span class="hljs-built_in">this</span>.tags = tags;<br>    &#125;<br><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-built_in">String</span> <span class="hljs-function"><span class="hljs-title">toString</span>(<span class="hljs-params"></span>)</span> &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;Metric&#123;&quot;</span> +<br>                <span class="hljs-string">&quot;name=&#x27;&quot;</span> + name + <span class="hljs-string">&#x27;\&#x27;&#x27;</span> +<br>                <span class="hljs-string">&quot;, timestamp=&#x27;&quot;</span> + timestamp + <span class="hljs-string">&#x27;\&#x27;&#x27;</span> +<br>                <span class="hljs-string">&quot;, fields=&quot;</span> + fields +<br>                <span class="hljs-string">&quot;, tags=&quot;</span> + tags +<br>                <span class="hljs-string">&#x27;&#125;&#x27;</span>;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-built_in">String</span> <span class="hljs-function"><span class="hljs-title">getName</span>(<span class="hljs-params"></span>)</span> &#123;<br>        <span class="hljs-keyword">return</span> name;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-built_in">void</span> <span class="hljs-function"><span class="hljs-title">setName</span>(<span class="hljs-params"><span class="hljs-built_in">String</span> name</span>)</span> &#123;<br>        <span class="hljs-built_in">this</span>.name = name;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> long <span class="hljs-function"><span class="hljs-title">getTimestamp</span>(<span class="hljs-params"></span>)</span> &#123;<br>        <span class="hljs-keyword">return</span> timestamp;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-built_in">void</span> <span class="hljs-function"><span class="hljs-title">setTimestamp</span>(<span class="hljs-params">long timestamp</span>)</span> &#123;<br>        <span class="hljs-built_in">this</span>.timestamp = timestamp;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-built_in">Map</span>&lt;<span class="hljs-built_in">String</span>, <span class="hljs-built_in">Object</span>&gt; <span class="hljs-function"><span class="hljs-title">getFields</span>(<span class="hljs-params"></span>)</span> &#123;<br>        <span class="hljs-keyword">return</span> fields;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-built_in">void</span> <span class="hljs-function"><span class="hljs-title">setFields</span>(<span class="hljs-params"><span class="hljs-built_in">Map</span>&lt;<span class="hljs-built_in">String</span>, <span class="hljs-built_in">Object</span>&gt; fields</span>)</span> &#123;<br>        <span class="hljs-built_in">this</span>.fields = fields;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-built_in">Map</span>&lt;<span class="hljs-built_in">String</span>, <span class="hljs-built_in">String</span>&gt; <span class="hljs-function"><span class="hljs-title">getTags</span>(<span class="hljs-params"></span>)</span> &#123;<br>        <span class="hljs-keyword">return</span> tags;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-built_in">void</span> <span class="hljs-function"><span class="hljs-title">setTags</span>(<span class="hljs-params"><span class="hljs-built_in">Map</span>&lt;<span class="hljs-built_in">String</span>, <span class="hljs-built_in">String</span>&gt; tags</span>)</span> &#123;<br>        <span class="hljs-built_in">this</span>.tags = tags;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">package raines.kafka;
+
+import java.util.Map;
+
+public class Metric &#123;
+    public String name;
+    public long timestamp;
+    public Map&lt;String, Object&gt; fields;
+    public Map&lt;String, String&gt; tags;
+
+    public Metric() &#123;
+    &#125;
+
+    public Metric(String name, long timestamp, Map&lt;String, Object&gt; fields, Map&lt;String, String&gt; tags) &#123;
+        this.name &#x3D; name;
+        this.timestamp &#x3D; timestamp;
+        this.fields &#x3D; fields;
+        this.tags &#x3D; tags;
+    &#125;
+
+    @Override
+    public String toString() &#123;
+        return &quot;Metric&#123;&quot; +
+                &quot;name&#x3D;&#39;&quot; + name + &#39;\&#39;&#39; +
+                &quot;, timestamp&#x3D;&#39;&quot; + timestamp + &#39;\&#39;&#39; +
+                &quot;, fields&#x3D;&quot; + fields +
+                &quot;, tags&#x3D;&quot; + tags +
+                &#39;&#125;&#39;;
+    &#125;
+
+    public String getName() &#123;
+        return name;
+    &#125;
+
+    public void setName(String name) &#123;
+        this.name &#x3D; name;
+    &#125;
+
+    public long getTimestamp() &#123;
+        return timestamp;
+    &#125;
+
+    public void setTimestamp(long timestamp) &#123;
+        this.timestamp &#x3D; timestamp;
+    &#125;
+
+    public Map&lt;String, Object&gt; getFields() &#123;
+        return fields;
+    &#125;
+
+    public void setFields(Map&lt;String, Object&gt; fields) &#123;
+        this.fields &#x3D; fields;
+    &#125;
+
+    public Map&lt;String, String&gt; getTags() &#123;
+        return tags;
+    &#125;
+
+    public void setTags(Map&lt;String, String&gt; tags) &#123;
+        this.tags &#x3D; tags;
+    &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 <p>往 kafka 中写数据工具类：KafkaUtils.java  </p>
-<figure class="highlight arduino"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs arduino">package raines.kafka;<br><br><span class="hljs-keyword">import</span> com.alibaba.fastjson.JSON;<br><span class="hljs-keyword">import</span> org.apache.kafka.clients.producer.KafkaProducer;<br><span class="hljs-keyword">import</span> org.apache.kafka.clients.producer.ProducerRecord;<br><br><span class="hljs-keyword">import</span> java.util.HashMap;<br><span class="hljs-keyword">import</span> java.util.Map;<br><span class="hljs-keyword">import</span> java.util.Properties;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 往kafka中写数据</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">KafkaUtils</span> &#123;</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">String</span> broker_list = <span class="hljs-string">&quot;localhost:9092&quot;</span>;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">String</span> topic = <span class="hljs-string">&quot;metric&quot;</span>;  <span class="hljs-comment">// kafka topic，Flink 程序中需要和这个统一</span><br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">writeToKafka</span><span class="hljs-params">()</span> throws InterruptedException </span>&#123;<br>        Properties props = <span class="hljs-keyword">new</span> Properties();<br>        props.<span class="hljs-built_in">put</span>(<span class="hljs-string">&quot;bootstrap.servers&quot;</span>, broker_list);<br>        props.<span class="hljs-built_in">put</span>(<span class="hljs-string">&quot;key.serializer&quot;</span>, <span class="hljs-string">&quot;org.apache.kafka.common.serialization.StringSerializer&quot;</span>); <span class="hljs-comment">//key 序列化</span><br>        props.<span class="hljs-built_in">put</span>(<span class="hljs-string">&quot;value.serializer&quot;</span>, <span class="hljs-string">&quot;org.apache.kafka.common.serialization.StringSerializer&quot;</span>); <span class="hljs-comment">//value 序列化</span><br>        KafkaProducer producer = <span class="hljs-keyword">new</span> KafkaProducer&lt;<span class="hljs-keyword">String</span>, <span class="hljs-keyword">String</span>&gt;(props);<br><br>        Metric metric = <span class="hljs-keyword">new</span> Metric();<br>        metric.setTimestamp(System.currentTimeMillis());<br>        metric.setName(<span class="hljs-string">&quot;mem&quot;</span>);<br>        Map&lt;<span class="hljs-keyword">String</span>, <span class="hljs-keyword">String</span>&gt; tags = <span class="hljs-keyword">new</span> HashMap&lt;&gt;();<br>        Map&lt;<span class="hljs-keyword">String</span>, Object&gt; fields = <span class="hljs-keyword">new</span> HashMap&lt;&gt;();<br><br>        tags.<span class="hljs-built_in">put</span>(<span class="hljs-string">&quot;cluster&quot;</span>, <span class="hljs-string">&quot;raines&quot;</span>);<br>        tags.<span class="hljs-built_in">put</span>(<span class="hljs-string">&quot;host_ip&quot;</span>, <span class="hljs-string">&quot;127.0.0.1&quot;</span>);<br><br>        fields.<span class="hljs-built_in">put</span>(<span class="hljs-string">&quot;used_percent&quot;</span>, <span class="hljs-number">90</span>d);<br>        fields.<span class="hljs-built_in">put</span>(<span class="hljs-string">&quot;max&quot;</span>, <span class="hljs-number">27244873</span>d);<br>        fields.<span class="hljs-built_in">put</span>(<span class="hljs-string">&quot;used&quot;</span>, <span class="hljs-number">17244873</span>d);<br>        fields.<span class="hljs-built_in">put</span>(<span class="hljs-string">&quot;init&quot;</span>, <span class="hljs-number">27244873</span>d);<br><br>        metric.setTags(tags);<br>        metric.setFields(fields);<br><br>        ProducerRecord record = <span class="hljs-keyword">new</span> ProducerRecord&lt;<span class="hljs-keyword">String</span>, <span class="hljs-keyword">String</span>&gt;(topic, null, null, JSON.toJSONString(metric));<br>        producer.send(record);<br>        System.out.<span class="hljs-built_in">println</span>(<span class="hljs-string">&quot;发送数据: &quot;</span> + JSON.toJSONString(metric));<br><br>        producer.<span class="hljs-built_in">flush</span>();<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">String</span>[] args)</span> throws InterruptedException </span>&#123;<br>        <span class="hljs-keyword">while</span> (<span class="hljs-literal">true</span>) &#123;<br>            Thread.sleep(<span class="hljs-number">300</span>);<br>            writeToKafka();<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">package raines.kafka;
+
+import com.alibaba.fastjson.JSON;
+import org.apache.kafka.clients.producer.KafkaProducer;
+import org.apache.kafka.clients.producer.ProducerRecord;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Properties;
+
+&#x2F;**
+ * 往kafka中写数据
+ *&#x2F;
+public class KafkaUtils &#123;
+    public static final String broker_list &#x3D; &quot;localhost:9092&quot;;
+    public static final String topic &#x3D; &quot;metric&quot;;  &#x2F;&#x2F; kafka topic，Flink 程序中需要和这个统一
+
+    public static void writeToKafka() throws InterruptedException &#123;
+        Properties props &#x3D; new Properties();
+        props.put(&quot;bootstrap.servers&quot;, broker_list);
+        props.put(&quot;key.serializer&quot;, &quot;org.apache.kafka.common.serialization.StringSerializer&quot;); &#x2F;&#x2F;key 序列化
+        props.put(&quot;value.serializer&quot;, &quot;org.apache.kafka.common.serialization.StringSerializer&quot;); &#x2F;&#x2F;value 序列化
+        KafkaProducer producer &#x3D; new KafkaProducer&lt;String, String&gt;(props);
+
+        Metric metric &#x3D; new Metric();
+        metric.setTimestamp(System.currentTimeMillis());
+        metric.setName(&quot;mem&quot;);
+        Map&lt;String, String&gt; tags &#x3D; new HashMap&lt;&gt;();
+        Map&lt;String, Object&gt; fields &#x3D; new HashMap&lt;&gt;();
+
+        tags.put(&quot;cluster&quot;, &quot;raines&quot;);
+        tags.put(&quot;host_ip&quot;, &quot;127.0.0.1&quot;);
+
+        fields.put(&quot;used_percent&quot;, 90d);
+        fields.put(&quot;max&quot;, 27244873d);
+        fields.put(&quot;used&quot;, 17244873d);
+        fields.put(&quot;init&quot;, 27244873d);
+
+        metric.setTags(tags);
+        metric.setFields(fields);
+
+        ProducerRecord record &#x3D; new ProducerRecord&lt;String, String&gt;(topic, null, null, JSON.toJSONString(metric));
+        producer.send(record);
+        System.out.println(&quot;发送数据: &quot; + JSON.toJSONString(metric));
+
+        producer.flush();
+    &#125;
+
+    public static void main(String[] args) throws InterruptedException &#123;
+        while (true) &#123;
+            Thread.sleep(300);
+            writeToKafka();
+        &#125;
+    &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 <p>打印kafka数据</p>
-<figure class="highlight arduino"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs arduino">package raines.kafka;<br><br><span class="hljs-keyword">import</span> org.apache.flink.api.common.serialization.SimpleStringSchema;<br><span class="hljs-keyword">import</span> org.apache.flink.streaming.api.datastream.DataStreamSource;<br><span class="hljs-keyword">import</span> org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;<br><span class="hljs-keyword">import</span> org.apache.flink.streaming.connectors.kafka.FlinkKafkaConsumer011;<br><br><span class="hljs-keyword">import</span> java.util.Properties;<br><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Main</span> &#123;</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">String</span>[] args)</span> throws Exception </span>&#123;<br>        <span class="hljs-keyword">final</span> StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();<br><br>        Properties props = <span class="hljs-keyword">new</span> Properties();<br>        props.<span class="hljs-built_in">put</span>(<span class="hljs-string">&quot;bootstrap.servers&quot;</span>, <span class="hljs-string">&quot;localhost:9092&quot;</span>);<br>        props.<span class="hljs-built_in">put</span>(<span class="hljs-string">&quot;zookeeper.connect&quot;</span>, <span class="hljs-string">&quot;localhost:2181&quot;</span>);<br>        props.<span class="hljs-built_in">put</span>(<span class="hljs-string">&quot;group.id&quot;</span>, <span class="hljs-string">&quot;metric-group&quot;</span>);<br>        props.<span class="hljs-built_in">put</span>(<span class="hljs-string">&quot;key.deserializer&quot;</span>, <span class="hljs-string">&quot;org.apache.kafka.common.serialization.StringDeserializer&quot;</span>);  <span class="hljs-comment">//key 反序列化</span><br>        props.<span class="hljs-built_in">put</span>(<span class="hljs-string">&quot;value.deserializer&quot;</span>, <span class="hljs-string">&quot;org.apache.kafka.common.serialization.StringDeserializer&quot;</span>);<br>        props.<span class="hljs-built_in">put</span>(<span class="hljs-string">&quot;auto.offset.reset&quot;</span>, <span class="hljs-string">&quot;latest&quot;</span>); <span class="hljs-comment">//value 反序列化</span><br><br>        DataStreamSource&lt;<span class="hljs-keyword">String</span>&gt; dataStreamSource = env.addSource(<span class="hljs-keyword">new</span> FlinkKafkaConsumer011&lt;&gt;(<br>                <span class="hljs-string">&quot;metric&quot;</span>,  <span class="hljs-comment">//kafka topic</span><br>                <span class="hljs-keyword">new</span> SimpleStringSchema(),  <span class="hljs-comment">// String 序列化</span><br>                props)).setParallelism(<span class="hljs-number">1</span>);<br><br>        dataStreamSource.<span class="hljs-built_in">print</span>(); <span class="hljs-comment">//把从 kafka 读取到的数据打印在控制台</span><br><br>        env.execute(<span class="hljs-string">&quot;Flink add data source&quot;</span>);<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">package raines.kafka;
+
+import org.apache.flink.api.common.serialization.SimpleStringSchema;
+import org.apache.flink.streaming.api.datastream.DataStreamSource;
+import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
+import org.apache.flink.streaming.connectors.kafka.FlinkKafkaConsumer011;
+
+import java.util.Properties;
+
+public class Main &#123;
+    public static void main(String[] args) throws Exception &#123;
+        final StreamExecutionEnvironment env &#x3D; StreamExecutionEnvironment.getExecutionEnvironment();
+
+        Properties props &#x3D; new Properties();
+        props.put(&quot;bootstrap.servers&quot;, &quot;localhost:9092&quot;);
+        props.put(&quot;zookeeper.connect&quot;, &quot;localhost:2181&quot;);
+        props.put(&quot;group.id&quot;, &quot;metric-group&quot;);
+        props.put(&quot;key.deserializer&quot;, &quot;org.apache.kafka.common.serialization.StringDeserializer&quot;);  &#x2F;&#x2F;key 反序列化
+        props.put(&quot;value.deserializer&quot;, &quot;org.apache.kafka.common.serialization.StringDeserializer&quot;);
+        props.put(&quot;auto.offset.reset&quot;, &quot;latest&quot;); &#x2F;&#x2F;value 反序列化
+
+        DataStreamSource&lt;String&gt; dataStreamSource &#x3D; env.addSource(new FlinkKafkaConsumer011&lt;&gt;(
+                &quot;metric&quot;,  &#x2F;&#x2F;kafka topic
+                new SimpleStringSchema(),  &#x2F;&#x2F; String 序列化
+                props)).setParallelism(1);
+
+        dataStreamSource.print(); &#x2F;&#x2F;把从 kafka 读取到的数据打印在控制台
+
+        env.execute(&quot;Flink add data source&quot;);
+    &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 <h2 id="自定义-Source"><a href="#自定义-Source" class="headerlink" title="自定义 Source"></a>自定义 Source</h2><h3 id="MySQL-中读取数据的-Source"><a href="#MySQL-中读取数据的-Source" class="headerlink" title="MySQL 中读取数据的 Source"></a>MySQL 中读取数据的 Source</h3><p>pom.xml 中添加 MySQL 依赖:</p>
-<figure class="highlight erb"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs erb"><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span></span><br><span class="xml">	<span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>mysql<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span></span><br><span class="xml">	<span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>mysql-connector-java<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span></span><br><span class="xml">	<span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>5.1.34<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span></span><br><span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span></span><br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">&lt;dependency&gt;
+	&lt;groupId&gt;mysql&lt;&#x2F;groupId&gt;
+	&lt;artifactId&gt;mysql-connector-java&lt;&#x2F;artifactId&gt;
+	&lt;version&gt;5.1.34&lt;&#x2F;version&gt;
+&lt;&#x2F;dependency&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 <p>数据库建表如下:</p>
-<figure class="highlight n1ql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs n1ql"><span class="hljs-keyword">DROP</span> TABLE <span class="hljs-keyword">IF</span> <span class="hljs-keyword">EXISTS</span> <span class="hljs-symbol">`student`</span>;<br><span class="hljs-keyword">CREATE</span> TABLE <span class="hljs-symbol">`student`</span> (<br>  <span class="hljs-symbol">`id`</span> int(<span class="hljs-number">11</span>) unsigned <span class="hljs-keyword">NOT</span> <span class="hljs-literal">NULL</span> AUTO_INCREMENT,<br>  <span class="hljs-symbol">`name`</span> varchar(<span class="hljs-number">25</span>) <span class="hljs-keyword">COLLATE</span> utf8_bin DEFAULT <span class="hljs-literal">NULL</span>,<br>  <span class="hljs-symbol">`password`</span> varchar(<span class="hljs-number">25</span>) <span class="hljs-keyword">COLLATE</span> utf8_bin DEFAULT <span class="hljs-literal">NULL</span>,<br>  <span class="hljs-symbol">`age`</span> int(<span class="hljs-number">10</span>) DEFAULT <span class="hljs-literal">NULL</span>,<br>  <span class="hljs-keyword">PRIMARY</span> <span class="hljs-keyword">KEY</span> (<span class="hljs-symbol">`id`</span>)<br>) ENGINE=InnoDB AUTO_INCREMENT=<span class="hljs-number">5</span> DEFAULT CHARSET=utf8 <span class="hljs-keyword">COLLATE</span>=utf8_bin;<br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">DROP TABLE IF EXISTS &#96;student&#96;;
+CREATE TABLE &#96;student&#96; (
+  &#96;id&#96; int(11) unsigned NOT NULL AUTO_INCREMENT,
+  &#96;name&#96; varchar(25) COLLATE utf8_bin DEFAULT NULL,
+  &#96;password&#96; varchar(25) COLLATE utf8_bin DEFAULT NULL,
+  &#96;age&#96; int(10) DEFAULT NULL,
+  PRIMARY KEY (&#96;id&#96;)
+) ENGINE&#x3D;InnoDB AUTO_INCREMENT&#x3D;5 DEFAULT CHARSET&#x3D;utf8 COLLATE&#x3D;utf8_bin;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 <p>插入数据:</p>
-<figure class="highlight n1ql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs n1ql"><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> <span class="hljs-symbol">`student`</span> <span class="hljs-keyword">VALUES</span> (<span class="hljs-string">&#x27;1&#x27;</span>, <span class="hljs-string">&#x27;zhisheng01&#x27;</span>, <span class="hljs-string">&#x27;123456&#x27;</span>, <span class="hljs-string">&#x27;18&#x27;</span>), (<span class="hljs-string">&#x27;2&#x27;</span>, <span class="hljs-string">&#x27;zhisheng02&#x27;</span>, <span class="hljs-string">&#x27;123&#x27;</span>, <span class="hljs-string">&#x27;17&#x27;</span>), (<span class="hljs-string">&#x27;3&#x27;</span>, <span class="hljs-string">&#x27;zhisheng03&#x27;</span>, <span class="hljs-string">&#x27;1234&#x27;</span>, <span class="hljs-string">&#x27;18&#x27;</span>), (<span class="hljs-string">&#x27;4&#x27;</span>, <span class="hljs-string">&#x27;zhisheng04&#x27;</span>, <span class="hljs-string">&#x27;12345&#x27;</span>, <span class="hljs-string">&#x27;16&#x27;</span>);<br>COMMIT;<br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">INSERT INTO &#96;student&#96; VALUES (&#39;1&#39;, &#39;zhisheng01&#39;, &#39;123456&#39;, &#39;18&#39;), (&#39;2&#39;, &#39;zhisheng02&#39;, &#39;123&#39;, &#39;17&#39;), (&#39;3&#39;, &#39;zhisheng03&#39;, &#39;1234&#39;, &#39;18&#39;), (&#39;4&#39;, &#39;zhisheng04&#39;, &#39;12345&#39;, &#39;16&#39;);
+COMMIT;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></div>
 <p>新建实体类：Student.java</p>
-<figure class="highlight typescript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs typescript">package raines.mysql;<br><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Student</span> </span>&#123;<br>    <span class="hljs-keyword">public</span> int id;<br>    <span class="hljs-keyword">public</span> <span class="hljs-built_in">String</span> name;<br>    <span class="hljs-keyword">public</span> <span class="hljs-built_in">String</span> password;<br>    <span class="hljs-keyword">public</span> int age;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-title">Student</span>(<span class="hljs-params"></span>)</span> &#123;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-title">Student</span>(<span class="hljs-params">int id, <span class="hljs-built_in">String</span> name, <span class="hljs-built_in">String</span> password, int age</span>)</span> &#123;<br>        <span class="hljs-built_in">this</span>.id = id;<br>        <span class="hljs-built_in">this</span>.name = name;<br>        <span class="hljs-built_in">this</span>.password = password;<br>        <span class="hljs-built_in">this</span>.age = age;<br>    &#125;<br><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-built_in">String</span> <span class="hljs-function"><span class="hljs-title">toString</span>(<span class="hljs-params"></span>)</span> &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;Student&#123;&quot;</span> +<br>                <span class="hljs-string">&quot;id=&quot;</span> + id +<br>                <span class="hljs-string">&quot;, name=&#x27;&quot;</span> + name + <span class="hljs-string">&#x27;\&#x27;&#x27;</span> +<br>                <span class="hljs-string">&quot;, password=&#x27;&quot;</span> + password + <span class="hljs-string">&#x27;\&#x27;&#x27;</span> +<br>                <span class="hljs-string">&quot;, age=&quot;</span> + age +<br>                <span class="hljs-string">&#x27;&#125;&#x27;</span>;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> int <span class="hljs-function"><span class="hljs-title">getId</span>(<span class="hljs-params"></span>)</span> &#123;<br>        <span class="hljs-keyword">return</span> id;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-built_in">void</span> <span class="hljs-function"><span class="hljs-title">setId</span>(<span class="hljs-params">int id</span>)</span> &#123;<br>        <span class="hljs-built_in">this</span>.id = id;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-built_in">String</span> <span class="hljs-function"><span class="hljs-title">getName</span>(<span class="hljs-params"></span>)</span> &#123;<br>        <span class="hljs-keyword">return</span> name;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-built_in">void</span> <span class="hljs-function"><span class="hljs-title">setName</span>(<span class="hljs-params"><span class="hljs-built_in">String</span> name</span>)</span> &#123;<br>        <span class="hljs-built_in">this</span>.name = name;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-built_in">String</span> <span class="hljs-function"><span class="hljs-title">getPassword</span>(<span class="hljs-params"></span>)</span> &#123;<br>        <span class="hljs-keyword">return</span> password;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-built_in">void</span> <span class="hljs-function"><span class="hljs-title">setPassword</span>(<span class="hljs-params"><span class="hljs-built_in">String</span> password</span>)</span> &#123;<br>        <span class="hljs-built_in">this</span>.password = password;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> int <span class="hljs-function"><span class="hljs-title">getAge</span>(<span class="hljs-params"></span>)</span> &#123;<br>        <span class="hljs-keyword">return</span> age;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-built_in">void</span> <span class="hljs-function"><span class="hljs-title">setAge</span>(<span class="hljs-params">int age</span>)</span> &#123;<br>        <span class="hljs-built_in">this</span>.age = age;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">package raines.mysql;
+
+public class Student &#123;
+    public int id;
+    public String name;
+    public String password;
+    public int age;
+
+    public Student() &#123;
+    &#125;
+
+    public Student(int id, String name, String password, int age) &#123;
+        this.id &#x3D; id;
+        this.name &#x3D; name;
+        this.password &#x3D; password;
+        this.age &#x3D; age;
+    &#125;
+
+    @Override
+    public String toString() &#123;
+        return &quot;Student&#123;&quot; +
+                &quot;id&#x3D;&quot; + id +
+                &quot;, name&#x3D;&#39;&quot; + name + &#39;\&#39;&#39; +
+                &quot;, password&#x3D;&#39;&quot; + password + &#39;\&#39;&#39; +
+                &quot;, age&#x3D;&quot; + age +
+                &#39;&#125;&#39;;
+    &#125;
+
+    public int getId() &#123;
+        return id;
+    &#125;
+
+    public void setId(int id) &#123;
+        this.id &#x3D; id;
+    &#125;
+
+    public String getName() &#123;
+        return name;
+    &#125;
+
+    public void setName(String name) &#123;
+        this.name &#x3D; name;
+    &#125;
+
+    public String getPassword() &#123;
+        return password;
+    &#125;
+
+    public void setPassword(String password) &#123;
+        this.password &#x3D; password;
+    &#125;
+
+    public int getAge() &#123;
+        return age;
+    &#125;
+
+    public void setAge(int age) &#123;
+        this.age &#x3D; age;
+    &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 <p>新建 Source 类 SourceFromMySQL.java，该类继承 RichSourceFunction ，实现里面的 open、close、run、cancel 方法：</p>
-<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">package</span> raines.mysql;<br><br><span class="hljs-keyword">import</span> org.apache.flink.configuration.Configuration;<br><span class="hljs-keyword">import</span> org.apache.flink.streaming.api.functions.source.RichSourceFunction;<br><br><span class="hljs-keyword">import</span> java.sql.Connection;<br><span class="hljs-keyword">import</span> java.sql.DriverManager;<br><span class="hljs-keyword">import</span> java.sql.PreparedStatement;<br><span class="hljs-keyword">import</span> java.sql.ResultSet;<br><br><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SourceFromMySQL</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">RichSourceFunction</span>&lt;<span class="hljs-title">Student</span>&gt; </span>&#123;<br><br>    PreparedStatement ps;<br>    <span class="hljs-keyword">private</span> Connection connection;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * open() 方法中建立连接，这样不用每次 invoke 的时候都要建立连接和释放连接。</span><br><span class="hljs-comment">     *</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> parameters</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@throws</span> Exception</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">open</span><span class="hljs-params">(Configuration parameters)</span> <span class="hljs-keyword">throws</span> Exception </span>&#123;<br>        <span class="hljs-keyword">super</span>.open(parameters);<br>        connection = getConnection();<br>        String sql = <span class="hljs-string">&quot;select * from Student;&quot;</span>;<br>        ps = <span class="hljs-keyword">this</span>.connection.prepareStatement(sql);<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 程序执行完毕就可以进行，关闭连接和释放资源的动作了</span><br><span class="hljs-comment">     *</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@throws</span> Exception</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">close</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> Exception </span>&#123;<br>        <span class="hljs-keyword">super</span>.close();<br>        <span class="hljs-keyword">if</span> (connection != <span class="hljs-keyword">null</span>) &#123; <span class="hljs-comment">//关闭连接和释放资源</span><br>            connection.close();<br>        &#125;<br>        <span class="hljs-keyword">if</span> (ps != <span class="hljs-keyword">null</span>) &#123;<br>            ps.close();<br>        &#125;<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * DataStream 调用一次 run() 方法用来获取数据</span><br><span class="hljs-comment">     *</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> ctx</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@throws</span> Exception</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">(SourceContext&lt;Student&gt; ctx)</span> <span class="hljs-keyword">throws</span> Exception </span>&#123;<br>        ResultSet resultSet = ps.executeQuery();<br>        <span class="hljs-keyword">while</span> (resultSet.next()) &#123;<br>            Student student = <span class="hljs-keyword">new</span> Student(<br>                    resultSet.getInt(<span class="hljs-string">&quot;id&quot;</span>),<br>                    resultSet.getString(<span class="hljs-string">&quot;name&quot;</span>).trim(),<br>                    resultSet.getString(<span class="hljs-string">&quot;password&quot;</span>).trim(),<br>                    resultSet.getInt(<span class="hljs-string">&quot;age&quot;</span>));<br>            ctx.collect(student);<br>        &#125;<br>    &#125;<br><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">cancel</span><span class="hljs-params">()</span> </span>&#123;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> Connection <span class="hljs-title">getConnection</span><span class="hljs-params">()</span> </span>&#123;<br>        Connection con = <span class="hljs-keyword">null</span>;<br>        <span class="hljs-keyword">try</span> &#123;<br>            Class.forName(<span class="hljs-string">&quot;com.mysql.jdbc.Driver&quot;</span>);<br>            con = DriverManager.getConnection(<span class="hljs-string">&quot;jdbc:mysql://172.16.63.50:3306/test?useUnicode=true&amp;characterEncoding=UTF-8&quot;</span>, <span class="hljs-string">&quot;root&quot;</span>, <span class="hljs-string">&quot;mysql&quot;</span>);<br>        &#125; <span class="hljs-keyword">catch</span> (Exception e) &#123;<br>            System.out.println(<span class="hljs-string">&quot;-----------mysql get connection has exception , msg = &quot;</span>+ e.getMessage());<br>        &#125;<br>        <span class="hljs-keyword">return</span> con;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">package raines.mysql;
+
+import org.apache.flink.configuration.Configuration;
+import org.apache.flink.streaming.api.functions.source.RichSourceFunction;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
+
+public class SourceFromMySQL extends RichSourceFunction&lt;Student&gt; &#123;
+
+    PreparedStatement ps;
+    private Connection connection;
+
+    &#x2F;**
+     * open() 方法中建立连接，这样不用每次 invoke 的时候都要建立连接和释放连接。
+     *
+     * @param parameters
+     * @throws Exception
+     *&#x2F;
+    @Override
+    public void open(Configuration parameters) throws Exception &#123;
+        super.open(parameters);
+        connection &#x3D; getConnection();
+        String sql &#x3D; &quot;select * from Student;&quot;;
+        ps &#x3D; this.connection.prepareStatement(sql);
+    &#125;
+
+    &#x2F;**
+     * 程序执行完毕就可以进行，关闭连接和释放资源的动作了
+     *
+     * @throws Exception
+     *&#x2F;
+    @Override
+    public void close() throws Exception &#123;
+        super.close();
+        if (connection !&#x3D; null) &#123; &#x2F;&#x2F;关闭连接和释放资源
+            connection.close();
+        &#125;
+        if (ps !&#x3D; null) &#123;
+            ps.close();
+        &#125;
+    &#125;
+
+    &#x2F;**
+     * DataStream 调用一次 run() 方法用来获取数据
+     *
+     * @param ctx
+     * @throws Exception
+     *&#x2F;
+    @Override
+    public void run(SourceContext&lt;Student&gt; ctx) throws Exception &#123;
+        ResultSet resultSet &#x3D; ps.executeQuery();
+        while (resultSet.next()) &#123;
+            Student student &#x3D; new Student(
+                    resultSet.getInt(&quot;id&quot;),
+                    resultSet.getString(&quot;name&quot;).trim(),
+                    resultSet.getString(&quot;password&quot;).trim(),
+                    resultSet.getInt(&quot;age&quot;));
+            ctx.collect(student);
+        &#125;
+    &#125;
+
+    @Override
+    public void cancel() &#123;
+    &#125;
+
+    private static Connection getConnection() &#123;
+        Connection con &#x3D; null;
+        try &#123;
+            Class.forName(&quot;com.mysql.jdbc.Driver&quot;);
+            con &#x3D; DriverManager.getConnection(&quot;jdbc:mysql:&#x2F;&#x2F;172.16.63.50:3306&#x2F;test?useUnicode&#x3D;true&amp;characterEncoding&#x3D;UTF-8&quot;, &quot;root&quot;, &quot;mysql&quot;);
+        &#125; catch (Exception e) &#123;
+            System.out.println(&quot;-----------mysql get connection has exception , msg &#x3D; &quot;+ e.getMessage());
+        &#125;
+        return con;
+    &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 <p>Flink 程序：</p>
-<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">package</span> raines.mysql;<br><br><span class="hljs-keyword">import</span> org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;<br><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Main2</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> Exception </span>&#123;<br>        <span class="hljs-keyword">final</span> StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();<br><br>        env.addSource(<span class="hljs-keyword">new</span> SourceFromMySQL()).print();<br><br>        env.execute(<span class="hljs-string">&quot;Flink add data source&quot;</span>);<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">package raines.mysql;
+
+import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
+
+public class Main2 &#123;
+    public static void main(String[] args) throws Exception &#123;
+        final StreamExecutionEnvironment env &#x3D; StreamExecutionEnvironment.getExecutionEnvironment();
+
+        env.addSource(new SourceFromMySQL()).print();
+
+        env.execute(&quot;Flink add data source&quot;);
+    &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 
 
 <h2 id="坑"><a href="#坑" class="headerlink" title="坑"></a>坑</h2><h3 id="java-lang-NoClassDefFoundError-org-apache-flink-api-common-serialization-DeserializationSchema"><a href="#java-lang-NoClassDefFoundError-org-apache-flink-api-common-serialization-DeserializationSchema" class="headerlink" title="java.lang.NoClassDefFoundError: org/apache/flink/api/common/serialization/DeserializationSchema"></a>java.lang.NoClassDefFoundError: org/apache/flink/api/common/serialization/DeserializationSchema</h3><p>pom文件如下</p>
-<figure class="highlight dust"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs dust"><span class="xml"><span class="hljs-comment">&lt;!--flink java--&gt;</span></span><br><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span></span><br><span class="xml">	<span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.apache.flink<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span></span><br><span class="xml">	<span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>flink-java<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span></span><br><span class="xml">	<span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>$</span><span class="hljs-template-variable">&#123;flink.version&#125;</span><span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span></span><br><span class="xml">	<span class="hljs-tag">&lt;<span class="hljs-name">scope</span>&gt;</span>provided<span class="hljs-tag">&lt;/<span class="hljs-name">scope</span>&gt;</span></span><br><span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span></span><br><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span></span><br><span class="xml">	<span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.apache.flink<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span></span><br><span class="xml">	<span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>flink-streaming-java_$</span><span class="hljs-template-variable">&#123;scala.binary.version&#125;</span><span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span></span><br><span class="xml">	<span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>$</span><span class="hljs-template-variable">&#123;flink.version&#125;</span><span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span></span><br><span class="xml">	<span class="hljs-tag">&lt;<span class="hljs-name">scope</span>&gt;</span>provided<span class="hljs-tag">&lt;/<span class="hljs-name">scope</span>&gt;</span></span><br><span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span></span><br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">&lt;!--flink java--&gt;
+&lt;dependency&gt;
+	&lt;groupId&gt;org.apache.flink&lt;&#x2F;groupId&gt;
+	&lt;artifactId&gt;flink-java&lt;&#x2F;artifactId&gt;
+	&lt;version&gt;$&#123;flink.version&#125;&lt;&#x2F;version&gt;
+	&lt;scope&gt;provided&lt;&#x2F;scope&gt;
+&lt;&#x2F;dependency&gt;
+&lt;dependency&gt;
+	&lt;groupId&gt;org.apache.flink&lt;&#x2F;groupId&gt;
+	&lt;artifactId&gt;flink-streaming-java_$&#123;scala.binary.version&#125;&lt;&#x2F;artifactId&gt;
+	&lt;version&gt;$&#123;flink.version&#125;&lt;&#x2F;version&gt;
+	&lt;scope&gt;provided&lt;&#x2F;scope&gt;
+&lt;&#x2F;dependency&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 <p>maven使用provided的问题，去掉provided，使用默认的compile，解决。</p>
 <ul>
 <li>扩展：compile和provided区别<br>Difference between maven scope compile and provided for JAR packaging： <a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/6646959/difference-between-maven-scope-compile-and-provided-for-jar-packaging">https://stackoverflow.com/questions/6646959/difference-between-maven-scope-compile-and-provided-for-jar-packaging</a></li>
@@ -404,6 +768,8 @@
 
 
 
+  
+    
   
 
 

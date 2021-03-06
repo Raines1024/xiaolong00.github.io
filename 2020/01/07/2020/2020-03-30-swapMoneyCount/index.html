@@ -32,7 +32,15 @@
     
     
       
-      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/darcula.min.css" />
+      
+        
+          
+        
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.22.0/themes/prism.min.css" />
+      
+      
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.22.0/plugins/line-numbers/prism-line-numbers.min.css" />
+      
     
   
 
@@ -187,7 +195,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      635 字
+      656 字
     </span>
   
 
@@ -197,7 +205,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      7
+      8
        分钟
     </span>
   
@@ -239,7 +247,57 @@
 <blockquote>
 <p>如果a就是0，应该算作是有1种换零钱的方式。<br>如果a小于0，应该算作是有0种换零钱的方式。<br>如果n是0，应该算作是有0种换零钱的方式。  </p>
 </blockquote>
-<h3 id="根据书中scheme代码重写为Java"><a href="#根据书中scheme代码重写为Java" class="headerlink" title="根据书中scheme代码重写为Java"></a>根据书中scheme代码重写为Java</h3><figure class="highlight aspectj"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs aspectj"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 换零钱方式的统计</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@author</span> raines</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SwapMoneyCount</span> </span>&#123;<br><br>    <span class="hljs-keyword">private</span> <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">countChange</span><span class="hljs-params">(<span class="hljs-keyword">int</span> amount)</span> </span>&#123;<br>        <span class="hljs-function"><span class="hljs-keyword">return</span> <span class="hljs-title">cc</span><span class="hljs-params">(amount, <span class="hljs-number">5</span>)</span></span>;<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 计算有多少种换零钱的方式</span><br><span class="hljs-comment">     *</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> amount       钱数</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> kindsOfCoins 可用的硬币种数</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span> 换零钱方式的总数</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-keyword">private</span> <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">cc</span><span class="hljs-params">(<span class="hljs-keyword">int</span> amount, <span class="hljs-keyword">int</span> kindsOfCoins)</span> </span>&#123;<br>        <span class="hljs-keyword">if</span> (amount == <span class="hljs-number">0</span>) &#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;<br>        &#125; <span class="hljs-function"><span class="hljs-keyword">else</span> <span class="hljs-title">if</span> <span class="hljs-params">(amount &lt; <span class="hljs-number">0</span> || kindsOfCoins == <span class="hljs-number">0</span>)</span> </span>&#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>        &#125; <span class="hljs-keyword">else</span> &#123;<br>            <span class="hljs-keyword">return</span> cc(amount, kindsOfCoins - <span class="hljs-number">1</span>) + cc(amount - firstDenomination(kindsOfCoins), kindsOfCoins);<br>        &#125;<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 以可用的硬币种数作为输入，返回第一种硬币的币值，默认硬币已经从最大到最小排序好了</span><br><span class="hljs-comment">     * 1美元 = 100美分</span><br><span class="hljs-comment">     * 硬币种数：50、25、10、5、1美分</span><br><span class="hljs-comment">     *</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> kindsOfCoins 可用的硬币种数</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span> 每种硬币的面值</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-keyword">private</span> <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">firstDenomination</span><span class="hljs-params">(<span class="hljs-keyword">int</span> kindsOfCoins)</span> </span>&#123;<br>        <span class="hljs-keyword">if</span> (kindsOfCoins == <span class="hljs-number">1</span>) &#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;<br>        &#125; <span class="hljs-function"><span class="hljs-keyword">else</span> <span class="hljs-title">if</span> <span class="hljs-params">(kindsOfCoins == <span class="hljs-number">2</span>)</span> </span>&#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-number">5</span>;<br>        &#125; <span class="hljs-function"><span class="hljs-keyword">else</span> <span class="hljs-title">if</span> <span class="hljs-params">(kindsOfCoins == <span class="hljs-number">3</span>)</span> </span>&#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-number">10</span>;<br>        &#125; <span class="hljs-function"><span class="hljs-keyword">else</span> <span class="hljs-title">if</span> <span class="hljs-params">(kindsOfCoins == <span class="hljs-number">4</span>)</span> </span>&#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-number">25</span>;<br>        &#125; <span class="hljs-function"><span class="hljs-keyword">else</span> <span class="hljs-title">if</span> <span class="hljs-params">(kindsOfCoins == <span class="hljs-number">5</span>)</span> </span>&#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-number">50</span>;<br>        &#125;<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>    &#125;<br><br>&#125;<br></code></pre></div></td></tr></table></figure>
+<h3 id="根据书中scheme代码重写为Java"><a href="#根据书中scheme代码重写为Java" class="headerlink" title="根据书中scheme代码重写为Java"></a>根据书中scheme代码重写为Java</h3><div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">&#x2F;**
+ * 换零钱方式的统计
+ * @author raines
+ *&#x2F;
+public class SwapMoneyCount &#123;
+
+    private int countChange(int amount) &#123;
+        return cc(amount, 5);
+    &#125;
+
+    &#x2F;**
+     * 计算有多少种换零钱的方式
+     *
+     * @param amount       钱数
+     * @param kindsOfCoins 可用的硬币种数
+     * @return 换零钱方式的总数
+     *&#x2F;
+    private int cc(int amount, int kindsOfCoins) &#123;
+        if (amount &#x3D;&#x3D; 0) &#123;
+            return 1;
+        &#125; else if (amount &lt; 0 || kindsOfCoins &#x3D;&#x3D; 0) &#123;
+            return 0;
+        &#125; else &#123;
+            return cc(amount, kindsOfCoins - 1) + cc(amount - firstDenomination(kindsOfCoins), kindsOfCoins);
+        &#125;
+    &#125;
+
+    &#x2F;**
+     * 以可用的硬币种数作为输入，返回第一种硬币的币值，默认硬币已经从最大到最小排序好了
+     * 1美元 &#x3D; 100美分
+     * 硬币种数：50、25、10、5、1美分
+     *
+     * @param kindsOfCoins 可用的硬币种数
+     * @return 每种硬币的面值
+     *&#x2F;
+    private int firstDenomination(int kindsOfCoins) &#123;
+        if (kindsOfCoins &#x3D;&#x3D; 1) &#123;
+            return 1;
+        &#125; else if (kindsOfCoins &#x3D;&#x3D; 2) &#123;
+            return 5;
+        &#125; else if (kindsOfCoins &#x3D;&#x3D; 3) &#123;
+            return 10;
+        &#125; else if (kindsOfCoins &#x3D;&#x3D; 4) &#123;
+            return 25;
+        &#125; else if (kindsOfCoins &#x3D;&#x3D; 5) &#123;
+            return 50;
+        &#125;
+        return 0;
+    &#125;
+
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 
 
 
@@ -439,6 +497,8 @@
 
 
 
+  
+    
   
 
 

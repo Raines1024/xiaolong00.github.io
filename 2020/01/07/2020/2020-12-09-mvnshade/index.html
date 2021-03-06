@@ -32,7 +32,15 @@
     
     
       
-      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/darcula.min.css" />
+      
+        
+          
+        
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.22.0/themes/prism.min.css" />
+      
+      
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.22.0/plugins/line-numbers/prism-line-numbers.min.css" />
+      
     
   
 
@@ -187,7 +195,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      509 字
+      538 字
     </span>
   
 
@@ -232,13 +240,62 @@
             <div class="markdown-body">
               <p>有时候，需要将复杂的项目，包括各种xml文件属性文件， 类， jar等等打包到一个可以执行的jar包中， 然后用java -jar  xxx.jar 来运行项目，这样简单方便，特别是在编写一些测试工具时，尤为重要。<br>但是经常发现打包后的项目无法启动， 其中一大类是您项目有问题， 但是这个相对好解决。<br>通过 maven-shade-plugin 生成的jar包，它包含所有的依赖 jar 包。</p>
 <h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><h3 id="配置-maven-shade-plugin"><a href="#配置-maven-shade-plugin" class="headerlink" title="配置 maven-shade-plugin"></a>配置 maven-shade-plugin</h3><p>maven-shade-plugin 将 goal shade:shade 绑定到 phase package 上。</p>
-<figure class="highlight xquery"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs xquery"><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">build</span>&gt;</span></span><br><span class="xml">     </span><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">plugins</span>&gt;</span></span><br><span class="xml">         </span><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">plugin</span>&gt;</span></span><br><span class="xml">             </span><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.apache.maven.plugins<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span></span><br><span class="xml">             </span><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>maven-shade-plugin<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span></span><br><span class="xml">             </span><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>2.4.3<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span></span><br><span class="xml">             </span><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">configuration</span>&gt;</span></span><br><span class="xml">                <span class="hljs-comment">&lt;!-- put your configurations here --&gt;</span></span><br><span class="xml">             <span class="hljs-tag">&lt;/<span class="hljs-name">configuration</span>&gt;</span></span><br><span class="xml">             </span><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">executions</span>&gt;</span></span><br><span class="xml">                 </span><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">execution</span>&gt;</span></span><br><span class="xml">                     </span><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">phase</span>&gt;</span>package<span class="hljs-tag">&lt;/<span class="hljs-name">phase</span>&gt;</span></span><br><span class="xml">                     </span><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">goals</span>&gt;</span></span><br><span class="xml">                        </span><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">goal</span>&gt;</span>shade<span class="hljs-tag">&lt;/<span class="hljs-name">goal</span>&gt;</span></span><br><span class="xml">                     <span class="hljs-tag">&lt;/<span class="hljs-name">goals</span>&gt;</span></span><br><span class="xml">                 <span class="hljs-tag">&lt;/<span class="hljs-name">execution</span>&gt;</span></span><br><span class="xml">             <span class="hljs-tag">&lt;/<span class="hljs-name">executions</span>&gt;</span></span><br><span class="xml">         <span class="hljs-tag">&lt;/<span class="hljs-name">plugin</span>&gt;</span></span><br><span class="xml">     <span class="hljs-tag">&lt;/<span class="hljs-name">plugins</span>&gt;</span></span><br><span class="xml"> <span class="hljs-tag">&lt;/<span class="hljs-name">build</span>&gt;</span></span><br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">&lt;build&gt;
+     &lt;plugins&gt;
+         &lt;plugin&gt;
+             &lt;groupId&gt;org.apache.maven.plugins&lt;&#x2F;groupId&gt;
+             &lt;artifactId&gt;maven-shade-plugin&lt;&#x2F;artifactId&gt;
+             &lt;version&gt;2.4.3&lt;&#x2F;version&gt;
+             &lt;configuration&gt;
+                &lt;!-- put your configurations here --&gt;
+             &lt;&#x2F;configuration&gt;
+             &lt;executions&gt;
+                 &lt;execution&gt;
+                     &lt;phase&gt;package&lt;&#x2F;phase&gt;
+                     &lt;goals&gt;
+                        &lt;goal&gt;shade&lt;&#x2F;goal&gt;
+                     &lt;&#x2F;goals&gt;
+                 &lt;&#x2F;execution&gt;
+             &lt;&#x2F;executions&gt;
+         &lt;&#x2F;plugin&gt;
+     &lt;&#x2F;plugins&gt;
+ &lt;&#x2F;build&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 <p>执行命令：mvn clean package</p>
 <h3 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h3><p>将该工程依赖的部分 Jar(fastjson) 包 include/exclude 掉。</p>
-<figure class="highlight django"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs django"><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">build</span>&gt;</span></span><br><span class="xml">    <span class="hljs-tag">&lt;<span class="hljs-name">plugins</span>&gt;</span></span><br><span class="xml">        <span class="hljs-tag">&lt;<span class="hljs-name">plugin</span>&gt;</span></span><br><span class="xml">            <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.apache.maven.plugins<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span></span><br><span class="xml">            <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>maven-shade-plugin<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span></span><br><span class="xml">            <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>2.4.3<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span></span><br><span class="xml">            <span class="hljs-tag">&lt;<span class="hljs-name">executions</span>&gt;</span></span><br><span class="xml">                <span class="hljs-tag">&lt;<span class="hljs-name">execution</span>&gt;</span></span><br><span class="xml">                    <span class="hljs-tag">&lt;<span class="hljs-name">phase</span>&gt;</span>package<span class="hljs-tag">&lt;/<span class="hljs-name">phase</span>&gt;</span></span><br><span class="xml">                    <span class="hljs-tag">&lt;<span class="hljs-name">goals</span>&gt;</span></span><br><span class="xml">                        <span class="hljs-tag">&lt;<span class="hljs-name">goal</span>&gt;</span>shade<span class="hljs-tag">&lt;/<span class="hljs-name">goal</span>&gt;</span></span><br><span class="xml">                    <span class="hljs-tag">&lt;/<span class="hljs-name">goals</span>&gt;</span></span><br><span class="xml">                    <span class="hljs-tag">&lt;<span class="hljs-name">configuration</span>&gt;</span></span><br><span class="xml">                        <span class="hljs-tag">&lt;<span class="hljs-name">minimizeJar</span>&gt;</span>true<span class="hljs-tag">&lt;/<span class="hljs-name">minimizeJar</span>&gt;</span></span><br><span class="xml">                        <span class="hljs-tag">&lt;<span class="hljs-name">artifactSet</span>&gt;</span></span><br><span class="xml">                            <span class="hljs-tag">&lt;<span class="hljs-name">excludes</span>&gt;</span></span><br><span class="xml">                                <span class="hljs-tag">&lt;<span class="hljs-name">exclude</span>&gt;</span>com.alibaba:fastjson<span class="hljs-tag">&lt;/<span class="hljs-name">exclude</span>&gt;</span></span><br><span class="xml">                            <span class="hljs-tag">&lt;/<span class="hljs-name">excludes</span>&gt;</span></span><br><span class="xml">                        <span class="hljs-tag">&lt;/<span class="hljs-name">artifactSet</span>&gt;</span></span><br><span class="xml">                    <span class="hljs-tag">&lt;/<span class="hljs-name">configuration</span>&gt;</span></span><br><span class="xml">                <span class="hljs-tag">&lt;/<span class="hljs-name">execution</span>&gt;</span></span><br><span class="xml">            <span class="hljs-tag">&lt;/<span class="hljs-name">executions</span>&gt;</span></span><br><span class="xml">        <span class="hljs-tag">&lt;/<span class="hljs-name">plugin</span>&gt;</span></span><br><span class="xml">    <span class="hljs-tag">&lt;/<span class="hljs-name">plugins</span>&gt;</span></span><br><span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-name">build</span>&gt;</span></span><br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">&lt;build&gt;
+    &lt;plugins&gt;
+        &lt;plugin&gt;
+            &lt;groupId&gt;org.apache.maven.plugins&lt;&#x2F;groupId&gt;
+            &lt;artifactId&gt;maven-shade-plugin&lt;&#x2F;artifactId&gt;
+            &lt;version&gt;2.4.3&lt;&#x2F;version&gt;
+            &lt;executions&gt;
+                &lt;execution&gt;
+                    &lt;phase&gt;package&lt;&#x2F;phase&gt;
+                    &lt;goals&gt;
+                        &lt;goal&gt;shade&lt;&#x2F;goal&gt;
+                    &lt;&#x2F;goals&gt;
+                    &lt;configuration&gt;
+                        &lt;minimizeJar&gt;true&lt;&#x2F;minimizeJar&gt;
+                        &lt;artifactSet&gt;
+                            &lt;excludes&gt;
+                                &lt;exclude&gt;com.alibaba:fastjson&lt;&#x2F;exclude&gt;
+                            &lt;&#x2F;excludes&gt;
+                        &lt;&#x2F;artifactSet&gt;
+                    &lt;&#x2F;configuration&gt;
+                &lt;&#x2F;execution&gt;
+            &lt;&#x2F;executions&gt;
+        &lt;&#x2F;plugin&gt;
+    &lt;&#x2F;plugins&gt;
+&lt;&#x2F;build&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 <h3 id="configuration的层级问题"><a href="#configuration的层级问题" class="headerlink" title="configuration的层级问题"></a>configuration的层级问题</h3><p><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/33908315/what-is-the-difference-between-executions-and-configurations-in-a-maven-plugin">https://stackoverflow.com/questions/33908315/what-is-the-difference-between-executions-and-configurations-in-a-maven-plugin</a></p>
-<h3 id="maven-shade-plugin-自动将所有不使用的类全部排除掉，将-uber-jar-最小化。"><a href="#maven-shade-plugin-自动将所有不使用的类全部排除掉，将-uber-jar-最小化。" class="headerlink" title="maven-shade-plugin 自动将所有不使用的类全部排除掉，将 uber-jar 最小化。"></a>maven-shade-plugin 自动将所有不使用的类全部排除掉，将 uber-jar 最小化。</h3><figure class="highlight handlebars"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs handlebars"><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">configuration</span>&gt;</span></span><br><span class="xml">    <span class="hljs-tag">&lt;<span class="hljs-name">minimizeJar</span>&gt;</span>true<span class="hljs-tag">&lt;/<span class="hljs-name">minimizeJar</span>&gt;</span></span><br><span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-name">configuration</span>&gt;</span></span><br></code></pre></div></td></tr></table></figure>
-<h2 id="默认会生成一个Jar包和一个以-“original-”为前缀的original-jar包，可以通过配置来指定original-jar的后缀名。"><a href="#默认会生成一个Jar包和一个以-“original-”为前缀的original-jar包，可以通过配置来指定original-jar的后缀名。" class="headerlink" title="默认会生成一个Jar包和一个以 “original-”为前缀的original-jar包，可以通过配置来指定original-jar的后缀名。"></a>默认会生成一个Jar包和一个以 “original-”为前缀的original-jar包，可以通过配置来指定original-jar的后缀名。</h2><figure class="highlight xquery"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs xquery"><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">configuration</span>&gt;</span></span><br><span class="xml">    </span><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">shadedArtifactAttached</span>&gt;</span>true<span class="hljs-tag">&lt;/<span class="hljs-name">shadedArtifactAttached</span>&gt;</span></span><br><span class="xml">    <span class="hljs-comment">&lt;!-- 名称会作为后缀在shade构件jar包后 --&gt;</span></span><br><span class="xml">    </span><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">shadedClassifierName</span>&gt;</span>jackofall<span class="hljs-tag">&lt;/<span class="hljs-name">shadedClassifierName</span>&gt;</span></span><br><span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-name">configuration</span>&gt;</span></span><br></code></pre></div></td></tr></table></figure>
+<h3 id="maven-shade-plugin-自动将所有不使用的类全部排除掉，将-uber-jar-最小化。"><a href="#maven-shade-plugin-自动将所有不使用的类全部排除掉，将-uber-jar-最小化。" class="headerlink" title="maven-shade-plugin 自动将所有不使用的类全部排除掉，将 uber-jar 最小化。"></a>maven-shade-plugin 自动将所有不使用的类全部排除掉，将 uber-jar 最小化。</h3><div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">&lt;configuration&gt;
+    &lt;minimizeJar&gt;true&lt;&#x2F;minimizeJar&gt;
+&lt;&#x2F;configuration&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></div>
+<h2 id="默认会生成一个Jar包和一个以-“original-”为前缀的original-jar包，可以通过配置来指定original-jar的后缀名。"><a href="#默认会生成一个Jar包和一个以-“original-”为前缀的original-jar包，可以通过配置来指定original-jar的后缀名。" class="headerlink" title="默认会生成一个Jar包和一个以 “original-”为前缀的original-jar包，可以通过配置来指定original-jar的后缀名。"></a>默认会生成一个Jar包和一个以 “original-”为前缀的original-jar包，可以通过配置来指定original-jar的后缀名。</h2><div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">&lt;configuration&gt;
+    &lt;shadedArtifactAttached&gt;true&lt;&#x2F;shadedArtifactAttached&gt;
+    &lt;!-- 名称会作为后缀在shade构件jar包后 --&gt;
+    &lt;shadedClassifierName&gt;jackofall&lt;&#x2F;shadedClassifierName&gt;
+&lt;&#x2F;configuration&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 
 
             </div>
@@ -383,6 +440,8 @@
 
 
 
+  
+    
   
 
 

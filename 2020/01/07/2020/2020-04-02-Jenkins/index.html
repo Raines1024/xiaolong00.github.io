@@ -32,7 +32,15 @@
     
     
       
-      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/darcula.min.css" />
+      
+        
+          
+        
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.22.0/themes/prism.min.css" />
+      
+      
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.22.0/plugins/line-numbers/prism-line-numbers.min.css" />
+      
     
   
 
@@ -197,7 +205,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      21
+      22
        分钟
     </span>
   
@@ -235,16 +243,43 @@
 <li>Docker镜像源修改<br><a target="_blank" rel="noopener" href="https://blog.csdn.net/jixuju/article/details/80158493">https://blog.csdn.net/jixuju/article/details/80158493</a>  </li>
 <li>运行jenkins  </li>
 </ol>
-<figure class="highlight livescript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs livescript">docker run <span class="hljs-string">\</span><br>  -u root <span class="hljs-string">\</span><br>  --rm <span class="hljs-string">\</span><br>  -d <span class="hljs-string">\</span><br>  -p <span class="hljs-number">12345</span>:<span class="hljs-number">8080</span> <span class="hljs-string">\</span><br>  -p <span class="hljs-number">50000</span>:<span class="hljs-number">50000</span> <span class="hljs-string">\</span><br>  -v jenkins-data:/<span class="hljs-keyword">var</span>/jenkins_home <span class="hljs-string">\</span><br>  -v /<span class="hljs-keyword">var</span>/run/docker.sock:/<span class="hljs-keyword">var</span>/run/docker.sock <span class="hljs-string">\</span><br>  jenkinsci/blueocean<br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">docker run \
+  -u root \
+  --rm \
+  -d \
+  -p 12345:8080 \
+  -p 50000:50000 \
+  -v jenkins-data:&#x2F;var&#x2F;jenkins_home \
+  -v &#x2F;var&#x2F;run&#x2F;docker.sock:&#x2F;var&#x2F;run&#x2F;docker.sock \
+  jenkinsci&#x2F;blueocean<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 <p>参数介绍<br>–rm   关闭时自动删除Docker容器<br>-d     在后台运行容器（即“分离”模式）并输出容器ID。如果您不指定此选项， 则在终端窗口中输出正在运行的此容器的Docker日志。<br>-p 12345:8000   容器的端口8080到主机上的端口8080。 第一个数字代表主机上的端口，而最后一个代表容器的端口。<br>-v jenkins-data:/var/jenkins_home   注意: 所述的 jenkins-data 卷也可以 docker volume create命令创建： docker volume create jenkins-data 代替映射 /var/jenkins_home 目录转换为Docker卷，还 可以将此目录映射到计算机本地文件系统上的目录。 例如，指定该选项 -v $HOME/jenkins:/var/jenkins_home 会将容器的 /var/jenkins_home 目录映射 到 本地计算机上目录中的 jenkins 子目录， 该$HOME目录通常是 /Users/<your-username>/jenkins 或 <code>/home/&lt;your-username&gt;/jenkins</code>  。</p>
 <ol start="4">
 <li>进入docker容器(查看docker中jenkins administrator密码)  </li>
 </ol>
-<figure class="highlight awk"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs awk">docker exec -it jenkins-blueoceanId bash<br>```  <br>离开容器：<span class="hljs-keyword">exit</span>  <br><span class="hljs-number">5</span>. 查看日志  <br><br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">docker exec -it jenkins-blueoceanId bash
+&#96;&#96;&#96;  
+离开容器：exit  
+5. 查看日志  
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre></div>
 <p>docker logs jenkins-blueoceanId</p>
-<figure class="highlight awk"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs awk"><span class="hljs-number">6</span>. 注意挂载目录授权  <br>sudo chown -R <span class="hljs-number">1000</span> <span class="hljs-regexp">/var/</span>jenkins_home   <br>启动：  <br>-v命令进行挂载，其中冒号前面的是本机的目录，将本机的javahome和mavenhome的路径，挂载到Jenkins容器上，冒号后面是容器上的目录，可以写跟本机目录相同。  <br>这样启动后就本地的容器中<span class="hljs-regexp">/var/</span>jenkins_home目录下的内容就会存入本机的<span class="hljs-regexp">/var/</span>jenkins_home下，密码也可以从这个目录下获取而不用进入容器内部。  <br><br><span class="hljs-number">7</span>. 放弃  <br>乱七八槽的授权与配置，算了，还是简单来吧。  <br><br><span class="hljs-comment">## Centos7 使用 Jenkins（以下为测试环境玩一下，切不可直接上手生产环境） </span><br><span class="hljs-number">1</span>. centos 使用 yum 安装 jenkins    <br>https:<span class="hljs-regexp">//</span>www.cnblogs.com<span class="hljs-regexp">/loveyouyou616/</span>p/<span class="hljs-number">8714544</span>.html  <br><span class="hljs-number">2</span>. jdk 安装  <br><span class="hljs-number">3</span>. maven 安装  <br>jdk和maven安装都类似，例如maven，下载 *-bin.tar.gz文件，解压；在linux环境中创建maven目录，<span class="hljs-regexp">/usr/</span>local<span class="hljs-regexp">/maven，将maven安装包上传至此目录中；配置环境变量 vi /</span>etc/profile :将下面这两行代码拷贝到文件末尾并保存   <br><br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">6. 注意挂载目录授权  
+sudo chown -R 1000 &#x2F;var&#x2F;jenkins_home   
+启动：  
+-v命令进行挂载，其中冒号前面的是本机的目录，将本机的javahome和mavenhome的路径，挂载到Jenkins容器上，冒号后面是容器上的目录，可以写跟本机目录相同。  
+这样启动后就本地的容器中&#x2F;var&#x2F;jenkins_home目录下的内容就会存入本机的&#x2F;var&#x2F;jenkins_home下，密码也可以从这个目录下获取而不用进入容器内部。  
+
+7. 放弃  
+乱七八槽的授权与配置，算了，还是简单来吧。  
+
+## Centos7 使用 Jenkins（以下为测试环境玩一下，切不可直接上手生产环境） 
+1. centos 使用 yum 安装 jenkins    
+https:&#x2F;&#x2F;www.cnblogs.com&#x2F;loveyouyou616&#x2F;p&#x2F;8714544.html  
+2. jdk 安装  
+3. maven 安装  
+jdk和maven安装都类似，例如maven，下载 *-bin.tar.gz文件，解压；在linux环境中创建maven目录，&#x2F;usr&#x2F;local&#x2F;maven，将maven安装包上传至此目录中；配置环境变量 vi &#x2F;etc&#x2F;profile :将下面这两行代码拷贝到文件末尾并保存   
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 <p>MAVEN_HOME=/usr/local/maven/apache-maven-3.6.1<br>export PATH=${MAVEN_HOME}/bin:${PATH}</p>
-<div class="hljs code-wrapper"><pre><code>
+<div class="code-wrapper"><pre><code>
 
 重载环境变量: source /etc/profile  
 查看结果: mvn –v  
@@ -522,6 +557,8 @@ Jenkins的RPM仓库配置被加到/etc/yum.repos.d/jenkins.repo
 
 
 
+  
+    
   
 
 

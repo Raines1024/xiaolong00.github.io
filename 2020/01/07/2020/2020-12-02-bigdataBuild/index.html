@@ -32,7 +32,15 @@
     
     
       
-      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/darcula.min.css" />
+      
+        
+          
+        
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.22.0/themes/prism.min.css" />
+      
+      
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.22.0/plugins/line-numbers/prism-line-numbers.min.css" />
+      
     
   
 
@@ -187,7 +195,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      918 字
+      969 字
     </span>
   
 
@@ -197,7 +205,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      14
+      15
        分钟
     </span>
   
@@ -233,21 +241,55 @@
               <h2 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h2><h3 id="在安装-Hadoop-之前，请确认集群的每台机器上均安装-JDK，以及搭配环境变量。"><a href="#在安装-Hadoop-之前，请确认集群的每台机器上均安装-JDK，以及搭配环境变量。" class="headerlink" title="在安装 Hadoop 之前，请确认集群的每台机器上均安装 JDK，以及搭配环境变量。"></a>在安装 Hadoop 之前，请确认集群的每台机器上均安装 JDK，以及搭配环境变量。</h3><ul>
 <li>添加Java环境变量<br>vim ~/.bash_profile  </li>
 </ul>
-<figure class="highlight routeros"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs routeros"><span class="hljs-comment"># Java Environment</span><br><span class="hljs-attribute">JAVA_HOME</span>=/usr/java/latest<br><span class="hljs-attribute">JRE_HOME</span>=<span class="hljs-variable">$&#123;JAVA_HOME&#125;</span>/jre<br><span class="hljs-attribute">CLASSPATH</span>=.:$&#123;JAVA_HOME&#125;/lib:<span class="hljs-variable">$&#123;JRE_HOME&#125;</span>/lib<br><span class="hljs-attribute">PATH</span>=<span class="hljs-variable">$&#123;JAVA_HOME&#125;</span>/bin:$PATH<br><span class="hljs-attribute">PATH</span>=<span class="hljs-variable">$PATH</span>:$HOME/bin<br><br><span class="hljs-builtin-name">export</span> PATH<br>```   <br><br>- 生效  <br>source ~/.bash_profile    <br><br><span class="hljs-comment">### 在三台机器/etc/hosts写入对应机器,修改对应 hostname</span><br><br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none"># Java Environment
+JAVA_HOME&#x3D;&#x2F;usr&#x2F;java&#x2F;latest
+JRE_HOME&#x3D;$&#123;JAVA_HOME&#125;&#x2F;jre
+CLASSPATH&#x3D;.:$&#123;JAVA_HOME&#125;&#x2F;lib:$&#123;JRE_HOME&#125;&#x2F;lib
+PATH&#x3D;$&#123;JAVA_HOME&#125;&#x2F;bin:$PATH
+PATH&#x3D;$PATH:$HOME&#x2F;bin
+
+export PATH
+&#96;&#96;&#96;   
+
+- 生效  
+source ~&#x2F;.bash_profile    
+
+### 在三台机器&#x2F;etc&#x2F;hosts写入对应机器,修改对应 hostname
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 <p>172.29.32.21 openshift1<br>172.29.32.22 openshift2<br>172.29.32.23 openshift3</p>
-<figure class="highlight clean"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs clean"><br>### 配置ssh无密码登陆（见之前文章）<br><br>### CentOS7关闭防火墙<br>- 查看防火墙状态<br>firewall-cmd --state<br>- 停止firewall<br>systemctl stop firewalld.service<br>- 禁止firewall开机启动<br>systemctl disable firewalld.service <br><br>## 下载二进制文件<br><br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">
+### 配置ssh无密码登陆（见之前文章）
+
+### CentOS7关闭防火墙
+- 查看防火墙状态
+firewall-cmd --state
+- 停止firewall
+systemctl stop firewalld.service
+- 禁止firewall开机启动
+systemctl disable firewalld.service 
+
+## 下载二进制文件
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 <p>cd /opt<br>wget <a target="_blank" rel="noopener" href="https://mirrors.tuna.tsinghua.edu.cn/apache/hadoop/common/hadoop-2.9.2/hadoop-2.9.2.tar.gz">https://mirrors.tuna.tsinghua.edu.cn/apache/hadoop/common/hadoop-2.9.2/hadoop-2.9.2.tar.gz</a><br>tar -zxvf hadoop-2.9.2.tar.gz -C .</p>
-<figure class="highlight vala"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs vala"><br><span class="hljs-meta">## 修改配置文件</span><br><br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">
+## 修改配置文件
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></div>
 <p>vim /etc/profile</p>
 <h1 id="Flink-Environment"><a href="#Flink-Environment" class="headerlink" title="Flink Environment"></a>Flink Environment</h1><p>export HADOOP_HOME=/opt/hadoop-2.9.2<br>export PATH=$PATH:${HADOOP_HOME}/bin:${HADOOP_HOME}/sbin</p>
-<figure class="highlight clean"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs clean"><br>### core-site.xml<br>指定 NameNode 的 IP 地址和端口号<br><br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">
+### core-site.xml
+指定 NameNode 的 IP 地址和端口号
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></div>
 <configuration>
   <property>
     <name>fs.default.name</name>
     <value>hdfs://openshift1:9000</value>
   </property>
 </configuration>
-<figure class="highlight css"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs css"><br>### <span class="hljs-selector-tag">hdfs-site</span><span class="hljs-selector-class">.xml</span><br><span class="hljs-selector-tag">dfs</span><span class="hljs-selector-class">.replication</span> 指定备份数目为 3，<span class="hljs-selector-tag">dfs</span><span class="hljs-selector-class">.name</span><span class="hljs-selector-class">.dir</span> 指定 <span class="hljs-selector-tag">NameNode</span> 的文件存储路径，<span class="hljs-selector-tag">dfs</span><span class="hljs-selector-class">.data</span><span class="hljs-selector-class">.dir</span> 指定 <span class="hljs-selector-tag">DataNode</span> 的文件存储路径。<br><br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">
+### hdfs-site.xml
+dfs.replication 指定备份数目为 3，dfs.name.dir 指定 NameNode 的文件存储路径，dfs.data.dir 指定 DataNode 的文件存储路径。
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></div>
 <configuration>
   <property>
     <name>dfs.replication</name>
@@ -262,14 +304,20 @@
     <value>file:/opt/hadoop-2.9.2/data/datanode</value>
   </property>
 </configuration>
-<figure class="highlight css"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs css"><br>### <span class="hljs-selector-tag">mapred-site</span><span class="hljs-selector-class">.xml</span><br><span class="hljs-selector-tag">cp</span> <span class="hljs-selector-tag">mapred-site</span><span class="hljs-selector-class">.xml</span><span class="hljs-selector-class">.template</span> <span class="hljs-selector-tag">mapred-site</span><span class="hljs-selector-class">.xml</span><br>然后修改<span class="hljs-selector-tag">mapred-site</span><span class="hljs-selector-class">.xml</span>的内容<br><br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">
+### mapred-site.xml
+cp mapred-site.xml.template mapred-site.xml
+然后修改mapred-site.xml的内容
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre></div>
 <configuration>
   <property>
     <name>mapreduce.framework.name</name>
     <value>yarn</value>
   </property>
 </configuration>
-<figure class="highlight clean"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs clean"><br>### yarn-site.xml<br><br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">
+### yarn-site.xml
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></div>
 <configuration>
 
 <!-- Site specific YARN configuration properties -->
@@ -294,15 +342,41 @@
     <value>openshift1:8050</value>
   </property>
 </configuration>
-<figure class="highlight clean"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs clean"><br>### slaves<br>添加 slave 节点的 hostname 到该文件中<br><br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">
+### slaves
+添加 slave 节点的 hostname 到该文件中
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></div>
 openshift2
 openshift3
-<figure class="highlight clean"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs clean"><br>### 设置环境变量<br>修改hadoop-env.sh<br><br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">
+### 设置环境变量
+修改hadoop-env.sh
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></div>
 export JAVA_HOME=/usr/java/latest
-<figure class="highlight vala"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs vala"><span class="hljs-meta">## 分发配置文件</span><br><br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">## 分发配置文件
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div>
 scp -r /opt/hadoop-2.9.2 openshift2:/opt/hadoop-2.9.2
 scp -r /opt/hadoop-2.9.2 openshift3:/opt/hadoop-2.9.2
-<figure class="highlight clean"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs clean"><br>## 启动集群<br><br>### 格式化 HDFS<br>hdfs namenode -format<br>### 启动集群<br>start-dfs.sh  <br>start-yarn.sh<br>### 使用 jps 命令查看服务运行情况<br>- master节点中运行的服务  <br><span class="hljs-number">25928</span> SecondaryNameNode  <br><span class="hljs-number">25742</span> NameNode  <br><span class="hljs-number">26387</span> Jps  <br><span class="hljs-number">26078</span> ResourceManager  <br>-  slave节点中运行的服务  <br><span class="hljs-number">24002</span> NodeManager  <br><span class="hljs-number">23899</span> DataNode  <br><span class="hljs-number">24179</span> Jps  <br>### 提交示例任务<br><br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">
+## 启动集群
+
+### 格式化 HDFS
+hdfs namenode -format
+### 启动集群
+start-dfs.sh  
+start-yarn.sh
+### 使用 jps 命令查看服务运行情况
+- master节点中运行的服务  
+25928 SecondaryNameNode  
+25742 NameNode  
+26387 Jps  
+26078 ResourceManager  
+-  slave节点中运行的服务  
+24002 NodeManager  
+23899 DataNode  
+24179 Jps  
+### 提交示例任务
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 cd /opt/hadoop-2.9.2
 hdfs dfs -mkdir /wordcount
 hdfs dfs -mkdir /wordcount/input
@@ -317,7 +391,30 @@ hadoop fs -ls /wordcount/output
 /wordcount/output/_SUCCESS
 # 第二个文件是输出文件，统计了 LICENSE.txt 中每个单词出现的次数
 /wordcount/output/part-r-00000
-<figure class="highlight awk"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs awk"><br><span class="hljs-comment">## 坑</span><br><br><span class="hljs-comment">### 多次NameNode执行format后DataNode启动不了解决方案</span><br><span class="hljs-number">1</span>.问题<br><br>执行start-dfs.sh后在进程中查看jps，发现NameNode启动，但DataNode没有<br><br><span class="hljs-number">2</span>.原因<br><br>在失败的.log文件中看到datanode的clusterID 和 namenode的clusterID 不一致<br><br>原因可能是多次Hadoop namenode -format导致clusterID不一致<br><br><span class="hljs-number">3</span>.解决方法<br><br><span class="hljs-number">1</span>）先去hadoop路径下的配置文件hdfs-site.xml可知dfs.namenode.name.dir的地址和dfs.datanode.data.dir的地址<br><br>默认：file:<span class="hljs-regexp">//</span><span class="hljs-variable">$&#123;hadoop.tmp.dir&#125;</span><span class="hljs-regexp">/dfs/</span>name、file:<span class="hljs-regexp">//</span><span class="hljs-variable">$&#123;hadoop.tmp.dir&#125;</span><span class="hljs-regexp">/dfs/</span>data<br><br>（<span class="hljs-regexp">/opt/m</span>odule<span class="hljs-regexp">/hadoop-2.7.2/</span>data<span class="hljs-regexp">/tmp/</span>dfs<span class="hljs-regexp">/name、/</span>opt<span class="hljs-regexp">/module/</span>hadoop-<span class="hljs-number">2.7</span>.<span class="hljs-number">2</span><span class="hljs-regexp">/data/</span>tmp<span class="hljs-regexp">/dfs/</span>data）<br><br><span class="hljs-number">2</span>）在...<span class="hljs-regexp">/name/</span>current/VERSION 中获得clusterID  <br><br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">
+## 坑
+
+### 多次NameNode执行format后DataNode启动不了解决方案
+1.问题
+
+执行start-dfs.sh后在进程中查看jps，发现NameNode启动，但DataNode没有
+
+2.原因
+
+在失败的.log文件中看到datanode的clusterID 和 namenode的clusterID 不一致
+
+原因可能是多次Hadoop namenode -format导致clusterID不一致
+
+3.解决方法
+
+1）先去hadoop路径下的配置文件hdfs-site.xml可知dfs.namenode.name.dir的地址和dfs.datanode.data.dir的地址
+
+默认：file:&#x2F;&#x2F;$&#123;hadoop.tmp.dir&#125;&#x2F;dfs&#x2F;name、file:&#x2F;&#x2F;$&#123;hadoop.tmp.dir&#125;&#x2F;dfs&#x2F;data
+
+（&#x2F;opt&#x2F;module&#x2F;hadoop-2.7.2&#x2F;data&#x2F;tmp&#x2F;dfs&#x2F;name、&#x2F;opt&#x2F;module&#x2F;hadoop-2.7.2&#x2F;data&#x2F;tmp&#x2F;dfs&#x2F;data）
+
+2）在...&#x2F;name&#x2F;current&#x2F;VERSION 中获得clusterID  
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 more VERSION 
 #Mon Sep 02 18:06:26 CST 2019
 namespaceID=1033971221
@@ -326,7 +423,8 @@ cTime=0
 storageType=NAME_NODE
 blockpoolID=BP-1400239548-192.168.1.201-1567418785939
 layoutVersion=-63
-<figure class="highlight awk"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs awk"><span class="hljs-number">3</span>）将clusterID修改到...<span class="hljs-regexp">/dfs/</span>data<span class="hljs-regexp">/current/</span>VERSION（所有启动不了DataNode的节点都要改）<br><br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">3）将clusterID修改到...&#x2F;dfs&#x2F;data&#x2F;current&#x2F;VERSION（所有启动不了DataNode的节点都要改）
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div>
 vi VERSION 
 #Sun Sep 01 19:46:01 CST 2019
 storageID=DS-330d79ed-7c1b-4d40-b151-81ffcadcf9f0
@@ -493,6 +591,8 @@ sbin/hadoop-daemon.sh start datanode
 
 
 
+  
+    
   
 
 

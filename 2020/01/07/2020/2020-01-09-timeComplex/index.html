@@ -32,7 +32,15 @@
     
     
       
-      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/darcula.min.css" />
+      
+        
+          
+        
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.22.0/themes/prism.min.css" />
+      
+      
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.22.0/plugins/line-numbers/prism-line-numbers.min.css" />
+      
     
   
 
@@ -241,7 +249,7 @@
 <p>2.对于多个循环，假设循环体的时间复杂度为 O(n)，各个循环的循环次数分别是a, b, c…，则这个循环的时间复杂度为 O(n×a×b×c…)。分析的时候应该由里向外分析这些循环。</p>
 <p>3.对于顺序执行的语句或者算法，总的时间复杂度等于其中最大的时间复杂度。</p>
 <p>4.对于条件判断语句，总的时间复杂度等于其中 时间复杂度最大的路径 的时间复杂度。</p>
-<h2 id="练习题"><a href="#练习题" class="headerlink" title="练习题"></a>练习题</h2><div class="hljs code-wrapper"><pre><code>void aFunc(int n) &#123;
+<h2 id="练习题"><a href="#练习题" class="headerlink" title="练习题"></a>练习题</h2><div class="code-wrapper"><pre><code>void aFunc(int n) &#123;
     for (int i = 0; i &lt; n; i++) &#123;
         for (int j = i; j &lt; n; j++) &#123;
             printf(&quot;Hello World\n&quot;);
@@ -249,14 +257,14 @@
     &#125;
 &#125;</code></pre></div>
 <p>参考答案：<br> 当 i = 0 时，内循环执行 n 次运算，当 i = 1 时，内循环执行 n - 1 次运算……当 i = n - 1 时，内循环执行 1 次运算。<br> 所以，执行次数 T(n) = n + (n - 1) + (n - 2)……+ 1 = n(n + 1) / 2 = n^2 / 2 + n / 2。<br> 根据上文说的 大O推导法 可以知道，此时时间复杂度为 O(n^2)。</p>
-<div class="hljs code-wrapper"><pre><code> void aFunc(int n) &#123;
+<div class="code-wrapper"><pre><code> void aFunc(int n) &#123;
      for (int i = 2; i &lt; n; i++) &#123;
          i *= 2;
          printf(&quot;%i\n&quot;, i);
      &#125;
  &#125;</code></pre></div>
 <p> 参考答案：<br> 假设循环次数为 t，则循环条件满足 2^t &lt; n。<br> 可以得出，执行次数t = log(2)(n)，即 T(n) = log(2)(n)，可见时间复杂度为 O(log(2)(n))，即 O(log n)。</p>
-<div class="hljs code-wrapper"><pre><code> long aFunc(int n) &#123;
+<div class="code-wrapper"><pre><code> long aFunc(int n) &#123;
      if (n &lt;= 1) &#123;
          return 1;
      &#125; else &#123;
@@ -301,8 +309,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2020/01/07/2020/2020-01-09-viewpoint/">
-                        <span class="hidden-mobile">观点</span>
+                      <a href="/2020/01/07/2020/2020-01-10-manualMavenJar/">
+                        <span class="hidden-mobile">Maven手动导入jar包</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -407,6 +415,8 @@
 
 
 
+  
+    
   
 
 

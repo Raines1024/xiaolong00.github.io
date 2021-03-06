@@ -32,7 +32,15 @@
     
     
       
-      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/darcula.min.css" />
+      
+        
+          
+        
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.22.0/themes/prism.min.css" />
+      
+      
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.22.0/plugins/line-numbers/prism-line-numbers.min.css" />
+      
     
   
 
@@ -241,7 +249,7 @@
 <ol start="3">
 <li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/hellxz/p/11044012.html">https://www.cnblogs.com/hellxz/p/11044012.html</a></li>
 </ol>
-<h2 id="springboot初使用"><a href="#springboot初使用" class="headerlink" title="springboot初使用"></a>springboot初使用</h2><h3 id="目录结构"><a href="#目录结构" class="headerlink" title="目录结构"></a>目录结构</h3><div class="hljs code-wrapper"><pre><code>.
+<h2 id="springboot初使用"><a href="#springboot初使用" class="headerlink" title="springboot初使用"></a>springboot初使用</h2><h3 id="目录结构"><a href="#目录结构" class="headerlink" title="目录结构"></a>目录结构</h3><div class="code-wrapper"><pre><code>.
 ├── pom.xml
 └── src
     └── main
@@ -259,7 +267,7 @@
 <li><p>加入maven插件“docker-maven-plugin”： </p>
 </li>
 </ul>
-<div class="hljs code-wrapper"><pre><code>&lt;build&gt;
+<div class="code-wrapper"><pre><code>&lt;build&gt;
     &lt;plugins&gt;
         &lt;plugin&gt;
             &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
@@ -283,7 +291,7 @@
         &lt;/plugin&gt;
     &lt;/plugins&gt;
 &lt;/build&gt;</code></pre></div>
-<h3 id="创建“src-main-docker-Dockerfile”文件："><a href="#创建“src-main-docker-Dockerfile”文件：" class="headerlink" title="创建“src/main/docker/Dockerfile”文件："></a>创建“src/main/docker/Dockerfile”文件：</h3><div class="hljs code-wrapper"><pre><code>FROM frolvlad/alpine-oraclejdk8:slim
+<h3 id="创建“src-main-docker-Dockerfile”文件："><a href="#创建“src-main-docker-Dockerfile”文件：" class="headerlink" title="创建“src/main/docker/Dockerfile”文件："></a>创建“src/main/docker/Dockerfile”文件：</h3><div class="code-wrapper"><pre><code>FROM frolvlad/alpine-oraclejdk8:slim
 VOLUME /tmp
 ADD spring12.jar app.jar
 RUN sh -c &#39;touch /app.jar&#39;
@@ -299,16 +307,16 @@ ENTRYPOINT [ &quot;sh&quot;, &quot;-c&quot;, &quot;java $JAVA_OPTS -Djava.securi
 <h3 id="生成镜像并运行"><a href="#生成镜像并运行" class="headerlink" title="生成镜像并运行"></a>生成镜像并运行</h3><ol>
 <li>将src文件和pom放在任意文件夹下，执行命令  </li>
 </ol>
-<div class="hljs code-wrapper"><pre><code>mvn package docker:build</code></pre></div>
+<div class="code-wrapper"><pre><code>mvn package docker:build</code></pre></div>
 <ol start="2">
 <li>查看镜像  </li>
 </ol>
-<div class="hljs code-wrapper"><pre><code>docker images</code></pre></div>
+<div class="code-wrapper"><pre><code>docker images</code></pre></div>
 <p>docker中存在的镜像、标签、镜像ID、已经创建的时间和大小，看下springboot/raines-learn 这个是在pom中<imageName>${docker.image.prefix}/${project.artifactId}</imageName>配置的，比较重要，因为它和接下来要讲的将镜像提交到DockerHub有着密切的联系。</p>
 <ol start="3">
 <li>运行镜像<br>启动服务  </li>
 </ol>
-<div class="hljs code-wrapper"><pre><code>docker run -d -p 8765:8080 springboot/raines-learn </code></pre></div>
+<div class="code-wrapper"><pre><code>docker run -d -p 8765:8080 springboot/raines-learn </code></pre></div>
 <ul>
 <li>解释下这个命令  </li>
 </ul>
@@ -316,7 +324,7 @@ ENTRYPOINT [ &quot;sh&quot;, &quot;-c&quot;, &quot;java $JAVA_OPTS -Djava.securi
 <ol start="4">
 <li>查看docker是否将服务启动成功</li>
 </ol>
-<div class="hljs code-wrapper"><pre><code>docker ps</code></pre></div>
+<div class="code-wrapper"><pre><code>docker ps</code></pre></div>
 <ul>
 <li>解释<br>CONTAINER ID 容器ID<br>PORTS宿主与docker内部的服务映射<br>NAMES 容器名称，跟容器ID对应，如果你不指定名称的话，docker会随机给你分配一个name  </li>
 </ul>
@@ -327,51 +335,51 @@ ENTRYPOINT [ &quot;sh&quot;, &quot;-c&quot;, &quot;java $JAVA_OPTS -Djava.securi
 <h2 id="docker常用命令"><a href="#docker常用命令" class="headerlink" title="docker常用命令"></a>docker常用命令</h2><h3 id="images"><a href="#images" class="headerlink" title="images"></a>images</h3><ul>
 <li>搜索image</li>
 </ul>
-<div class="hljs code-wrapper"><pre><code>docker search image_name</code></pre></div>
+<div class="code-wrapper"><pre><code>docker search image_name</code></pre></div>
 <ul>
 <li>下载image</li>
 </ul>
-<div class="hljs code-wrapper"><pre><code>docker pull image_name</code></pre></div>
+<div class="code-wrapper"><pre><code>docker pull image_name</code></pre></div>
 <ul>
 <li>列出镜像列表</li>
 </ul>
-<div class="hljs code-wrapper"><pre><code>docker images</code></pre></div>
+<div class="code-wrapper"><pre><code>docker images</code></pre></div>
 <ul>
 <li>删除images</li>
 </ul>
-<div class="hljs code-wrapper"><pre><code>docker rmi &lt;image id&gt;</code></pre></div>
+<div class="code-wrapper"><pre><code>docker rmi &lt;image id&gt;</code></pre></div>
 <ul>
 <li>删除images id 为none的</li>
 </ul>
-<div class="hljs code-wrapper"><pre><code>docker rmi $(docker images | grep &quot;^&lt;none&gt;&quot; | awk &quot;&#123;print $3&#125;&quot;)</code></pre></div>
+<div class="code-wrapper"><pre><code>docker rmi $(docker images | grep &quot;^&lt;none&gt;&quot; | awk &quot;&#123;print $3&#125;&quot;)</code></pre></div>
 <ul>
 <li>删除全部image</li>
 </ul>
-<div class="hljs code-wrapper"><pre><code>docker rmi $(docker images -q)</code></pre></div>
+<div class="code-wrapper"><pre><code>docker rmi $(docker images -q)</code></pre></div>
 <ul>
 <li>显示一个镜像的历史</li>
 </ul>
-<div class="hljs code-wrapper"><pre><code>docker history image_name</code></pre></div>
+<div class="code-wrapper"><pre><code>docker history image_name</code></pre></div>
 <h3 id="container"><a href="#container" class="headerlink" title="container"></a>container</h3><ul>
 <li>列出当前所有正在运行的container</li>
 </ul>
-<div class="hljs code-wrapper"><pre><code>docker ps</code></pre></div>
+<div class="code-wrapper"><pre><code>docker ps</code></pre></div>
 <ul>
 <li>列出所有的container</li>
 </ul>
-<div class="hljs code-wrapper"><pre><code>docker ps -a</code></pre></div>
+<div class="code-wrapper"><pre><code>docker ps -a</code></pre></div>
 <ul>
 <li>列出最近一次启动的container</li>
 </ul>
-<div class="hljs code-wrapper"><pre><code>docker ps -l</code></pre></div>
+<div class="code-wrapper"><pre><code>docker ps -l</code></pre></div>
 <ul>
 <li>停止所有的container，这样才能够删除其中的images：</li>
 </ul>
-<div class="hljs code-wrapper"><pre><code>docker stop $(docker ps -a -q)</code></pre></div>
+<div class="code-wrapper"><pre><code>docker stop $(docker ps -a -q)</code></pre></div>
 <ul>
 <li>删除所有container：</li>
 </ul>
-<div class="hljs code-wrapper"><pre><code>docker rm $(docker ps -a -q)</code></pre></div>
+<div class="code-wrapper"><pre><code>docker rm $(docker ps -a -q)</code></pre></div>
 <h2 id="Docker-快速删除所有容器"><a href="#Docker-快速删除所有容器" class="headerlink" title="Docker 快速删除所有容器"></a>Docker 快速删除所有容器</h2><ul>
 <li>查看运行容器<br>docker ps  </li>
 <li>查看所有容器<br>docker ps -a  </li>
@@ -526,6 +534,8 @@ ENTRYPOINT [ &quot;sh&quot;, &quot;-c&quot;, &quot;java $JAVA_OPTS -Djava.securi
 
 
 
+  
+    
   
 
 

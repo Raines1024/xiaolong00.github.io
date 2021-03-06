@@ -32,7 +32,15 @@
     
     
       
-      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/darcula.min.css" />
+      
+        
+          
+        
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.22.0/themes/prism.min.css" />
+      
+      
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.22.0/plugins/line-numbers/prism-line-numbers.min.css" />
+      
     
   
 
@@ -187,7 +195,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      961 字
+      962 字
     </span>
   
 
@@ -231,7 +239,7 @@
             
             <div class="markdown-body">
               <h2 id="创建分支"><a href="#创建分支" class="headerlink" title="创建分支"></a>创建分支</h2><p>easy:</p>
-<div class="hljs code-wrapper"><pre><code>git checkout -b my-test  //在当前分支下创建my-test的本地分支分支
+<div class="code-wrapper"><pre><code>git checkout -b my-test  //在当前分支下创建my-test的本地分支分支
 git push origin my-test  //将my-test分支推送到远程
 git branch --set-upstream-to=origin/my-test //将本地分支my-test关联到远程分支my-test上   
 git branch -a //查看远程分支</code></pre></div>
@@ -239,7 +247,7 @@ git branch -a //查看远程分支</code></pre></div>
 <p>1.从已有的分支创建新的分支(如从master分支),创建一个dev分支<br>git checkout -b dev</p>
 <p>2.提交该分支到远程仓库<br>git push origin dev</p>
 <p>新建本地分支后将本地分支推送到远程库, 使用git pull 或者 git push 的时候报错</p>
-<div class="hljs code-wrapper"><pre><code>  gitThere is no tracking information for the current branch.
+<div class="code-wrapper"><pre><code>  gitThere is no tracking information for the current branch.
   Please specify which branch you want to merge with.
   See git-pull(1) for details
    git pull \&lt;remote\&gt; \&lt;branch\&gt;
@@ -250,7 +258,7 @@ git branch -a //查看远程分支</code></pre></div>
 <p>git branch –merged 查看哪些分支已被并入当前分支</p>
 <hr>
 
-<h2 id="删除分支"><a href="#删除分支" class="headerlink" title="删除分支"></a>删除分支</h2><div class="hljs code-wrapper"><pre><code>查看项目的分支们(包括本地和远程)
+<h2 id="删除分支"><a href="#删除分支" class="headerlink" title="删除分支"></a>删除分支</h2><div class="code-wrapper"><pre><code>查看项目的分支们(包括本地和远程)
 命令行 : $ git branch -a
 删除本地分支
 命令行 : $ git branch -d &lt;BranchName&gt;
@@ -284,8 +292,12 @@ git branch -a //查看远程分支</code></pre></div>
 <h4 id="提交代码"><a href="#提交代码" class="headerlink" title="提交代码"></a>提交代码</h4><p><em style="color:#c7254e">git push origin v1.2</em></p>
 <h4 id="搞定"><a href="#搞定" class="headerlink" title="搞定"></a>搞定</h4><hr>
 
-<h2 id="备份"><a href="#备份" class="headerlink" title="备份"></a>备份</h2><figure class="highlight xquery"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs xquery">git stash save <span class="hljs-string">&quot;save message&quot;</span>  : 执行存储时，添加备注，方便查找，只有git stash 也要可以的，但查找时不方便识别。<br>git stash list  ：查看stash了哪些存储<br>git stash<span class="hljs-built_in"> apply</span> :应用某个存储,但不会把存储从存储列表中删除，默认使用第一个存储,即stash@&#123;<span class="hljs-number">0</span>&#125;，如果要使用其他个，git stash<span class="hljs-built_in"> apply</span> stash@&#123;<span class="hljs-variable">$num</span>&#125; ， <br>                 比如第二个：git stash<span class="hljs-built_in"> apply</span> stash@&#123;<span class="hljs-number">1</span>&#125; <br>git stash clear ：删除所有缓存的stash<br></code></pre></div></td></tr></table></figure>
-<h2 id="Git回退版本"><a href="#Git回退版本" class="headerlink" title="Git回退版本"></a>Git回退版本</h2><div class="hljs code-wrapper"><pre><code>git reset --hard 版本id
+<h2 id="备份"><a href="#备份" class="headerlink" title="备份"></a>备份</h2><div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">git stash save &quot;save message&quot;  : 执行存储时，添加备注，方便查找，只有git stash 也要可以的，但查找时不方便识别。
+git stash list  ：查看stash了哪些存储
+git stash apply :应用某个存储,但不会把存储从存储列表中删除，默认使用第一个存储,即stash@&#123;0&#125;，如果要使用其他个，git stash apply stash@&#123;$num&#125; ， 
+                 比如第二个：git stash apply stash@&#123;1&#125; 
+git stash clear ：删除所有缓存的stash<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+<h2 id="Git回退版本"><a href="#Git回退版本" class="headerlink" title="Git回退版本"></a>Git回退版本</h2><div class="code-wrapper"><pre><code>git reset --hard 版本id
 git push -f提交会把回退版本之后的记录删除</code></pre></div>
 <hr>
 
@@ -436,6 +448,8 @@ git push -f提交会把回退版本之后的记录删除</code></pre></div>
 
 
 
+  
+    
   
 
 

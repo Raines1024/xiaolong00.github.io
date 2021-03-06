@@ -32,7 +32,15 @@
     
     
       
-      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/darcula.min.css" />
+      
+        
+          
+        
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.22.0/themes/prism.min.css" />
+      
+      
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.22.0/plugins/line-numbers/prism-line-numbers.min.css" />
+      
     
   
 
@@ -308,11 +316,11 @@
 <li>异或运算符<br>异或运算符是用符号“^”表示的，其运算规律是：<br>两个操作数的位中，相同则结果为0，不同则结果为1。  </li>
 <li>移位运算  </li>
 </ol>
-<h2 id="Java中高位转低位溢出的计算过程"><a href="#Java中高位转低位溢出的计算过程" class="headerlink" title="Java中高位转低位溢出的计算过程"></a>Java中高位转低位溢出的计算过程</h2><h3 id="代码（以byte为例）"><a href="#代码（以byte为例）" class="headerlink" title="代码（以byte为例）"></a>代码（以byte为例）</h3><div class="hljs code-wrapper"><pre><code>System.out.println((byte) 129);
+<h2 id="Java中高位转低位溢出的计算过程"><a href="#Java中高位转低位溢出的计算过程" class="headerlink" title="Java中高位转低位溢出的计算过程"></a>Java中高位转低位溢出的计算过程</h2><h3 id="代码（以byte为例）"><a href="#代码（以byte为例）" class="headerlink" title="代码（以byte为例）"></a>代码（以byte为例）</h3><div class="code-wrapper"><pre><code>System.out.println((byte) 129);
 System.out.println((byte) -129);
 System.out.println(&quot;~b2: &quot; + ~10);</code></pre></div>
 <p>结果是：</p>
-<div class="hljs code-wrapper"><pre><code>-127
+<div class="code-wrapper"><pre><code>-127
 127
 ~b2: -11</code></pre></div>
 <h3 id="运算过程"><a href="#运算过程" class="headerlink" title="运算过程"></a>运算过程</h3><h4 id="byte-129"><a href="#byte-129" class="headerlink" title="(byte) 129"></a>(byte) 129</h4><p>129二进制：<br>00000000 00000000 00000000 10000001<br>补码：<br>00000000 00000000 00000000 10000001<br>由于byte只占1字节即8位，截取8位为：<br>10000001<br>此时最高位为1即负数，该二进制减1即是反码<br>反码：10000000<br>原码：11111111<br>即-127，所以(byte)129的结果就是-127  </p>
@@ -461,6 +469,8 @@ System.out.println(&quot;~b2: &quot; + ~10);</code></pre></div>
 
 
 
+  
+    
   
 
 

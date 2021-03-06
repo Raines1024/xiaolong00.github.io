@@ -32,7 +32,15 @@
     
     
       
-      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/darcula.min.css" />
+      
+        
+          
+        
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.22.0/themes/prism.min.css" />
+      
+      
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.22.0/plugins/line-numbers/prism-line-numbers.min.css" />
+      
     
   
 
@@ -187,7 +195,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      813 字
+      866 字
     </span>
   
 
@@ -197,7 +205,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      11
+      12
        分钟
     </span>
   
@@ -233,30 +241,213 @@
               <h2 id="创建被观察对象"><a href="#创建被观察对象" class="headerlink" title="创建被观察对象"></a>创建被观察对象</h2><h3 id="抽象主题接口"><a href="#抽象主题接口" class="headerlink" title="抽象主题接口"></a>抽象主题接口</h3><ul>
 <li>对观察者的操作。必需功能有观察者的注册、删除以及主题状态发生改变时通知观察者</li>
 </ul>
-<figure class="highlight csharp"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs csharp">package watch;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 主题</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title">Subject</span> &#123;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 注册观察者</span><br><span class="hljs-comment">     * @param o 观察者</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">registerObserver</span>(<span class="hljs-params">Observer o</span>)</span>;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 删除观察者</span><br><span class="hljs-comment">     * @param o 观察者</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">removeObserver</span>(<span class="hljs-params">Observer o</span>)</span>;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 主题状态改变通知观察者</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">notifyObservers</span>(<span class="hljs-params"></span>)</span>;<br><br>&#125;<br><br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">package watch;
+
+&#x2F;**
+ * 主题
+ *&#x2F;
+public interface Subject &#123;
+
+    &#x2F;**
+     * 注册观察者
+     * @param o 观察者
+     *&#x2F;
+    void registerObserver(Observer o);
+
+    &#x2F;**
+     * 删除观察者
+     * @param o 观察者
+     *&#x2F;
+    void removeObserver(Observer o);
+
+    &#x2F;**
+     * 主题状态改变通知观察者
+     *&#x2F;
+    void notifyObservers();
+
+&#125;
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 <h3 id="实现主题接口"><a href="#实现主题接口" class="headerlink" title="实现主题接口"></a>实现主题接口</h3><ul>
 <li>创建主题时初始化观察者集合，维护所有观察者；</li>
 <li>注册时把观察者放入集合；</li>
 <li>删除时把观察者从集合中移除；</li>
 <li>主题状态发生改变时遍历观察者集合，通知观察者。</li>
 </ul>
-<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">package</span> watch;<br><br><span class="hljs-keyword">import</span> java.util.ArrayList;<br><span class="hljs-keyword">import</span> java.util.List;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 实现主题接口</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">WeatherData</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Subject</span> </span>&#123;<br><br>    <span class="hljs-comment">//观察者list，构造器中建立</span><br>    <span class="hljs-keyword">private</span> List&lt;Observer&gt; observers;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">float</span> temperature;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">float</span> humidity;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">float</span> pressure;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">WeatherData</span><span class="hljs-params">()</span></span>&#123;<br>        observers = <span class="hljs-keyword">new</span> ArrayList&lt;&gt;();<br>    &#125;<br><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">registerObserver</span><span class="hljs-params">(Observer o)</span> </span>&#123;<br>        observers.add(o);<br>    &#125;<br><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">removeObserver</span><span class="hljs-params">(Observer o)</span> </span>&#123;<br>        <span class="hljs-keyword">int</span> i = observers.indexOf(o);<br>        <span class="hljs-keyword">if</span> (i &gt;= <span class="hljs-number">0</span>) &#123;<br>            observers.remove(i);<br>        &#125;<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 观察者都实现了 update 方法，所以我们知道如何通知他们</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">notifyObservers</span><span class="hljs-params">()</span> </span>&#123;<br>        observers.forEach(observer -&gt; observer.update(temperature, humidity, pressure));<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 当从气象站得到更新观测值，我们通知观察者</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">measurementsChanged</span><span class="hljs-params">()</span> </span>&#123;<br>        notifyObservers();<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 测试布告板</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> temperature</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> humidity</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> pressure</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setMeasurements</span><span class="hljs-params">(<span class="hljs-keyword">float</span> temperature, <span class="hljs-keyword">float</span> humidity, <span class="hljs-keyword">float</span> pressure)</span> </span>&#123;<br>        <span class="hljs-keyword">this</span>.temperature = temperature;<br>        <span class="hljs-keyword">this</span>.humidity = humidity;<br>        <span class="hljs-keyword">this</span>.pressure = pressure;<br>        measurementsChanged();<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">float</span> <span class="hljs-title">getTemperature</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> temperature;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">float</span> <span class="hljs-title">getHumidity</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> humidity;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">float</span> <span class="hljs-title">getPressure</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> pressure;<br>    &#125;<br>&#125;<br><br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">package watch;
+
+import java.util.ArrayList;
+import java.util.List;
+
+&#x2F;**
+ * 实现主题接口
+ *&#x2F;
+public class WeatherData implements Subject &#123;
+
+    &#x2F;&#x2F;观察者list，构造器中建立
+    private List&lt;Observer&gt; observers;
+    private float temperature;
+    private float humidity;
+    private float pressure;
+
+    public WeatherData()&#123;
+        observers &#x3D; new ArrayList&lt;&gt;();
+    &#125;
+
+    @Override
+    public void registerObserver(Observer o) &#123;
+        observers.add(o);
+    &#125;
+
+    @Override
+    public void removeObserver(Observer o) &#123;
+        int i &#x3D; observers.indexOf(o);
+        if (i &gt;&#x3D; 0) &#123;
+            observers.remove(i);
+        &#125;
+    &#125;
+
+    &#x2F;**
+     * 观察者都实现了 update 方法，所以我们知道如何通知他们
+     *&#x2F;
+    @Override
+    public void notifyObservers() &#123;
+        observers.forEach(observer -&gt; observer.update(temperature, humidity, pressure));
+    &#125;
+
+    &#x2F;**
+     * 当从气象站得到更新观测值，我们通知观察者
+     *&#x2F;
+    public void measurementsChanged() &#123;
+        notifyObservers();
+    &#125;
+
+    &#x2F;**
+     * 测试布告板
+     * @param temperature
+     * @param humidity
+     * @param pressure
+     *&#x2F;
+    public void setMeasurements(float temperature, float humidity, float pressure) &#123;
+        this.temperature &#x3D; temperature;
+        this.humidity &#x3D; humidity;
+        this.pressure &#x3D; pressure;
+        measurementsChanged();
+    &#125;
+
+    public float getTemperature() &#123;
+        return temperature;
+    &#125;
+
+    public float getHumidity() &#123;
+        return humidity;
+    &#125;
+
+    public float getPressure() &#123;
+        return pressure;
+    &#125;
+&#125;
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 <h2 id="创建观察者对象"><a href="#创建观察者对象" class="headerlink" title="创建观察者对象"></a>创建观察者对象</h2><h3 id="抽象观察者接口"><a href="#抽象观察者接口" class="headerlink" title="抽象观察者接口"></a>抽象观察者接口</h3><p>所有观察者都该实现 update 接口，以接收主题状态改动后接收通知  </p>
-<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">package</span> watch;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 观察者</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">Observer</span> </span>&#123;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 接收更新通知</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> temp</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> humidity</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> pressure</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">update</span><span class="hljs-params">(<span class="hljs-keyword">float</span> temp, <span class="hljs-keyword">float</span> humidity, <span class="hljs-keyword">float</span> pressure)</span></span>;<br><br>&#125;<br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">package watch;
+
+&#x2F;**
+ * 观察者
+ *&#x2F;
+public interface Observer &#123;
+
+    &#x2F;**
+     * 接收更新通知
+     * @param temp
+     * @param humidity
+     * @param pressure
+     *&#x2F;
+    void update(float temp, float humidity, float pressure);
+
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 <h3 id="抽象布告板接口"><a href="#抽象布告板接口" class="headerlink" title="抽象布告板接口"></a>抽象布告板接口</h3><p>布告板接口的作用就只是把状态改动后的结果显示出来  </p>
-<figure class="highlight angelscript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs angelscript">package watch;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 布告板接口</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-symbol">DisplayElement</span> &#123;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 当布告板需要显示时</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-built_in">void</span> display();<br><br>&#125;<br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">package watch;
+
+&#x2F;**
+ * 布告板接口
+ *&#x2F;
+public interface DisplayElement &#123;
+
+    &#x2F;**
+     * 当布告板需要显示时
+     *&#x2F;
+    void display();
+
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 <h3 id="观察者同时实现观察者和布告板接口"><a href="#观察者同时实现观察者和布告板接口" class="headerlink" title="观察者同时实现观察者和布告板接口"></a>观察者同时实现观察者和布告板接口</h3><ul>
 <li>创建观察者时需传入主题对象，以作注册之用</li>
 <li>实现布告板接口，把状态改动后的结果显示出来</li>
 <li>实现观察者 update 接口，对数据进行处理，并调用布告遍接口使接口显示出来</li>
 </ul>
-<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">package</span> watch;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 实现布告板</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">CurrentConditionsDisplay</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Observer</span>,<span class="hljs-title">DisplayElement</span></span>&#123;<br><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">float</span> temperature;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">float</span> humidity;<br>    <span class="hljs-keyword">private</span> Subject weatherData;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 构造器需要主题作为注册之用</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> weatherData</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">CurrentConditionsDisplay</span><span class="hljs-params">(Subject weatherData)</span></span>&#123;<br>        <span class="hljs-keyword">this</span>.weatherData = weatherData;<br>        weatherData.registerObserver(<span class="hljs-keyword">this</span>);<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 温度显示</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">display</span><span class="hljs-params">()</span> </span>&#123;<br>        System.out.println(<span class="hljs-string">&quot;现状: &quot;</span> + temperature<br>                + <span class="hljs-string">&quot; 度 和 &quot;</span> + humidity + <span class="hljs-string">&quot;% 湿度&quot;</span>);<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 把温度和湿度保存起来，然后调用显示方法</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> temp</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> humidity</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> pressure</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">update</span><span class="hljs-params">(<span class="hljs-keyword">float</span> temp, <span class="hljs-keyword">float</span> humidity, <span class="hljs-keyword">float</span> pressure)</span> </span>&#123;<br>        <span class="hljs-keyword">this</span>.temperature = temp;<br>        <span class="hljs-keyword">this</span>.humidity = humidity;<br>        display();<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">package watch;
+
+&#x2F;**
+ * 实现布告板
+ *&#x2F;
+public class CurrentConditionsDisplay implements Observer,DisplayElement&#123;
+
+    private float temperature;
+    private float humidity;
+    private Subject weatherData;
+
+    &#x2F;**
+     * 构造器需要主题作为注册之用
+     * @param weatherData
+     *&#x2F;
+    public CurrentConditionsDisplay(Subject weatherData)&#123;
+        this.weatherData &#x3D; weatherData;
+        weatherData.registerObserver(this);
+    &#125;
+
+    &#x2F;**
+     * 温度显示
+     *&#x2F;
+    @Override
+    public void display() &#123;
+        System.out.println(&quot;现状: &quot; + temperature
+                + &quot; 度 和 &quot; + humidity + &quot;% 湿度&quot;);
+    &#125;
+
+    &#x2F;**
+     * 把温度和湿度保存起来，然后调用显示方法
+     * @param temp
+     * @param humidity
+     * @param pressure
+     *&#x2F;
+    @Override
+    public void update(float temp, float humidity, float pressure) &#123;
+        this.temperature &#x3D; temp;
+        this.humidity &#x3D; humidity;
+        display();
+    &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 <h2 id="测试程序"><a href="#测试程序" class="headerlink" title="测试程序"></a>测试程序</h2><ul>
 <li>首先，建立一个主题对象 weatherData；</li>
 <li>然后，建立布告板对象 currentDisplay，并把主题对象传给它们</li>
 <li>最后，模拟新的踢气象测量</li>
 </ul>
-<figure class="highlight typescript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs typescript">package watch;<br><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">WeatherStation</span> </span>&#123;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-built_in">void</span> <span class="hljs-function"><span class="hljs-title">main</span>(<span class="hljs-params"><span class="hljs-built_in">String</span>[] args</span>)</span> &#123;<br>        <span class="hljs-comment">//创建主题</span><br>        WeatherData weatherData = <span class="hljs-keyword">new</span> WeatherData();<br>        <span class="hljs-comment">//建立布告板</span><br>        CurrentConditionsDisplay currentDisplay = <span class="hljs-keyword">new</span> CurrentConditionsDisplay(weatherData);<br>        <span class="hljs-comment">//......其他布告板</span><br><br>        <span class="hljs-comment">//模拟天气数据</span><br>        weatherData.setMeasurements(<span class="hljs-number">80</span>, <span class="hljs-number">65</span>, <span class="hljs-number">30.</span>4f);<br>        weatherData.setMeasurements(<span class="hljs-number">82</span>, <span class="hljs-number">70</span>, <span class="hljs-number">29.</span>2f);<br>        weatherData.setMeasurements(<span class="hljs-number">78</span>, <span class="hljs-number">90</span>, <span class="hljs-number">29.</span>2f);<br>    &#125;<br><br>&#125;<br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">package watch;
+
+public class WeatherStation &#123;
+
+    public static void main(String[] args) &#123;
+        &#x2F;&#x2F;创建主题
+        WeatherData weatherData &#x3D; new WeatherData();
+        &#x2F;&#x2F;建立布告板
+        CurrentConditionsDisplay currentDisplay &#x3D; new CurrentConditionsDisplay(weatherData);
+        &#x2F;&#x2F;......其他布告板
+
+        &#x2F;&#x2F;模拟天气数据
+        weatherData.setMeasurements(80, 65, 30.4f);
+        weatherData.setMeasurements(82, 70, 29.2f);
+        weatherData.setMeasurements(78, 90, 29.2f);
+    &#125;
+
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 
 
 
@@ -436,6 +627,8 @@
 
 
 
+  
+    
   
 
 

@@ -32,7 +32,15 @@
     
     
       
-      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/darcula.min.css" />
+      
+        
+          
+        
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.22.0/themes/prism.min.css" />
+      
+      
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.22.0/plugins/line-numbers/prism-line-numbers.min.css" />
+      
     
   
 
@@ -187,7 +195,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      606 字
+      672 字
     </span>
   
 
@@ -197,7 +205,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      11
+      12
        分钟
     </span>
   
@@ -230,10 +238,160 @@
             <h1 style="display: none">Mysql连接封装脚本</h1>
             
             <div class="markdown-body">
-              <h2 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h2><h3 id="Mysql连接工具类"><a href="#Mysql连接工具类" class="headerlink" title="Mysql连接工具类"></a>Mysql连接工具类</h3><figure class="highlight typescript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs typescript"><span class="hljs-keyword">import</span> org.slf4j.Logger;<br><span class="hljs-keyword">import</span> org.slf4j.LoggerFactory;<br><br><span class="hljs-keyword">import</span> java.sql.*;<br><span class="hljs-keyword">import</span> java.util.*;<br><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MysqlConnectManager</span> </span>&#123;<br><br>	<span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> Logger log = LoggerFactory.getLogger(MysqlConnectManager.class);<br><br>	<span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> ResourceBundle rb = ResourceBundle.getBundle(<span class="hljs-string">&quot;systemParamters&quot;</span>);<br>	<span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-built_in">String</span> driver = rb.getString(<span class="hljs-string">&quot;mysql.driverClass&quot;</span>);<br>	<span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-built_in">String</span> url = rb.getString(<span class="hljs-string">&quot;mysql.jdbcUrl&quot;</span>);<br>	<span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-built_in">String</span> username = rb.getString(<span class="hljs-string">&quot;mysql.user&quot;</span>);<br>	<span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-built_in">String</span> password = rb.getString(<span class="hljs-string">&quot;mysql.password&quot;</span>);<br>	<br>	<span class="hljs-keyword">private</span> volatile <span class="hljs-keyword">static</span> MysqlConnectManager singleton = <span class="hljs-literal">null</span>;<br>	<span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> Connection con = <span class="hljs-literal">null</span>;<br>	<br>	<span class="hljs-keyword">private</span> <span class="hljs-function"><span class="hljs-title">MysqlConnectManager</span>(<span class="hljs-params"></span>)</span> &#123;<br>		<span class="hljs-keyword">try</span> &#123;<br>			<span class="hljs-comment">//注册 JDBC 驱动</span><br>			Class.forName(driver);<br>			con = getConn();			<br>		&#125; <span class="hljs-keyword">catch</span> (Exception e) &#123;<br>			e.printStackTrace();<br>		&#125;<br>	&#125;<br><br>	<span class="hljs-comment">/**</span><br><span class="hljs-comment">	 * 获取mysql连接</span><br><span class="hljs-comment">	 * <span class="hljs-doctag">@return</span></span><br><span class="hljs-comment">	 */</span><br>	<span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> MysqlConnectManager <span class="hljs-function"><span class="hljs-title">getInstance</span>(<span class="hljs-params"></span>)</span> &#123;<br>		<span class="hljs-keyword">if</span> (singleton == <span class="hljs-literal">null</span>) &#123;<br>			synchronized (MysqlConnectManager.class) &#123;<br>				<span class="hljs-keyword">if</span> (singleton == <span class="hljs-literal">null</span>) &#123;<br>					singleton = <span class="hljs-keyword">new</span> MysqlConnectManager();<br>				&#125;<br>			&#125;<br>		&#125;<br>		<span class="hljs-keyword">return</span> singleton;<br>	&#125;<br>	<br>	<span class="hljs-keyword">public</span> Connection <span class="hljs-function"><span class="hljs-title">getConn</span>(<span class="hljs-params"></span>)</span>&#123;<br>		<span class="hljs-keyword">if</span>(con == <span class="hljs-literal">null</span>)&#123;<br>			<span class="hljs-keyword">try</span> &#123;<br>				<span class="hljs-comment">//连接数据库..</span><br>				con = DriverManager.getConnection(url, username, password);<br>			&#125;<span class="hljs-keyword">catch</span> (Exception e) &#123;<br>				e.printStackTrace();<br>			&#125;<br>		&#125;<br>		<span class="hljs-keyword">return</span> con;<br>	&#125;<br>	<br>	<br>	<span class="hljs-keyword">public</span> <span class="hljs-built_in">void</span> <span class="hljs-function"><span class="hljs-title">closeConn</span>(<span class="hljs-params"></span>)</span>&#123;<br>		<span class="hljs-keyword">if</span>(con != <span class="hljs-literal">null</span>)&#123;<br>			<span class="hljs-keyword">try</span> &#123;<br>				con.close();<br>			&#125; <span class="hljs-keyword">catch</span> (SQLException e) &#123;<br>				e.printStackTrace();<br>			&#125;<br>		&#125;<br>	&#125;<br>	<br>	<span class="hljs-keyword">public</span> <span class="hljs-built_in">void</span> <span class="hljs-function"><span class="hljs-title">executeMysql</span>(<span class="hljs-params"><span class="hljs-built_in">String</span> sql, <span class="hljs-built_in">Boolean</span> closeConn</span>)</span>&#123;<br>		getConn();<br>		<span class="hljs-keyword">try</span> &#123;<br>			PreparedStatement stmt = con.prepareStatement(sql);<br>			stmt.execute();<br>		&#125; <span class="hljs-keyword">catch</span> (Exception e) &#123;<br>			e.printStackTrace();<br>		&#125;<br>		<span class="hljs-keyword">if</span>(closeConn)<br>			closeConn();<br>	&#125;<br><br>	<span class="hljs-comment">/**</span><br><span class="hljs-comment">	 * 插入日志</span><br><span class="hljs-comment">	 */</span><br>	<span class="hljs-keyword">public</span> <span class="hljs-built_in">void</span> <span class="hljs-function"><span class="hljs-title">insertLog</span>(<span class="hljs-params"><span class="hljs-built_in">String</span> dataStr,int status,<span class="hljs-built_in">String</span> reason,<span class="hljs-built_in">String</span> url,<span class="hljs-built_in">Boolean</span> closeConn</span>)</span>&#123;<br>		<span class="hljs-built_in">String</span> sql = <span class="hljs-string">&quot;INSERT INTO l_biz_tiza_data_log(create_time,data_str,status,reason,url) VALUES(NOW(),&#x27;&quot;</span>+dataStr+<span class="hljs-string">&quot;&#x27;,&quot;</span>+status+<span class="hljs-string">&quot;,&#x27;&quot;</span>+reason+<span class="hljs-string">&quot;&#x27;,&#x27;&quot;</span>+url+<span class="hljs-string">&quot;&#x27;)&quot;</span>;<br>		executeMysql(sql,closeConn);<br>	&#125;<br><br>	<span class="hljs-comment">/**</span><br><span class="hljs-comment">	 * 查询</span><br><span class="hljs-comment">	 * <span class="hljs-doctag">@param </span>columns 列</span><br><span class="hljs-comment">	 * <span class="hljs-doctag">@param </span>tableName 表名</span><br><span class="hljs-comment">	 * <span class="hljs-doctag">@param </span>whereSql where条件</span><br><span class="hljs-comment">	 * <span class="hljs-doctag">@param </span>closeConn 是否关闭连接</span><br><span class="hljs-comment">	 * <span class="hljs-doctag">@return</span></span><br><span class="hljs-comment">	 */</span><br>	<span class="hljs-keyword">public</span> List&lt;<span class="hljs-built_in">Map</span>&lt;<span class="hljs-built_in">String</span>, <span class="hljs-built_in">Object</span>&gt;&gt; <span class="hljs-function"><span class="hljs-title">queryMysql</span>(<span class="hljs-params"><span class="hljs-built_in">String</span> columns, <span class="hljs-built_in">String</span> tableName, <span class="hljs-built_in">String</span> whereSql, <span class="hljs-built_in">Boolean</span> closeConn</span>)</span>&#123;<br>		List&lt;<span class="hljs-built_in">Map</span>&lt;<span class="hljs-built_in">String</span>, <span class="hljs-built_in">Object</span>&gt;&gt; res = <span class="hljs-keyword">new</span> ArrayList&lt;<span class="hljs-built_in">Map</span>&lt;<span class="hljs-built_in">String</span>, <span class="hljs-built_in">Object</span>&gt;&gt;();<br>		getConn();<br>		<span class="hljs-keyword">try</span> &#123;<br>			<span class="hljs-built_in">String</span> sql = <span class="hljs-string">&quot;select &quot;</span>+columns+<span class="hljs-string">&quot; from &quot;</span>+tableName;<br>			<span class="hljs-keyword">if</span>(!isEmpty(whereSql))&#123;<br>				sql += <span class="hljs-string">&quot; where &quot;</span>+whereSql;<br>			&#125;<br>			log.info(sql+<span class="hljs-string">&quot;sql执行了&quot;</span>);<br>			PreparedStatement stmt = con.prepareStatement(sql);<br>			ResultSet rs = stmt.executeQuery();<br><br>			<span class="hljs-keyword">while</span> (rs.next()) &#123;<br>				<span class="hljs-built_in">Map</span>&lt;<span class="hljs-built_in">String</span>, <span class="hljs-built_in">Object</span>&gt; ele = <span class="hljs-keyword">new</span> HashMap&lt;<span class="hljs-built_in">String</span>, <span class="hljs-built_in">Object</span>&gt;();<br><br>				int count = <span class="hljs-number">1</span>;<br>				<span class="hljs-keyword">for</span>(<span class="hljs-built_in">String</span> s : columns.split(<span class="hljs-string">&quot;,&quot;</span>))&#123;<br>					<span class="hljs-keyword">if</span>(s.contains(<span class="hljs-string">&quot; as &quot;</span>))&#123;<br>						ele.put(s.split(<span class="hljs-string">&quot; as &quot;</span>)[<span class="hljs-number">1</span>], rs.getObject(count++));<br>					&#125;<span class="hljs-keyword">else</span>&#123;<br>						ele.put(s, rs.getObject(count++));<br>					&#125;<br>				&#125;<br>				res.add(ele);<br>			&#125;<br>		&#125; <span class="hljs-keyword">catch</span> (Exception e) &#123;<br>			e.printStackTrace();<br>		&#125;<br>		<span class="hljs-keyword">if</span>(closeConn)<br>			closeConn();<br>		<span class="hljs-keyword">return</span> res;<br>	&#125;<br><br><br>	<span class="hljs-comment">/**</span><br><span class="hljs-comment">	 * 判断字符串是否为空</span><br><span class="hljs-comment">	 */</span><br>	<span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-built_in">boolean</span> <span class="hljs-function"><span class="hljs-title">isEmpty</span>(<span class="hljs-params"><span class="hljs-built_in">String</span> str</span>)</span> &#123;<br><br>		<span class="hljs-built_in">boolean</span> flag = <span class="hljs-literal">false</span>;<br>		<span class="hljs-keyword">if</span> (str == <span class="hljs-literal">null</span> || <span class="hljs-string">&quot;&quot;</span>.equals(str) || <span class="hljs-string">&quot;null&quot;</span>.equals(str)) &#123;<br><br>			flag = <span class="hljs-literal">true</span>;<br>		&#125; <span class="hljs-keyword">else</span> &#123;<br>			flag = <span class="hljs-literal">false</span>;<br>		&#125;<br>		<span class="hljs-keyword">return</span> flag;<br>	&#125;<br><br>&#125;<br></code></pre></div></td></tr></table></figure>
-<h3 id="定义systemParamters-properties文件"><a href="#定义systemParamters-properties文件" class="headerlink" title="定义systemParamters.properties文件"></a>定义systemParamters.properties文件</h3><figure class="highlight ini"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs ini"><span class="hljs-attr">mysql.jdbcUrl</span>=jdbc:mysql://<span class="hljs-number">172.16</span>.<span class="hljs-number">70.180</span>:<span class="hljs-number">3306</span>/test_db?rewriteBatchedStatements=<span class="hljs-literal">true</span>&amp;failOverReadOnly=<span class="hljs-literal">false</span>&amp;maxReconnects=<span class="hljs-number">1</span>&amp;autoReconnect=<span class="hljs-literal">true</span>&amp;useUnicode=<span class="hljs-literal">true</span>&amp;characterEncoding=utf-<span class="hljs-number">8</span>&amp;useSSL=<span class="hljs-literal">false</span><br><span class="hljs-attr">mysql.user</span>=root<br><span class="hljs-attr">mysql.password</span>=password<br><span class="hljs-attr">mysql.driverClass</span>=com.mysql.jdbc.Driver<br></code></pre></div></td></tr></table></figure>
-<h3 id="pom文件引入依赖"><a href="#pom文件引入依赖" class="headerlink" title="pom文件引入依赖"></a>pom文件引入依赖</h3><figure class="highlight dust"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs dust"><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span></span><br><span class="xml">    <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>mysql<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span></span><br><span class="xml">    <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>mysql-connector-java<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span></span><br><span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span></span><br></code></pre></div></td></tr></table></figure>
-<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><figure class="highlight reasonml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs reasonml">List&lt;Map&lt;String, Object&gt;&gt; <span class="hljs-built_in">list</span> = <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">MysqlConnectManager</span>.</span></span>get<span class="hljs-constructor">Instance()</span>.query<span class="hljs-constructor">Mysql(<span class="hljs-params">columns</span>, <span class="hljs-string">&quot;l_biz_data&quot;</span>, <span class="hljs-string">&quot;terminal_id=1&quot;</span>, <span class="hljs-params">false</span>)</span>;<br></code></pre></div></td></tr></table></figure>
+              <h2 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h2><h3 id="Mysql连接工具类"><a href="#Mysql连接工具类" class="headerlink" title="Mysql连接工具类"></a>Mysql连接工具类</h3><div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.sql.*;
+import java.util.*;
+
+public class MysqlConnectManager &#123;
+
+	private static Logger log &#x3D; LoggerFactory.getLogger(MysqlConnectManager.class);
+
+	private static ResourceBundle rb &#x3D; ResourceBundle.getBundle(&quot;systemParamters&quot;);
+	private static String driver &#x3D; rb.getString(&quot;mysql.driverClass&quot;);
+	private static String url &#x3D; rb.getString(&quot;mysql.jdbcUrl&quot;);
+	private static String username &#x3D; rb.getString(&quot;mysql.user&quot;);
+	private static String password &#x3D; rb.getString(&quot;mysql.password&quot;);
+	
+	private volatile static MysqlConnectManager singleton &#x3D; null;
+	private static Connection con &#x3D; null;
+	
+	private MysqlConnectManager() &#123;
+		try &#123;
+			&#x2F;&#x2F;注册 JDBC 驱动
+			Class.forName(driver);
+			con &#x3D; getConn();			
+		&#125; catch (Exception e) &#123;
+			e.printStackTrace();
+		&#125;
+	&#125;
+
+	&#x2F;**
+	 * 获取mysql连接
+	 * @return
+	 *&#x2F;
+	public static MysqlConnectManager getInstance() &#123;
+		if (singleton &#x3D;&#x3D; null) &#123;
+			synchronized (MysqlConnectManager.class) &#123;
+				if (singleton &#x3D;&#x3D; null) &#123;
+					singleton &#x3D; new MysqlConnectManager();
+				&#125;
+			&#125;
+		&#125;
+		return singleton;
+	&#125;
+	
+	public Connection getConn()&#123;
+		if(con &#x3D;&#x3D; null)&#123;
+			try &#123;
+				&#x2F;&#x2F;连接数据库..
+				con &#x3D; DriverManager.getConnection(url, username, password);
+			&#125;catch (Exception e) &#123;
+				e.printStackTrace();
+			&#125;
+		&#125;
+		return con;
+	&#125;
+	
+	
+	public void closeConn()&#123;
+		if(con !&#x3D; null)&#123;
+			try &#123;
+				con.close();
+			&#125; catch (SQLException e) &#123;
+				e.printStackTrace();
+			&#125;
+		&#125;
+	&#125;
+	
+	public void executeMysql(String sql, Boolean closeConn)&#123;
+		getConn();
+		try &#123;
+			PreparedStatement stmt &#x3D; con.prepareStatement(sql);
+			stmt.execute();
+		&#125; catch (Exception e) &#123;
+			e.printStackTrace();
+		&#125;
+		if(closeConn)
+			closeConn();
+	&#125;
+
+	&#x2F;**
+	 * 插入日志
+	 *&#x2F;
+	public void insertLog(String dataStr,int status,String reason,String url,Boolean closeConn)&#123;
+		String sql &#x3D; &quot;INSERT INTO l_biz_tiza_data_log(create_time,data_str,status,reason,url) VALUES(NOW(),&#39;&quot;+dataStr+&quot;&#39;,&quot;+status+&quot;,&#39;&quot;+reason+&quot;&#39;,&#39;&quot;+url+&quot;&#39;)&quot;;
+		executeMysql(sql,closeConn);
+	&#125;
+
+	&#x2F;**
+	 * 查询
+	 * @param columns 列
+	 * @param tableName 表名
+	 * @param whereSql where条件
+	 * @param closeConn 是否关闭连接
+	 * @return
+	 *&#x2F;
+	public List&lt;Map&lt;String, Object&gt;&gt; queryMysql(String columns, String tableName, String whereSql, Boolean closeConn)&#123;
+		List&lt;Map&lt;String, Object&gt;&gt; res &#x3D; new ArrayList&lt;Map&lt;String, Object&gt;&gt;();
+		getConn();
+		try &#123;
+			String sql &#x3D; &quot;select &quot;+columns+&quot; from &quot;+tableName;
+			if(!isEmpty(whereSql))&#123;
+				sql +&#x3D; &quot; where &quot;+whereSql;
+			&#125;
+			log.info(sql+&quot;sql执行了&quot;);
+			PreparedStatement stmt &#x3D; con.prepareStatement(sql);
+			ResultSet rs &#x3D; stmt.executeQuery();
+
+			while (rs.next()) &#123;
+				Map&lt;String, Object&gt; ele &#x3D; new HashMap&lt;String, Object&gt;();
+
+				int count &#x3D; 1;
+				for(String s : columns.split(&quot;,&quot;))&#123;
+					if(s.contains(&quot; as &quot;))&#123;
+						ele.put(s.split(&quot; as &quot;)[1], rs.getObject(count++));
+					&#125;else&#123;
+						ele.put(s, rs.getObject(count++));
+					&#125;
+				&#125;
+				res.add(ele);
+			&#125;
+		&#125; catch (Exception e) &#123;
+			e.printStackTrace();
+		&#125;
+		if(closeConn)
+			closeConn();
+		return res;
+	&#125;
+
+
+	&#x2F;**
+	 * 判断字符串是否为空
+	 *&#x2F;
+	public static boolean isEmpty(String str) &#123;
+
+		boolean flag &#x3D; false;
+		if (str &#x3D;&#x3D; null || &quot;&quot;.equals(str) || &quot;null&quot;.equals(str)) &#123;
+
+			flag &#x3D; true;
+		&#125; else &#123;
+			flag &#x3D; false;
+		&#125;
+		return flag;
+	&#125;
+
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+<h3 id="定义systemParamters-properties文件"><a href="#定义systemParamters-properties文件" class="headerlink" title="定义systemParamters.properties文件"></a>定义systemParamters.properties文件</h3><div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">mysql.jdbcUrl&#x3D;jdbc:mysql:&#x2F;&#x2F;172.16.70.180:3306&#x2F;test_db?rewriteBatchedStatements&#x3D;true&amp;failOverReadOnly&#x3D;false&amp;maxReconnects&#x3D;1&amp;autoReconnect&#x3D;true&amp;useUnicode&#x3D;true&amp;characterEncoding&#x3D;utf-8&amp;useSSL&#x3D;false
+mysql.user&#x3D;root
+mysql.password&#x3D;password
+mysql.driverClass&#x3D;com.mysql.jdbc.Driver<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre></div>
+<h3 id="pom文件引入依赖"><a href="#pom文件引入依赖" class="headerlink" title="pom文件引入依赖"></a>pom文件引入依赖</h3><div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">&lt;dependency&gt;
+    &lt;groupId&gt;mysql&lt;&#x2F;groupId&gt;
+    &lt;artifactId&gt;mysql-connector-java&lt;&#x2F;artifactId&gt;
+&lt;&#x2F;dependency&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre></div>
+<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">List&lt;Map&lt;String, Object&gt;&gt; list &#x3D; MysqlConnectManager.getInstance().queryMysql(columns, &quot;l_biz_data&quot;, &quot;terminal_id&#x3D;1&quot;, false);<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div>
 
 
 
@@ -413,6 +571,8 @@
 
 
 
+  
+    
   
 
 

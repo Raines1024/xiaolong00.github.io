@@ -32,7 +32,15 @@
     
     
       
-      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/darcula.min.css" />
+      
+        
+          
+        
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.22.0/themes/prism.min.css" />
+      
+      
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.22.0/plugins/line-numbers/prism-line-numbers.min.css" />
+      
     
   
 
@@ -187,7 +195,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.5k 字
+      1.6k 字
     </span>
   
 
@@ -197,7 +205,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      20
+      22
        分钟
     </span>
   
@@ -234,7 +242,26 @@
 <h2 id="创建虚拟机"><a href="#创建虚拟机" class="headerlink" title="创建虚拟机"></a>创建虚拟机</h2><p>使用vmware esxi创建新虚拟机，选择8核心16G，使用iso镜像文件安装。</p>
 <h3 id="初始化Centos"><a href="#初始化Centos" class="headerlink" title="初始化Centos"></a>初始化Centos</h3><p>进入系统界面，选择中国、简体中文，选择默认分区，点击确定后，选择设置登录密码，设置登录密码</p>
 <h3 id="配置ip"><a href="#配置ip" class="headerlink" title="配置ip"></a>配置ip</h3><p>CentOS 7 网卡命令规则变化，命名规则根据系统固件和硬件来命名为 ifcfg-en* 类型，网络设置及静态IP配置文件<br>/etc/sysconfig/network-scripts/ifcfg-ens192</p>
-<figure class="highlight yaml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs yaml"><span class="hljs-string">TYPE=Ethernet</span><br><span class="hljs-string">PROXY_METHOD=none</span><br><span class="hljs-string">BROWSER_ONLY=no</span><br><span class="hljs-string">BOOTPROTO=none</span><br><span class="hljs-string">DEFROUTE=yes</span><br><span class="hljs-string">IPV4_FAILURE_FATAL=no</span><br><span class="hljs-string">IPV6INIT=yes</span><br><span class="hljs-string">IPV6_AUTOCONF=yes</span><br><span class="hljs-string">IPV6_DEFROUTE=yes</span><br><span class="hljs-string">IPV6_FAILURE_FATAL=no</span><br><span class="hljs-string">IPV6_ADDR_GEN_MODE=stable-privacy</span><br><span class="hljs-string">NAME=ens192</span><br><span class="hljs-string">UUID=e90f25a3-3f05-4555-b107-ec7a17d6d1b2</span><br><span class="hljs-string">DEVICE=ens192</span><br><span class="hljs-string">ONBOOT=yes</span><br><span class="hljs-string">IPADDR=172.29.32.11</span><br><span class="hljs-string">PREFIX=24</span><br><span class="hljs-string">GATEWAY=172.29.32.1</span><br><span class="hljs-string">IPV6_PRIVACY=no</span><br><span class="hljs-string">DNS1=172.16.61.253</span><br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml">TYPE=Ethernet
+PROXY_METHOD=none
+BROWSER_ONLY=no
+BOOTPROTO=none
+DEFROUTE=yes
+IPV4_FAILURE_FATAL=no
+IPV6INIT=yes
+IPV6_AUTOCONF=yes
+IPV6_DEFROUTE=yes
+IPV6_FAILURE_FATAL=no
+IPV6_ADDR_GEN_MODE=stable<span class="token punctuation">-</span>privacy
+NAME=ens192
+UUID=e90f25a3<span class="token punctuation">-</span>3f05<span class="token punctuation">-</span>4555<span class="token punctuation">-</span>b107<span class="token punctuation">-</span>ec7a17d6d1b2
+DEVICE=ens192
+ONBOOT=yes
+IPADDR=172.29.32.11
+PREFIX=24
+GATEWAY=172.29.32.1
+IPV6_PRIVACY=no
+DNS1=172.16.61.253<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 <p>重启网络<br>service network restart</p>
 <h3 id="系统配置"><a href="#系统配置" class="headerlink" title="系统配置"></a>系统配置</h3><p>3台虚拟机<br>flink1: 16g内存 8核 300g硬盘<br>flink2: 16g内存 8核 300g硬盘<br>flink3: 16g内存 8核 300g硬盘</p>
 <hr>
@@ -255,7 +282,9 @@
 </li>
 <li><p>修改hosts文件</p>
 <p>vim /etc/hosts</p>
-<figure class="highlight yaml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs yaml"><span class="hljs-number">172.29</span><span class="hljs-number">.32</span><span class="hljs-number">.11</span>    <span class="hljs-string">flink1</span><br><span class="hljs-number">172.29</span><span class="hljs-number">.32</span><span class="hljs-number">.12</span>    <span class="hljs-string">flink2</span><br><span class="hljs-number">172.29</span><span class="hljs-number">.32</span><span class="hljs-number">.13</span>    <span class="hljs-string">flink3</span><br></code></pre></div></td></tr></table></figure></li>
+<div class="code-wrapper"><pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml">172.29.32.11    flink1
+172.29.32.12    flink2
+172.29.32.13    flink3<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></div></li>
 <li><p>其他俩台主机亦是如此</p>
 </li>
 </ol>
@@ -269,9 +298,13 @@
 <hr>
 <h2 id="安装Java"><a href="#安装Java" class="headerlink" title="安装Java"></a>安装Java</h2><h3 id="上传"><a href="#上传" class="headerlink" title="上传"></a>上传</h3><p>使用rz命令把.tar.gz文件上传到服务器</p>
 <h3 id="解压并删除"><a href="#解压并删除" class="headerlink" title="解压并删除"></a>解压并删除</h3><p>tar -zxvf *.gz<br>rm -f *.gz</p>
-<h3 id="传到其他服务器"><a href="#传到其他服务器" class="headerlink" title="传到其他服务器"></a>传到其他服务器</h3><p>scp -r /home/java <a href="mailto:&#114;&#111;&#x6f;&#116;&#x40;&#x31;&#55;&#50;&#46;&#50;&#57;&#46;&#51;&#50;&#46;&#49;&#50;">&#114;&#111;&#x6f;&#116;&#x40;&#x31;&#55;&#50;&#46;&#50;&#57;&#46;&#51;&#50;&#46;&#49;&#50;</a>:/home/java<br>scp -r /home/java <a href="mailto:&#114;&#111;&#111;&#x74;&#x40;&#x31;&#55;&#x32;&#46;&#50;&#57;&#x2e;&#51;&#x32;&#46;&#49;&#51;">&#114;&#111;&#111;&#x74;&#x40;&#x31;&#55;&#x32;&#46;&#50;&#57;&#x2e;&#51;&#x32;&#46;&#49;&#51;</a>:/home/java</p>
+<h3 id="传到其他服务器"><a href="#传到其他服务器" class="headerlink" title="传到其他服务器"></a>传到其他服务器</h3><p>scp -r /home/java <a href="mailto:&#x72;&#111;&#x6f;&#x74;&#x40;&#x31;&#55;&#x32;&#46;&#x32;&#x39;&#x2e;&#x33;&#50;&#x2e;&#49;&#50;">&#x72;&#111;&#x6f;&#x74;&#x40;&#x31;&#55;&#x32;&#46;&#x32;&#x39;&#x2e;&#x33;&#50;&#x2e;&#49;&#50;</a>:/home/java<br>scp -r /home/java <a href="mailto:&#114;&#x6f;&#x6f;&#116;&#x40;&#49;&#x37;&#50;&#x2e;&#50;&#57;&#x2e;&#x33;&#x32;&#46;&#49;&#x33;">&#114;&#x6f;&#x6f;&#116;&#x40;&#49;&#x37;&#50;&#x2e;&#50;&#57;&#x2e;&#x33;&#x32;&#46;&#49;&#x33;</a>:/home/java</p>
 <h3 id="修改环境变量"><a href="#修改环境变量" class="headerlink" title="修改环境变量"></a>修改环境变量</h3><p>vim /etc/profile<br>插入：</p>
-<figure class="highlight yaml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs yaml"><span class="hljs-string">JAVA_HOME=/home/java/jdk1.8.0_201</span><br><span class="hljs-string">JRE_HOME=$JAVA_HOME/jre</span><br><span class="hljs-string">PATH=$PATH:$JAVA_HOME/bin:$JRE_HOME/bin</span><br><span class="hljs-string">CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar:$JRE_HOME/lib</span><br><span class="hljs-string">export</span> <span class="hljs-string">JAVA_HOME</span> <span class="hljs-string">JRE_HOME</span> <span class="hljs-string">PATH</span> <span class="hljs-string">CLASSPATH</span><br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml">JAVA_HOME=/home/java/jdk1.8.0_201
+JRE_HOME=$JAVA_HOME/jre
+PATH=$PATH<span class="token punctuation">:</span>$JAVA_HOME/bin<span class="token punctuation">:</span>$JRE_HOME/bin
+CLASSPATH=.<span class="token punctuation">:</span>$JAVA_HOME/lib/dt.jar<span class="token punctuation">:</span>$JAVA_HOME/lib/tools.jar<span class="token punctuation">:</span>$JRE_HOME/lib
+export JAVA_HOME JRE_HOME PATH CLASSPATH<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 
 
 <p>生效：<code>source /etc/profile</code> </p>
@@ -303,17 +336,26 @@
 <hr>
 <h2 id="zookeeper集群搭建"><a href="#zookeeper集群搭建" class="headerlink" title="zookeeper集群搭建"></a>zookeeper集群搭建</h2><p>注：zookeeper集群节点数必须为奇数，满足leader选举算法(当选leader的节点所需支持节点数过半的原则)，且&gt;=3</p>
 <p>1、下载zookeeper安装包</p>
-<figure class="highlight apache"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs apache"><span class="hljs-attribute">curl</span> -O https://archive.apache.org/dist/zookeeper/zookeeper-<span class="hljs-number">3</span>.<span class="hljs-number">4</span>.<span class="hljs-number">10</span>/zookeeper-<span class="hljs-number">3</span>.<span class="hljs-number">4</span>.<span class="hljs-number">10</span>.tar.gz<br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">curl -O https:&#x2F;&#x2F;archive.apache.org&#x2F;dist&#x2F;zookeeper&#x2F;zookeeper-3.4.10&#x2F;zookeeper-3.4.10.tar.gz<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div>
 <p>2、解压安装包</p>
-<figure class="highlight apache"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs apache"><span class="hljs-attribute">tar</span> -zxvf zookeeper-<span class="hljs-number">3</span>.<span class="hljs-number">4</span>.<span class="hljs-number">10</span>.tar.gz<br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">tar -zxvf zookeeper-3.4.10.tar.gz<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div>
 <p>3、拷贝”xxx安装目录/zookeeper-3.4.10/conf”目录下的zoo_sample.cfg文件，重命名为zoo.cfg，并进行编辑，添加如下设置</p>
-<figure class="highlight yaml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs yaml"><span class="hljs-string">cp</span> <span class="hljs-string">zoo_sample.cfg</span> <span class="hljs-string">zoo.cfg</span><br><span class="hljs-string">vim</span> <span class="hljs-string">zoo.cfg</span><br><span class="hljs-string">插入内容：</span><br><span class="hljs-string">dataDir=/home/data/zookeeper</span><br><span class="hljs-string">server.1=flink1:2888:3888</span><br><span class="hljs-string">server.2=flink2:2888:3888</span><br><span class="hljs-string">server.3=flink3:2888:3888</span><br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml">cp zoo_sample.cfg zoo.cfg
+vim zoo.cfg
+插入内容：
+dataDir=/home/data/zookeeper
+server.1=flink1<span class="token punctuation">:</span>2888<span class="token punctuation">:</span><span class="token number">3888</span>
+server.2=flink2<span class="token punctuation">:</span>2888<span class="token punctuation">:</span><span class="token number">3888</span>
+server.3=flink3<span class="token punctuation">:</span>2888<span class="token punctuation">:</span><span class="token number">3888</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 <p>4、远程传输到flink2、flink3节点上</p>
-<figure class="highlight elixir"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs elixir">scp -r /home/zookeeper/zookeeper<span class="hljs-number">-3.4</span>.<span class="hljs-number">10</span> root<span class="hljs-variable">@flink2</span><span class="hljs-symbol">:/home/zookeeper/zookeeper-</span><span class="hljs-number">3.4</span>.<span class="hljs-number">10</span><br>scp -r /home/zookeeper/zookeeper<span class="hljs-number">-3.4</span>.<span class="hljs-number">10</span> root<span class="hljs-variable">@flink3</span><span class="hljs-symbol">:/home/zookeeper/zookeeper-</span><span class="hljs-number">3.4</span>.<span class="hljs-number">10</span><br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">scp -r &#x2F;home&#x2F;zookeeper&#x2F;zookeeper-3.4.10 root@flink2:&#x2F;home&#x2F;zookeeper&#x2F;zookeeper-3.4.10
+scp -r &#x2F;home&#x2F;zookeeper&#x2F;zookeeper-3.4.10 root@flink3:&#x2F;home&#x2F;zookeeper&#x2F;zookeeper-3.4.10<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></div>
 <p>5、在配置的文件目录/home/data/zookeeper目录下，新建myid文件并编辑(用于标识在zookeeper集群的编号)</p>
 <p>如上配置，flink1服务器为1，flink2服务器内容为2，flink3服务器内容为3</p>
 <p>6、启动/停止zookeeper</p>
-<figure class="highlight yaml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs yaml"><span class="hljs-string">bin/zkServer.sh</span> <span class="hljs-string">start</span>          <span class="hljs-string">//启动zookeeper</span><br><span class="hljs-string">bin/zkServer.sh</span> <span class="hljs-string">stop</span>           <span class="hljs-string">//停止zookeeper</span><br><span class="hljs-string">bin/zkServer.sh</span> <span class="hljs-string">status</span>         <span class="hljs-string">//查看zookeeper状态</span><br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml">bin/zkServer.sh start          //启动zookeeper
+bin/zkServer.sh stop           //停止zookeeper
+bin/zkServer.sh status         //查看zookeeper状态<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></div>
 <p>三个节点的zookeeper服务都需要开启，仔细查看是否每台节点的zk服务是否都开启。并且开启后稍等片刻，看着否状态显示正常。</p>
 <hr>
 <h2 id="Flink-1-10-on-yarn集群搭建-Hadoop-2-9-2"><a href="#Flink-1-10-on-yarn集群搭建-Hadoop-2-9-2" class="headerlink" title="Flink 1.10 on yarn集群搭建(Hadoop-2.9.2)"></a>Flink 1.10 on yarn集群搭建(Hadoop-2.9.2)</h2><h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><ol>
@@ -325,15 +367,30 @@
 <li><p>Hadoop配置文件yarn-site.xml</p>
 <p>Hadoop主目录下etc/hadoop/yarn-site.xml(hadoop安装目录下的yarn集群配置文件）</p>
 <p>添加如下配置</p>
-<figure class="highlight xml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">property</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">name</span>&gt;</span>yarn.resourcemanager.am.max-attempts<span class="hljs-tag">&lt;/<span class="hljs-name">name</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">value</span>&gt;</span>4<span class="hljs-tag">&lt;/<span class="hljs-name">value</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">description</span>&gt;</span><br>    The maximum number of application master execution attempts.<br>  <span class="hljs-tag">&lt;/<span class="hljs-name">description</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">property</span>&gt;</span><br></code></pre></div></td></tr></table></figure></li>
+<div class="code-wrapper"><pre class="line-numbers language-xml" data-language="xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>property</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>name</span><span class="token punctuation">></span></span>yarn.resourcemanager.am.max-attempts<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>name</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>value</span><span class="token punctuation">></span></span>4<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>value</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>description</span><span class="token punctuation">></span></span>
+    The maximum number of application master execution attempts.
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>description</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>property</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></li>
 <li><p>Flink配置文件flink-conf.yaml</p>
 <p>Flink主目录下conf/flink-conf.yaml</p>
 <p>屏蔽jobmanager.rpc.address配置</p>
 <p>高可用设置</p>
-<figure class="highlight yaml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs yaml"><span class="hljs-attr">high-availability:</span> <span class="hljs-string">zookeeper</span><br><span class="hljs-attr">high-availability.zookeeper.quorum:</span> <span class="hljs-string">hadoop1:2181,hadoop2:2181,hadoop3:2181</span><br><span class="hljs-attr">high-availability.storageDir:</span> <span class="hljs-string">hdfs:///flink/recovery</span><br><span class="hljs-attr">high-availability.zookeeper.path.root:</span> <span class="hljs-string">/flink</span><br><span class="hljs-attr">yarn.application-attempts:</span> <span class="hljs-number">10</span><br></code></pre></div></td></tr></table></figure></li>
+<div class="code-wrapper"><pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml"><span class="token key atrule">high-availability</span><span class="token punctuation">:</span> zookeeper
+<span class="token key atrule">high-availability.zookeeper.quorum</span><span class="token punctuation">:</span> hadoop1<span class="token punctuation">:</span><span class="token number">2181</span><span class="token punctuation">,</span>hadoop2<span class="token punctuation">:</span><span class="token number">2181</span><span class="token punctuation">,</span>hadoop3<span class="token punctuation">:</span><span class="token number">2181</span>
+<span class="token key atrule">high-availability.storageDir</span><span class="token punctuation">:</span> hdfs<span class="token punctuation">:</span>///flink/recovery
+<span class="token key atrule">high-availability.zookeeper.path.root</span><span class="token punctuation">:</span> /flink
+<span class="token key atrule">yarn.application-attempts</span><span class="token punctuation">:</span> <span class="token number">10</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></li>
 <li><p>添加flink环境变量/etc/profile</p>
 <p>vim /etc/profile</p>
-<figure class="highlight routeros"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs routeros"><span class="hljs-comment">#flink环境变量配置</span><br><span class="hljs-builtin-name">export</span> <span class="hljs-attribute">FLINK_HOME</span>=/usr/local/softwareinstall/flink-1.10.0<br><span class="hljs-builtin-name">export</span> <span class="hljs-attribute">PATH</span>=<span class="hljs-variable">$PATH</span>:$FLINK_HOME/bin<br><span class="hljs-comment">#flink on yarn配置</span><br><span class="hljs-attribute">HADOOP_CONF_DIR</span>=<span class="hljs-variable">$HADOOP_HOME</span><br><span class="hljs-builtin-name">export</span> <span class="hljs-attribute">HADOOP_CLASSPATH</span>=`hadoop classpath`<br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">#flink环境变量配置
+export FLINK_HOME&#x3D;&#x2F;usr&#x2F;local&#x2F;softwareinstall&#x2F;flink-1.10.0
+export PATH&#x3D;$PATH:$FLINK_HOME&#x2F;bin
+#flink on yarn配置
+HADOOP_CONF_DIR&#x3D;$HADOOP_HOME
+export HADOOP_CLASSPATH&#x3D;&#96;hadoop classpath&#96;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 <p><code>source /etc/profile</code>   使环境变量生效</p>
 </li>
 <li><p>Flink具体使用后续再写</p>
@@ -498,6 +555,8 @@
 
 
 
+  
+    
   
 
 

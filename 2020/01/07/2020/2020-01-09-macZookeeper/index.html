@@ -32,7 +32,15 @@
     
     
       
-      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/darcula.min.css" />
+      
+        
+          
+        
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.22.0/themes/prism.min.css" />
+      
+      
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.22.0/plugins/line-numbers/prism-line-numbers.min.css" />
+      
     
   
 
@@ -231,11 +239,11 @@
             
             <div class="markdown-body">
               <h3 id="一、zookeeper下载地址：选择的是-3-4-14"><a href="#一、zookeeper下载地址：选择的是-3-4-14" class="headerlink" title="一、zookeeper下载地址：选择的是 3.4.14"></a>一、zookeeper下载地址：选择的是 3.4.14</h3><p><a target="_blank" rel="noopener" href="http://mirror.bit.edu.cn/apache/zookeeper/">http://mirror.bit.edu.cn/apache/zookeeper/</a></p>
-<h3 id="二、解压下载得到的ZooKeeper压缩包，发现有bin，conf，lib等目录。"><a href="#二、解压下载得到的ZooKeeper压缩包，发现有bin，conf，lib等目录。" class="headerlink" title="二、解压下载得到的ZooKeeper压缩包，发现有bin，conf，lib等目录。"></a>二、解压下载得到的ZooKeeper压缩包，发现有bin，conf，lib等目录。</h3><div class="hljs code-wrapper"><pre><code>  bin目录中存放有运行脚本；
+<h3 id="二、解压下载得到的ZooKeeper压缩包，发现有bin，conf，lib等目录。"><a href="#二、解压下载得到的ZooKeeper压缩包，发现有bin，conf，lib等目录。" class="headerlink" title="二、解压下载得到的ZooKeeper压缩包，发现有bin，conf，lib等目录。"></a>二、解压下载得到的ZooKeeper压缩包，发现有bin，conf，lib等目录。</h3><div class="code-wrapper"><pre><code>  bin目录中存放有运行脚本；
   conf目录中存放有配置文件；
   lib目录”中存放有运行所需要第三方库。</code></pre></div>
 <h3 id="三、单机配置"><a href="#三、单机配置" class="headerlink" title="三、单机配置"></a>三、单机配置</h3><h4 id="编辑配置文件"><a href="#编辑配置文件" class="headerlink" title="编辑配置文件"></a>编辑配置文件</h4><p>在conf目录下，新建一个名为zoo.cfg的文件，其中内容如下：</p>
-<div class="hljs code-wrapper"><pre><code># 服务器与客户端之间交互的基本时间单元（ms） 
+<div class="code-wrapper"><pre><code># 服务器与客户端之间交互的基本时间单元（ms） 
 tickTime=2000   
 # zookeeper所能接受的客户端数量 
 initLimit=10  
@@ -250,7 +258,7 @@ dataLogDir=/tmp/zookeeper/log
 # t监听client连接的端口号.
 clientPort=2181</code></pre></div>
 <h3 id="四、运行zookeeper"><a href="#四、运行zookeeper" class="headerlink" title="四、运行zookeeper"></a>四、运行zookeeper</h3><p>进入解压目录(zookeeper-3.4.14)，执行以下命令：</p>
-<div class="hljs code-wrapper"><pre><code>## 启动ZooKeeper
+<div class="code-wrapper"><pre><code>## 启动ZooKeeper
 ./bin/zkServer.sh start
 ## 停止ZooKeeper
 ./bin/zkServer.sh stop</code></pre></div>
@@ -397,6 +405,8 @@ clientPort=2181</code></pre></div>
 
 
 
+  
+    
   
 
 

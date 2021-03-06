@@ -32,7 +32,15 @@
     
     
       
-      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/darcula.min.css" />
+      
+        
+          
+        
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.22.0/themes/prism.min.css" />
+      
+      
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.22.0/plugins/line-numbers/prism-line-numbers.min.css" />
+      
     
   
 
@@ -187,7 +195,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      4.6k 字
+      5k 字
     </span>
   
 
@@ -197,7 +205,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      60
+      67
        分钟
     </span>
   
@@ -274,7 +282,8 @@
 <p>参数含义：</p>
 <p>general_log：是否开启</p>
 <p>general_log_file：日志文件位置</p>
-<figure class="highlight ini"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs ini"><span class="hljs-attr">general_log</span>=<span class="hljs-literal">ON</span><br><span class="hljs-attr">general_log_file</span>=/data/mysql/test.log<br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">general_log&#x3D;ON
+general_log_file&#x3D;&#x2F;data&#x2F;mysql&#x2F;test.log<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></div>
 <p>然后要重启数据库，这个log会将所有的执行语句记录下来，所以在数据库很忙的时候，这个日志可能变得很大，不宜查看。</p>
 <p>其他诸如慢查询、错误日志类似于这样，大家举一反三即可。</p>
 </li>
@@ -290,9 +299,57 @@
 <p>一般来说开启binlog日志大概会有1%的性能损耗。</p>
 <p>启用binlog，通过配置 <code>/etc/my.cnf</code> 或 <code>/etc/mysql/mysql.conf.d/mysqld.cnf</code> 配置文件的 <code>log-bin</code> 选项：</p>
 <p>在配置文件中加入 <code>log-bin</code> 配置，表示启用binlog，如果没有给定值，写成 <code>log-bin=</code>，则默认名称为主机名。（注：名称若带有小数点，则只取第一个小数点前的部分作为名称）</p>
-<figure class="highlight applescript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs applescript">[mysqld]<br><span class="hljs-built_in">log</span>-bin=<span class="hljs-keyword">my</span>-binlog-<span class="hljs-built_in">name</span><br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">[mysqld]
+log-bin&#x3D;my-binlog-name<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></div>
 <p>也可以通过 <code>SET SQL_LOG_BIN=1</code> 命令来启用 binlog，通过 <code>SET SQL_LOG_BIN=0</code> 命令停用 binlog。启用 binlog 之后须重启MySQL才能生效。</p>
-<h4 id="常用的Binlog操作命令"><a href="#常用的Binlog操作命令" class="headerlink" title="常用的Binlog操作命令"></a>常用的Binlog操作命令</h4><figure class="highlight vala"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs vala"><span class="hljs-meta"># 是否启用binlog日志</span><br>show variables like <span class="hljs-string">&#x27;log_bin&#x27;</span>;<br><br><span class="hljs-meta"># 查看详细的日志配置信息</span><br>show global variables like <span class="hljs-string">&#x27;%log%&#x27;</span>;<br><br><span class="hljs-meta"># mysql数据存储目录</span><br>show variables like <span class="hljs-string">&#x27;%dir%&#x27;</span>;<br><br><span class="hljs-meta"># 查看binlog的目录</span><br>show global variables like <span class="hljs-string">&quot;%log_bin%&quot;</span>;<br><br><span class="hljs-meta"># 查看当前服务器使用的biglog文件及大小</span><br>show binary logs;<br><br><span class="hljs-meta"># 查看主服务器使用的biglog文件及大小</span><br><br><span class="hljs-meta"># 查看最新一个binlog日志文件名称和Position</span><br>show master status;<br><br><br><span class="hljs-meta"># 事件查询命令</span><br><span class="hljs-meta"># IN &#x27;log_name&#x27; ：指定要查询的binlog文件名(不指定就是第一个binlog文件)</span><br><span class="hljs-meta"># FROM pos ：指定从哪个pos起始点开始查起(不指定就是从整个文件首个pos点开始算)</span><br><span class="hljs-meta"># LIMIT [offset,] ：偏移量(不指定就是0)</span><br><span class="hljs-meta"># row_count ：查询总条数(不指定就是所有行)</span><br>show binlog events [IN <span class="hljs-string">&#x27;log_name&#x27;</span>] [FROM pos] [LIMIT [offset,] row_count];<br><br><span class="hljs-meta"># 查看 binlog 内容</span><br>show binlog events;<br><br><span class="hljs-meta"># 查看具体一个binlog文件的内容 （in 后面为binlog的文件名）</span><br>show binlog events in <span class="hljs-string">&#x27;master.000003&#x27;</span>;<br><br><span class="hljs-meta"># 设置binlog文件保存事件，过期删除，单位天</span><br><span class="hljs-keyword">set</span> global expire_log_days=<span class="hljs-number">3</span>; <br><br><span class="hljs-meta"># 删除当前的binlog文件</span><br>reset master; <br><br><span class="hljs-meta"># 删除slave的中继日志</span><br>reset slave;<br><br><span class="hljs-meta"># 删除指定日期前的日志索引中binlog日志文件</span><br>purge master logs before <span class="hljs-string">&#x27;2019-03-09 14:00:00&#x27;</span>;<br><br><span class="hljs-meta"># 删除指定日志文件</span><br>purge master logs to <span class="hljs-string">&#x27;master.000003&#x27;</span>;<br></code></pre></div></td></tr></table></figure>
+<h4 id="常用的Binlog操作命令"><a href="#常用的Binlog操作命令" class="headerlink" title="常用的Binlog操作命令"></a>常用的Binlog操作命令</h4><div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none"># 是否启用binlog日志
+show variables like &#39;log_bin&#39;;
+
+# 查看详细的日志配置信息
+show global variables like &#39;%log%&#39;;
+
+# mysql数据存储目录
+show variables like &#39;%dir%&#39;;
+
+# 查看binlog的目录
+show global variables like &quot;%log_bin%&quot;;
+
+# 查看当前服务器使用的biglog文件及大小
+show binary logs;
+
+# 查看主服务器使用的biglog文件及大小
+
+# 查看最新一个binlog日志文件名称和Position
+show master status;
+
+
+# 事件查询命令
+# IN &#39;log_name&#39; ：指定要查询的binlog文件名(不指定就是第一个binlog文件)
+# FROM pos ：指定从哪个pos起始点开始查起(不指定就是从整个文件首个pos点开始算)
+# LIMIT [offset,] ：偏移量(不指定就是0)
+# row_count ：查询总条数(不指定就是所有行)
+show binlog events [IN &#39;log_name&#39;] [FROM pos] [LIMIT [offset,] row_count];
+
+# 查看 binlog 内容
+show binlog events;
+
+# 查看具体一个binlog文件的内容 （in 后面为binlog的文件名）
+show binlog events in &#39;master.000003&#39;;
+
+# 设置binlog文件保存事件，过期删除，单位天
+set global expire_log_days&#x3D;3; 
+
+# 删除当前的binlog文件
+reset master; 
+
+# 删除slave的中继日志
+reset slave;
+
+# 删除指定日期前的日志索引中binlog日志文件
+purge master logs before &#39;2019-03-09 14:00:00&#39;;
+
+# 删除指定日志文件
+purge master logs to &#39;master.000003&#39;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 <h4 id="写-Binlog-的时机"><a href="#写-Binlog-的时机" class="headerlink" title="写 Binlog 的时机"></a>写 Binlog 的时机</h4><p>对支持事务的引擎如InnoDB而言，必须要提交了事务才会记录binlog。binlog 什么时候<strong>刷新到磁盘</strong>跟参数 <code>sync_binlog</code> 相关。</p>
 <ul>
 <li>如果设置为0，则表示MySQL不控制binlog的刷新，由文件系统去控制它缓存的刷新；</li>
@@ -342,11 +399,58 @@
 </blockquote>
 <h5 id="Mixed"><a href="#Mixed" class="headerlink" title="Mixed"></a>Mixed</h5><p>从5.1.8版本开始，MySQL提供了Mixed格式，实际上就是Statement与Row的结合。<br>在Mixed模式下，一般的语句修改使用statment格式保存binlog，如一些函数，statement无法完成主从复制的操作，则采用row格式保存binlog，MySQL会根据执行的每一条具体的sql语句来区分对待记录的日志形式，也就是在Statement和Row之间选择一种。</p>
 <h4 id="mysqlbinlog-命令的使用"><a href="#mysqlbinlog-命令的使用" class="headerlink" title="mysqlbinlog 命令的使用"></a>mysqlbinlog 命令的使用</h4><p>服务器以二进制格式将binlog日志写入binlog文件，如何要以文本格式显示其内容，可以使用 mysqlbinlog 命令。</p>
-<figure class="highlight jboss-cli"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs jboss-cli"><span class="hljs-comment"># mysqlbinlog 的执行格式</span><br>mysqlbinlog [options] log_file <span class="hljs-string">...</span><br><br><span class="hljs-comment"># 查看bin-log二进制文件（shell方式）</span><br>mysqlbinlog -v <span class="hljs-params">--base64-output=decode-rows</span> <span class="hljs-string">/var/lib/mysql/master.000003</span><br><br><span class="hljs-comment"># 查看bin-log二进制文件（带查询条件）</span><br>mysqlbinlog -v <span class="hljs-params">--base64-output=decode-rows</span> <span class="hljs-string">/var/lib/mysql/master.000003</span> \<br>    <span class="hljs-params">--start-datetime=</span><span class="hljs-string">&quot;2019-03-01 00:00:00&quot;</span>  \<br>    <span class="hljs-params">--stop-datetime=</span><span class="hljs-string">&quot;2019-03-10 00:00:00&quot;</span>   \<br>    <span class="hljs-params">--start-position=</span><span class="hljs-string">&quot;5000&quot;</span>    \<br>    <span class="hljs-params">--stop-position=</span><span class="hljs-string">&quot;20000&quot;</span><br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none"># mysqlbinlog 的执行格式
+mysqlbinlog [options] log_file ...
+
+# 查看bin-log二进制文件（shell方式）
+mysqlbinlog -v --base64-output&#x3D;decode-rows &#x2F;var&#x2F;lib&#x2F;mysql&#x2F;master.000003
+
+# 查看bin-log二进制文件（带查询条件）
+mysqlbinlog -v --base64-output&#x3D;decode-rows &#x2F;var&#x2F;lib&#x2F;mysql&#x2F;master.000003 \
+    --start-datetime&#x3D;&quot;2019-03-01 00:00:00&quot;  \
+    --stop-datetime&#x3D;&quot;2019-03-10 00:00:00&quot;   \
+    --start-position&#x3D;&quot;5000&quot;    \
+    --stop-position&#x3D;&quot;20000&quot;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 <p>设置日志格式为ROW时，在我的机器上输出了以下信息</p>
-<figure class="highlight vala"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs vala">[root@openshift1 mysql]#  /usr/local/mysql/bin/mysqlbinlog --no-defaults  -v --base64-output=decode-rows master-bin<span class="hljs-number">.000016</span><br><span class="hljs-comment">/*!50530 SET @@SESSION.PSEUDO_SLAVE_MODE=1*/</span>;<br><span class="hljs-comment">/*!50003 SET @OLD_COMPLETION_TYPE=@@COMPLETION_TYPE,COMPLETION_TYPE=0*/</span>;<br>DELIMITER <span class="hljs-comment">/*!*/</span>;<br><span class="hljs-meta"># at 17423</span><br><span class="hljs-meta">#210130 10:15:21 server id 1  end_log_pos 17467 CRC32 0xf7c48f0d        Table_map: `test`.`a` mapped to number 163</span><br><span class="hljs-meta"># at 17467</span><br><span class="hljs-meta">#210130 10:15:21 server id 1  end_log_pos 17507 CRC32 0x4568c431        Write_rows: table id 163 flags: STMT_END_F</span><br><span class="hljs-meta">### INSERT INTO `test`.`a`</span><br><span class="hljs-meta">### SET</span><br><span class="hljs-meta">###   @1=1</span><br><span class="hljs-meta"># at 17507</span><br><span class="hljs-meta">#210130 10:15:21 server id 1  end_log_pos 17538 CRC32 0xae0f343c        Xid = 5434</span><br>COMMIT<span class="hljs-comment">/*!*/</span>;<br><span class="hljs-meta"># at 17538</span><br><span class="hljs-meta">#210201  8:22:41 server id 1  end_log_pos 17603 CRC32 0xe75364ae        Anonymous_GTID  last_committed=11  sequence_number=12      rbr_only=yes</span><br><span class="hljs-comment">/*!50718 SET TRANSACTION ISOLATION LEVEL READ COMMITTED*/</span><span class="hljs-comment">/*!*/</span>;<br>SET @@SESSION.GTID_NEXT= <span class="hljs-string">&#x27;ANONYMOUS&#x27;</span><span class="hljs-comment">/*!*/</span>;<br><span class="hljs-meta"># at 17603</span><br><span class="hljs-meta">#210201  8:22:41 server id 1  end_log_pos 17675 CRC32 0x228ba16b        Query   thread_id=4912  exec_time=0        error_code=0</span><br>SET TIMESTAMP=<span class="hljs-number">1612138961</span><span class="hljs-comment">/*!*/</span>;<br>BEGIN<br><span class="hljs-comment">/*!*/</span>;<br><span class="hljs-meta"># at 17675</span><br><span class="hljs-meta">#210201  8:22:41 server id 1  end_log_pos 17719 CRC32 0x46a33884        Table_map: `test`.`a` mapped to number 163</span><br><span class="hljs-meta"># at 17719</span><br><span class="hljs-meta">#210201  8:22:41 server id 1  end_log_pos 17759 CRC32 0xcb7ee07b        Write_rows: table id 163 flags: STMT_END_F</span><br><span class="hljs-meta">### INSERT INTO `test`.`a`</span><br><span class="hljs-meta">### SET</span><br><span class="hljs-meta">###   @1=2</span><br><span class="hljs-meta"># at 17759</span><br><span class="hljs-meta">#210201  8:22:41 server id 1  end_log_pos 17790 CRC32 0x037265f5        Xid = 1782200</span><br>COMMIT<span class="hljs-comment">/*!*/</span>;<br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">[root@openshift1 mysql]#  &#x2F;usr&#x2F;local&#x2F;mysql&#x2F;bin&#x2F;mysqlbinlog --no-defaults  -v --base64-output&#x3D;decode-rows master-bin.000016
+&#x2F;*!50530 SET @@SESSION.PSEUDO_SLAVE_MODE&#x3D;1*&#x2F;;
+&#x2F;*!50003 SET @OLD_COMPLETION_TYPE&#x3D;@@COMPLETION_TYPE,COMPLETION_TYPE&#x3D;0*&#x2F;;
+DELIMITER &#x2F;*!*&#x2F;;
+# at 17423
+#210130 10:15:21 server id 1  end_log_pos 17467 CRC32 0xf7c48f0d        Table_map: &#96;test&#96;.&#96;a&#96; mapped to number 163
+# at 17467
+#210130 10:15:21 server id 1  end_log_pos 17507 CRC32 0x4568c431        Write_rows: table id 163 flags: STMT_END_F
+### INSERT INTO &#96;test&#96;.&#96;a&#96;
+### SET
+###   @1&#x3D;1
+# at 17507
+#210130 10:15:21 server id 1  end_log_pos 17538 CRC32 0xae0f343c        Xid &#x3D; 5434
+COMMIT&#x2F;*!*&#x2F;;
+# at 17538
+#210201  8:22:41 server id 1  end_log_pos 17603 CRC32 0xe75364ae        Anonymous_GTID  last_committed&#x3D;11  sequence_number&#x3D;12      rbr_only&#x3D;yes
+&#x2F;*!50718 SET TRANSACTION ISOLATION LEVEL READ COMMITTED*&#x2F;&#x2F;*!*&#x2F;;
+SET @@SESSION.GTID_NEXT&#x3D; &#39;ANONYMOUS&#39;&#x2F;*!*&#x2F;;
+# at 17603
+#210201  8:22:41 server id 1  end_log_pos 17675 CRC32 0x228ba16b        Query   thread_id&#x3D;4912  exec_time&#x3D;0        error_code&#x3D;0
+SET TIMESTAMP&#x3D;1612138961&#x2F;*!*&#x2F;;
+BEGIN
+&#x2F;*!*&#x2F;;
+# at 17675
+#210201  8:22:41 server id 1  end_log_pos 17719 CRC32 0x46a33884        Table_map: &#96;test&#96;.&#96;a&#96; mapped to number 163
+# at 17719
+#210201  8:22:41 server id 1  end_log_pos 17759 CRC32 0xcb7ee07b        Write_rows: table id 163 flags: STMT_END_F
+### INSERT INTO &#96;test&#96;.&#96;a&#96;
+### SET
+###   @1&#x3D;2
+# at 17759
+#210201  8:22:41 server id 1  end_log_pos 17790 CRC32 0x037265f5        Xid &#x3D; 1782200
+COMMIT&#x2F;*!*&#x2F;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 <p>截取其中的一段进行分析：</p>
-<figure class="highlight awk"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs awk"><span class="hljs-comment"># at 17603</span><br><span class="hljs-comment">#210201  8:22:41 server id 1  end_log_pos 17675 CRC32 0x228ba16b        Query   thread_id=4912  exec_time=0        error_code=0</span><br>SET TIMESTAMP=<span class="hljs-number">1612138961</span><span class="hljs-regexp">/*!*/</span>;<br><span class="hljs-keyword">BEGIN</span><br><span class="hljs-regexp">/*!*/</span>;<br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none"># at 17603
+#210201  8:22:41 server id 1  end_log_pos 17675 CRC32 0x228ba16b        Query   thread_id&#x3D;4912  exec_time&#x3D;0        error_code&#x3D;0
+SET TIMESTAMP&#x3D;1612138961&#x2F;*!*&#x2F;;
+BEGIN
+&#x2F;*!*&#x2F;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 <p>上面输出包括信息：</p>
 <ul>
 <li>position: 位于文件中的位置，即第一行的（# at 17603）,说明该事件记录从文件第21019个字节开始</li>
@@ -486,12 +590,121 @@
 </tr>
 </tbody></table>
 <h4 id="Binlog-事件的结构"><a href="#Binlog-事件的结构" class="headerlink" title="Binlog 事件的结构"></a>Binlog 事件的结构</h4><p>一个事件对象分为事件头和事件体，事件的结构如下：</p>
-<figure class="highlight gherkin"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs gherkin">+=====================================+<br>|<span class="hljs-string"> event  </span>|<span class="hljs-string"> timestamp         0 : 4    </span>|<br>|<span class="hljs-string"> header +----------------------------+</span><br>|<span class="hljs-string">        </span>|<span class="hljs-string"> type_code         4 : 1    </span>|<br>|<span class="hljs-string">        +----------------------------+</span><br>|<span class="hljs-string">        </span>|<span class="hljs-string"> server_id         5 : 4    </span>|<br>|<span class="hljs-string">        +----------------------------+</span><br>|<span class="hljs-string">        </span>|<span class="hljs-string"> event_length      9 : 4    </span>|<br>|<span class="hljs-string">        +----------------------------+</span><br>|<span class="hljs-string">        </span>|<span class="hljs-string"> next_position    13 : 4    </span>|<br>|<span class="hljs-string">        +----------------------------+</span><br>|<span class="hljs-string">        </span>|<span class="hljs-string"> flags            17 : 2    </span>|<br>|<span class="hljs-string">        +----------------------------+</span><br>|<span class="hljs-string">        </span>|<span class="hljs-string"> extra_headers    19 : x-19 </span>|<br>+=====================================+<br>|<span class="hljs-string"> event  </span>|<span class="hljs-string"> fixed part        x : y    </span>|<br>|<span class="hljs-string"> data   +----------------------------+</span><br>|<span class="hljs-string">        </span>|<span class="hljs-string"> variable part              </span>|<br>+=====================================+<br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">+&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;+
+| event  | timestamp         0 : 4    |
+| header +----------------------------+
+|        | type_code         4 : 1    |
+|        +----------------------------+
+|        | server_id         5 : 4    |
+|        +----------------------------+
+|        | event_length      9 : 4    |
+|        +----------------------------+
+|        | next_position    13 : 4    |
+|        +----------------------------+
+|        | flags            17 : 2    |
+|        +----------------------------+
+|        | extra_headers    19 : x-19 |
++&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;+
+| event  | fixed part        x : y    |
+| data   +----------------------------+
+|        | variable part              |
++&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 <p>如果事件头的长度是 <code>x</code> 字节，那么事件体的长度为 <code>(event_length - x)</code> 字节；设事件体中 <code>fixed part</code> 的长度为 <code>y</code> 字节，那么 <code>variable part</code> 的长度为 <code>(event_length - (x + y))</code> 字节</p>
 <h4 id="Binlog-Event-简要分析"><a href="#Binlog-Event-简要分析" class="headerlink" title="Binlog Event 简要分析"></a>Binlog Event 简要分析</h4><p>从一个最简单的实例来分析Event，包括创建表，插入数据，更新数据，删除数据；</p>
-<figure class="highlight n1ql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs n1ql"><span class="hljs-keyword">CREATE</span> TABLE <span class="hljs-symbol">`test`</span> (<br>  <span class="hljs-symbol">`id`</span> bigint(<span class="hljs-number">20</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-literal">NULL</span> AUTO_INCREMENT,<br>  <span class="hljs-symbol">`age`</span> int(<span class="hljs-number">11</span>) DEFAULT <span class="hljs-literal">NULL</span>,<br>  <span class="hljs-symbol">`name`</span> varchar(<span class="hljs-number">255</span>) DEFAULT <span class="hljs-literal">NULL</span>,<br>  <span class="hljs-keyword">PRIMARY</span> <span class="hljs-keyword">KEY</span> (<span class="hljs-symbol">`id`</span>)<br>) ENGINE=InnoDB DEFAULT CHARSET=utf8;<br><br><span class="hljs-keyword">insert</span> <span class="hljs-keyword">into</span> test <span class="hljs-keyword">values</span>(<span class="hljs-number">1</span>,<span class="hljs-number">22</span>,<span class="hljs-string">&quot;小旋锋&quot;</span>);<br><span class="hljs-keyword">update</span> test <span class="hljs-keyword">set</span> name=<span class="hljs-string">&#x27;whirly&#x27;</span> <span class="hljs-keyword">where</span> id=<span class="hljs-number">1</span>;<br><span class="hljs-keyword">delete</span> <span class="hljs-keyword">from</span> test <span class="hljs-keyword">where</span> id=<span class="hljs-number">1</span>;<br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">CREATE TABLE &#96;test&#96; (
+  &#96;id&#96; bigint(20) NOT NULL AUTO_INCREMENT,
+  &#96;age&#96; int(11) DEFAULT NULL,
+  &#96;name&#96; varchar(255) DEFAULT NULL,
+  PRIMARY KEY (&#96;id&#96;)
+) ENGINE&#x3D;InnoDB DEFAULT CHARSET&#x3D;utf8;
+
+insert into test values(1,22,&quot;小旋锋&quot;);
+update test set name&#x3D;&#39;whirly&#39; where id&#x3D;1;
+delete from test where id&#x3D;1;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 <p>日志格式为<code>ROW</code>，查看create、insert、update、delete操作产生的binlog事件</p>
-<figure class="highlight vala"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs vala"><span class="hljs-meta"># at 13309</span><br><span class="hljs-meta">#210203 14:00:28 server id 1  end_log_pos 13374 CRC32 0x70dff441 	Anonymous_GTID	last_committed=17	sequence_number=18	rbr_only=no</span><br>SET @@SESSION.GTID_NEXT= <span class="hljs-string">&#x27;ANONYMOUS&#x27;</span><span class="hljs-comment">/*!*/</span>;<br><span class="hljs-meta"># at 13374</span><br><span class="hljs-meta">#210203 14:00:28 server id 1  end_log_pos 13636 CRC32 0xf9e23901 	Query	thread_id=10888	exec_time=0	error_code=0</span><br>SET TIMESTAMP=<span class="hljs-number">1612332028</span><span class="hljs-comment">/*!*/</span>;<br>CREATE TABLE `test` (<br>  `id` bigint(<span class="hljs-number">20</span>) NOT NULL AUTO_INCREMENT,<br>  `age` <span class="hljs-keyword">int</span>(<span class="hljs-number">11</span>) DEFAULT NULL,<br>  `name` varchar(<span class="hljs-number">255</span>) DEFAULT NULL,<br>  PRIMARY KEY (`id`)<br>) ENGINE=InnoDB DEFAULT CHARSET=utf8<br><span class="hljs-comment">/*!*/</span>;<br><span class="hljs-meta"># at 13636</span><br><span class="hljs-meta">#210203 14:00:28 server id 1  end_log_pos 13701 CRC32 0x42d0df37 	Anonymous_GTID	last_committed=18	sequence_number=19	rbr_only=yes</span><br><span class="hljs-comment">/*!50718 SET TRANSACTION ISOLATION LEVEL READ COMMITTED*/</span><span class="hljs-comment">/*!*/</span>;<br>SET @@SESSION.GTID_NEXT= <span class="hljs-string">&#x27;ANONYMOUS&#x27;</span><span class="hljs-comment">/*!*/</span>;<br><span class="hljs-meta"># at 13701</span><br><span class="hljs-meta">#210203 14:00:28 server id 1  end_log_pos 13773 CRC32 0x5fc46a4b 	Query	thread_id=10888	exec_time=0	error_code=0</span><br>SET TIMESTAMP=<span class="hljs-number">1612332028</span><span class="hljs-comment">/*!*/</span>;<br>BEGIN<br><span class="hljs-comment">/*!*/</span>;<br><span class="hljs-meta"># at 13773</span><br><span class="hljs-meta">#210203 14:00:28 server id 1  end_log_pos 13824 CRC32 0x9e93cf24 	Table_map: `test`.`test` mapped to number 293</span><br><span class="hljs-meta"># at 13824</span><br><span class="hljs-meta">#210203 14:00:28 server id 1  end_log_pos 13880 CRC32 0x7b4a0463 	Write_rows: table id 293 flags: STMT_END_F</span><br><span class="hljs-meta">### INSERT INTO `test`.`test`</span><br><span class="hljs-meta">### SET</span><br><span class="hljs-meta">###   @1=1</span><br><span class="hljs-meta">###   @2=26</span><br><span class="hljs-meta">###   @3=&#x27;Raines&#x27;</span><br><span class="hljs-meta"># at 13880</span><br><span class="hljs-meta">#210203 14:00:28 server id 1  end_log_pos 13911 CRC32 0x2c762662 	Xid = 1625907</span><br>COMMIT<span class="hljs-comment">/*!*/</span>;<br><span class="hljs-meta"># at 13911</span><br><span class="hljs-meta">#210203 14:00:28 server id 1  end_log_pos 13976 CRC32 0xcd82a45f 	Anonymous_GTID	last_committed=19	sequence_number=20	rbr_only=yes</span><br><span class="hljs-comment">/*!50718 SET TRANSACTION ISOLATION LEVEL READ COMMITTED*/</span><span class="hljs-comment">/*!*/</span>;<br>SET @@SESSION.GTID_NEXT= <span class="hljs-string">&#x27;ANONYMOUS&#x27;</span><span class="hljs-comment">/*!*/</span>;<br><span class="hljs-meta"># at 13976</span><br><span class="hljs-meta">#210203 14:00:28 server id 1  end_log_pos 14048 CRC32 0xa71b0686 	Query	thread_id=10888	exec_time=0	error_code=0</span><br>SET TIMESTAMP=<span class="hljs-number">1612332028</span><span class="hljs-comment">/*!*/</span>;<br>BEGIN<br><span class="hljs-comment">/*!*/</span>;<br><span class="hljs-meta"># at 14048</span><br><span class="hljs-meta">#210203 14:00:28 server id 1  end_log_pos 14099 CRC32 0xe051b52e 	Table_map: `test`.`test` mapped to number 293</span><br><span class="hljs-meta"># at 14099</span><br><span class="hljs-meta">#210203 14:00:28 server id 1  end_log_pos 14177 CRC32 0x2131259c 	Update_rows: table id 293 flags: STMT_END_F</span><br><span class="hljs-meta">### UPDATE `test`.`test`</span><br><span class="hljs-meta">### WHERE</span><br><span class="hljs-meta">###   @1=1</span><br><span class="hljs-meta">###   @2=26</span><br><span class="hljs-meta">###   @3=&#x27;Raines&#x27;</span><br><span class="hljs-meta">### SET</span><br><span class="hljs-meta">###   @1=1</span><br><span class="hljs-meta">###   @2=26</span><br><span class="hljs-meta">###   @3=&#x27;raines&#x27;</span><br><span class="hljs-meta"># at 14177</span><br><span class="hljs-meta">#210203 14:00:28 server id 1  end_log_pos 14208 CRC32 0xf63a78df 	Xid = 1625909</span><br>COMMIT<span class="hljs-comment">/*!*/</span>;<br><span class="hljs-meta"># at 14208</span><br><span class="hljs-meta">#210203 14:00:28 server id 1  end_log_pos 14273 CRC32 0x9f9919a7 	Anonymous_GTID	last_committed=20	sequence_number=21	rbr_only=yes</span><br><span class="hljs-comment">/*!50718 SET TRANSACTION ISOLATION LEVEL READ COMMITTED*/</span><span class="hljs-comment">/*!*/</span>;<br>SET @@SESSION.GTID_NEXT= <span class="hljs-string">&#x27;ANONYMOUS&#x27;</span><span class="hljs-comment">/*!*/</span>;<br><span class="hljs-meta"># at 14273</span><br><span class="hljs-meta">#210203 14:00:28 server id 1  end_log_pos 14345 CRC32 0x30d7d943 	Query	thread_id=10888	exec_time=0	error_code=0</span><br>SET TIMESTAMP=<span class="hljs-number">1612332028</span><span class="hljs-comment">/*!*/</span>;<br>BEGIN<br><span class="hljs-comment">/*!*/</span>;<br><span class="hljs-meta"># at 14345</span><br><span class="hljs-meta">#210203 14:00:28 server id 1  end_log_pos 14396 CRC32 0x47e9cd1b 	Table_map: `test`.`test` mapped to number 293</span><br><span class="hljs-meta"># at 14396</span><br><span class="hljs-meta">#210203 14:00:28 server id 1  end_log_pos 14452 CRC32 0x6b5c7194 	Delete_rows: table id 293 flags: STMT_END_F</span><br><span class="hljs-meta">### DELETE FROM `test`.`test`</span><br><span class="hljs-meta">### WHERE</span><br><span class="hljs-meta">###   @1=1</span><br><span class="hljs-meta">###   @2=26</span><br><span class="hljs-meta">###   @3=&#x27;raines&#x27;</span><br><span class="hljs-meta"># at 14452</span><br><span class="hljs-meta">#210203 14:00:28 server id 1  end_log_pos 14483 CRC32 0x4516b3be 	Xid = 1625910</span><br>COMMIT<span class="hljs-comment">/*!*/</span>;<br>SET @@SESSION.GTID_NEXT= <span class="hljs-string">&#x27;AUTOMATIC&#x27;</span> <span class="hljs-comment">/* added by mysqlbinlog */</span> <span class="hljs-comment">/*!*/</span>;<br>DELIMITER ;<br><span class="hljs-meta"># End of log file</span><br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none"># at 13309
+#210203 14:00:28 server id 1  end_log_pos 13374 CRC32 0x70dff441 	Anonymous_GTID	last_committed&#x3D;17	sequence_number&#x3D;18	rbr_only&#x3D;no
+SET @@SESSION.GTID_NEXT&#x3D; &#39;ANONYMOUS&#39;&#x2F;*!*&#x2F;;
+# at 13374
+#210203 14:00:28 server id 1  end_log_pos 13636 CRC32 0xf9e23901 	Query	thread_id&#x3D;10888	exec_time&#x3D;0	error_code&#x3D;0
+SET TIMESTAMP&#x3D;1612332028&#x2F;*!*&#x2F;;
+CREATE TABLE &#96;test&#96; (
+  &#96;id&#96; bigint(20) NOT NULL AUTO_INCREMENT,
+  &#96;age&#96; int(11) DEFAULT NULL,
+  &#96;name&#96; varchar(255) DEFAULT NULL,
+  PRIMARY KEY (&#96;id&#96;)
+) ENGINE&#x3D;InnoDB DEFAULT CHARSET&#x3D;utf8
+&#x2F;*!*&#x2F;;
+# at 13636
+#210203 14:00:28 server id 1  end_log_pos 13701 CRC32 0x42d0df37 	Anonymous_GTID	last_committed&#x3D;18	sequence_number&#x3D;19	rbr_only&#x3D;yes
+&#x2F;*!50718 SET TRANSACTION ISOLATION LEVEL READ COMMITTED*&#x2F;&#x2F;*!*&#x2F;;
+SET @@SESSION.GTID_NEXT&#x3D; &#39;ANONYMOUS&#39;&#x2F;*!*&#x2F;;
+# at 13701
+#210203 14:00:28 server id 1  end_log_pos 13773 CRC32 0x5fc46a4b 	Query	thread_id&#x3D;10888	exec_time&#x3D;0	error_code&#x3D;0
+SET TIMESTAMP&#x3D;1612332028&#x2F;*!*&#x2F;;
+BEGIN
+&#x2F;*!*&#x2F;;
+# at 13773
+#210203 14:00:28 server id 1  end_log_pos 13824 CRC32 0x9e93cf24 	Table_map: &#96;test&#96;.&#96;test&#96; mapped to number 293
+# at 13824
+#210203 14:00:28 server id 1  end_log_pos 13880 CRC32 0x7b4a0463 	Write_rows: table id 293 flags: STMT_END_F
+### INSERT INTO &#96;test&#96;.&#96;test&#96;
+### SET
+###   @1&#x3D;1
+###   @2&#x3D;26
+###   @3&#x3D;&#39;Raines&#39;
+# at 13880
+#210203 14:00:28 server id 1  end_log_pos 13911 CRC32 0x2c762662 	Xid &#x3D; 1625907
+COMMIT&#x2F;*!*&#x2F;;
+# at 13911
+#210203 14:00:28 server id 1  end_log_pos 13976 CRC32 0xcd82a45f 	Anonymous_GTID	last_committed&#x3D;19	sequence_number&#x3D;20	rbr_only&#x3D;yes
+&#x2F;*!50718 SET TRANSACTION ISOLATION LEVEL READ COMMITTED*&#x2F;&#x2F;*!*&#x2F;;
+SET @@SESSION.GTID_NEXT&#x3D; &#39;ANONYMOUS&#39;&#x2F;*!*&#x2F;;
+# at 13976
+#210203 14:00:28 server id 1  end_log_pos 14048 CRC32 0xa71b0686 	Query	thread_id&#x3D;10888	exec_time&#x3D;0	error_code&#x3D;0
+SET TIMESTAMP&#x3D;1612332028&#x2F;*!*&#x2F;;
+BEGIN
+&#x2F;*!*&#x2F;;
+# at 14048
+#210203 14:00:28 server id 1  end_log_pos 14099 CRC32 0xe051b52e 	Table_map: &#96;test&#96;.&#96;test&#96; mapped to number 293
+# at 14099
+#210203 14:00:28 server id 1  end_log_pos 14177 CRC32 0x2131259c 	Update_rows: table id 293 flags: STMT_END_F
+### UPDATE &#96;test&#96;.&#96;test&#96;
+### WHERE
+###   @1&#x3D;1
+###   @2&#x3D;26
+###   @3&#x3D;&#39;Raines&#39;
+### SET
+###   @1&#x3D;1
+###   @2&#x3D;26
+###   @3&#x3D;&#39;raines&#39;
+# at 14177
+#210203 14:00:28 server id 1  end_log_pos 14208 CRC32 0xf63a78df 	Xid &#x3D; 1625909
+COMMIT&#x2F;*!*&#x2F;;
+# at 14208
+#210203 14:00:28 server id 1  end_log_pos 14273 CRC32 0x9f9919a7 	Anonymous_GTID	last_committed&#x3D;20	sequence_number&#x3D;21	rbr_only&#x3D;yes
+&#x2F;*!50718 SET TRANSACTION ISOLATION LEVEL READ COMMITTED*&#x2F;&#x2F;*!*&#x2F;;
+SET @@SESSION.GTID_NEXT&#x3D; &#39;ANONYMOUS&#39;&#x2F;*!*&#x2F;;
+# at 14273
+#210203 14:00:28 server id 1  end_log_pos 14345 CRC32 0x30d7d943 	Query	thread_id&#x3D;10888	exec_time&#x3D;0	error_code&#x3D;0
+SET TIMESTAMP&#x3D;1612332028&#x2F;*!*&#x2F;;
+BEGIN
+&#x2F;*!*&#x2F;;
+# at 14345
+#210203 14:00:28 server id 1  end_log_pos 14396 CRC32 0x47e9cd1b 	Table_map: &#96;test&#96;.&#96;test&#96; mapped to number 293
+# at 14396
+#210203 14:00:28 server id 1  end_log_pos 14452 CRC32 0x6b5c7194 	Delete_rows: table id 293 flags: STMT_END_F
+### DELETE FROM &#96;test&#96;.&#96;test&#96;
+### WHERE
+###   @1&#x3D;1
+###   @2&#x3D;26
+###   @3&#x3D;&#39;raines&#39;
+# at 14452
+#210203 14:00:28 server id 1  end_log_pos 14483 CRC32 0x4516b3be 	Xid &#x3D; 1625910
+COMMIT&#x2F;*!*&#x2F;;
+SET @@SESSION.GTID_NEXT&#x3D; &#39;AUTOMATIC&#39; &#x2F;* added by mysqlbinlog *&#x2F; &#x2F;*!*&#x2F;;
+DELIMITER ;
+# End of log file<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 <p>关于Event的分析，有需要可以查看参考文档进行推算。</p>
 <h4 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h4><ul>
 <li><a target="_blank" rel="noopener" href="http://www.searchdoc.cn/rdbms/mysql/dev.mysql.com/doc/refman/5.7/en/binary-log.com.coder114.cn.html">MySQL 5.7参考手册.二进制日志</a></li>
@@ -662,6 +875,8 @@
 
 
 
+  
+    
   
 
 

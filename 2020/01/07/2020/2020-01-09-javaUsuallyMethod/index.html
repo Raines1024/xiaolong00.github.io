@@ -32,7 +32,15 @@
     
     
       
-      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/darcula.min.css" />
+      
+        
+          
+        
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.22.0/themes/prism.min.css" />
+      
+      
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.22.0/plugins/line-numbers/prism-line-numbers.min.css" />
+      
     
   
 
@@ -231,15 +239,15 @@
             
             <div class="markdown-body">
               <p>//集合转成字符串逗号分隔</p>
-<div class="hljs code-wrapper"><pre><code>StringUtils.join(list,&quot;,&quot;);</code></pre></div>
+<div class="code-wrapper"><pre><code>StringUtils.join(list,&quot;,&quot;);</code></pre></div>
 <p>//取集合中最大值</p>
-<div class="hljs code-wrapper"><pre><code>long parValueMax = Collections.max(resultList.stream().map(OmsCouponUserAppVo::getParValue).collect(Collectors.toList()));</code></pre></div>
+<div class="code-wrapper"><pre><code>long parValueMax = Collections.max(resultList.stream().map(OmsCouponUserAppVo::getParValue).collect(Collectors.toList()));</code></pre></div>
 <p>//字符串根据逗号转成List</p>
-<div class="hljs code-wrapper"><pre><code>List&lt;String&gt; items = Arrays.asList(str.split(&quot;\\s*,\\s*&quot;));</code></pre></div>
+<div class="code-wrapper"><pre><code>List&lt;String&gt; items = Arrays.asList(str.split(&quot;\\s*,\\s*&quot;));</code></pre></div>
 <p>//集合去重</p>
-<div class="hljs code-wrapper"><pre><code>items.stream().distinct().collect(Collectors.joining(&quot;,&quot;));</code></pre></div>
+<div class="code-wrapper"><pre><code>items.stream().distinct().collect(Collectors.joining(&quot;,&quot;));</code></pre></div>
 <p>//对对象集合中的某字段降序排序</p>
-<div class="hljs code-wrapper"><pre><code>Collections.sort(list, new Comparator&lt;OmsCouponSend&gt;() &#123;
+<div class="code-wrapper"><pre><code>Collections.sort(list, new Comparator&lt;OmsCouponSend&gt;() &#123;
     @Override
     public int compare(OmsCouponSend o1, OmsCouponSend o2) &#123;
         if (o1.getCoupon() &gt; o2.getCoupon()) &#123;
@@ -252,9 +260,9 @@
     &#125;
 &#125;);</code></pre></div>
 <p>//对集合中某元素去重</p>
-<div class="hljs code-wrapper"><pre><code>ArrayList&lt;OmsCollectAppVo&gt; distinctLiost = resultList.stream().collect(Collectors.collectingAndThen(Collectors.toCollection(() -&gt; new TreeSet&lt;&gt;(Comparator.comparingLong(OmsCollectAppVo::getSortId))), ArrayList::new));</code></pre></div>
+<div class="code-wrapper"><pre><code>ArrayList&lt;OmsCollectAppVo&gt; distinctLiost = resultList.stream().collect(Collectors.collectingAndThen(Collectors.toCollection(() -&gt; new TreeSet&lt;&gt;(Comparator.comparingLong(OmsCollectAppVo::getSortId))), ArrayList::new));</code></pre></div>
 <p>//多条件对集合排序<br>(如果a1-a2大于0，返回正数是升序;如果a2-a1小于0，返回负数是降序)</p>
-<div class="hljs code-wrapper"><pre><code>Collections.sort(students, new Comparator()&#123;
+<div class="code-wrapper"><pre><code>Collections.sort(students, new Comparator()&#123;
 
   public int compare(Student a1, Student a2) &#123;
 
@@ -424,6 +432,8 @@
 
 
 
+  
+    
   
 
 

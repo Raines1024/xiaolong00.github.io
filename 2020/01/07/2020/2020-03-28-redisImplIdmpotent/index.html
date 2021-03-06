@@ -32,7 +32,15 @@
     
     
       
-      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/darcula.min.css" />
+      
+        
+          
+        
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.22.0/themes/prism.min.css" />
+      
+      
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.22.0/plugins/line-numbers/prism-line-numbers.min.css" />
+      
     
   
 
@@ -187,7 +195,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.8k 字
+      1.9k 字
     </span>
   
 
@@ -197,7 +205,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      23
+      24
        分钟
     </span>
   
@@ -241,30 +249,242 @@
 <li>首先是搭建redis服务器。  </li>
 <li>引入springboot中到的redis的stater，或者Spring封装的jedis也可以，后面主要用到的api就是它的set方法和exists方法,由于上篇Redis实现分布式锁时我们用的jedis，这里我们再尝试使用springboot的封装好的redisTemplate  </li>
 </ol>
-<figure class="highlight dts"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs dts"><span class="hljs-params">&lt;dependency&gt;</span><br>    <span class="hljs-params">&lt;groupId&gt;</span>org.springframework.boot<span class="hljs-params">&lt;/groupId&gt;</span><br>    <span class="hljs-params">&lt;artifactId&gt;</span>spring-boot-starter-data-redis<span class="hljs-params">&lt;/artifactId&gt;</span><br><span class="hljs-params">&lt;/dependency&gt;</span><br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework.boot&lt;&#x2F;groupId&gt;
+    &lt;artifactId&gt;spring-boot-starter-data-redis&lt;&#x2F;artifactId&gt;
+&lt;&#x2F;dependency&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre></div>
 <ol start="3">
 <li>redisTemplate所需工具类及具体使用参照之前 SpringBoot中使用Redis 博文</li>
 </ol>
 <h3 id="自定义注解AutoIdempotent-自定义注解使用方式可以参照之前写过的-Java自定义注解-博文"><a href="#自定义注解AutoIdempotent-自定义注解使用方式可以参照之前写过的-Java自定义注解-博文" class="headerlink" title="自定义注解AutoIdempotent(自定义注解使用方式可以参照之前写过的 Java自定义注解 博文)"></a>自定义注解AutoIdempotent(自定义注解使用方式可以参照之前写过的 Java自定义注解 博文)</h3><p>自定义一个注解，定义此注解的主要目的是把它添加在需要实现幂等的方法上，凡是某个方法注解了它，都会实现自动幂等。后台利用反射如果扫描到这个注解，就会处理这个方法实现自动幂等，使用元注解ElementType.METHOD表示它只能放在方法上，etentionPolicy.RUNTIME表示它在运行时。   </p>
-<figure class="highlight less"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs less"><span class="hljs-variable">@Target</span>(&#123;ElementType.METHOD&#125;)<br><span class="hljs-variable">@Retention</span>(RetentionPolicy.RUNTIME)<br>public <span class="hljs-variable">@interface</span> AutoIdempotent &#123;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">@Target(&#123;ElementType.METHOD&#125;)
+@Retention(RetentionPolicy.RUNTIME)
+public @interface AutoIdempotent &#123;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre></div>
 <h3 id="token创建和检验"><a href="#token创建和检验" class="headerlink" title="token创建和检验"></a>token创建和检验</h3><ol>
 <li>token服务接口<br>我们新建一个接口，创建token服务，里面主要是两个方法，一个用来创建token，一个用来验证token。创建token主要产生的是一个字符串，检验token的话主要是传达request对象，为什么要传request对象呢？主要作用就是获取header里面的token,然后检验，通过抛出的Exception来获取具体的报错信息返回给前端。   </li>
 </ol>
-<figure class="highlight zephir"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs zephir"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 幂等接口所需功能</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">TokenService</span> </span>&#123;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 创建token</span><br><span class="hljs-comment">     *</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span></span><br><span class="hljs-comment">     */</span><br>    String createToken();<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 检验token</span><br><span class="hljs-comment">     *</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> request</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span></span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-keyword">boolean</span> checkToken(HttpServletRequest request) throws <span class="hljs-keyword">Exception</span>;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">&#x2F;**
+ * 幂等接口所需功能
+ *&#x2F;
+public interface TokenService &#123;
+
+    &#x2F;**
+     * 创建token
+     *
+     * @return
+     *&#x2F;
+    String createToken();
+
+    &#x2F;**
+     * 检验token
+     *
+     * @param request
+     * @return
+     *&#x2F;
+    boolean checkToken(HttpServletRequest request) throws Exception;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 <ol start="2">
 <li>token的服务实现类<br>token引用了redis服务，创建token采用随机算法工具类生成随机uuid字符串,然后放入到redis中(为了防止数据的冗余保留,这里设置过期时间为10000秒,具体可视业务而定)，如果放入成功，最后返回这个token值。checkToken方法就是从header中获取token到值(如果header中拿不到，就从paramter中获取)，如若不存在,直接抛出异常。这个异常信息可以被拦截器捕捉到，然后返回给前端。  </li>
 </ol>
-<figure class="highlight reasonml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs reasonml"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 幂等接口功能实现类</span><br><span class="hljs-comment"> */</span><br>@Service<br>public <span class="hljs-keyword">class</span> TokenServiceImpl implements TokenService &#123;<br><br><br>    @Autowired<br>    <span class="hljs-keyword">private</span> DataCache dataCache;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 检验token</span><br><span class="hljs-comment">     *</span><br><span class="hljs-comment">     * @param request</span><br><span class="hljs-comment">     * @return</span><br><span class="hljs-comment">     */</span><br>    @Override<br>    public boolean check<span class="hljs-constructor">Token(HttpServletRequest <span class="hljs-params">request</span>)</span> throws Exception &#123;<br>        String token = request.get<span class="hljs-constructor">Header(Constant.TOKEN_NAME)</span>;<br>        <span class="hljs-keyword">if</span> (<span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">StrUtil</span>.</span></span>is<span class="hljs-constructor">Blank(<span class="hljs-params">token</span>)</span>) &#123;<br>            <span class="hljs-comment">// header中不存在tokenw</span><br>            token = request.get<span class="hljs-constructor">Parameter(Constant.TOKEN_NAME)</span>;<br>            <span class="hljs-keyword">if</span> (<span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">StrUtil</span>.</span></span>is<span class="hljs-constructor">Blank(<span class="hljs-params">token</span>)</span>) &#123;<br>            <span class="hljs-comment">// parameter中也不存在token</span><br>                throw <span class="hljs-keyword">new</span> <span class="hljs-constructor">Exception(<span class="hljs-string">&quot;parameter中也不存在token&quot;</span>)</span>;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">if</span> (!dataCache.exists(token)) &#123;<br>            throw <span class="hljs-keyword">new</span> <span class="hljs-constructor">Exception(<span class="hljs-string">&quot;找不到token&quot;</span>)</span>;<br>        &#125;<br>        boolean remove = dataCache.remove(token);<br>        <span class="hljs-keyword">if</span> (!remove) &#123;<br>            throw <span class="hljs-keyword">new</span> <span class="hljs-constructor">Exception(<span class="hljs-string">&quot;redis错误&quot;</span>)</span>;<br>        &#125;<br>        return <span class="hljs-literal">true</span>;<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 创建token</span><br><span class="hljs-comment">     *</span><br><span class="hljs-comment">     * @return</span><br><span class="hljs-comment">     */</span><br>    @Override<br>    public String create<span class="hljs-constructor">Token()</span> &#123;<br>        String str = <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">UUID</span>.</span></span>random<span class="hljs-constructor">UUID()</span>.<span class="hljs-keyword">to</span><span class="hljs-constructor">String()</span>;<br>        StringBuilder token = <span class="hljs-keyword">new</span> <span class="hljs-constructor">StringBuilder()</span>;<br>        <span class="hljs-keyword">try</span> &#123;<br>            token.append(str);<br>            dataCache.set(token.<span class="hljs-keyword">to</span><span class="hljs-constructor">String()</span>, token.<span class="hljs-keyword">to</span><span class="hljs-constructor">String()</span>, <span class="hljs-number">10000L</span>);<br>            boolean notEmpty = <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">StrUtil</span>.</span></span>is<span class="hljs-constructor">NotBlank(<span class="hljs-params">token</span>.<span class="hljs-params">toString</span>()</span>);<br>            <span class="hljs-keyword">if</span> (notEmpty) &#123;<br>                return token.<span class="hljs-keyword">to</span><span class="hljs-constructor">String()</span>;<br>            &#125;<br><br>        &#125; catch (Exception ex) &#123;<br>            ex.print<span class="hljs-constructor">StackTrace()</span>;<br>        &#125;<br>        return null;<br>    &#125;<br><br>&#125;<br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">&#x2F;**
+ * 幂等接口功能实现类
+ *&#x2F;
+@Service
+public class TokenServiceImpl implements TokenService &#123;
+
+
+    @Autowired
+    private DataCache dataCache;
+
+    &#x2F;**
+     * 检验token
+     *
+     * @param request
+     * @return
+     *&#x2F;
+    @Override
+    public boolean checkToken(HttpServletRequest request) throws Exception &#123;
+        String token &#x3D; request.getHeader(Constant.TOKEN_NAME);
+        if (StrUtil.isBlank(token)) &#123;
+            &#x2F;&#x2F; header中不存在tokenw
+            token &#x3D; request.getParameter(Constant.TOKEN_NAME);
+            if (StrUtil.isBlank(token)) &#123;
+            &#x2F;&#x2F; parameter中也不存在token
+                throw new Exception(&quot;parameter中也不存在token&quot;);
+            &#125;
+        &#125;
+        if (!dataCache.exists(token)) &#123;
+            throw new Exception(&quot;找不到token&quot;);
+        &#125;
+        boolean remove &#x3D; dataCache.remove(token);
+        if (!remove) &#123;
+            throw new Exception(&quot;redis错误&quot;);
+        &#125;
+        return true;
+    &#125;
+
+    &#x2F;**
+     * 创建token
+     *
+     * @return
+     *&#x2F;
+    @Override
+    public String createToken() &#123;
+        String str &#x3D; UUID.randomUUID().toString();
+        StringBuilder token &#x3D; new StringBuilder();
+        try &#123;
+            token.append(str);
+            dataCache.set(token.toString(), token.toString(), 10000L);
+            boolean notEmpty &#x3D; StrUtil.isNotBlank(token.toString());
+            if (notEmpty) &#123;
+                return token.toString();
+            &#125;
+
+        &#125; catch (Exception ex) &#123;
+            ex.printStackTrace();
+        &#125;
+        return null;
+    &#125;
+
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 <h3 id="拦截器的配置"><a href="#拦截器的配置" class="headerlink" title="拦截器的配置"></a>拦截器的配置</h3><ol>
 <li>web配置类，实现WebMvcConfigurer，主要作用就是添加拦截器AutoIdempotentInterceptor到配置类中，这样我们到拦截器才能生效，注意使用@Configuration注解，这样在容器启动是时候就可以添加进入context中。   </li>
 </ol>
-<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-meta">@Configuration</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">WebConfiguration</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">WebMvcConfigurer</span> </span>&#123;<br><br>    <span class="hljs-meta">@Resource</span><br>    <span class="hljs-keyword">private</span> AutoIdempotentInterceptor autoIdempotentInterceptor;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 添加拦截器</span><br><span class="hljs-comment">     *</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> registry</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">addInterceptors</span><span class="hljs-params">(InterceptorRegistry registry)</span> </span>&#123;<br>        registry.addInterceptor(autoIdempotentInterceptor);<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">@Configuration
+public class WebConfiguration implements WebMvcConfigurer &#123;
+
+    @Resource
+    private AutoIdempotentInterceptor autoIdempotentInterceptor;
+
+    &#x2F;**
+     * 添加拦截器
+     *
+     * @param registry
+     *&#x2F;
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) &#123;
+        registry.addInterceptor(autoIdempotentInterceptor);
+    &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 <ol start="2">
 <li>拦截处理器：主要的功能是拦截扫描到AutoIdempotent注解的方法,然后调用tokenService的checkToken()方法校验token是否正确，如果捕捉到异常就将异常信息渲染成json返回给前端   </li>
 </ol>
-<figure class="highlight aspectj"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs aspectj"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 幂等接口拦截器</span><br><span class="hljs-comment"> */</span><br><span class="hljs-meta">@Component</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AutoIdempotentInterceptor</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">HandlerInterceptor</span> </span>&#123;<br><br>    <span class="hljs-meta">@Autowired</span><br>    <span class="hljs-keyword">private</span> TokenService tokenService;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 预处理</span><br><span class="hljs-comment">     *</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> request</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> response</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> handler</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span></span><br><span class="hljs-comment">     * <span class="hljs-doctag">@throws</span> Exception</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">boolean</span> <span class="hljs-title">preHandle</span><span class="hljs-params">(HttpServletRequest request, HttpServletResponse response, Object <span class="hljs-keyword">handler</span>)</span> <span class="hljs-keyword">throws</span> Exception </span>&#123;<br>        System.out.println(<span class="hljs-string">&quot;走了AutoIdempotentInterceptor.preHandle&quot;</span>);<br>        <span class="hljs-keyword">if</span> (!(<span class="hljs-keyword">handler</span> <span class="hljs-keyword">instanceof</span> HandlerMethod)) &#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>;<br>        &#125;<br>        HandlerMethod handlerMethod = (HandlerMethod) <span class="hljs-keyword">handler</span>;<br>        Method method = handlerMethod.getMethod();<br>        <span class="hljs-comment">//被ApiIdempotment标记的扫描</span><br>        AutoIdempotent methodAnnotation = method.getAnnotation(AutoIdempotent.class);<br>        <span class="hljs-keyword">if</span> (methodAnnotation != <span class="hljs-keyword">null</span>) &#123;<br>            <span class="hljs-keyword">try</span> &#123;<br>                <span class="hljs-function"><span class="hljs-keyword">return</span> tokenService.<span class="hljs-title">checkToken</span><span class="hljs-params">(request)</span></span>;<br>                <span class="hljs-comment">// 幂等性校验, 校验通过则放行, 校验失败则抛出异常, 并通过统一异常处理返回友好提示</span><br>            &#125; <span class="hljs-keyword">catch</span> (Exception ex) &#123;<br>                writeReturnJson(response, <span class="hljs-string">&quot;返回的json错误信息&quot;</span>);<br>                <span class="hljs-keyword">throw</span> ex;<br>            &#125;<br>        &#125;<br>        <span class="hljs-comment">//必须返回true,否则会被拦截一切请求</span><br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>;<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 返回的json值</span><br><span class="hljs-comment">     *</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> response</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> json</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@throws</span> Exception</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-keyword">private</span> <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">writeReturnJson</span><span class="hljs-params">(HttpServletResponse response, String json)</span> <span class="hljs-keyword">throws</span> Exception </span>&#123;<br>        PrintWriter writer = <span class="hljs-keyword">null</span>;<br>        response.setCharacterEncoding(<span class="hljs-string">&quot;UTF-8&quot;</span>);<br>        response.setContentType(<span class="hljs-string">&quot;text/html; charset=utf-8&quot;</span>);<br>        <span class="hljs-keyword">try</span> &#123;<br>            writer = response.getWriter();<br>            writer.print(json);<br>        &#125; <span class="hljs-keyword">catch</span> (IOException e) &#123;<br>        &#125; <span class="hljs-keyword">finally</span> &#123;<br>            <span class="hljs-keyword">if</span> (writer != <span class="hljs-keyword">null</span>)<br>                writer.close();<br>        &#125;<br>    &#125;<br><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">postHandle</span><span class="hljs-params">(HttpServletRequest request, HttpServletResponse response, Object <span class="hljs-keyword">handler</span>, ModelAndView modelAndView)</span> <span class="hljs-keyword">throws</span> Exception </span>&#123;<br>    &#125;<br><br><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">afterCompletion</span><span class="hljs-params">(HttpServletRequest request, HttpServletResponse response, Object <span class="hljs-keyword">handler</span>, Exception ex)</span> <span class="hljs-keyword">throws</span> Exception </span>&#123;<br>    &#125;<br><br><br>&#125;<br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">&#x2F;**
+ * 幂等接口拦截器
+ *&#x2F;
+@Component
+public class AutoIdempotentInterceptor implements HandlerInterceptor &#123;
+
+    @Autowired
+    private TokenService tokenService;
+
+    &#x2F;**
+     * 预处理
+     *
+     * @param request
+     * @param response
+     * @param handler
+     * @return
+     * @throws Exception
+     *&#x2F;
+    @Override
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception &#123;
+        System.out.println(&quot;走了AutoIdempotentInterceptor.preHandle&quot;);
+        if (!(handler instanceof HandlerMethod)) &#123;
+            return true;
+        &#125;
+        HandlerMethod handlerMethod &#x3D; (HandlerMethod) handler;
+        Method method &#x3D; handlerMethod.getMethod();
+        &#x2F;&#x2F;被ApiIdempotment标记的扫描
+        AutoIdempotent methodAnnotation &#x3D; method.getAnnotation(AutoIdempotent.class);
+        if (methodAnnotation !&#x3D; null) &#123;
+            try &#123;
+                return tokenService.checkToken(request);
+                &#x2F;&#x2F; 幂等性校验, 校验通过则放行, 校验失败则抛出异常, 并通过统一异常处理返回友好提示
+            &#125; catch (Exception ex) &#123;
+                writeReturnJson(response, &quot;返回的json错误信息&quot;);
+                throw ex;
+            &#125;
+        &#125;
+        &#x2F;&#x2F;必须返回true,否则会被拦截一切请求
+        return true;
+    &#125;
+
+    &#x2F;**
+     * 返回的json值
+     *
+     * @param response
+     * @param json
+     * @throws Exception
+     *&#x2F;
+    private void writeReturnJson(HttpServletResponse response, String json) throws Exception &#123;
+        PrintWriter writer &#x3D; null;
+        response.setCharacterEncoding(&quot;UTF-8&quot;);
+        response.setContentType(&quot;text&#x2F;html; charset&#x3D;utf-8&quot;);
+        try &#123;
+            writer &#x3D; response.getWriter();
+            writer.print(json);
+        &#125; catch (IOException e) &#123;
+        &#125; finally &#123;
+            if (writer !&#x3D; null)
+                writer.close();
+        &#125;
+    &#125;
+
+    @Override
+    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception &#123;
+    &#125;
+
+
+    @Override
+    public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception &#123;
+    &#125;
+
+
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 <h3 id="测试用例"><a href="#测试用例" class="headerlink" title="测试用例"></a>测试用例</h3><p>1、模拟业务请求类<br>首先我们需要通过/get/token路径通过getToken()方法去获取具体的token，然后我们调用test/Idempotence方法，这个方法上面注解了@AutoIdempotent，拦截器会拦截所有的请求，当判断到处理的方法上面有该注解的时候，就会调用TokenService中的checkToken()方法，如果捕获到异常会将异常抛出调用者。  </p>
-<figure class="highlight typescript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs typescript"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 幂等接口测试Controller</span><br><span class="hljs-comment"> */</span><br><span class="hljs-meta">@RestController</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">BusinessController</span> </span>&#123;<br><br><br>    <span class="hljs-meta">@Resource</span><br>    <span class="hljs-keyword">private</span> TokenService tokenService;<br><br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 幂等接口，必须携带token</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span></span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-meta">@AutoIdempotent</span><br>    <span class="hljs-meta">@PostMapping</span>(<span class="hljs-string">&quot;/test/Idempotence&quot;</span>)<br>    <span class="hljs-keyword">public</span> <span class="hljs-built_in">String</span> <span class="hljs-function"><span class="hljs-title">testIdempotence</span>(<span class="hljs-params"></span>)</span> &#123;<br>        <span class="hljs-built_in">String</span> businessResult = <span class="hljs-string">&quot;幂等接口&quot;</span>;<br>        <span class="hljs-keyword">if</span> (StrUtil.isNotBlank(businessResult)) &#123;<br>            <span class="hljs-keyword">return</span> businessResult;<br>        &#125;<br>        <span class="hljs-keyword">return</span> StrUtil.EMPTY;<br><br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 获取幂等接口所需token</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span></span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-meta">@PostMapping</span>(<span class="hljs-string">&quot;/get/token&quot;</span>)<br>    <span class="hljs-keyword">public</span> <span class="hljs-built_in">String</span> <span class="hljs-function"><span class="hljs-title">getToken</span>(<span class="hljs-params"></span>)</span> &#123;<br>        <span class="hljs-built_in">String</span> token = tokenService.createToken();<br>        <span class="hljs-keyword">if</span> (StrUtil.isNotBlank(token)) &#123;<br>            <span class="hljs-keyword">return</span> token;<br>        &#125;<br>        <span class="hljs-keyword">return</span> StrUtil.EMPTY;<br>    &#125;<br><br>&#125;<br><br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">&#x2F;**
+ * 幂等接口测试Controller
+ *&#x2F;
+@RestController
+public class BusinessController &#123;
+
+
+    @Resource
+    private TokenService tokenService;
+
+
+    &#x2F;**
+     * 幂等接口，必须携带token
+     * @return
+     *&#x2F;
+    @AutoIdempotent
+    @PostMapping(&quot;&#x2F;test&#x2F;Idempotence&quot;)
+    public String testIdempotence() &#123;
+        String businessResult &#x3D; &quot;幂等接口&quot;;
+        if (StrUtil.isNotBlank(businessResult)) &#123;
+            return businessResult;
+        &#125;
+        return StrUtil.EMPTY;
+
+    &#125;
+
+    &#x2F;**
+     * 获取幂等接口所需token
+     * @return
+     *&#x2F;
+    @PostMapping(&quot;&#x2F;get&#x2F;token&quot;)
+    public String getToken() &#123;
+        String token &#x3D; tokenService.createToken();
+        if (StrUtil.isNotBlank(token)) &#123;
+            return token;
+        &#125;
+        return StrUtil.EMPTY;
+    &#125;
+
+&#125;
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>介绍了使用springboot和拦截器、redis来优雅的实现接口幂等，对于幂等在实际的开发过程中是十分重要的，因为一个接口可能会被无数的客户端调用，如何保证其不影响后台的业务处理，如何保证其只影响数据一次是非常重要的，它可以防止产生脏数据或者乱数据，也可以减少并发量，实乃十分有益的一件事。而传统的做法是每次判断数据，这种做法不够智能化和自动化，比较麻烦。而今天的这种自动化处理也可以提升程序的伸缩性。  </p>
 
             </div>
@@ -409,6 +629,8 @@
 
 
 
+  
+    
   
 
 

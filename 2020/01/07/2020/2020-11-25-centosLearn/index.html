@@ -32,7 +32,15 @@
     
     
       
-      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/darcula.min.css" />
+      
+        
+          
+        
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.22.0/themes/prism.min.css" />
+      
+      
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.22.0/plugins/line-numbers/prism-line-numbers.min.css" />
+      
     
   
 
@@ -187,7 +195,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      543 字
+      556 字
     </span>
   
 
@@ -197,7 +205,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      6
+      7
        分钟
     </span>
   
@@ -234,21 +242,35 @@
 <h2 id="查看centos系统的版本"><a href="#查看centos系统的版本" class="headerlink" title="查看centos系统的版本"></a>查看centos系统的版本</h2><p>cat /etc/redhat-release</p>
 <h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><p>free    # 查看服务器内存使用<br>netstat -lntup    # 查看端口情况  l-&gt;listen,n-&gt;num,t-&gt;tcp,u-&gt;udp,p-&gt;process<br>cat /etc/locale.conf   查看使用编码<br>lsblk  查看盘符  </p>
 <h2 id="zip压缩当前文件夹下所有文件"><a href="#zip压缩当前文件夹下所有文件" class="headerlink" title="zip压缩当前文件夹下所有文件"></a>zip压缩当前文件夹下所有文件</h2><p>zip -r myfile.zip ./*</p>
-<h2 id="两台centos之间传送文件"><a href="#两台centos之间传送文件" class="headerlink" title="两台centos之间传送文件"></a>两台centos之间传送文件</h2><p>scp -r /data/appmanage <a href="mailto:&#114;&#111;&#x6f;&#x74;&#64;&#49;&#55;&#50;&#x2e;&#49;&#54;&#x2e;&#x37;&#48;&#46;&#49;&#49;">&#114;&#111;&#x6f;&#x74;&#64;&#49;&#55;&#50;&#x2e;&#49;&#54;&#x2e;&#x37;&#48;&#46;&#49;&#49;</a>:/data/appmanage</p>
+<h2 id="两台centos之间传送文件"><a href="#两台centos之间传送文件" class="headerlink" title="两台centos之间传送文件"></a>两台centos之间传送文件</h2><p>scp -r /data/appmanage <a href="mailto:&#x72;&#111;&#111;&#x74;&#x40;&#49;&#55;&#x32;&#46;&#x31;&#54;&#46;&#x37;&#48;&#x2e;&#x31;&#49;">&#x72;&#111;&#111;&#x74;&#x40;&#49;&#55;&#x32;&#46;&#x31;&#54;&#46;&#x37;&#48;&#x2e;&#x31;&#49;</a>:/data/appmanage</p>
 <h2 id="对当前文件夹打包"><a href="#对当前文件夹打包" class="headerlink" title="对当前文件夹打包"></a>对当前文件夹打包</h2><p>zip -r myfile.zip ./*   </p>
 <h2 id="CentOS下查看文件和文件夹大小"><a href="#CentOS下查看文件和文件夹大小" class="headerlink" title="CentOS下查看文件和文件夹大小"></a>CentOS下查看文件和文件夹大小</h2><p>查看data文件夹下大小<br>du -h –max-depth=1 data/<br><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_33326449/article/details/107446140">https://blog.csdn.net/qq_33326449/article/details/107446140</a></p>
 <h2 id="设置环境变量"><a href="#设置环境变量" class="headerlink" title="设置环境变量"></a>设置环境变量</h2><p>vim /etc/profile   </p>
 <ul>
 <li><p>eg:添加maven环境变量   </p>
-<figure class="highlight routeros"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs routeros"><span class="hljs-attribute">M2_HOME</span>=/usr/maven/apache-maven-3.6.3<br><span class="hljs-builtin-name">export</span> <span class="hljs-attribute">PATH</span>=<span class="hljs-variable">$&#123;M2_HOME&#125;</span>/bin:$&#123;PATH&#125;<br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">M2_HOME&#x3D;&#x2F;usr&#x2F;maven&#x2F;apache-maven-3.6.3
+export PATH&#x3D;$&#123;M2_HOME&#125;&#x2F;bin:$&#123;PATH&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></div>
 <p>source /etc/profile   </p>
 </li>
 </ul>
 <h2 id="linux-crontab-定时任务"><a href="#linux-crontab-定时任务" class="headerlink" title="linux crontab 定时任务"></a>linux crontab 定时任务</h2><h2 id="cron介绍"><a href="#cron介绍" class="headerlink" title="cron介绍"></a>cron介绍</h2><p>我们经常使用的是crontab命令是cron table的简写，它是cron的配置文件，也可以叫它作业列表，我们可以在以下文件夹内找到相关配置文件。<br>/var/spool/cron/ 目录下存放的是每个用户包括root的crontab任务，每个任务以创建者的名字命名<br>/etc/crontab 这个文件负责调度各种管理和维护任务。<br>/etc/cron.d/ 这个目录用来存放任何要执行的crontab文件或脚本。<br>我们还可以把脚本放在/etc/cron.hourly、/etc/cron.daily、/etc/cron.weekly、/etc/cron.monthly目录中，让它每小时/天/星期、月执行一次。   </p>
-<figure class="highlight less"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs less"><span class="hljs-selector-tag">crontab</span> <span class="hljs-selector-attr">[-u username]</span>　　　　<span class="hljs-comment">//省略用户表表示操作当前用户的crontab</span><br>    <span class="hljs-selector-tag">-e</span>      (编辑工作表)<br>    <span class="hljs-selector-tag">-l</span>      (列出工作表里的命令)<br>    <span class="hljs-selector-tag">-r</span>      (删除工作表)<br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">crontab [-u username]　　　　&#x2F;&#x2F;省略用户表表示操作当前用户的crontab
+    -e      (编辑工作表)
+    -l      (列出工作表里的命令)
+    -r      (删除工作表)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre></div>
 <p>我们用crontab -e进入当前用户的工作表编辑，是常见的vim界面。每行是一条命令。<br>crontab的命令构成为 时间+动作，其时间有分、时、日、月、周五种，操作符有  </p>
-<figure class="highlight asciidoc"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs asciidoc"><span class="hljs-bullet">* </span>取值范围内的所有数字<br>/ 每过多少个数字<br><span class="hljs-bullet">- </span>从X到Z<br>，散列数字<br></code></pre></div></td></tr></table></figure>
-<h3 id="使用实例"><a href="#使用实例" class="headerlink" title="使用实例"></a>使用实例</h3><figure class="highlight markdown"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs markdown">实例1：每1分钟执行一次myCommand<br><span class="hljs-bullet">*</span> <span class="hljs-emphasis">* *</span> <span class="hljs-emphasis">* *</span> myCommand<br><br>实例2：每小时的第3和第15分钟执行<br>3,15 <span class="hljs-emphasis">* *</span> <span class="hljs-emphasis">* *</span> myCommand<br><br>实例3：在上午8点到11点的第3和第15分钟执行<br>3,15 8-11 <span class="hljs-emphasis">* *</span> <span class="hljs-emphasis">* myCommand</span><br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">* 取值范围内的所有数字
+&#x2F; 每过多少个数字
+- 从X到Z
+，散列数字<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre></div>
+<h3 id="使用实例"><a href="#使用实例" class="headerlink" title="使用实例"></a>使用实例</h3><div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">实例1：每1分钟执行一次myCommand
+* * * * * myCommand
+
+实例2：每小时的第3和第15分钟执行
+3,15 * * * * myCommand
+
+实例3：在上午8点到11点的第3和第15分钟执行
+3,15 8-11 * * * myCommand<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 
 
             </div>
@@ -277,9 +299,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2020/01/07/2020/2020-08-19-k8sinstall/">
+                      <a href="/2020/01/07/2020/2020-06-29-ubuntuLearn/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Centos7.6部署k8s(v1.18.2)集群</span>
+                        <span class="hidden-mobile">Ubuntu 桌面版</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -393,6 +415,8 @@
 
 
 
+  
+    
   
 
 

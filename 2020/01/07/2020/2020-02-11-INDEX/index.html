@@ -32,7 +32,15 @@
     
     
       
-      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/darcula.min.css" />
+      
+        
+          
+        
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.22.0/themes/prism.min.css" />
+      
+      
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.22.0/plugins/line-numbers/prism-line-numbers.min.css" />
+      
     
   
 
@@ -261,7 +269,7 @@
 <li>使用MyCat对Mysql进行分库分表</li>
 </ul>
 <h2 id="寻找问题：Mysql"><a href="#寻找问题：Mysql" class="headerlink" title="寻找问题：Mysql"></a>寻找问题：Mysql</h2><h3 id="show-processlist"><a href="#show-processlist" class="headerlink" title="show processlist"></a>show processlist</h3><p>show full processlist 返回的结果是实时变化的，是对mysql链接执行的现场快照，所以用来处理突发事件非常有用。<br>一般用到 show processlist 或 show full processlist 都是为了查看当前 mysql 是否有压力，都在跑什么语句，当前语句耗时多久了，有没有什么慢 SQL 正在执行之类的<br>可以看到总共有多少链接数，哪些线程有问题(time是执行秒数，时间长的就应该多注意了)，然后可以把有问题的线程 kill 掉，这样可以临时解决一些突发性的问题。<br>有时候一个快照可能看不出什么问题，那么可以频发的刷新试试</p>
-<h4 id="下面针对每列做下介绍："><a href="#下面针对每列做下介绍：" class="headerlink" title="下面针对每列做下介绍："></a>下面针对每列做下介绍：</h4><div class="hljs code-wrapper"><pre><code> Id：链接mysql 服务器线程的唯一标识，可以通过kill来终止此线程的链接。
+<h4 id="下面针对每列做下介绍："><a href="#下面针对每列做下介绍：" class="headerlink" title="下面针对每列做下介绍："></a>下面针对每列做下介绍：</h4><div class="code-wrapper"><pre><code> Id：链接mysql 服务器线程的唯一标识，可以通过kill来终止此线程的链接。
 
  User：当前线程链接数据库的用户
 
@@ -281,7 +289,7 @@
 <ul>
 <li>查询非 Sleep 状态的链接，按消耗时间倒序展示，自己加条件过滤<br>select id, db, user, host, command, time, state, info<br>from information_schema.processlist<br>where command != ‘Sleep’<br>order by time desc<br>这样就过滤出来哪些是正在干活的，然后按照消耗时间倒叙展示，排在最前面的，极大可能就是有问题的链接了，然后查看 info 一列，就能看到具体执行的什么 SQL 语句了，针对分析 </li>
 </ul>
-<h3 id="kill-使用"><a href="#kill-使用" class="headerlink" title="kill 使用"></a>kill 使用</h3><h4 id="通过前面的查询，我们查到了问题sql，通常会kill掉这个链接的线程"><a href="#通过前面的查询，我们查到了问题sql，通常会kill掉这个链接的线程" class="headerlink" title="通过前面的查询，我们查到了问题sql，通常会kill掉这个链接的线程"></a>通过前面的查询，我们查到了问题sql，通常会kill掉这个链接的线程</h4><div class="hljs code-wrapper"><pre><code>-- 查询执行时间超过2分钟的线程，然后拼接成 kill 语句
+<h3 id="kill-使用"><a href="#kill-使用" class="headerlink" title="kill 使用"></a>kill 使用</h3><h4 id="通过前面的查询，我们查到了问题sql，通常会kill掉这个链接的线程"><a href="#通过前面的查询，我们查到了问题sql，通常会kill掉这个链接的线程" class="headerlink" title="通过前面的查询，我们查到了问题sql，通常会kill掉这个链接的线程"></a>通过前面的查询，我们查到了问题sql，通常会kill掉这个链接的线程</h4><div class="code-wrapper"><pre><code>-- 查询执行时间超过2分钟的线程，然后拼接成 kill 语句
 select concat(&#39;kill &#39;, id, &#39;;&#39;)
 from information_schema.processlist
 where command != &#39;Sleep&#39;
@@ -435,6 +443,8 @@ order by time desc</code></pre></div>
 
 
 
+  
+    
   
 
 

@@ -32,7 +32,15 @@
     
     
       
-      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/darcula.min.css" />
+      
+        
+          
+        
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.22.0/themes/prism.min.css" />
+      
+      
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.22.0/plugins/line-numbers/prism-line-numbers.min.css" />
+      
     
   
 
@@ -187,7 +195,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      451 字
+      464 字
     </span>
   
 
@@ -231,9 +239,80 @@
             
             <div class="markdown-body">
               <h2 id="以计算数值为例"><a href="#以计算数值为例" class="headerlink" title="以计算数值为例"></a>以计算数值为例</h2><h3 id="定义过程计算数值"><a href="#定义过程计算数值" class="headerlink" title="定义过程计算数值"></a>定义过程计算数值</h3><p>定义过程，做某些行为的封装</p>
-<figure class="highlight reasonml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs reasonml">public <span class="hljs-keyword">class</span> SumCount &#123;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 计算从a到b各整数之和</span><br><span class="hljs-comment">     */</span><br>    public <span class="hljs-built_in">int</span> sum<span class="hljs-constructor">Integers(<span class="hljs-params">int</span> <span class="hljs-params">a</span>, <span class="hljs-params">int</span> <span class="hljs-params">b</span>)</span> &#123;<br>        <span class="hljs-keyword">if</span> (a &gt; b) return <span class="hljs-number">0</span>;<br>        return a + sum<span class="hljs-constructor">Integers(<span class="hljs-params">a</span> + 1, <span class="hljs-params">b</span>)</span>;<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 计算给定范围内(a-b)整数的立方之和</span><br><span class="hljs-comment">     */</span><br>    public <span class="hljs-built_in">int</span> sum<span class="hljs-constructor">Cubes(<span class="hljs-params">int</span> <span class="hljs-params">a</span>, <span class="hljs-params">int</span> <span class="hljs-params">b</span>)</span> &#123;<br>        <span class="hljs-keyword">if</span> (a &gt; b) return <span class="hljs-number">0</span>;<br>        return cube(a) + sum<span class="hljs-constructor">Cubes(<span class="hljs-params">a</span> + 1, <span class="hljs-params">b</span>)</span>;<br>    &#125;<br><br>    public double pi<span class="hljs-constructor">Sum(<span class="hljs-params">int</span> <span class="hljs-params">a</span>, <span class="hljs-params">int</span> <span class="hljs-params">b</span>)</span> &#123;<br>        <span class="hljs-keyword">if</span> (a &gt; b) return <span class="hljs-number">0</span>;<br>        return <span class="hljs-number">1.0</span><span class="hljs-operator"> / </span>(a<span class="hljs-operator"> * </span>(a + <span class="hljs-number">2</span>)) + pi<span class="hljs-constructor">Sum(<span class="hljs-params">a</span> + 4, <span class="hljs-params">b</span>)</span>;<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 计算x的立方</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-keyword">private</span> <span class="hljs-built_in">int</span> cube(<span class="hljs-built_in">int</span> x) &#123;<br>        return x<span class="hljs-operator"> * </span>x<span class="hljs-operator"> * </span>x;<br>    &#125;<br><br>&#125;<br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">public class SumCount &#123;
+
+    &#x2F;**
+     * 计算从a到b各整数之和
+     *&#x2F;
+    public int sumIntegers(int a, int b) &#123;
+        if (a &gt; b) return 0;
+        return a + sumIntegers(a + 1, b);
+    &#125;
+
+    &#x2F;**
+     * 计算给定范围内(a-b)整数的立方之和
+     *&#x2F;
+    public int sumCubes(int a, int b) &#123;
+        if (a &gt; b) return 0;
+        return cube(a) + sumCubes(a + 1, b);
+    &#125;
+
+    public double piSum(int a, int b) &#123;
+        if (a &gt; b) return 0;
+        return 1.0 &#x2F; (a * (a + 2)) + piSum(a + 4, b);
+    &#125;
+
+    &#x2F;**
+     * 计算x的立方
+     *&#x2F;
+    private int cube(int x) &#123;
+        return x * x * x;
+    &#125;
+
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 <h3 id="用高阶函数做抽象计算数值（过程作为参数或过程作为返回值）"><a href="#用高阶函数做抽象计算数值（过程作为参数或过程作为返回值）" class="headerlink" title="用高阶函数做抽象计算数值（过程作为参数或过程作为返回值）"></a>用高阶函数做抽象计算数值（过程作为参数或过程作为返回值）</h3><p>将过程作为参数传递，能够显著增强我们的程序语言的表达能力。<br>sum方法：为公共的模式命名，建立抽象，而后直接在抽象的层次上进行工作。<br>以过程作为参数，或者以过程作为返回值，这类能操作过程的过程称为高阶过程。  </p>
-<figure class="highlight pgsql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs pgsql"><span class="hljs-built_in">public</span> <span class="hljs-keyword">class</span> NewSumCount &#123;<br>    <br>    private static <span class="hljs-type">int</span> sum(<span class="hljs-keyword">Method</span> term, <span class="hljs-type">Integer</span> a, <span class="hljs-keyword">Method</span> next, <span class="hljs-type">Integer</span> b) throws InvocationTargetException, IllegalAccessException &#123;<br>        <span class="hljs-keyword">if</span> (a &gt; b) <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">return</span> (<span class="hljs-type">Integer</span>) term.invoke(<span class="hljs-type">Integer</span>.<span class="hljs-keyword">class</span>, a) + sum(term, (<span class="hljs-type">Integer</span>) next.invoke(<span class="hljs-type">Integer</span>.<span class="hljs-keyword">class</span>, a), next, b);<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 计算从a到b各整数之和</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-built_in">public</span> static <span class="hljs-type">int</span> sumIntegers(<span class="hljs-type">int</span> a, <span class="hljs-type">int</span> b) throws <span class="hljs-keyword">Exception</span> &#123;<br>        <span class="hljs-keyword">return</span> sum(NewSumCount.<span class="hljs-keyword">class</span>.getDeclaredMethod(&quot;identity&quot;, <span class="hljs-type">Integer</span>.<span class="hljs-keyword">class</span>), a, NewSumCount.<span class="hljs-keyword">class</span>.getDeclaredMethod(&quot;inc&quot;, <span class="hljs-type">Integer</span>.<span class="hljs-keyword">class</span>), b);<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 计算从a到b各整数的立方和</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-built_in">public</span> static <span class="hljs-type">int</span> sumCubes(<span class="hljs-type">int</span> a, <span class="hljs-type">int</span> b) throws <span class="hljs-keyword">Exception</span> &#123;<br>        <span class="hljs-keyword">return</span> sum(NewSumCount.<span class="hljs-keyword">class</span>.getDeclaredMethod(&quot;cube&quot;, <span class="hljs-type">Integer</span>.<span class="hljs-keyword">class</span>), a, NewSumCount.<span class="hljs-keyword">class</span>.getDeclaredMethod(&quot;inc&quot;, <span class="hljs-type">Integer</span>.<span class="hljs-keyword">class</span>), b);<br>    &#125;<br><br>    <span class="hljs-built_in">public</span> static <span class="hljs-type">void</span> main(String[] args) throws <span class="hljs-keyword">Exception</span> &#123;<br>        <span class="hljs-keyword">System</span>.<span class="hljs-keyword">out</span>.println(sumIntegers(<span class="hljs-number">1</span>, <span class="hljs-number">10</span>));<br>        <span class="hljs-keyword">System</span>.<span class="hljs-keyword">out</span>.println(sumCubes(<span class="hljs-number">1</span>, <span class="hljs-number">10</span>));<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 计算x的立方</span><br><span class="hljs-comment">     */</span><br>    private static <span class="hljs-type">int</span> <span class="hljs-keyword">cube</span>(<span class="hljs-type">Integer</span> x) &#123;<br>        <span class="hljs-keyword">return</span> x * x * x;<br>    &#125;<br><br>    private static <span class="hljs-type">int</span> <span class="hljs-keyword">identity</span>(<span class="hljs-type">Integer</span> x) &#123;<br>        <span class="hljs-keyword">return</span> x;<br>    &#125;<br><br>    private static <span class="hljs-type">int</span> inc(<span class="hljs-type">Integer</span> a) &#123;<br>        <span class="hljs-keyword">return</span> a + <span class="hljs-number">1</span>;<br>    &#125;<br>    <br>&#125;<br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">public class NewSumCount &#123;
+    
+    private static int sum(Method term, Integer a, Method next, Integer b) throws InvocationTargetException, IllegalAccessException &#123;
+        if (a &gt; b) return 0;
+        return (Integer) term.invoke(Integer.class, a) + sum(term, (Integer) next.invoke(Integer.class, a), next, b);
+    &#125;
+
+    &#x2F;**
+     * 计算从a到b各整数之和
+     *&#x2F;
+    public static int sumIntegers(int a, int b) throws Exception &#123;
+        return sum(NewSumCount.class.getDeclaredMethod(&quot;identity&quot;, Integer.class), a, NewSumCount.class.getDeclaredMethod(&quot;inc&quot;, Integer.class), b);
+    &#125;
+
+    &#x2F;**
+     * 计算从a到b各整数的立方和
+     *&#x2F;
+    public static int sumCubes(int a, int b) throws Exception &#123;
+        return sum(NewSumCount.class.getDeclaredMethod(&quot;cube&quot;, Integer.class), a, NewSumCount.class.getDeclaredMethod(&quot;inc&quot;, Integer.class), b);
+    &#125;
+
+    public static void main(String[] args) throws Exception &#123;
+        System.out.println(sumIntegers(1, 10));
+        System.out.println(sumCubes(1, 10));
+    &#125;
+
+    &#x2F;**
+     * 计算x的立方
+     *&#x2F;
+    private static int cube(Integer x) &#123;
+        return x * x * x;
+    &#125;
+
+    private static int identity(Integer x) &#123;
+        return x;
+    &#125;
+
+    private static int inc(Integer a) &#123;
+        return a + 1;
+    &#125;
+    
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 
 
 
@@ -428,6 +507,8 @@
 
 
 
+  
+    
   
 
 

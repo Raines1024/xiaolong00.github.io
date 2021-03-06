@@ -32,7 +32,15 @@
     
     
       
-      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/darcula.min.css" />
+      
+        
+          
+        
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.22.0/themes/prism.min.css" />
+      
+      
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.22.0/plugins/line-numbers/prism-line-numbers.min.css" />
+      
     
   
 
@@ -187,7 +195,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      56 字
+      66 字
     </span>
   
 
@@ -230,7 +238,21 @@
             <h1 style="display: none">AOP介绍</h1>
             
             <div class="markdown-body">
-              <h2 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h2><h3 id="AOP中-Before-After-AfterThrowing-AfterReturning-的执行顺序"><a href="#AOP中-Before-After-AfterThrowing-AfterReturning-的执行顺序" class="headerlink" title="AOP中 @Before @After @AfterThrowing @AfterReturning 的执行顺序"></a>AOP中 @Before @After @AfterThrowing @AfterReturning 的执行顺序</h3><figure class="highlight php"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs php"><span class="hljs-keyword">public</span> <span class="hljs-keyword">Object</span> invoke(<span class="hljs-keyword">Object</span> proxy, Method method, <span class="hljs-keyword">Object</span>[] args) throws <span class="hljs-built_in">Throwable</span> &#123;<br>   <span class="hljs-keyword">Object</span> result;<br>   <span class="hljs-keyword">try</span> &#123;<br>       <span class="hljs-comment">//@Before</span><br>       result = method.invoke(target, args);<br>       <span class="hljs-comment">//@After</span><br>       <span class="hljs-keyword">return</span> result;<br>   &#125; <span class="hljs-keyword">catch</span> (InvocationTargetException e) &#123;<br>       <span class="hljs-built_in">Throwable</span> targetException = e.getTargetException();<br>       <span class="hljs-comment">//@AfterThrowing</span><br>       <span class="hljs-keyword">throw</span> targetException;<br>   &#125; <span class="hljs-keyword">finally</span> &#123;<br>       <span class="hljs-comment">//@AfterReturning</span><br>   &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+              <h2 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h2><h3 id="AOP中-Before-After-AfterThrowing-AfterReturning-的执行顺序"><a href="#AOP中-Before-After-AfterThrowing-AfterReturning-的执行顺序" class="headerlink" title="AOP中 @Before @After @AfterThrowing @AfterReturning 的执行顺序"></a>AOP中 @Before @After @AfterThrowing @AfterReturning 的执行顺序</h3><div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">public Object invoke(Object proxy, Method method, Object[] args) throws Throwable &#123;
+   Object result;
+   try &#123;
+       &#x2F;&#x2F;@Before
+       result &#x3D; method.invoke(target, args);
+       &#x2F;&#x2F;@After
+       return result;
+   &#125; catch (InvocationTargetException e) &#123;
+       Throwable targetException &#x3D; e.getTargetException();
+       &#x2F;&#x2F;@AfterThrowing
+       throw targetException;
+   &#125; finally &#123;
+       &#x2F;&#x2F;@AfterReturning
+   &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 
 
 
@@ -430,6 +452,8 @@
 
 
 
+  
+    
   
 
 

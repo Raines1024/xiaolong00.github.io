@@ -32,7 +32,15 @@
     
     
       
-      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/darcula.min.css" />
+      
+        
+          
+        
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.22.0/themes/prism.min.css" />
+      
+      
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.22.0/plugins/line-numbers/prism-line-numbers.min.css" />
+      
     
   
 
@@ -187,7 +195,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      248 字
+      262 字
     </span>
   
 
@@ -197,7 +205,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      3
+      4
        分钟
     </span>
   
@@ -230,11 +238,21 @@
             <h1 style="display: none">maven常用整理</h1>
             
             <div class="markdown-body">
-              <h2 id="mac系统删除本地仓库中所有的-lastUpdated"><a href="#mac系统删除本地仓库中所有的-lastUpdated" class="headerlink" title="mac系统删除本地仓库中所有的.lastUpdated"></a>mac系统删除本地仓库中所有的.lastUpdated</h2><div class="hljs code-wrapper"><pre><code>find ~/.m2/repository -name &quot;*.lastUpdated&quot; -exec grep -q &quot;Could not transfer&quot; &#123;&#125; \; -print -exec rm &#123;&#125; \;</code></pre></div>
+              <h2 id="mac系统删除本地仓库中所有的-lastUpdated"><a href="#mac系统删除本地仓库中所有的-lastUpdated" class="headerlink" title="mac系统删除本地仓库中所有的.lastUpdated"></a>mac系统删除本地仓库中所有的.lastUpdated</h2><div class="code-wrapper"><pre><code>find ~/.m2/repository -name &quot;*.lastUpdated&quot; -exec grep -q &quot;Could not transfer&quot; &#123;&#125; \; -print -exec rm &#123;&#125; \;</code></pre></div>
 <h2 id="阿里maven库"><a href="#阿里maven库" class="headerlink" title="阿里maven库"></a>阿里maven库</h2><p>mirrors节点下添加如下配置</p>
-<figure class="highlight handlebars"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs handlebars"><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">mirror</span>&gt;</span></span><br><span class="xml">    <span class="hljs-tag">&lt;<span class="hljs-name">id</span>&gt;</span>alimaven<span class="hljs-tag">&lt;/<span class="hljs-name">id</span>&gt;</span></span><br><span class="xml">    <span class="hljs-tag">&lt;<span class="hljs-name">name</span>&gt;</span>aliyun maven<span class="hljs-tag">&lt;/<span class="hljs-name">name</span>&gt;</span></span><br><span class="xml">    <span class="hljs-tag">&lt;<span class="hljs-name">url</span>&gt;</span>http://maven.aliyun.com/nexus/content/groups/public/<span class="hljs-tag">&lt;/<span class="hljs-name">url</span>&gt;</span></span><br><span class="xml">    <span class="hljs-tag">&lt;<span class="hljs-name">mirrorOf</span>&gt;</span>central<span class="hljs-tag">&lt;/<span class="hljs-name">mirrorOf</span>&gt;</span></span><br><span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-name">mirror</span>&gt;</span></span><br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">&lt;mirror&gt;
+    &lt;id&gt;alimaven&lt;&#x2F;id&gt;
+    &lt;name&gt;aliyun maven&lt;&#x2F;name&gt;
+    &lt;url&gt;http:&#x2F;&#x2F;maven.aliyun.com&#x2F;nexus&#x2F;content&#x2F;groups&#x2F;public&#x2F;&lt;&#x2F;url&gt;
+    &lt;mirrorOf&gt;central&lt;&#x2F;mirrorOf&gt;
+&lt;&#x2F;mirror&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 <h2 id="exclusions：排除传递依赖"><a href="#exclusions：排除传递依赖" class="headerlink" title="exclusions：排除传递依赖"></a>exclusions：排除传递依赖</h2><p>   在mavenB项目中引入mavenA项目依赖，通过依赖传递，会将mavenA中的jar包传递进来,如果B中不需要A中的某个jar包就可以使用以下标签   </p>
-<figure class="highlight erb"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs erb"><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">exclusions</span>&gt;</span></span><br><span class="xml">   <span class="hljs-tag">&lt;<span class="hljs-name">exclusion</span>&gt;</span></span><br><span class="xml">   <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span></span><br><span class="xml">   <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span></span><br><span class="xml">   <span class="hljs-tag">&lt;/<span class="hljs-name">exclusion</span>&gt;</span></span><br><span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-name">exclusions</span>&gt;</span></span><br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">&lt;exclusions&gt;
+   &lt;exclusion&gt;
+   &lt;groupId&gt;&lt;&#x2F;groupId&gt;
+   &lt;artifactId&gt;&lt;&#x2F;artifactId&gt;
+   &lt;&#x2F;exclusion&gt;
+&lt;&#x2F;exclusions&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 <h2 id="maven依赖树查看"><a href="#maven依赖树查看" class="headerlink" title="maven依赖树查看"></a>maven依赖树查看</h2><p>mvn dependency:tree<br>如果要输出到文件，找到pom文件的位置 进入命令行<br>输入命令：<br>mvn dependency:tree &gt;/Users/raines/IdeaProjects/JavaPro/raines-learn/src/main/resources/tree.txt<br>只查看关系的jar包<br>mvn dependency:tree -Dverbose -Dincludes=groupId:artifactId:version:artifactId:version<br>输入命令：<br>mvn dependency:tree -Dverbose -Dincludes=org.springframework:spring-tx  </p>
 
             </div>
@@ -263,9 +281,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2020/01/07/2020/2020-03-09-marchSummary/">
+                      <a href="/2020/01/07/2020/2020-03-09-log4jForSpringboot/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">三月概述</span>
+                        <span class="hidden-mobile">springboot日志体系---log4j2</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -379,6 +397,8 @@
 
 
 
+  
+    
   
 
 

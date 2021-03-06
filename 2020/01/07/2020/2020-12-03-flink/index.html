@@ -32,7 +32,15 @@
     
     
       
-      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/darcula.min.css" />
+      
+        
+          
+        
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.22.0/themes/prism.min.css" />
+      
+      
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.22.0/plugins/line-numbers/prism-line-numbers.min.css" />
+      
     
   
 
@@ -187,7 +195,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      590 字
+      617 字
     </span>
   
 
@@ -231,13 +239,14 @@
             
             <div class="markdown-body">
               <h2 id="以Flink-on-YARN模式启动"><a href="#以Flink-on-YARN模式启动" class="headerlink" title="以Flink on YARN模式启动"></a>以Flink on YARN模式启动</h2><p>把 Flink 运行在 YARN 上有两种方式，第一种方式是建立一个长期运行的 Flink YARN Session，然后向这个 Session 提交 Flink Job，多个任务同时运行时会共享资源。第二种方式是为单个任务启动一个 Flink 集群，这个任务会独占 Flink 集群的所有资源，任务结束即代表集群被回收。<br>另外，Flink on YARN 模式需要系统中设置了 YARN_CONF_DIR 或 HADOOP_CONF_DIR 环境变量，如果未设置，请在 ~/.profile 中加入以下内容，然后使用 source ~/.profile 命令使修改立即生效。  </p>
-<figure class="highlight routeros"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs routeros"><span class="hljs-comment"># 在这条命令前定义HADOOP_HOME环境变量</span><br><span class="hljs-builtin-name">export</span> <span class="hljs-attribute">HADOOP_CONF_DIR</span>=<span class="hljs-variable">$&#123;HADOOP_HOME&#125;</span>/etc/hadoop<br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none"># 在这条命令前定义HADOOP_HOME环境变量
+export HADOOP_CONF_DIR&#x3D;$&#123;HADOOP_HOME&#125;&#x2F;etc&#x2F;hadoop<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></div>
 <h3 id="Flink-YARN-Session"><a href="#Flink-YARN-Session" class="headerlink" title="Flink YARN Session"></a>Flink YARN Session</h3><p>添加环境变量（Flink 1.11必需）<br>vim ~/.bash_profile  </p>
-<figure class="highlight routeros"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs routeros"><span class="hljs-builtin-name">export</span> <span class="hljs-attribute">HADOOP_CLASSPATH</span>=`hadoop classpath`<br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">export HADOOP_CLASSPATH&#x3D;&#96;hadoop classpath&#96;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div>
 <p>使用下列命令来启动一个拥有 2 个 TaskManager 的 Flink 集群，每个 TaskManager 有 2 GB 内存，2 个 slot。<br>./bin/yarn-session.sh -n 2 -jm 1024m -tm 2048<br>启动 YARN Session 以后会输出 JobManager 的 Web Interface 地址.<br>仔细一看，Task Managers，Task Slots 怎么都是 0 呢？难道是哪里出了问题？其实并没有问题，从某个版本开始 Flink 允许动态分配资源，在没有任务的时候不分配 TaskManager。接下来我们就提交一个任务试试。<br>因为启动 YARN Session 以后 Flink Client 会一直在前台运行，所以先用 Ctrl + Z 快捷键把 Client 转到后台，然后再提交任务。   </p>
-<figure class="highlight gradle"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs gradle">.<span class="hljs-regexp">/bin/</span>flink run .<span class="hljs-regexp">/examples/</span>batch/WordCount.jar<br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">.&#x2F;bin&#x2F;flink run .&#x2F;examples&#x2F;batch&#x2F;WordCount.jar<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div>
 <h3 id="Single-Flink-job-on-YARN"><a href="#Single-Flink-job-on-YARN" class="headerlink" title="Single Flink job on YARN"></a>Single Flink job on YARN</h3><p>下面这条命令会为 wordcount 任务启动一个独占的 Flink 集群，任务结束集群即被回收。其中 -m 选项指定 Flink 集群的启动模式，-yn 选项指定 TaskManager 的数目。  </p>
-<figure class="highlight awk"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs awk">.<span class="hljs-regexp">/bin/</span>flink run -m YARN-cluster -yn <span class="hljs-number">2</span> .<span class="hljs-regexp">/examples/</span>batch/WordCount.jar<br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">.&#x2F;bin&#x2F;flink run -m YARN-cluster -yn 2 .&#x2F;examples&#x2F;batch&#x2F;WordCount.jar<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div>
 
 
 
@@ -245,11 +254,31 @@
 <h2 id="坑"><a href="#坑" class="headerlink" title="坑"></a>坑</h2><h3 id="虚拟内存不够-https-stackoverflow-com-questions-21005643-container-is-running-beyond-memory-limits"><a href="#虚拟内存不够-https-stackoverflow-com-questions-21005643-container-is-running-beyond-memory-limits" class="headerlink" title="虚拟内存不够(https://stackoverflow.com/questions/21005643/container-is-running-beyond-memory-limits)"></a>虚拟内存不够(<a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/21005643/container-is-running-beyond-memory-limits">https://stackoverflow.com/questions/21005643/container-is-running-beyond-memory-limits</a>)</h3><ul>
 <li>mapred-site.xml</li>
 </ul>
-<figure class="highlight mojolicious"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs mojolicious"><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">property</span>&gt;</span></span><br><span class="xml">        <span class="hljs-tag">&lt;<span class="hljs-name">name</span>&gt;</span>mapreduce.map.memory.mb<span class="hljs-tag">&lt;/<span class="hljs-name">name</span>&gt;</span></span><br><span class="xml">        <span class="hljs-tag">&lt;<span class="hljs-name">value</span>&gt;</span>2048<span class="hljs-tag">&lt;/<span class="hljs-name">value</span>&gt;</span></span><br><span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-name">property</span>&gt;</span></span><br><br><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">property</span>&gt;</span></span><br><span class="xml">        <span class="hljs-tag">&lt;<span class="hljs-name">name</span>&gt;</span>mapreduce.reduce.memory.mb<span class="hljs-tag">&lt;/<span class="hljs-name">name</span>&gt;</span></span><br><span class="xml">        <span class="hljs-tag">&lt;<span class="hljs-name">value</span>&gt;</span>2048<span class="hljs-tag">&lt;/<span class="hljs-name">value</span>&gt;</span></span><br><span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-name">property</span>&gt;</span></span><br><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">property</span>&gt;</span></span><br><span class="xml">        <span class="hljs-tag">&lt;<span class="hljs-name">name</span>&gt;</span>mapreduce.reduce.java.opts<span class="hljs-tag">&lt;/<span class="hljs-name">name</span>&gt;</span></span><br><span class="xml">        <span class="hljs-tag">&lt;<span class="hljs-name">value</span>&gt;</span>-Xmx1638m<span class="hljs-tag">&lt;/<span class="hljs-name">value</span>&gt;</span></span><br><span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-name">property</span>&gt;</span></span><br><br><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">property</span>&gt;</span></span><br><span class="xml">        <span class="hljs-tag">&lt;<span class="hljs-name">name</span>&gt;</span>mapreduce.map.java.opts<span class="hljs-tag">&lt;/<span class="hljs-name">name</span>&gt;</span></span><br><span class="xml">        <span class="hljs-tag">&lt;<span class="hljs-name">value</span>&gt;</span>-Xmx1638m<span class="hljs-tag">&lt;/<span class="hljs-name">value</span>&gt;</span></span><br><span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-name">property</span>&gt;</span></span><br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">&lt;property&gt;
+        &lt;name&gt;mapreduce.map.memory.mb&lt;&#x2F;name&gt;
+        &lt;value&gt;2048&lt;&#x2F;value&gt;
+&lt;&#x2F;property&gt;
+
+&lt;property&gt;
+        &lt;name&gt;mapreduce.reduce.memory.mb&lt;&#x2F;name&gt;
+        &lt;value&gt;2048&lt;&#x2F;value&gt;
+&lt;&#x2F;property&gt;
+&lt;property&gt;
+        &lt;name&gt;mapreduce.reduce.java.opts&lt;&#x2F;name&gt;
+        &lt;value&gt;-Xmx1638m&lt;&#x2F;value&gt;
+&lt;&#x2F;property&gt;
+
+&lt;property&gt;
+        &lt;name&gt;mapreduce.map.java.opts&lt;&#x2F;name&gt;
+        &lt;value&gt;-Xmx1638m&lt;&#x2F;value&gt;
+&lt;&#x2F;property&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 <ul>
 <li>yarn-site.xml</li>
 </ul>
-<figure class="highlight dust"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs dust"><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">property</span>&gt;</span></span><br><span class="xml">    <span class="hljs-tag">&lt;<span class="hljs-name">name</span>&gt;</span>yarn.nodemanager.vmem-check-enabled<span class="hljs-tag">&lt;/<span class="hljs-name">name</span>&gt;</span></span><br><span class="xml">    <span class="hljs-tag">&lt;<span class="hljs-name">value</span>&gt;</span>false<span class="hljs-tag">&lt;/<span class="hljs-name">value</span>&gt;</span></span><br><span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-name">property</span>&gt;</span></span><br></code></pre></div></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">&lt;property&gt;
+    &lt;name&gt;yarn.nodemanager.vmem-check-enabled&lt;&#x2F;name&gt;
+    &lt;value&gt;false&lt;&#x2F;value&gt;
+&lt;&#x2F;property&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre></div>
 
 
 
@@ -398,6 +427,8 @@
 
 
 
+  
+    
   
 
 
