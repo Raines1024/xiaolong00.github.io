@@ -61,11 +61,11 @@ flink3: 16g内存 8核 300g硬盘
 
 ## CentOS7关闭防火墙
 - 查看防火墙状态
-firewall-cmd --state
+`firewall-cmd --state`
 - 停止firewall
-systemctl stop firewalld.service
+`systemctl stop firewalld.service`
 - 禁止firewall开机启动
-systemctl disable firewalld.service
+`systemctl disable firewalld.service`
 
 ----
 
