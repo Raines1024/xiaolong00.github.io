@@ -12,7 +12,7 @@ category:
 
 ## 背景
 
-之前总结过一个Java调用mysql封装的工具类，然而并不是使用到连接池，也算是给自己挖了个坑。此文，是来填坑。
+之前总结过一个Java调用mysql封装的工具类，然而并没有使用到连接池，也算是给自己挖了个坑。此文，是来填坑。
 
 ## JDBC连接池
 
@@ -26,7 +26,7 @@ JDBC连接池有一个标准的接口`javax.sql.DataSource`，注意这个类位
 
 目前使用最广泛的是HikariCP。我们以HikariCP为例，要使用JDBC连接池，先添加HikariCP的依赖如下：
 
-```
+```xml
 <dependency>
     <groupId>com.zaxxer</groupId>
     <artifactId>HikariCP</artifactId>
@@ -36,7 +36,7 @@ JDBC连接池有一个标准的接口`javax.sql.DataSource`，注意这个类位
 
 紧接着，我们需要创建一个`DataSource`实例，这个实例就是连接池：
 
-```
+```java
 HikariConfig config = new HikariConfig();
 config.setJdbcUrl("jdbc:mysql://localhost:3306/test");
 config.setUsername("root");
@@ -51,7 +51,7 @@ DataSource ds = new HikariDataSource(config);
 
 有了连接池以后，我们如何使用它呢？和前面的代码类似，只是获取`Connection`时，把`DriverManage.getConnection()`改为`ds.getConnection()`：
 
-```
+```java
 try (Connection conn = ds.getConnection()) { // 在此获取连接
     ...
 } // 在此“关闭”连接
