@@ -1,8 +1,8 @@
 ---
 title: 求小块地块中心点的解决思路
 date: 2021-03-15 20:01:39
-description: 以HikariCP为例
-tags: 无人机巡田地块采样点算法开发解决思路
+description: 无人机巡田地块采样点算法开发解决思路
+tags: [编程,业务,过去]
 category:
     - 100 学习类
     - 110 编程
