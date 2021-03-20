@@ -14,9 +14,7 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#2f4154">
-  
-    <meta name="description" content="从创建虚拟机开始···">
-  
+  <meta name="description" content="从创建虚拟机开始···">
   <meta name="author" content="Raines">
   <meta name="keywords" content="">
   
@@ -66,7 +64,7 @@
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.9","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
@@ -298,7 +296,7 @@ DNS1=172.16.61.253<span aria-hidden="true" class="line-numbers-rows"><span></spa
 <hr>
 <h2 id="安装Java"><a href="#安装Java" class="headerlink" title="安装Java"></a>安装Java</h2><h3 id="上传"><a href="#上传" class="headerlink" title="上传"></a>上传</h3><p>使用rz命令把.tar.gz文件上传到服务器</p>
 <h3 id="解压并删除"><a href="#解压并删除" class="headerlink" title="解压并删除"></a>解压并删除</h3><p>tar -zxvf *.gz<br>rm -f *.gz</p>
-<h3 id="传到其他服务器"><a href="#传到其他服务器" class="headerlink" title="传到其他服务器"></a>传到其他服务器</h3><p>scp -r /home/java <a href="mailto:&#x72;&#x6f;&#x6f;&#116;&#64;&#49;&#x37;&#50;&#x2e;&#50;&#57;&#x2e;&#x33;&#x32;&#x2e;&#x31;&#x32;">&#x72;&#x6f;&#x6f;&#116;&#64;&#49;&#x37;&#50;&#x2e;&#50;&#57;&#x2e;&#x33;&#x32;&#x2e;&#x31;&#x32;</a>:/home/java<br>scp -r /home/java <a href="mailto:&#114;&#111;&#111;&#x74;&#64;&#49;&#55;&#x32;&#46;&#x32;&#57;&#46;&#51;&#x32;&#46;&#49;&#51;">&#114;&#111;&#111;&#x74;&#64;&#49;&#55;&#x32;&#46;&#x32;&#57;&#46;&#51;&#x32;&#46;&#49;&#51;</a>:/home/java</p>
+<h3 id="传到其他服务器"><a href="#传到其他服务器" class="headerlink" title="传到其他服务器"></a>传到其他服务器</h3><p>scp -r /home/java <a href="mailto:&#x72;&#x6f;&#111;&#x74;&#x40;&#49;&#x37;&#x32;&#x2e;&#x32;&#57;&#x2e;&#51;&#50;&#x2e;&#x31;&#50;">&#x72;&#x6f;&#111;&#x74;&#x40;&#49;&#x37;&#x32;&#x2e;&#x32;&#57;&#x2e;&#51;&#50;&#x2e;&#x31;&#50;</a>:/home/java<br>scp -r /home/java <a href="mailto:&#x72;&#x6f;&#111;&#116;&#x40;&#x31;&#55;&#x32;&#46;&#50;&#57;&#x2e;&#x33;&#x32;&#x2e;&#x31;&#51;">&#x72;&#x6f;&#111;&#116;&#x40;&#x31;&#55;&#x32;&#46;&#50;&#57;&#x2e;&#x33;&#x32;&#x2e;&#x31;&#51;</a>:/home/java</p>
 <h3 id="修改环境变量"><a href="#修改环境变量" class="headerlink" title="修改环境变量"></a>修改环境变量</h3><p>vim /etc/profile<br>插入：</p>
 <div class="code-wrapper"><pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml">JAVA_HOME=/home/java/jdk1.8.0_201
 JRE_HOME=$JAVA_HOME/jre
@@ -532,8 +530,9 @@ export HADOOP_CLASSPATH&#x3D;&#96;hadoop classpath&#96;<span aria-hidden="true" 
   
 </footer>
 
-<!-- SCRIPTS -->
 
+  <!-- SCRIPTS -->
+  
   <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
 
@@ -556,7 +555,7 @@ export HADOOP_CLASSPATH&#x3D;&#96;hadoop classpath&#96;<span aria-hidden="true" 
 
 
   
-    <script  src="/js/lazyload.js" ></script>
+    <script  src="/js/img-lazyload.js" ></script>
   
 
 
@@ -628,7 +627,6 @@ export HADOOP_CLASSPATH&#x3D;&#96;hadoop classpath&#96;<span aria-hidden="true" 
 
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
-
 
 
 <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/hibiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.7},"log":false});</script></body>

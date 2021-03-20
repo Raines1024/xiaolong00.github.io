@@ -14,9 +14,7 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#2f4154">
-  
-    <meta name="description" content="设计模式系列（二）">
-  
+  <meta name="description" content="设计模式系列（二）">
   <meta name="author" content="Raines">
   <meta name="keywords" content="">
   
@@ -66,7 +64,7 @@
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.9","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
@@ -239,7 +237,7 @@
             
             <div class="markdown-body">
               <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>装饰器模式（Decorator Pattern）允许向一个现有的对象添加新的功能，同时又不改变其结构。装饰者模式动态地将责任附加到对象上，若要扩展功能，装饰者提供了比继承更有弹性的替代方案。  </p>
-<h2 id="类图"><a href="#类图" class="headerlink" title="类图"></a>类图</h2><p>Componet<br><img src="/img/develop/design2/Component.png" srcset="/img/loading.gif" alt="avatar"><br>每个组件（ConcreteComponent）都可以单独使用，或者被装饰者包起来使用</p>
+<h2 id="类图"><a href="#类图" class="headerlink" title="类图"></a>类图</h2><p>Componet<br><img src="/img/develop/design2/Component.png" srcset="/img/loading.gif" lazyload alt="avatar"><br>每个组件（ConcreteComponent）都可以单独使用，或者被装饰者包起来使用</p>
 <h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><h3 id="定义抽象组件（超类）"><a href="#定义抽象组件（超类）" class="headerlink" title="定义抽象组件（超类）"></a>定义抽象组件（超类）</h3><div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">package decorate;
 
 &#x2F;**
@@ -512,9 +510,9 @@ public class StarbuzzCoffee &#123;
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2020/01/07/2020/2020-12-21-design1/">
+                      <a href="/2020/01/07/2020/2020-12-22-springboot/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">观察者模式</span>
+                        <span class="hidden-mobile">工作中的Spring</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -522,8 +520,8 @@ public class StarbuzzCoffee &#123;
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2020/01/07/2020/2020-12-30-JetBrainsActivate/">
-                        <span class="hidden-mobile">JetBrains 开发IDE 2020.4 以下版本最新全家桶系列产品激活破解方法</span>
+                      <a href="/2020/01/07/2020/2020-12-29-design3/">
+                        <span class="hidden-mobile">工厂模式</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -599,8 +597,9 @@ public class StarbuzzCoffee &#123;
   
 </footer>
 
-<!-- SCRIPTS -->
 
+  <!-- SCRIPTS -->
+  
   <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
 
@@ -623,7 +622,7 @@ public class StarbuzzCoffee &#123;
 
 
   
-    <script  src="/js/lazyload.js" ></script>
+    <script  src="/js/img-lazyload.js" ></script>
   
 
 
@@ -695,7 +694,6 @@ public class StarbuzzCoffee &#123;
 
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
-
 
 
 <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/hibiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.7},"log":false});</script></body>

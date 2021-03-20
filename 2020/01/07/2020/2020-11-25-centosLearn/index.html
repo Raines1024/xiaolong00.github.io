@@ -14,9 +14,7 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#2f4154">
-  
-    <meta name="description" content="CentOS学习">
-  
+  <meta name="description" content="CentOS学习">
   <meta name="author" content="Raines">
   <meta name="keywords" content="">
   
@@ -66,7 +64,7 @@
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.9","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
@@ -242,7 +240,7 @@
 <h2 id="查看centos系统的版本"><a href="#查看centos系统的版本" class="headerlink" title="查看centos系统的版本"></a>查看centos系统的版本</h2><p>cat /etc/redhat-release</p>
 <h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><p>free    # 查看服务器内存使用<br>netstat -lntup    # 查看端口情况  l-&gt;listen,n-&gt;num,t-&gt;tcp,u-&gt;udp,p-&gt;process<br>cat /etc/locale.conf   查看使用编码<br>lsblk  查看盘符  </p>
 <h2 id="zip压缩当前文件夹下所有文件"><a href="#zip压缩当前文件夹下所有文件" class="headerlink" title="zip压缩当前文件夹下所有文件"></a>zip压缩当前文件夹下所有文件</h2><p>zip -r myfile.zip ./*</p>
-<h2 id="两台centos之间传送文件"><a href="#两台centos之间传送文件" class="headerlink" title="两台centos之间传送文件"></a>两台centos之间传送文件</h2><p>scp -r /data/appmanage <a href="mailto:&#x72;&#111;&#x6f;&#116;&#64;&#x31;&#x37;&#50;&#x2e;&#x31;&#x36;&#46;&#x37;&#x30;&#46;&#49;&#x31;">&#x72;&#111;&#x6f;&#116;&#64;&#x31;&#x37;&#50;&#x2e;&#x31;&#x36;&#46;&#x37;&#x30;&#46;&#49;&#x31;</a>:/data/appmanage</p>
+<h2 id="两台centos之间传送文件"><a href="#两台centos之间传送文件" class="headerlink" title="两台centos之间传送文件"></a>两台centos之间传送文件</h2><p>scp -r /data/appmanage <a href="mailto:&#114;&#x6f;&#x6f;&#116;&#x40;&#x31;&#x37;&#50;&#x2e;&#49;&#54;&#x2e;&#55;&#48;&#x2e;&#49;&#49;">&#114;&#x6f;&#x6f;&#116;&#x40;&#x31;&#x37;&#50;&#x2e;&#49;&#54;&#x2e;&#55;&#48;&#x2e;&#49;&#49;</a>:/data/appmanage</p>
 <h2 id="对当前文件夹打包"><a href="#对当前文件夹打包" class="headerlink" title="对当前文件夹打包"></a>对当前文件夹打包</h2><p>zip -r myfile.zip ./*   </p>
 <h2 id="CentOS下查看文件和文件夹大小"><a href="#CentOS下查看文件和文件夹大小" class="headerlink" title="CentOS下查看文件和文件夹大小"></a>CentOS下查看文件和文件夹大小</h2><p>查看data文件夹下大小<br>du -h –max-depth=1 data/<br><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_33326449/article/details/107446140">https://blog.csdn.net/qq_33326449/article/details/107446140</a></p>
 <h2 id="设置环境变量"><a href="#设置环境变量" class="headerlink" title="设置环境变量"></a>设置环境变量</h2><p>vim /etc/profile   </p>
@@ -299,9 +297,9 @@ export PATH&#x3D;$&#123;M2_HOME&#125;&#x2F;bin:$&#123;PATH&#125;<span aria-hidde
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2020/01/07/2020/2020-06-07-k8s/">
+                      <a href="/2020/01/07/2020/2020-08-19-k8sinstall/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">kubernetes入门实战</span>
+                        <span class="hidden-mobile">Centos7.6部署k8s(v1.18.2)集群</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -386,8 +384,9 @@ export PATH&#x3D;$&#123;M2_HOME&#125;&#x2F;bin:$&#123;PATH&#125;<span aria-hidde
   
 </footer>
 
-<!-- SCRIPTS -->
 
+  <!-- SCRIPTS -->
+  
   <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
 
@@ -410,7 +409,7 @@ export PATH&#x3D;$&#123;M2_HOME&#125;&#x2F;bin:$&#123;PATH&#125;<span aria-hidde
 
 
   
-    <script  src="/js/lazyload.js" ></script>
+    <script  src="/js/img-lazyload.js" ></script>
   
 
 
@@ -482,7 +481,6 @@ export PATH&#x3D;$&#123;M2_HOME&#125;&#x2F;bin:$&#123;PATH&#125;<span aria-hidde
 
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
-
 
 
 <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/hibiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.7},"log":false});</script></body>
