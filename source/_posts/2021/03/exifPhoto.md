@@ -2,7 +2,7 @@
 title: Java读取图像exif属性
 date: 2021-03-22 20:01:39
 description: 获取无人机拍摄图像读取经纬度及拍摄时间
-tags: [编程,过去]
+tags: [编程,代码,过去]
 category:
     - 200 工作类
     - 210 代码类
