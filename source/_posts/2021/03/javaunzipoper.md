@@ -12,6 +12,123 @@ category:
 
 ## 解压zip压缩包并返回解压之后所得到的文件List
 
+### 使用Java util包（推荐使用）
+
+使用Java util包中打包的文件使用Apache的工具类解压失败，该工具类能正常解压Java压缩的zip包及手动压缩的zip包，故推荐使用该工具类。
+
+```java
+import java.io.*;
+import java.util.ArrayList;
+import java.util.Enumeration;
+import java.util.List;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipFile;
+
+public class UnzipUtil {
+
+    private static final int BUFFER_LEN = 8192;
+
+    public static void main(String[] args) {
+        String zipFilePath = "/Users/raines/Desktop/my/test_upload.zip";
+        String unzipDestPath = "/Users/raines/Desktop/my/";
+
+        List<File> files = null;
+        try {
+            files = unZipFile(new File(zipFilePath), new File(unzipDestPath));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        for (File file : files) {
+            System.out.println(file.getPath());
+        }
+
+        System.out.println(files.size());
+    }
+
+    /**
+     * Unzip the file by keyword.
+     *
+     * @param zipFile The ZIP file.
+     * @param destDir The destination directory.
+     * @return the unzipped files
+     * @throws IOException if unzip unsuccessfully
+     */
+    public static List<File> unZipFile(final File zipFile, final File destDir)
+            throws IOException {
+        if (zipFile == null || destDir == null) return null;
+        List<File> files = new ArrayList<>();
+        ZipFile zip = new ZipFile(zipFile);
+        Enumeration<?> entries = zip.entries();
+        try {
+            while (entries.hasMoreElements()) {
+                ZipEntry entry = ((ZipEntry) entries.nextElement());
+                String entryName = entry.getName().replace("\\", "/");
+                if (entryName.contains("../")) {
+                    continue;
+                }
+                if (!unzipChildFile(destDir, files, zip, entry, entryName)) return files;
+            }
+        } finally {
+            zip.close();
+        }
+        return files;
+    }
+
+
+    private static boolean unzipChildFile(final File destDir, final List<File> files, final ZipFile zip, final ZipEntry entry, final String name) throws IOException {
+        File file = new File(destDir, name);
+        files.add(file);
+        if (entry.isDirectory()) {
+            return createOrExistsDir(file);
+        } else {
+            if (!createOrExistsFile(file)) return false;
+            InputStream in = null;
+            OutputStream out = null;
+            try {
+                in = new BufferedInputStream(zip.getInputStream(entry));
+                out = new BufferedOutputStream(new FileOutputStream(file));
+                byte buffer[] = new byte[BUFFER_LEN];
+                int len;
+                while ((len = in.read(buffer)) != -1) {
+                    out.write(buffer, 0, len);
+                }
+            } finally {
+                if (in != null) {
+                    in.close();
+                }
+                if (out != null) {
+                    out.close();
+                }
+            }
+        }
+        return true;
+    }
+
+
+    public static boolean createOrExistsDir(final File file) {
+        return file != null && (file.exists() ? file.isDirectory() : file.mkdirs());
+    }
+
+    public static boolean createOrExistsFile(final File file) {
+        if (file == null) return false;
+        if (file.exists()) return file.isFile();
+        if (!createOrExistsDir(file.getParentFile())) return false;
+        try {
+            return file.createNewFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+
+}
+```
+
+
+
+### 使用apache依赖
+
 1. 添加依赖
 
    ```xml
