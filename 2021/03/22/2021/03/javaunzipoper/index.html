@@ -193,7 +193,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      581 字
+      1k 字
     </span>
   
 
@@ -203,7 +203,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      9
+      18
        分钟
     </span>
   
@@ -236,7 +236,116 @@
             <h1 style="display: none">Java解压zip压缩包并返回文件列表</h1>
             
             <div class="markdown-body">
-              <h2 id="解压zip压缩包并返回解压之后所得到的文件List"><a href="#解压zip压缩包并返回解压之后所得到的文件List" class="headerlink" title="解压zip压缩包并返回解压之后所得到的文件List"></a>解压zip压缩包并返回解压之后所得到的文件List</h2><ol>
+              <h2 id="解压zip压缩包并返回解压之后所得到的文件List"><a href="#解压zip压缩包并返回解压之后所得到的文件List" class="headerlink" title="解压zip压缩包并返回解压之后所得到的文件List"></a>解压zip压缩包并返回解压之后所得到的文件List</h2><h3 id="使用Java-util包（推荐使用）"><a href="#使用Java-util包（推荐使用）" class="headerlink" title="使用Java util包（推荐使用）"></a>使用Java util包（推荐使用）</h3><p>使用Java util包中打包的文件使用Apache的工具类解压失败，该工具类能正常解压Java压缩的zip包及手动压缩的zip包，故推荐使用该工具类。</p>
+<div class="code-wrapper"><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">import</span> <span class="token namespace">java<span class="token punctuation">.</span>io<span class="token punctuation">.</span></span><span class="token operator">*</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">java<span class="token punctuation">.</span>util<span class="token punctuation">.</span></span><span class="token class-name">ArrayList</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">java<span class="token punctuation">.</span>util<span class="token punctuation">.</span></span><span class="token class-name">Enumeration</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">java<span class="token punctuation">.</span>util<span class="token punctuation">.</span></span><span class="token class-name">List</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">java<span class="token punctuation">.</span>util<span class="token punctuation">.</span>zip<span class="token punctuation">.</span></span><span class="token class-name">ZipEntry</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">java<span class="token punctuation">.</span>util<span class="token punctuation">.</span>zip<span class="token punctuation">.</span></span><span class="token class-name">ZipFile</span><span class="token punctuation">;</span>
+
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">UnzipUtil</span> <span class="token punctuation">&#123;</span>
+
+    <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token keyword">int</span> BUFFER_LEN <span class="token operator">=</span> <span class="token number">8192</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">String</span> zipFilePath <span class="token operator">=</span> <span class="token string">"/Users/raines/Desktop/my/test_upload.zip"</span><span class="token punctuation">;</span>
+        <span class="token class-name">String</span> unzipDestPath <span class="token operator">=</span> <span class="token string">"/Users/raines/Desktop/my/"</span><span class="token punctuation">;</span>
+
+        <span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">File</span><span class="token punctuation">></span></span> files <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+        <span class="token keyword">try</span> <span class="token punctuation">&#123;</span>
+            files <span class="token operator">=</span> <span class="token function">unZipFile</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">File</span><span class="token punctuation">(</span>zipFilePath<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">File</span><span class="token punctuation">(</span>unzipDestPath<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">IOException</span> e<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            e<span class="token punctuation">.</span><span class="token function">printStackTrace</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token class-name">File</span> file <span class="token operator">:</span> files<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>file<span class="token punctuation">.</span><span class="token function">getPath</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>files<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token comment">/**
+     * Unzip the file by keyword.
+     *
+     * @param zipFile The ZIP file.
+     * @param destDir The destination directory.
+     * @return the unzipped files
+     * @throws IOException if unzip unsuccessfully
+     */</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">File</span><span class="token punctuation">></span></span> <span class="token function">unZipFile</span><span class="token punctuation">(</span><span class="token keyword">final</span> <span class="token class-name">File</span> zipFile<span class="token punctuation">,</span> <span class="token keyword">final</span> <span class="token class-name">File</span> destDir<span class="token punctuation">)</span>
+            <span class="token keyword">throws</span> <span class="token class-name">IOException</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>zipFile <span class="token operator">==</span> <span class="token keyword">null</span> <span class="token operator">||</span> destDir <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token keyword">return</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+        <span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">File</span><span class="token punctuation">></span></span> files <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ArrayList</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">ZipFile</span> zip <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ZipFile</span><span class="token punctuation">(</span>zipFile<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">Enumeration</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token operator">?</span><span class="token punctuation">></span></span> entries <span class="token operator">=</span> zip<span class="token punctuation">.</span><span class="token function">entries</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">try</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">while</span> <span class="token punctuation">(</span>entries<span class="token punctuation">.</span><span class="token function">hasMoreElements</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                <span class="token class-name">ZipEntry</span> entry <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token class-name">ZipEntry</span><span class="token punctuation">)</span> entries<span class="token punctuation">.</span><span class="token function">nextElement</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token class-name">String</span> entryName <span class="token operator">=</span> entry<span class="token punctuation">.</span><span class="token function">getName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span><span class="token string">"\\"</span><span class="token punctuation">,</span> <span class="token string">"/"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span>entryName<span class="token punctuation">.</span><span class="token function">contains</span><span class="token punctuation">(</span><span class="token string">"../"</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                    <span class="token keyword">continue</span><span class="token punctuation">;</span>
+                <span class="token punctuation">&#125;</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token function">unzipChildFile</span><span class="token punctuation">(</span>destDir<span class="token punctuation">,</span> files<span class="token punctuation">,</span> zip<span class="token punctuation">,</span> entry<span class="token punctuation">,</span> entryName<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token keyword">return</span> files<span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span>
+        <span class="token punctuation">&#125;</span> <span class="token keyword">finally</span> <span class="token punctuation">&#123;</span>
+            zip<span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+        <span class="token keyword">return</span> files<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+
+    <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">boolean</span> <span class="token function">unzipChildFile</span><span class="token punctuation">(</span><span class="token keyword">final</span> <span class="token class-name">File</span> destDir<span class="token punctuation">,</span> <span class="token keyword">final</span> <span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">File</span><span class="token punctuation">></span></span> files<span class="token punctuation">,</span> <span class="token keyword">final</span> <span class="token class-name">ZipFile</span> zip<span class="token punctuation">,</span> <span class="token keyword">final</span> <span class="token class-name">ZipEntry</span> entry<span class="token punctuation">,</span> <span class="token keyword">final</span> <span class="token class-name">String</span> name<span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">IOException</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">File</span> file <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">File</span><span class="token punctuation">(</span>destDir<span class="token punctuation">,</span> name<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        files<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>file<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>entry<span class="token punctuation">.</span><span class="token function">isDirectory</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">return</span> <span class="token function">createOrExistsDir</span><span class="token punctuation">(</span>file<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token function">createOrExistsFile</span><span class="token punctuation">(</span>file<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+            <span class="token class-name">InputStream</span> in <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+            <span class="token class-name">OutputStream</span> out <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+            <span class="token keyword">try</span> <span class="token punctuation">&#123;</span>
+                in <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">BufferedInputStream</span><span class="token punctuation">(</span>zip<span class="token punctuation">.</span><span class="token function">getInputStream</span><span class="token punctuation">(</span>entry<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                out <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">BufferedOutputStream</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">FileOutputStream</span><span class="token punctuation">(</span>file<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token keyword">byte</span> buffer<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token keyword">byte</span><span class="token punctuation">[</span>BUFFER_LEN<span class="token punctuation">]</span><span class="token punctuation">;</span>
+                <span class="token keyword">int</span> len<span class="token punctuation">;</span>
+                <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>len <span class="token operator">=</span> in<span class="token punctuation">.</span><span class="token function">read</span><span class="token punctuation">(</span>buffer<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">!=</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                    out<span class="token punctuation">.</span><span class="token function">write</span><span class="token punctuation">(</span>buffer<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> len<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token punctuation">&#125;</span>
+            <span class="token punctuation">&#125;</span> <span class="token keyword">finally</span> <span class="token punctuation">&#123;</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span>in <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                    in<span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token punctuation">&#125;</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span>out <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                    out<span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token punctuation">&#125;</span>
+            <span class="token punctuation">&#125;</span>
+        <span class="token punctuation">&#125;</span>
+        <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">boolean</span> <span class="token function">createOrExistsDir</span><span class="token punctuation">(</span><span class="token keyword">final</span> <span class="token class-name">File</span> file<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span> file <span class="token operator">!=</span> <span class="token keyword">null</span> <span class="token operator">&amp;&amp;</span> <span class="token punctuation">(</span>file<span class="token punctuation">.</span><span class="token function">exists</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">?</span> file<span class="token punctuation">.</span><span class="token function">isDirectory</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">:</span> file<span class="token punctuation">.</span><span class="token function">mkdirs</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">boolean</span> <span class="token function">createOrExistsFile</span><span class="token punctuation">(</span><span class="token keyword">final</span> <span class="token class-name">File</span> file<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>file <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>file<span class="token punctuation">.</span><span class="token function">exists</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token keyword">return</span> file<span class="token punctuation">.</span><span class="token function">isFile</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token function">createOrExistsDir</span><span class="token punctuation">(</span>file<span class="token punctuation">.</span><span class="token function">getParentFile</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+        <span class="token keyword">try</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">return</span> file<span class="token punctuation">.</span><span class="token function">createNewFile</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">IOException</span> e<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            e<span class="token punctuation">.</span><span class="token function">printStackTrace</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+
+
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+
+
+<h3 id="使用apache依赖"><a href="#使用apache依赖" class="headerlink" title="使用apache依赖"></a>使用apache依赖</h3><ol>
 <li><p>添加依赖</p>
 <div class="code-wrapper"><pre class="line-numbers language-xml" data-language="xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>org.apache.ant<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
@@ -394,6 +503,8 @@
                     
                       <a class="hover-with-bg" href="/tags/%E7%BC%96%E7%A8%8B/">编程</a>
                     
+                      <a class="hover-with-bg" href="/tags/%E4%BB%A3%E7%A0%81/">代码</a>
+                    
                   </div>
                 
               </div>
@@ -408,6 +519,12 @@
                 <div class="post-prevnext">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/2021/03/23/2021/03/mapUtil/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Java判断点是否在多边形内</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">
