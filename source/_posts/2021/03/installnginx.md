@@ -39,7 +39,7 @@ category:
    ```sh
    [root@flink1 nginx-1.18.0]# ./configure --prefix=/usr/local/nginx
    [root@flink1 nginx-1.18.0]# make -j 4		#按Makefile文件编译，-j 4表示指定4核心CPU同时编译，提升速度
-   [root@flink1 nginx-1.18.0]# make install		#按Makefile顶一的文件路径安装
+   [root@flink1 nginx-1.18.0]# make install		#按Makefile定义的文件路径安装
    ```
 
 4. 运行nginx测试
@@ -57,7 +57,23 @@ category:
 
    
 
+## 知识点
 
+### ./configure有如下作用
+
+1. 指定安装路径，如` --prefix=/usr/local/nginx`
+
+2. 启用或禁用某项功能，如 `--enable--sl、--disable-filter、--with-http_ssl_module`
+
+3. 和其他软件关联，如`--with-pcre`
+
+4. 检查安装环境，如是否有编译器gcc、是否满足软件的依赖需求。
+
+   最终在当前目录下生成Makefile文件
+
+### make clean
+
+清除上次的make命令所产生的object和Makefile文件。当需要重新执行./configure时，需要先执行make clean。
 
 
 
