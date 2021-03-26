@@ -14,13 +14,37 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#2f4154">
-  <meta name="description" content="">
+  <meta name="description" content="源码安装nginx">
   <meta name="author" content="Raines">
   <meta name="keywords" content="">
   
-  <title>归档 - 小龙的跋涉</title>
+  <title>Centos安装nginx - 小龙的跋涉</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      
+        
+          
+        
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.22.0/themes/prism.min.css" />
+      
+      
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.22.0/plugins/line-numbers/prism-line-numbers.min.css" />
+      
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
 
 
 
@@ -48,7 +72,7 @@
 
 
 <body>
-  <header style="height: 60vh;">
+  <header style="height: 70vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
@@ -147,9 +171,46 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="归档">
+            <span class="h2" id="subtitle" title="Centos安装nginx">
               
             </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-03-26 20:01" pubdate>
+        2021年3月26日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      247 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      3
+       分钟
+    </span>
+  
+
+  
+  
+</div>
 
             
           </div>
@@ -162,100 +223,126 @@
 
   <main>
     
-      <div class="container nopadding-x-md">
-        <div class="py-5" id="board"
-          >
-          
-          <div class="container">
-            <div class="row">
-              <div class="col-12 col-md-10 m-auto">
-                
-
-<div class="list-group">
-  <p class="h4">共计 136 篇文章</p>
-  <hr>
-  
-  
-    
       
-      <p class="h5">2020</p>
-    
-    <a href="/2020/01/07/2020/2020-03-16-annotation/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">Java自定义注解</span>
-      <time style="float: right;">01-07</time>
-    </a>
-  
-    
-    <a href="/2020/01/07/2020/2020-03-16-everydayEnglish/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">每日英语</span>
-      <time style="float: right;">01-07</time>
-    </a>
-  
-    
-    <a href="/2020/01/07/2020/2020-03-17-everydayEnglish/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">每日英语</span>
-      <time style="float: right;">01-07</time>
-    </a>
-  
-    
-    <a href="/2020/01/07/2020/2020-03-18-everydayEnglish/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">每日英语</span>
-      <time style="float: right;">01-07</time>
-    </a>
-  
-    
-    <a href="/2020/01/07/2020/2020-03-20-javaAsync/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">《Java异步编程实战》读书笔记</span>
-      <time style="float: right;">01-07</time>
-    </a>
-  
-    
-    <a href="/2020/01/07/2020/2020-03-26-recursion/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">递归介绍(一）：线性递归、线性迭代、树形递归</span>
-      <time style="float: right;">01-07</time>
-    </a>
-  
-    
-    <a href="/2020/01/07/2020/2020-03-27-runtimeDataArea/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">Java运行时数据区</span>
-      <time style="float: right;">01-07</time>
-    </a>
-  
-    
-    <a href="/2020/01/07/2020/2020-03-28-aopIntroduce/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">AOP介绍</span>
-      <time style="float: right;">01-07</time>
-    </a>
-  
-    
-    <a href="/2020/01/07/2020/2020-03-28-redisImplIdmpotent/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">Redis实现幂等性接口（Java语言实现）</span>
-      <time style="float: right;">01-07</time>
-    </a>
-  
-    
-    <a href="/2020/01/07/2020/2020-03-28-redisImplLock/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">Redis实现分布式锁（Java语言实现）</span>
-      <time style="float: right;">01-07</time>
-    </a>
-  
-</div>
 
-
-  <nav aria-label="navigation">
-    <span class="pagination" id="pagination">
-      <a class="extend prev" rel="prev" href="/archives/page/5/#board"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/archives/">1</a><span class="space">&hellip;</span><a class="page-number" href="/archives/page/4/#board">4</a><a class="page-number" href="/archives/page/5/#board">5</a><span class="page-number current">6</span><a class="page-number" href="/archives/page/7/#board">7</a><a class="page-number" href="/archives/page/8/#board">8</a><span class="space">&hellip;</span><a class="page-number" href="/archives/page/14/#board">14</a><a class="extend next" rel="next" href="/archives/page/7/#board"><i class="iconfont icon-arrowright"></i></a>
-    </span>
-  </nav>
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Centos安装nginx</h1>
+            
+            <div class="markdown-body">
+              <h2 id="源码安装nginx"><a href="#源码安装nginx" class="headerlink" title="源码安装nginx"></a>源码安装nginx</h2><ol>
+<li><p>部署nginx</p>
+<div class="code-wrapper"><pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">[root@flink1 ~]# yum -y install gcc gcc-c++ make zlib-devel pcre pcre-devel openssl-devel<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div></li>
+<li><p>下载并解压nginx程序压缩包</p>
+<p><a target="_blank" rel="noopener" href="http://nginx.org/en/download.html">nginx官网下载地址</a></p>
+<div class="code-wrapper"><pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">[root@flink1 ~]# rz			#上传nginx压缩包（或使用wget命令下载）
+[root@flink1 ~]# tar xvf nginx-1.18.0.tar.gz
+[root@flink1 ~]# cd nginx-1.18.0<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></div></li>
+<li><p>开始安装</p>
+<p>执行预编译（检测环境）并指定安装目录，使用<code>--prefix=</code>指定</p>
+<p>安装nginx预编译时指定安装目录为/usr/local/nginx</p>
+<p>configure命令最终在当前目录下生成Makefile文件</p>
+<div class="code-wrapper"><pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">[root@flink1 nginx-1.18.0]# .&#x2F;configure --prefix&#x3D;&#x2F;usr&#x2F;local&#x2F;nginx
+[root@flink1 nginx-1.18.0]# make -j 4		#按Makefile文件编译，-j 4表示指定4核心CPU同时编译，提升速度
+[root@flink1 nginx-1.18.0]# make install		#按Makefile顶一的文件路径安装<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></div></li>
+<li><p>运行nginx测试</p>
+<div class="code-wrapper"><pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">[root@flink1 ~]# &#x2F;usr&#x2F;local&#x2F;nginx&#x2F;sbin&#x2F;nginx<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div>
+<p>查看nginx端口占用</p>
+<div class="code-wrapper"><pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">[root@flink1 sbin]# netstat -lntup |grep nginx
+tcp        0      0 0.0.0.0:80              0.0.0.0:*               LISTEN      1285&#x2F;nginx: master <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></div>
 
 
 
 
-              </div>
+
+
+
+
+
+
+</li>
+</ol>
+
             </div>
-          </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/100-%E5%AD%A6%E4%B9%A0%E7%B1%BB/">100 学习类</a>
+                    
+                      <a class="hover-with-bg" href="/categories/100-%E5%AD%A6%E4%B9%A0%E7%B1%BB/110-%E7%BC%96%E7%A8%8B/">110 编程</a>
+                    
+                      <a class="hover-with-bg" href="/categories/100-%E5%AD%A6%E4%B9%A0%E7%B1%BB/110-%E7%BC%96%E7%A8%8B/112-Linux/">112 Linux</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E8%BF%87%E5%8E%BB/">过去</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E7%BC%96%E7%A8%8B/">编程</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/03/25/2021/03/javaRunSh/">
+                        <span class="hidden-mobile">Java调用Linux系统命令</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
         </div>
       </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
     
 
     
@@ -338,9 +425,15 @@
 
 
 
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
 
 
 
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
 
 
 
