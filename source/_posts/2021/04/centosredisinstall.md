@@ -1,5 +1,6 @@
+---
 title: Linux下Redis安装与使用简介
-date: 2021-04-02 19:01:39
+date: 2021-04-01 19:01:39
 description: CentOS7安装Redis6.0
 tags: [编程, 过去]
 category:
@@ -7,7 +8,7 @@ category:
     - 110 编程
     - 112 Linux
 
-
+---
 
 ## 软件及环境
 
