@@ -1,0 +1,544 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/comm/favicon.png">
+  <link rel="icon" href="/img/comm/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Raines">
+  <meta name="keywords" content="">
+  
+  <title>小龙的跋涉</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      
+        
+          
+        
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.22.0/themes/prism.min.css" />
+      
+      
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.22.0/plugins/line-numbers/prism-line-numbers.min.css" />
+      
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.9","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>小龙的跋涉</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-04-02 01:57" pubdate>
+        2021年4月2日 凌晨
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      915 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      13
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none"></h1>
+            
+            <div class="markdown-body">
+              <p>title: Linux下Redis安装与使用简介<br>date: 2021-04-02 19:01:39<br>description: CentOS7安装Redis6.0<br>tags: [编程, 过去]<br>category:</p>
+<div class="code-wrapper"><pre><code>- 100 学习类
+- 110 编程
+- 112 Linux</code></pre></div>
+<h2 id="软件及环境"><a href="#软件及环境" class="headerlink" title="软件及环境"></a>软件及环境</h2><ol>
+<li>CentOS7</li>
+<li><a target="_blank" rel="noopener" href="https://redis.io/download">redis-6.0.8.tar.gz</a></li>
+</ol>
+<h2 id="redis安装"><a href="#redis安装" class="headerlink" title="redis安装"></a>redis安装</h2><ol>
+<li><p>预先安装gcc和make<br>避免待会儿make时由于没安装gcc失败，提前使用<code>yum install -y gcc make</code>安装gcc<br>注：可通过<code>whereis gcc make</code>检查软件是否已安装</p>
+</li>
+<li><p>在上传(或下载)redis的目录下进行解压</p>
+<ul>
+<li><p>创建redis目录<br><code>mkdir /usr/local/redis </code></p>
+</li>
+<li><p>解压到/usr/local/redis目录</p>
+<p><code>tar -zxvf redis-6.0.8.tar.gz -C /usr/local/redis #解压到/usr/local/redis目录</code></p>
+</li>
+<li><p>切换到redis主目录</p>
+<p><code>cd /usr/local/redis/redis-6.0.8</code></p>
+</li>
+</ul>
+</li>
+<li><p>编译安装</p>
+<ul>
+<li><p>查看gcc版本(centos7默认安装的版本是4.8.5，但是redis6.0要求对应版本要在5.3以上)</p>
+<p><code>gcc -v</code></p>
+<p>如果小于5.3，则升级到5.3以上版本，依次执行命令</p>
+<div class="code-wrapper"><pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">yum -y install centos-release-scl
+yum -y install devtoolset-9-gcc devtoolset-9-gcc-c++ devtoolset-9-binutils
+scl enable devtoolset-9 bash
+echo “source &#x2F;opt&#x2F;rh&#x2F;devtoolset-9&#x2F;enable” &gt;&gt;&#x2F;etc&#x2F;profile　　#使永久生效<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre></div></li>
+<li><p>安装tcl，执行命令</p>
+<p><code>yum install tcl -y</code></p>
+</li>
+<li><p>编译并安装</p>
+<div class="code-wrapper"><pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">make #编译，之前的RPM安装包就是跳过了此步骤
+make install #安装，将redis的命令安装到&#x2F;usr&#x2F;local&#x2F;bin&#x2F;目录<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></div>
+<p>查看编译好的命令文件</p>
+<div class="code-wrapper"><pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">[root@localhost redis-6.0.8]# ls &#x2F;usr&#x2F;local&#x2F;bin&#x2F;redis-*
+&#x2F;usr&#x2F;local&#x2F;bin&#x2F;redis-benchmark	#性能测试工具
+usr&#x2F;local&#x2F;bin&#x2F;redis-check-aof		#更新日志检查
+&#x2F;usr&#x2F;local&#x2F;bin&#x2F;redis-check-rdb	#本地数据文件检查
+&#x2F;usr&#x2F;local&#x2F;bin&#x2F;redis-cli				#命令行操作工具
+&#x2F;usr&#x2F;local&#x2F;bin&#x2F;redis-sentinel -&gt; redis-server
+&#x2F;usr&#x2F;local&#x2F;bin&#x2F;redis-server			#服务器程序<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></li>
+</ul>
+</li>
+<li><p>后端模式启动</p>
+<ul>
+<li><p>服务器防火墙配置(或者关闭防火墙)</p>
+<div class="code-wrapper"><pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">firewall-cmd --zone&#x3D;public --add-port&#x3D;6379&#x2F;tcp --permanent ----添加6379端口
+firewall-cmd --reload ----重启防火墙
+firewall-cmd --list-port -----查看所有开放端口号
+firewall-cmd --query-port&#x3D;6379&#x2F;tcp -----查看指定端口是否开放<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre></div></li>
+<li><p>修改redis.conf配置文件</p>
+<p><code>vim /usr/local/redis/redis-6.0.8/redis.conf</code></p>
+<ul>
+<li><p>修改前</p>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">bind 127.0.0.1 #绑定ip：如果需要远程访问，可将此行注释，或绑定一个真实ip
+port 6379 #端口号
+protected-mode yes #是否开启保护模式
+daemonize no #是否设为后台运行
+#requirepass foobared #密码设置
+pidfile &#x2F;var&#x2F;run&#x2F;redis_6379.pid #进程文件保存位置，redis运行后会在此位置自动生成
+logfile “” #日志文件保存位置
+dir .&#x2F; #redis位置<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></li>
+<li><p>修改后</p>
+<blockquote>
+<p>:/prot (:/找询的单词,在Esc模式下输入)—-作用快速找到需要更改内容</p>
+</blockquote>
+</li>
+<li><p>```<br>#bind 127.0.0.1 #允许所有IP访问<br>port 6379 #端口号为6379<br>protected-mode no #关闭保护模式，不然远程还是连接不了<br>daemonize yes #设为后台运行<br>#requirepass 123456 #简化开发，没有设置密码<br>pidfile /var/run/redis_6379.pid #修改为你的安装目录 redis_端口号 端口改为该redis服务端口<br>logfile /usr/local/redis/redis-6.0.8/redis_log.log #修改redis日志存放位置<br>dir /usr/local/redis/redis-6.0.8 #修改redis位置</p>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">
+5. 启动和关闭redis
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></div>
+<p>redis-server /usr/local/redis/redis-6.0.8/redis.conf #使用指定配置启动[后台启动模式]</p>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">
+- 启动成功测试
+
+  &#96;&#96;&#96;sh
+  [root@localhost redis-6.0.8]# ps -aux|grep redis
+  root     27036  0.0  0.0 162420  7804 ?        Ssl  09:42   0:00 redis-server *:6379
+  root     27047  0.0  0.0 112828   984 pts&#x2F;0    S+   09:42   0:00 grep --color&#x3D;auto redis<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></li>
+</ul>
+</li>
+<li><p>关闭redis</p>
+<div class="code-wrapper"><pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">redis-cli shutdown #没有设置密码，运行此行代码
+redis-cli -a 123456 shutdown #设置密码，运行此行<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></div></li>
+<li><p>登录redis</p>
+<div class="code-wrapper"><pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">redis-cli -h 127.0.0.1 -p 6379 -a 123456<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div>
+
+
+
+
+</li>
+</ul>
+</li>
+</ol>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/04/01/2021/04/reflectcopy/">
+                        <span class="hidden-mobile">Java利用反射实现Spring中BeanUtils类的copyProperties方法</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://xiaolong00.github.io/about" target="_blank" rel="nofollow noopener"><span>Raines blog</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>use hexo Fluid theme</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+    
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      $('#local-search-input').on('click', function() {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+<!-- hexo injector body_end start -->
+<!--  <div id="aplayer"></div>-->
+<!--  <link defer rel="stylesheet" href="https://cdn.staticfile.org/aplayer/1.10.1/APlayer.min.css" />-->
+<!--  <script src="https://cdn.staticfile.org/aplayer/1.10.1/APlayer.min.js"></script>-->
+  <script defer src="/js/aplayer.js"></script>
+<!-- hexo injector body_end end --><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/hibiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.7},"log":false});</script></body>
+</html>
