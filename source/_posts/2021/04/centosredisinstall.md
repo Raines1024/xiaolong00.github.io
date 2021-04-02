@@ -3,12 +3,14 @@ date: 2021-04-02 19:01:39
 description: CentOS7安装Redis6.0
 tags: [编程, 过去]
 category:
-
     - 100 学习类
     - 110 编程
     - 112 Linux
 
+
+
 ## 软件及环境
+
 1. CentOS7
 2. [redis-6.0.8.tar.gz](https://redis.io/download)
 
