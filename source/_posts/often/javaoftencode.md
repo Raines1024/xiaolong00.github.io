@@ -8,6 +8,7 @@ category:
 - 100 学习类
 - 110 编程
 - 111 Java
+
 ---
 
 //集合转成字符串逗号分隔
@@ -21,9 +22,11 @@ category:
 //字符串根据逗号转成List
 
     List<String> items = Arrays.asList(str.split("\\s*,\\s*"));
+
 //集合去重
 
     items.stream().distinct().collect(Collectors.joining(","));
+
 //对对象集合中的某字段降序排序
 
     Collections.sort(list, new Comparator<OmsCouponSend>() {
@@ -38,6 +41,7 @@ category:
             return 1;
         }
     });
+
 //对集合中某元素去重
 
     ArrayList<OmsCollectAppVo> distinctLiost = resultList.stream().collect(Collectors.collectingAndThen(Collectors.toCollection(() -> new TreeSet<>(Comparator.comparingLong(OmsCollectAppVo::getSortId))), ArrayList::new));
@@ -45,6 +49,7 @@ category:
 //多条件对集合排序
 (如果a1-a2大于0，返回正数是升序;如果a2-a1小于0，返回负数是降序)
     
+
     Collections.sort(students, new Comparator(){
     
       public int compare(Student a1, Student a2) {
@@ -75,7 +80,6 @@ category:
 
 
 ​     
-
 
 
 
