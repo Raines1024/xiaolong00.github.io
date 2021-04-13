@@ -1,9 +1,13 @@
 ---
-layout: post
-title: java常用方法
+title: java常用代码片段
 description: web开发常用方法，快速开发、缩短工作时间必备
-category: blog
 date: 2020-01-07 13:50:39
+tags: [编程, 现在]
+sticky: 10
+category:
+- 100 学习类
+- 110 编程
+- 111 Java
 ---
 
 //集合转成字符串逗号分隔
@@ -68,8 +72,9 @@ date: 2020-01-07 13:50:39
       }
     
       });
-    
-     
+
+
+​     
 
 
 
