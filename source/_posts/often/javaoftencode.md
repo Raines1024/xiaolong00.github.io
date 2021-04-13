@@ -11,23 +11,48 @@ category:
 
 ---
 
-//集合转成字符串逗号分隔
+
+
+## 集合常用方法
+
+### Iterator循环删除list中元素
+
+```java
+for (Iterator<String> iterator = list.iterator(); iterator.hasNext(); ) {
+        String str=iterator.next();
+        if (Objects.equals("one",str)){
+            iterator.remove();
+        }
+    }
+// or
+Iterator<String> iterator = list.iterator();
+    while(iterator.hasNext()){
+        String str=iterator.next();
+        if (Objects.equals("one",str)){
+            iterator.remove();
+        }
+
+```
+
+
+
+### 集合转成字符串逗号分隔
 
     StringUtils.join(list,",");
 
-//取集合中最大值
+### 取集合中最大值
 
     long parValueMax = Collections.max(resultList.stream().map(OmsCouponUserAppVo::getParValue).collect(Collectors.toList()));
 
-//字符串根据逗号转成List
+### 字符串根据逗号转成List
 
     List<String> items = Arrays.asList(str.split("\\s*,\\s*"));
 
-//集合去重
+### 集合去重
 
     items.stream().distinct().collect(Collectors.joining(","));
 
-//对对象集合中的某字段降序排序
+### 对对象集合中的某字段降序排序
 
     Collections.sort(list, new Comparator<OmsCouponSend>() {
         @Override
@@ -42,11 +67,11 @@ category:
         }
     });
 
-//对集合中某元素去重
+### 对集合中某元素去重
 
     ArrayList<OmsCollectAppVo> distinctLiost = resultList.stream().collect(Collectors.collectingAndThen(Collectors.toCollection(() -> new TreeSet<>(Comparator.comparingLong(OmsCollectAppVo::getSortId))), ArrayList::new));
 
-//多条件对集合排序
+### 多条件对集合排序
 (如果a1-a2大于0，返回正数是升序;如果a2-a1小于0，返回负数是降序)
     
 
