@@ -103,3 +103,37 @@ CONV(N,from_base,to_base)
 
 
 
+
+
+## 相似问题
+### MySQL中怎么对varchar类型排序问题：转载自【https://www.cnblogs.com/dengyungao/p/8324590.html】
+asc 升级
+
+desc降序
+
+在mysql默认order by 只对数字与日期类型可以排序，但对于varchar字符型类型排序好像没有用了，下面我来给各位同学介绍varchar类型排序问题如何解决。
+
+今天在对国家电话号码表进行排序的时候发现了一个有趣的问题，我想让isdcode字段按照由小到大的顺序排序，于是乎我是这样写的
+
+SELECT * FROM gb_country_isdcode ORDER BY isdcode asc
+
+结果如下，发现竟然不是我想要的结果，asc排序是对的呀，于是乎我找呀找，找呀找，终于找到原因了；
+
+isdcode是varcher类型的，如果排序的直接用asc显然是不行的，必须将他转换成int类型然后就可以正常排序了，只要isdcode + 0就可以了
+
+于是乎这样写
+
+SELECT * FROM gb_country_isdcode ORDER BY (isdcode+0) asc
+
+好像是想要的那种数据比较大小的了呀。。可是为什么+0就好了呢？原来，+0后就转换INT类型排序了。这样就可以按照大小排序了。
+
+如果不是电话而是汉字怎么办，汉字排序我们只要进行简单转换即可排序了。
+
+在mysql中使用order by对存储了中文信息的字段，默认出来的结果并不是按汉字拼音的顺序来排序，要想按汉字的拼音来排序，需要把数据库的字符集设置为UTF8，然后在order by 时候强制把该字段信息转换成GBK，这样出来的结果就是按拼音顺序排序的。例如：
+
+SELECT * FROM table_name ORDER BY CONVERT(column_name USING gbk);
+
+在mysql中试了一下，结果很令人满意。
+
+结论是：查询的时候，通过convert函数，把查询出来的数据使用的字符集gb2312编码就可以了，然后使用convert之后的中文排序。但是如果真的去把表中字段的字符集改成gb2312，又会涉及到很多编码的问题，页面传值啊，从数据库中存取啊，很麻烦。只要在查询的时候，指定一下字符集，并不是真的把物理字段改成gb2312，很简单。
+
