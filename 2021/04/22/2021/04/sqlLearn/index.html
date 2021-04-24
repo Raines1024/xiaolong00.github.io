@@ -18,7 +18,7 @@
   <meta name="author" content="Raines">
   <meta name="keywords" content="">
   
-  <title>SQL JOIN关键字 - 小龙的跋涉</title>
+  <title>SQL基础之关键字 - 小龙的跋涉</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
@@ -183,7 +183,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="SQL JOIN关键字">
+            <span class="h2" id="subtitle" title="SQL基础之关键字">
               
             </span>
 
@@ -205,7 +205,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.2k 字
+      2.6k 字
     </span>
   
 
@@ -215,7 +215,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      13
+      32
        分钟
     </span>
   
@@ -245,13 +245,39 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">SQL JOIN关键字</h1>
+            <h1 style="display: none">SQL基础之关键字</h1>
             
             <div class="markdown-body">
               <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>以前是一直很看轻sql的，其一错以为数据库的横向优化作用并不是很重要，主要得利用纵向来进行优化；其二是被各种框架给“惯”坏了，依赖于框架的封装来进行简单的sql拼接查询。</p>
 <p>慢慢改观这个想法的是看过的一篇英文博客，出处已无从可考，只记得了个大概，意思是sql诞生由来已久，而至今仍未出现大的改动，反观框架则半年一小变，一年一大变，三五年仍火爆的框架如同凤毛麟角，更足以说明深入学习sql是一项非常值得的劳动。</p>
 <p>现实中则是数据库用到了大量sql的查询操作，因为关联表的大批量操作而导致数据库压力过大，sql优化刻不容缓。</p>
-<h2 id="mysql递归查询，mysql中从子类ID查询所有父类（做无限分类经常用到）"><a href="#mysql递归查询，mysql中从子类ID查询所有父类（做无限分类经常用到）" class="headerlink" title="mysql递归查询，mysql中从子类ID查询所有父类（做无限分类经常用到）"></a>mysql递归查询，mysql中从子类ID查询所有父类（做无限分类经常用到）</h2><h2 id="MySQL-数据类型"><a href="#MySQL-数据类型" class="headerlink" title="MySQL 数据类型"></a>MySQL 数据类型</h2><p>在 MySQL 中，有三种主要的类型：文本、数字和日期/时间类型。</p>
+<h2 id="关键字"><a href="#关键字" class="headerlink" title="关键字"></a>关键字</h2><h3 id="like关键字"><a href="#like关键字" class="headerlink" title="like关键字"></a>like关键字</h3><p>SELECT * FROM table1 WHERE <code>name</code> LIKE ‘hom%’;<br>SELECT * FROM table1 WHERE <code>name</code> NOT LIKE ‘%om%’;</p>
+<h3 id="in关键字"><a href="#in关键字" class="headerlink" title="in关键字"></a>in关键字</h3><p>SELECT * FROM table1 WHERE id IN (1,2);<br>SELECT * FROM table1 WHERE name IN (‘Home’);</p>
+<h3 id="BETWEEN-操作符在-WHERE-子句中使用，作用是选取介于两个值之间的数据范围。"><a href="#BETWEEN-操作符在-WHERE-子句中使用，作用是选取介于两个值之间的数据范围。" class="headerlink" title="BETWEEN 操作符在 WHERE 子句中使用，作用是选取介于两个值之间的数据范围。"></a>BETWEEN 操作符在 WHERE 子句中使用，作用是选取介于两个值之间的数据范围。</h3><p>SELECT * FROM table1 WHERE id BETWEEN 1 AND 3;</p>
+<h3 id="通过使用-SQL，可以为列名称和表名称指定别名（Alias）。使用AS，AS可以省略"><a href="#通过使用-SQL，可以为列名称和表名称指定别名（Alias）。使用AS，AS可以省略" class="headerlink" title="通过使用 SQL，可以为列名称和表名称指定别名（Alias）。使用AS，AS可以省略"></a>通过使用 SQL，可以为列名称和表名称指定别名（Alias）。使用AS，AS可以省略</h3><p>SELECT t.name FROM table1 t;</p>
+<h3 id="SQL-join-用于根据两个或多个表中的列之间的关系，从这些表中查询数据。"><a href="#SQL-join-用于根据两个或多个表中的列之间的关系，从这些表中查询数据。" class="headerlink" title="SQL join 用于根据两个或多个表中的列之间的关系，从这些表中查询数据。"></a>SQL join 用于根据两个或多个表中的列之间的关系，从这些表中查询数据。</h3><h3 id="引用两个表"><a href="#引用两个表" class="headerlink" title="引用两个表"></a>引用两个表</h3><p>SELECT t.name tname,s.name sname FROM table1 t,student s WHERE t.id = s.table_id;</p>
+<h3 id="SQL-JOIN-使用-Join"><a href="#SQL-JOIN-使用-Join" class="headerlink" title="SQL JOIN - 使用 Join"></a>SQL JOIN - 使用 Join</h3><p>SELECT t.name tname,s.name sname FROM table1 t INNER JOIN student s ON t.id = s.table_id ORDER BY t.id;</p>
+<h3 id="JOIN-如果表中有至少一个匹配，则返回行-LEFT-JOIN-即使右表中没有匹配，也从左表返回所有的行-RIGHT-JOIN-即使左表中没有匹配，也从右表返回所有的行-FULL-JOIN-只要其中一个表中存在匹配，就返回行-Mysql不支持"><a href="#JOIN-如果表中有至少一个匹配，则返回行-LEFT-JOIN-即使右表中没有匹配，也从左表返回所有的行-RIGHT-JOIN-即使左表中没有匹配，也从右表返回所有的行-FULL-JOIN-只要其中一个表中存在匹配，就返回行-Mysql不支持" class="headerlink" title="JOIN: 如果表中有至少一个匹配，则返回行;LEFT JOIN: 即使右表中没有匹配，也从左表返回所有的行;RIGHT JOIN: 即使左表中没有匹配，也从右表返回所有的行;FULL JOIN: 只要其中一个表中存在匹配，就返回行(Mysql不支持)"></a>JOIN: 如果表中有至少一个匹配，则返回行;LEFT JOIN: 即使右表中没有匹配，也从左表返回所有的行;RIGHT JOIN: 即使左表中没有匹配，也从右表返回所有的行;FULL JOIN: 只要其中一个表中存在匹配，就返回行(Mysql不支持)</h3><p>SELECT t.name tname,s.name sname FROM table1 t LEFT JOIN student s ON t.id = s.table_id ;<br>SELECT t.name tname,s.name sname FROM table1 t RIGHT JOIN student s ON t.id = s.table_id ;</p>
+<h3 id="SQL-UNION-操作符"><a href="#SQL-UNION-操作符" class="headerlink" title="SQL UNION 操作符"></a>SQL UNION 操作符</h3><h3 id="UNION-操作符用于合并两个或多个-SELECT-语句的结果集。请注意，UNION-内部的-SELECT-语句必须拥有相同数量的列。列也必须拥有相似的数据类型。同时，每条-SELECT-语句中的列的顺序必须相同。"><a href="#UNION-操作符用于合并两个或多个-SELECT-语句的结果集。请注意，UNION-内部的-SELECT-语句必须拥有相同数量的列。列也必须拥有相似的数据类型。同时，每条-SELECT-语句中的列的顺序必须相同。" class="headerlink" title="UNION 操作符用于合并两个或多个 SELECT 语句的结果集。请注意，UNION 内部的 SELECT 语句必须拥有相同数量的列。列也必须拥有相似的数据类型。同时，每条 SELECT 语句中的列的顺序必须相同。"></a>UNION 操作符用于合并两个或多个 SELECT 语句的结果集。请注意，UNION 内部的 SELECT 语句必须拥有相同数量的列。列也必须拥有相似的数据类型。同时，每条 SELECT 语句中的列的顺序必须相同。</h3><p>SELECT name,id FROM table1<br>UNION<br>SELECT name,table_id FROM student;</p>
+<h2 id="SQL-约束"><a href="#SQL-约束" class="headerlink" title="SQL 约束"></a>SQL 约束</h2><h3 id="约束用于限制加入表的数据的类型。可以在创建表时规定约束（通过-CREATE-TABLE-语句），或者在表创建之后也可以（通过-ALTER-TABLE-语句）。"><a href="#约束用于限制加入表的数据的类型。可以在创建表时规定约束（通过-CREATE-TABLE-语句），或者在表创建之后也可以（通过-ALTER-TABLE-语句）。" class="headerlink" title="约束用于限制加入表的数据的类型。可以在创建表时规定约束（通过 CREATE TABLE 语句），或者在表创建之后也可以（通过 ALTER TABLE 语句）。"></a>约束用于限制加入表的数据的类型。可以在创建表时规定约束（通过 CREATE TABLE 语句），或者在表创建之后也可以（通过 ALTER TABLE 语句）。</h3><h3 id="SQL-NOT-NULL-约束-NOT-NULL-约束强制列不接受-NULL-值。"><a href="#SQL-NOT-NULL-约束-NOT-NULL-约束强制列不接受-NULL-值。" class="headerlink" title="SQL NOT NULL 约束:NOT NULL 约束强制列不接受 NULL 值。"></a>SQL NOT NULL 约束:NOT NULL 约束强制列不接受 NULL 值。</h3><h3 id="SQL-UNIQUE-约束-UNIQUE-约束唯一标识数据库表中的每条记录-为列或列集合提供了唯一性的保证。每个表可以有多个-UNIQUE-约束，但是每个表只能有一个-PRIMARY-KEY-约束。"><a href="#SQL-UNIQUE-约束-UNIQUE-约束唯一标识数据库表中的每条记录-为列或列集合提供了唯一性的保证。每个表可以有多个-UNIQUE-约束，但是每个表只能有一个-PRIMARY-KEY-约束。" class="headerlink" title="SQL UNIQUE 约束:UNIQUE 约束唯一标识数据库表中的每条记录,为列或列集合提供了唯一性的保证。每个表可以有多个 UNIQUE 约束，但是每个表只能有一个 PRIMARY KEY 约束。"></a>SQL UNIQUE 约束:UNIQUE 约束唯一标识数据库表中的每条记录,为列或列集合提供了唯一性的保证。每个表可以有多个 UNIQUE 约束，但是每个表只能有一个 PRIMARY KEY 约束。</h3><p>ALTER TABLE student ADD UNIQUE (table_id);<br>ALTER TABLE student DROP INDEX table_id;</p>
+<h3 id="SQL-PRIMARY-KEY-约束-PRIMARY-KEY-约束唯一标识数据库表中的每条记录。主键必须包含唯一的值-主键列不能包含-NULL-值-每个表都应该有一个主键，并且每个表只能有一个主键"><a href="#SQL-PRIMARY-KEY-约束-PRIMARY-KEY-约束唯一标识数据库表中的每条记录。主键必须包含唯一的值-主键列不能包含-NULL-值-每个表都应该有一个主键，并且每个表只能有一个主键" class="headerlink" title="SQL PRIMARY KEY 约束:PRIMARY KEY 约束唯一标识数据库表中的每条记录。主键必须包含唯一的值,主键列不能包含 NULL 值,每个表都应该有一个主键，并且每个表只能有一个主键"></a>SQL PRIMARY KEY 约束:PRIMARY KEY 约束唯一标识数据库表中的每条记录。主键必须包含唯一的值,主键列不能包含 NULL 值,每个表都应该有一个主键，并且每个表只能有一个主键</h3><h3 id="SQL-FOREIGN-KEY-约束-外键-一个表中的-FOREIGN-KEY-指向另一个表中的-PRIMARY-KEY。"><a href="#SQL-FOREIGN-KEY-约束-外键-一个表中的-FOREIGN-KEY-指向另一个表中的-PRIMARY-KEY。" class="headerlink" title="SQL FOREIGN KEY 约束:外键,一个表中的 FOREIGN KEY 指向另一个表中的 PRIMARY KEY。"></a>SQL FOREIGN KEY 约束:外键,一个表中的 FOREIGN KEY 指向另一个表中的 PRIMARY KEY。</h3><h3 id="SQL-CHECK-约束-CHECK-约束用于限制列中的值的范围。如果对单个列定义-CHECK-约束，那么该列只允许特定的值-如果对一个表定义-CHECK-约束，那么此约束会在特定的列中对值进行限制。（Mysql数据库有暂有问题）"><a href="#SQL-CHECK-约束-CHECK-约束用于限制列中的值的范围。如果对单个列定义-CHECK-约束，那么该列只允许特定的值-如果对一个表定义-CHECK-约束，那么此约束会在特定的列中对值进行限制。（Mysql数据库有暂有问题）" class="headerlink" title="SQL CHECK 约束:CHECK 约束用于限制列中的值的范围。如果对单个列定义 CHECK 约束，那么该列只允许特定的值;如果对一个表定义 CHECK 约束，那么此约束会在特定的列中对值进行限制。（Mysql数据库有暂有问题）"></a>SQL CHECK 约束:CHECK 约束用于限制列中的值的范围。如果对单个列定义 CHECK 约束，那么该列只允许特定的值;如果对一个表定义 CHECK 约束，那么此约束会在特定的列中对值进行限制。（Mysql数据库有暂有问题）</h3><p>ALTER TABLE student ADD CHECK (table_id&gt;0);<br>ALTER TABLE Persons DROP CHECK table_id;</p>
+<h3 id="SQL-DEFAULT-约束：DEFAULT-约束用于向列中插入默认值。如果没有规定其他的值，那么会将默认值添加到所有的新记录。"><a href="#SQL-DEFAULT-约束：DEFAULT-约束用于向列中插入默认值。如果没有规定其他的值，那么会将默认值添加到所有的新记录。" class="headerlink" title="SQL DEFAULT 约束：DEFAULT 约束用于向列中插入默认值。如果没有规定其他的值，那么会将默认值添加到所有的新记录。"></a>SQL DEFAULT 约束：DEFAULT 约束用于向列中插入默认值。如果没有规定其他的值，那么会将默认值添加到所有的新记录。</h3><h3 id="SQL-CREATE-INDEX-语句：CREATE-INDEX-语句用于在表中创建索引。在不读取整个表的情况下，索引使数据库应用程序可以更快地查找数据。"><a href="#SQL-CREATE-INDEX-语句：CREATE-INDEX-语句用于在表中创建索引。在不读取整个表的情况下，索引使数据库应用程序可以更快地查找数据。" class="headerlink" title="SQL CREATE INDEX 语句：CREATE INDEX 语句用于在表中创建索引。在不读取整个表的情况下，索引使数据库应用程序可以更快地查找数据。"></a>SQL CREATE INDEX 语句：CREATE INDEX 语句用于在表中创建索引。在不读取整个表的情况下，索引使数据库应用程序可以更快地查找数据。</h3><h3 id="SQL-CREATE-INDEX-在表上创建一个简单的索引-允许使用重复的值"><a href="#SQL-CREATE-INDEX-在表上创建一个简单的索引-允许使用重复的值" class="headerlink" title="SQL CREATE INDEX:在表上创建一个简单的索引,允许使用重复的值"></a>SQL CREATE INDEX:在表上创建一个简单的索引,允许使用重复的值</h3><p>CREATE INDEX index_name ON student (name);</p>
+<h3 id="SQL-CREATE-UNIQUE-INDEX-在表上创建一个唯一的索引。唯一的索引意味着两个行不能拥有相同的索引值。"><a href="#SQL-CREATE-UNIQUE-INDEX-在表上创建一个唯一的索引。唯一的索引意味着两个行不能拥有相同的索引值。" class="headerlink" title="SQL CREATE UNIQUE INDEX:在表上创建一个唯一的索引。唯一的索引意味着两个行不能拥有相同的索引值。"></a>SQL CREATE UNIQUE INDEX:在表上创建一个唯一的索引。唯一的索引意味着两个行不能拥有相同的索引值。</h3><p>CREATE UNIQUE INDEX index_tid ON student (table_id);</p>
+<h3 id="SQL-撤销索引、表以及数据库-通过使用-DROP-语句，可以轻松地删除索引、表和数据库。"><a href="#SQL-撤销索引、表以及数据库-通过使用-DROP-语句，可以轻松地删除索引、表和数据库。" class="headerlink" title="SQL 撤销索引、表以及数据库:通过使用 DROP 语句，可以轻松地删除索引、表和数据库。"></a>SQL 撤销索引、表以及数据库:通过使用 DROP 语句，可以轻松地删除索引、表和数据库。</h3><h3 id="SQL-DROP-INDEX-语句"><a href="#SQL-DROP-INDEX-语句" class="headerlink" title="SQL DROP INDEX 语句"></a>SQL DROP INDEX 语句</h3><p>ALTER TABLE student DROP INDEX index_tid;</p>
+<h3 id="SQL-DROP-TABLE-语句"><a href="#SQL-DROP-TABLE-语句" class="headerlink" title="SQL DROP TABLE 语句"></a>SQL DROP TABLE 语句</h3><h3 id="SQL-DROP-DATABASE-语句"><a href="#SQL-DROP-DATABASE-语句" class="headerlink" title="SQL DROP DATABASE 语句"></a>SQL DROP DATABASE 语句</h3><h3 id="SQL-TRUNCATE-TABLE-语句-仅仅需要除去表内的数据，但并不删除表本身"><a href="#SQL-TRUNCATE-TABLE-语句-仅仅需要除去表内的数据，但并不删除表本身" class="headerlink" title="SQL TRUNCATE TABLE 语句:仅仅需要除去表内的数据，但并不删除表本身"></a>SQL TRUNCATE TABLE 语句:仅仅需要除去表内的数据，但并不删除表本身</h3><h3 id="SQL-ALTER-TABLE-语句-ALTER-TABLE-语句用于在已有的表中添加、修改或删除列。"><a href="#SQL-ALTER-TABLE-语句-ALTER-TABLE-语句用于在已有的表中添加、修改或删除列。" class="headerlink" title="SQL ALTER TABLE 语句:ALTER TABLE 语句用于在已有的表中添加、修改或删除列。"></a>SQL ALTER TABLE 语句:ALTER TABLE 语句用于在已有的表中添加、修改或删除列。</h3><h3 id="SQL-AUTO-INCREMENT-字段-Auto-increment-会在新记录插入表中时生成一个唯一的数字。"><a href="#SQL-AUTO-INCREMENT-字段-Auto-increment-会在新记录插入表中时生成一个唯一的数字。" class="headerlink" title="SQL AUTO INCREMENT 字段:Auto-increment 会在新记录插入表中时生成一个唯一的数字。"></a>SQL AUTO INCREMENT 字段:Auto-increment 会在新记录插入表中时生成一个唯一的数字。</h3><h3 id="SQL-Date-函数"><a href="#SQL-Date-函数" class="headerlink" title="SQL Date 函数"></a>SQL Date 函数</h3><h3 id="SQL-NULL-值-NULL-值是遗漏的未知数据-默认地，表的列可以存放-NULL-值。"><a href="#SQL-NULL-值-NULL-值是遗漏的未知数据-默认地，表的列可以存放-NULL-值。" class="headerlink" title="SQL NULL 值:NULL 值是遗漏的未知数据,默认地，表的列可以存放 NULL 值。"></a>SQL NULL 值:NULL 值是遗漏的未知数据,默认地，表的列可以存放 NULL 值。</h3><h3 id="SQL-IS-NULL：选取某列中带有-NULL-值的记录"><a href="#SQL-IS-NULL：选取某列中带有-NULL-值的记录" class="headerlink" title="SQL IS NULL：选取某列中带有 NULL 值的记录"></a>SQL IS NULL：选取某列中带有 NULL 值的记录</h3><h3 id="SQL-IS-NOT-NULL：选取某列中不带有-NULL-值的记录"><a href="#SQL-IS-NOT-NULL：选取某列中不带有-NULL-值的记录" class="headerlink" title="SQL IS NOT NULL：选取某列中不带有 NULL 值的记录"></a>SQL IS NOT NULL：选取某列中不带有 NULL 值的记录</h3><h2 id="SQL函数：SQL-拥有很多可用于计数和计算的内建函数。"><a href="#SQL函数：SQL-拥有很多可用于计数和计算的内建函数。" class="headerlink" title="SQL函数：SQL 拥有很多可用于计数和计算的内建函数。"></a>SQL函数：SQL 拥有很多可用于计数和计算的内建函数。</h2><h3 id="SQL-AVG-函数：AVG-函数返回数值列的平均值。NULL-值不包括在计算中。"><a href="#SQL-AVG-函数：AVG-函数返回数值列的平均值。NULL-值不包括在计算中。" class="headerlink" title="SQL AVG 函数：AVG 函数返回数值列的平均值。NULL 值不包括在计算中。"></a>SQL AVG 函数：AVG 函数返回数值列的平均值。NULL 值不包括在计算中。</h3><p>SELECT AVG(age) AS ageAverage FROM student;</p>
+<h3 id="SQL-COUNT-函数：COUNT-函数返回匹配指定条件的行数。"><a href="#SQL-COUNT-函数：COUNT-函数返回匹配指定条件的行数。" class="headerlink" title="SQL COUNT() 函数：COUNT() 函数返回匹配指定条件的行数。"></a>SQL COUNT() 函数：COUNT() 函数返回匹配指定条件的行数。</h3><p>SELECT COUNT(*) FROM student;</p>
+<h3 id="SQL-MAX-函数：MAX-函数返回一列中的最大值。NULL-值不包括在计算中。"><a href="#SQL-MAX-函数：MAX-函数返回一列中的最大值。NULL-值不包括在计算中。" class="headerlink" title="SQL MAX() 函数：MAX 函数返回一列中的最大值。NULL 值不包括在计算中。"></a>SQL MAX() 函数：MAX 函数返回一列中的最大值。NULL 值不包括在计算中。</h3><p>SELECT MAX(age) FROM student;<br>SELECT MIN(age) FROM student;</p>
+<h3 id="SQL-SUM-函数-SUM-函数返回数值列的总数（总额）。"><a href="#SQL-SUM-函数-SUM-函数返回数值列的总数（总额）。" class="headerlink" title="SQL SUM() 函数:SUM 函数返回数值列的总数（总额）。"></a>SQL SUM() 函数:SUM 函数返回数值列的总数（总额）。</h3><p>SELECT SUM(age) FROM student;</p>
+<h3 id="SQL-GROUP-BY-语句-合计函数-比如-SUM-常常需要添加-GROUP-BY-语句。"><a href="#SQL-GROUP-BY-语句-合计函数-比如-SUM-常常需要添加-GROUP-BY-语句。" class="headerlink" title="SQL GROUP BY 语句:合计函数 (比如 SUM) 常常需要添加 GROUP BY 语句。"></a>SQL GROUP BY 语句:合计函数 (比如 SUM) 常常需要添加 GROUP BY 语句。</h3><p>SELECT table_id,SUM(age) FROM student GROUP BY table_id;</p>
+<h3 id="SQL-HAVING-子句-在-SQL-中增加-HAVING-子句原因是，WHERE-关键字无法与合计函数一起使用。"><a href="#SQL-HAVING-子句-在-SQL-中增加-HAVING-子句原因是，WHERE-关键字无法与合计函数一起使用。" class="headerlink" title="SQL HAVING 子句:在 SQL 中增加 HAVING 子句原因是，WHERE 关键字无法与合计函数一起使用。"></a>SQL HAVING 子句:在 SQL 中增加 HAVING 子句原因是，WHERE 关键字无法与合计函数一起使用。</h3><p>SELECT table_id,SUM(age) FROM student GROUP BY table_id HAVING SUM(age)&lt;30;</p>
+<h3 id="SQL-UCASE-函数-UCASE-函数把字段的值转换为大写。"><a href="#SQL-UCASE-函数-UCASE-函数把字段的值转换为大写。" class="headerlink" title="SQL UCASE() 函数:UCASE 函数把字段的值转换为大写。"></a>SQL UCASE() 函数:UCASE 函数把字段的值转换为大写。</h3><p>SELECT UCASE(name) FROM student;</p>
+<h3 id="SQL-LCASE-函数-LCASE-函数把字段的值转换为小写。"><a href="#SQL-LCASE-函数-LCASE-函数把字段的值转换为小写。" class="headerlink" title="SQL LCASE() 函数:LCASE 函数把字段的值转换为小写。"></a>SQL LCASE() 函数:LCASE 函数把字段的值转换为小写。</h3><p>SELECT LCASE(name) FROM student;</p>
+<h3 id="SQL-MID-函数-MID-函数用于从文本字段中提取字符。"><a href="#SQL-MID-函数-MID-函数用于从文本字段中提取字符。" class="headerlink" title="SQL MID() 函数:MID 函数用于从文本字段中提取字符。"></a>SQL MID() 函数:MID 函数用于从文本字段中提取字符。</h3><p>SELECT MID(name,1,3) as smallName FROM student;</p>
+<h3 id="SQL-LENGTH-函数-LENGTH-函数返回文本字段中值的长度。"><a href="#SQL-LENGTH-函数-LENGTH-函数返回文本字段中值的长度。" class="headerlink" title="SQL LENGTH() 函数:LENGTH 函数返回文本字段中值的长度。"></a>SQL LENGTH() 函数:LENGTH 函数返回文本字段中值的长度。</h3><p>SELECT LENGTH(name) as LengthOfName FROM student;</p>
+<h3 id="SQL-ROUND-函数-ROUND-函数用于把数值字段舍入为指定的小数位数。"><a href="#SQL-ROUND-函数-ROUND-函数用于把数值字段舍入为指定的小数位数。" class="headerlink" title="SQL ROUND() 函数:ROUND 函数用于把数值字段舍入为指定的小数位数。"></a>SQL ROUND() 函数:ROUND 函数用于把数值字段舍入为指定的小数位数。</h3><p>SELECT name, ROUND(age,0) as age FROM student;</p>
+<h3 id="SQL-NOW-函数-NOW-函数返回当前的日期和时间。"><a href="#SQL-NOW-函数-NOW-函数返回当前的日期和时间。" class="headerlink" title="SQL NOW() 函数:NOW 函数返回当前的日期和时间。"></a>SQL NOW() 函数:NOW 函数返回当前的日期和时间。</h3><p>SELECT NOW() time,name,age FROM student;</p>
+<h3 id="SQL-FORMAT-函数-FORMAT-函数用于对字段的显示进行格式化。"><a href="#SQL-FORMAT-函数-FORMAT-函数用于对字段的显示进行格式化。" class="headerlink" title="SQL FORMAT() 函数:FORMAT 函数用于对字段的显示进行格式化。"></a>SQL FORMAT() 函数:FORMAT 函数用于对字段的显示进行格式化。</h3><p>SELECT name, age, FORMAT(Now(),’YYYY/MM/DD hh:mm:ss’) as time FROM student;</p>
+<h2 id="附录：MySQL-数据类型"><a href="#附录：MySQL-数据类型" class="headerlink" title="附录：MySQL 数据类型"></a>附录：MySQL 数据类型</h2><p>在 MySQL 中，有三种主要的类型：文本、数字和日期/时间类型。</p>
 <h3 id="Text-类型："><a href="#Text-类型：" class="headerlink" title="Text 类型："></a>Text 类型：</h3><table>
 <thead>
 <tr>
