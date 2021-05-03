@@ -40,7 +40,7 @@
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.9","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.10","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
@@ -138,13 +138,13 @@
         
         
           <li class="nav-item" id="search-btn">
-            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
                 class="iconfont icon-search"></i>&nbsp;</a>
           </li>
         
         
           <li class="nav-item" id="color-toggle-btn">
-            <a class="nav-link" href="javascript:">&nbsp;<i
+            <a class="nav-link" target="_self">&nbsp;<i
                 class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
           </li>
         
@@ -194,11 +194,13 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2020/01/07/2020/2020-06-07-k8s/">kubernetes入门实战</a>
+        <a href="/2020/01/07/2020/2020-06-07-k8s/" target="_self">
+          kubernetes入门实战
+        </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2020/01/07/2020/2020-06-07-k8s/">
+        <a href="/2020/01/07/2020/2020-06-07-k8s/" target="_self">
           
           
             
@@ -235,11 +237,13 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2020/01/07/2020/2020-06-29-ubuntuLearn/">Ubuntu 桌面版</a>
+        <a href="/2020/01/07/2020/2020-06-29-ubuntuLearn/" target="_self">
+          Ubuntu 桌面版
+        </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2020/01/07/2020/2020-06-29-ubuntuLearn/">
+        <a href="/2020/01/07/2020/2020-06-29-ubuntuLearn/" target="_self">
           
           
             
@@ -276,11 +280,13 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2020/01/07/2020/2020-08-19-k8sinstall/">Centos7.6部署k8s(v1.18.2)集群</a>
+        <a href="/2020/01/07/2020/2020-08-19-k8sinstall/" target="_self">
+          Centos7.6部署k8s(v1.18.2)集群
+        </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2020/01/07/2020/2020-08-19-k8sinstall/">
+        <a href="/2020/01/07/2020/2020-08-19-k8sinstall/" target="_self">
           
           
             
@@ -317,11 +323,56 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2020/01/07/2020/2020-03-16-books/">图书列表整理</a>
+        <a href="/2020/01/07/2020/2020-11-25-centosLearn/" target="_self">
+          CentOS必知必会
+        </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2020/01/07/2020/2020-03-16-books/">
+        <a href="/2020/01/07/2020/2020-11-25-centosLearn/" target="_self">
+          
+          
+            
+          
+          CentOS学习
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-01-07 13:50" pubdate>
+              2020-01-07
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/blog/">blog</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2020/01/07/2020/2020-03-16-books/" target="_self">
+          图书列表整理
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2020/01/07/2020/2020-03-16-books/" target="_self">
           
           
           
@@ -356,52 +407,13 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2020/01/07/2020/2020-11-25-flink1/">Flink入门</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2020/01/07/2020/2020-11-25-flink1/">
-          
-          
-            
-          
-          Flink系列一
+        <a href="/2020/01/07/2020/2020-11-25-flink2/" target="_self">
+          Flink之Data Source 介绍
         </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2020-01-07 13:50" pubdate>
-              2020-01-07
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/blog/">blog</a>
-            
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2020/01/07/2020/2020-11-25-flink2/">Flink之Data Source 介绍</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2020/01/07/2020/2020-11-25-flink2/">
+        <a href="/2020/01/07/2020/2020-11-25-flink2/" target="_self">
           
           
             
@@ -438,11 +450,13 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2020/01/07/2020/2020-11-25-flink3/">Flink之Data Source 实战</a>
+        <a href="/2020/01/07/2020/2020-11-25-flink3/" target="_self">
+          Flink之Data Source 实战
+        </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2020/01/07/2020/2020-11-25-flink3/">
+        <a href="/2020/01/07/2020/2020-11-25-flink3/" target="_self">
           
           
             
@@ -479,11 +493,13 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2020/01/07/2020/2020-11-25-flink4/">Flink之Data Sink 实战</a>
+        <a href="/2020/01/07/2020/2020-11-25-flink4/" target="_self">
+          Flink之Data Sink 实战
+        </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2020/01/07/2020/2020-11-25-flink4/">
+        <a href="/2020/01/07/2020/2020-11-25-flink4/" target="_self">
           
           
             
@@ -520,11 +536,13 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2020/01/07/2020/2020-11-25-flink5/">Flink之Data transformation(转换)</a>
+        <a href="/2020/01/07/2020/2020-11-25-flink5/" target="_self">
+          Flink之Data transformation(转换)
+        </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2020/01/07/2020/2020-11-25-flink5/">
+        <a href="/2020/01/07/2020/2020-11-25-flink5/" target="_self">
           
           
             
@@ -561,11 +579,13 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2020/01/07/2020/2020-11-25-hdfsShell/">HDFS常用Shell操作</a>
+        <a href="/2020/01/07/2020/2020-11-25-hdfsShell/" target="_self">
+          HDFS常用Shell操作
+        </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2020/01/07/2020/2020-11-25-hdfsShell/">
+        <a href="/2020/01/07/2020/2020-11-25-hdfsShell/" target="_self">
           
           
           
@@ -672,7 +692,6 @@
 
 <script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
 <script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
-<script  src="/js/debouncer.js" ></script>
 <script  src="/js/events.js" ></script>
 <script  src="/js/plugins.js" ></script>
 
