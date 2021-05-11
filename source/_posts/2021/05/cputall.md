@@ -19,9 +19,37 @@ category:
 ### 查看哪个进程消耗的CPU高
 输入`top`命令，按`P`进行排序，查看占cpu高的进程pid。
 
-### jstack记录进程的堆栈信息
+### jstack命令
+
 jstack：Java提供的命令。可以查看某个进程的当前线程栈运行情况。根据这个命令的输出可以定位某个进程的所有线程的当前运行状态、运行代码，以及是否死锁等等。
+
+#### jstack记录进程的堆栈信息
+
 执行`jstack -l pid >> err.txt`命令，拿到进程的线程dump文件。这个命令会打出这个进程的所有线程的运行堆栈。
+
+#### jstack统计线程数
+
+```sh
+jstack -l 28367 | grep 'java.lang.Thread.State' | wc -l
+```
+
+#### jstack检测cpu高
+
+1. 查看cpu占用高进程
+
+   `top`命令按M查看pid
+
+2. 查看cpu占用高线程
+
+   `top -H -p pid`命令查看线程占用
+
+3. 转换线程ID（转换为16进制查询）
+
+   `printf "%x\n" tid`
+
+4. 定位cpu占用线程
+
+   `jstack pid|grep 转换16进制后的tid -A 30`
 
 ### 使用arthas-boot
 1. 启动
