@@ -14,11 +14,11 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#2f4154">
-  <meta name="description" content="调用Linux系统命令并返回执行结果">
+  <meta name="description" content="《MYSQL必知必会》读书笔记单独学习">
   <meta name="author" content="Raines">
   <meta name="keywords" content="">
   
-  <title>Java调用Linux系统命令 - 小龙的跋涉</title>
+  <title>存储过程介绍 - 小龙的跋涉</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
@@ -183,7 +183,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="Java调用Linux系统命令">
+            <span class="h2" id="subtitle" title="存储过程介绍">
               
             </span>
 
@@ -193,8 +193,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-03-25 20:01" pubdate>
-        2021年3月25日 晚上
+      <time datetime="2021-05-14 20:01" pubdate>
+        2021年5月14日 晚上
       </time>
     </span>
   
@@ -205,7 +205,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      558 字
+      504 字
     </span>
   
 
@@ -215,7 +215,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      7
+      8
        分钟
     </span>
   
@@ -245,67 +245,199 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Java调用Linux系统命令</h1>
+            <h1 style="display: none">存储过程介绍</h1>
             
             <div class="markdown-body">
-              <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>之前解压zip包的时候，想过调用系统命令来完成解压、获取文件等操作，因为懒也拖了好几天今日才看，不过这只是保底的方案，在系统中使用不利于扩展和维护。</p>
-<p>##简介</p>
-<h3 id="Java方法"><a href="#Java方法" class="headerlink" title="Java方法"></a>Java方法</h3><p>java调用操作系统命令主要使用到Process以及ProcessBuilder这两个类。</p>
-<p>Process：JDK1.5之前调用系统命令广泛使用的一个抽象类，一般都是通过Runtime.exec()和ProcessBuilder.start()来间接创建其实例，但是其功能相对较少。</p>
-<p>ProcessBuilder：JDK1.5之后出现的一个final类，有两个带参数的构造方法，可以通过构造方法来直接创建其对象，为进程提供了更多功能(可获取/设置系统的环境变量、设置命令执行路径)，但是其不是同步的。</p>
-<h3 id="sh命令"><a href="#sh命令" class="headerlink" title="sh命令"></a>sh命令</h3><p><strong>sh命令</strong>是shell命令语言解释器，执行命令从标准输入读取或从一个文件中读取。通过用户输入命令，和内核进行沟通！Bourne Again Shell （即bash）是自由软件基金会（GNU）开发的一个Shell，它是Linux系统中一个默认的Shell。Bash不但与Bourne Shell兼容，还继承了C Shell、Korn Shell等优点。</p>
-<ul>
-<li><p>语法 </p>
-<div class="code-wrapper"><pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">bash [options] [file]<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div></li>
-<li><p>选项 </p>
-<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">-c string：命令从-c后的字符串读取。
--i：实现脚本交互。
--n：进行shell脚本的语法检查。
--x：实现shell脚本逐条语句的跟踪。<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre></div>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2></li>
-</ul>
-<div class="code-wrapper"><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Main</span> <span class="token punctuation">&#123;</span>
+              <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>sql真的很好，不骗你。</p>
+<h2 id="创建存储过程"><a href="#创建存储过程" class="headerlink" title="创建存储过程"></a>创建存储过程</h2><div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">CREATE PROCEDURE productpricing()
+BEGIN
+	SELECT AVG(id) AS idavg
+	FROM l_biz_task;
+END;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+<h2 id="使用存储过程"><a href="#使用存储过程" class="headerlink" title="使用存储过程"></a>使用存储过程</h2><div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">CALL productpricing()<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div>
+<h2 id="删除存储过程"><a href="#删除存储过程" class="headerlink" title="删除存储过程"></a>删除存储过程</h2><div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">DROP PROCEDURE IF EXISTS productpricing <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div>
+<h2 id="使用参数"><a href="#使用参数" class="headerlink" title="使用参数"></a>使用参数</h2><div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">CREATE PROCEDURE productpricing(
+	OUT pl DECIMAL(8,2),
+	OUT ph DECIMAL(8,2),
+	OUT pa DECIMAL(8,2)
+)
+BEGIN
+	SELECT MIN(id)
+	INTO pl
+	FROM l_biz_task;
+	SELECT MAX(id)
+	INTO ph
+	FROM l_biz_task;
+	SELECT AVG(id)
+	INTO pa
+	FROM l_biz_task;
+END;
+## 使用存储过程
+CALL productpricing(@idlow,
+										@idhigh,
+										@idavg)
+SELECT @idlow,@idhigh,@idavg<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+<h2 id="存储过程进阶及游标使用"><a href="#存储过程进阶及游标使用" class="headerlink" title="存储过程进阶及游标使用"></a>存储过程进阶及游标使用</h2><div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">## 使用in和out参数，in传入，out从存储过程返回合计。select语句使用这两个参数，where子句使用odel选择正确的行，INTO使用ototal存储计算出来的合计。
+DROP PROCEDURE IF EXISTS idtotal;
+CREATE PROCEDURE idtotal(
+	IN odel INT,
+	OUT ototal DECIMAL(8,2)
+)
+BEGIN
+	SELECT SUM(id)
+	FROM l_biz_task
+	WHERE del_flag &#x3D; odel
+	INTO ototal;
+END;
 
-    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">IOException</span> <span class="token punctuation">&#123;</span>
-        <span class="token comment">//调用linux含有管道的复杂shell</span>
-        <span class="token function">shell</span><span class="token punctuation">(</span><span class="token string">"ps -ef | grep java | grep -v grep | wc -l"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token comment">//调用linux简单的shell语句</span>
-        <span class="token function">shell</span><span class="token punctuation">(</span><span class="token string">"ls"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
+## 调用存储过程
+CALL idtotal(1,@total);
+## 显示此合计
+SELECT @total;
+## 调用存储过程
+CALL idtotal(0,@total);
+## 显示此合计
+SELECT @total;
 
-    <span class="token comment">/**
-     * 使用sh -c执行Linux系统命令
-     * @param execution 要执行的shell
-     * @throws IOException
-     */</span>
-    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">shell</span><span class="token punctuation">(</span><span class="token class-name">String</span> execution<span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">IOException</span> <span class="token punctuation">&#123;</span>
-        <span class="token class-name">Process</span> process <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
-        <span class="token class-name">BufferedReader</span> input <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
-        <span class="token keyword">try</span> <span class="token punctuation">&#123;</span>
-            <span class="token class-name">ProcessBuilder</span> builder <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ProcessBuilder</span><span class="token punctuation">(</span><span class="token string">"sh"</span><span class="token punctuation">,</span> <span class="token string">"-c"</span><span class="token punctuation">,</span> execution<span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token comment">//设置在/Users/raines目录下执行命令</span>
-            builder<span class="token punctuation">.</span><span class="token function">directory</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">File</span><span class="token punctuation">(</span><span class="token string">"/Users/raines"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            builder<span class="token punctuation">.</span><span class="token function">redirectErrorStream</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            process <span class="token operator">=</span> builder<span class="token punctuation">.</span><span class="token function">start</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            input <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">BufferedReader</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">InputStreamReader</span><span class="token punctuation">(</span>process<span class="token punctuation">.</span><span class="token function">getInputStream</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token class-name">String</span> str <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
-            <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>str <span class="token operator">=</span> input<span class="token punctuation">.</span><span class="token function">readLine</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-                <span class="token comment">//打印返回执行结果</span>
-                <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>str<span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token punctuation">&#125;</span>
-            <span class="token comment">//Map&lt;String, String> map = builder.environment();           //获得进程的环境</span>
-        <span class="token punctuation">&#125;</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">Exception</span> e<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-            <span class="token comment">//异常操作</span>
-            e<span class="token punctuation">.</span><span class="token function">printStackTrace</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">&#125;</span> <span class="token keyword">finally</span> <span class="token punctuation">&#123;</span>
-            <span class="token comment">//销毁process（process.destroy()）以及关闭流</span>
-            <span class="token keyword">if</span> <span class="token punctuation">(</span>input <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">)</span> input<span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token keyword">if</span> <span class="token punctuation">(</span>process <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">)</span> process<span class="token punctuation">.</span><span class="token function">destroy</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">&#125;</span>
-    <span class="token punctuation">&#125;</span>
 
-<span class="token punctuation">&#125;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+DROP PROCEDURE IF EXISTS idtotal;
+
+CREATE PROCEDURE idtotal(
+	IN odel INT,
+	IN taxable BOOLEAN,
+	OUT ototal DECIMAL(8,2)
+) 
+BEGIN
+	DECLARE total DECIMAL(8,2);
+	DECLARE taxrate INT DEFAULT 6;
+	
+	SELECT SUM(id)
+	FROM l_biz_task
+	WHERE del_flag &#x3D; odel
+	INTO ototal;
+	
+	IF taxable THEN
+		SELECT total+(total&#x2F;100*taxrate) INTO total;
+		SELECT total INTO ototal;
+	END IF;
+
+END
+
+## boolean值1表示真，0表示假。
+CALL idtotal(0,0,@total);
+SELECT @total;
+
+## 显示用来创建一个存储过程的CREATE语句
+SHOW create PROCEDURE idtotal
+
+
+
+
+
+## FETCH用来检索当前行的id列到一个名为o的局部变量中。
+CREATE PROCEDURE processids()
+BEGIN
+	DECLARE o INT;
+	
+	DECLARE ids CURSOR
+	FOR
+	SELECT id FROM l_biz_task;
+	OPEN ids;
+	FETCH ids INTO o;
+	CLOSE ids;
+END;
+CALL processids();
+
+CREATE PROCEDURE processids()
+BEGIN
+	DECLARE done BOOLEAN DEFAULT 0;
+	DECLARE o INT;
+	
+	DECLARE ids CURSOR
+	FOR
+	SELECT id FROM l_biz_task;
+	
+	DECLARE CONTINUE HANDLER FOR SQLSTATE &#39;02000&#39; SET done &#x3D; 1;
+	
+	OPEN ids;
+	
+	REPEAT
+		FETCH ids INTO o;
+	UNTIL done END REPEAT;
+	
+	CLOSE ids;
+END;
+
+DROP PROCEDURE IF EXISTS processids;
+CREATE PROCEDURE processids()
+BEGIN
+	DECLARE done BOOLEAN DEFAULT 0;
+	DECLARE o INT;
+	DECLARE t DECIMAL(8,2);
+	
+	DECLARE ids CURSOR
+	FOR
+	SELECT id FROM l_biz_task;
+	
+	DECLARE CONTINUE HANDLER FOR SQLSTATE &#39;02000&#39; SET done &#x3D; 1;
+	
+	CREATE TABLE IF NOT EXISTS ids(id int,total DECIMAL(8,2));
+	
+	OPEN ids;
+	
+	REPEAT
+		FETCH ids INTO o;
+		CALL idtotal(0,0,t);
+		INSERT INTO ids(id,total) VALUES(o,t);
+	UNTIL done END REPEAT;
+	
+	CLOSE ids;
+END;
+
+CALL processids();<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
             </div>
             <hr>
@@ -315,11 +447,11 @@
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/200-%E5%B7%A5%E4%BD%9C%E7%B1%BB/">200 工作类</a>
+                      <a class="hover-with-bg" href="/categories/100-%E5%AD%A6%E4%B9%A0%E7%B1%BB/">100 学习类</a>
                     
-                      <a class="hover-with-bg" href="/categories/200-%E5%B7%A5%E4%BD%9C%E7%B1%BB/210-%E4%BB%A3%E7%A0%81%E7%B1%BB/">210 代码类</a>
+                      <a class="hover-with-bg" href="/categories/100-%E5%AD%A6%E4%B9%A0%E7%B1%BB/120-%E9%98%85%E8%AF%BB/">120 阅读</a>
                     
-                      <a class="hover-with-bg" href="/categories/200-%E5%B7%A5%E4%BD%9C%E7%B1%BB/210-%E4%BB%A3%E7%A0%81%E7%B1%BB/211-%E5%90%8E%E7%AB%AF%E4%BB%A3%E7%A0%81/">211 后端代码</a>
+                      <a class="hover-with-bg" href="/categories/100-%E5%AD%A6%E4%B9%A0%E7%B1%BB/120-%E9%98%85%E8%AF%BB/121-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">121 读书笔记</a>
                     
                   </div>
                 
@@ -329,9 +461,7 @@
                     
                       <a class="hover-with-bg" href="/tags/%E8%BF%87%E5%8E%BB/">过去</a>
                     
-                      <a class="hover-with-bg" href="/tags/%E7%BC%96%E7%A8%8B/">编程</a>
-                    
-                      <a class="hover-with-bg" href="/tags/%E4%BB%A3%E7%A0%81/">代码</a>
+                      <a class="hover-with-bg" href="/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a>
                     
                   </div>
                 
@@ -348,18 +478,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/03/26/2021/03/installnginx/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Centos安装nginx</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/03/23/2021/03/javacp/">
-                        <span class="hidden-mobile">Java版复制文件</span>
+                      <a href="/2021/05/13/2021/05/mysqllearn/">
+                        <span class="hidden-mobile">《MYSQL必知必会》读书笔记</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
