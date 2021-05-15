@@ -14,11 +14,11 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#2f4154">
-  <meta name="description" content="乱七八糟">
+  <meta name="description" content="">
   <meta name="author" content="Raines">
   <meta name="keywords" content="">
   
-  <title>JVM相关 - 小龙的跋涉</title>
+  <title>《能力迁移》读书笔记、 - 小龙的跋涉</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
@@ -183,7 +183,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="JVM相关">
+            <span class="h2" id="subtitle" title="《能力迁移》读书笔记、">
               
             </span>
 
@@ -193,8 +193,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2020-01-07 13:50" pubdate>
-        2020年1月7日 下午
+      <time datetime="2021-05-15 20:01" pubdate>
+        2021年5月15日 晚上
       </time>
     </span>
   
@@ -205,7 +205,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.5k 字
+      2.1k 字
     </span>
   
 
@@ -245,170 +245,33 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">JVM相关</h1>
+            <h1 style="display: none">《能力迁移》读书笔记、</h1>
             
             <div class="markdown-body">
-              <h2 id="JVM相关"><a href="#JVM相关" class="headerlink" title="JVM相关"></a>JVM相关</h2><h3 id="打印GC相关的信息并分析"><a href="#打印GC相关的信息并分析" class="headerlink" title="打印GC相关的信息并分析"></a>打印GC相关的信息并分析</h3><p>JVM提供了大量命令行参数,打印信息,供调试使用.主要有以下一些:<br>java -verbose:gc hash  或  java -XX:+PrintGC hash<br>输出形式:<br>[GC 118250K-&gt;113543K(130112K), 0.0094143 secs]<br>[Full GC 121376K-&gt;10414K(130112K), 0.0650971 secs]  </p>
-<p>-XX:+PrintGCDetails<br>输出形式:<br>[GC [DefNew: 8614K-&gt;781K(9088K), 0.0123035 secs] 118250K-&gt;113543K(130112K), 0.0124633 secs]<br>[GC [DefNew: 8614K-&gt;8614K(9088K), 0.0000665 secs][Tenured: 112761K-&gt;10414K(121024K), 0.0433488 secs] 121376K-&gt;10414K(130112K), 0.0436268 secs]  </p>
-<p>以其中一行为例来解读下日志信息：<br>[GC (Allocation Failure) [ParNew: 367523K-&gt;1293K(410432K), 0.0023988 secs] 522739K-&gt;156516K(1322496K), 0.0025301 secs] [Times: user=0.04 sys=0.00, real=0.01 secs]  </p>
-<ul>
-<li>GC：<br>表明进行了一次垃圾回收，前面没有Full修饰，表明这是一次Minor GC ,注意它不表示只GC新生代，并且现有的不管是新生代还是老年代都会STW。  </li>
-<li>Allocation Failure：<br>表明本次引起GC的原因是因为在年轻代中没有足够的空间能够存储新的数据了。   </li>
-<li>ParNew：<br>表明本次GC发生在年轻代并且使用的是ParNew垃圾收集器。ParNew是一个Serial收集器的多线程版本，会使用多个CPU和线程完成垃圾收集工作（默认使用的线程数和CPU数相同，可以使用-XX：ParallelGCThreads参数限制）。该收集器采用复制算法回收内存，期间会停止其他工作线程，即Stop The World。  </li>
-<li>367523K-&gt;1293K(410432K)：<br>单位是KB  </li>
-</ul>
-<p>三个参数分别为：GC前该内存区域(这里是年轻代)使用容量，GC后该内存区域使用容量，该内存区域总容量。  </p>
-<ul>
-<li>0.0023988 secs：<br>该内存区域GC耗时，单位是秒  </li>
-<li>522739K-&gt;156516K(1322496K)：<br>三个参数分别为：堆区垃圾回收前的大小，堆区垃圾回收后的大小，堆区总大小。  </li>
-<li>0.0025301 secs：<br>该内存区域GC耗时，单位是秒  </li>
-<li>[Times: user=0.04 sys=0.00, real=0.01 secs]：<br>分别表示用户态耗时，内核态耗时和总耗时</li>
-</ul>
-<h4 id="分析下可以得出结论："><a href="#分析下可以得出结论：" class="headerlink" title="分析下可以得出结论："></a>分析下可以得出结论：</h4><p>该次GC新生代减少了367523-1293=366239K<br>Heap区总共减少了522739-156516=366223K<br>366239 – 366223 =16K，说明该次共有16K内存从年轻代移到了老年代，可以看出来数量并不多，说明都是生命周期短的对象，只是这种对象有很多。<br>我们需要的是尽量避免Full GC的发生，让对象尽可能的在年轻代就回收掉，所以这里可以稍微增加一点年轻代的大小，让那16K的数据也保存在年轻代中。  </p>
-<h4 id="GC时，用什么方法判断哪些对象是需要回收："><a href="#GC时，用什么方法判断哪些对象是需要回收：" class="headerlink" title="GC时，用什么方法判断哪些对象是需要回收："></a>GC时，用什么方法判断哪些对象是需要回收：</h4><ol>
-<li>引用计数法(已经不用了)<br>简而言之就是给对象添加一个引用计数器，有其他地方引用时这个计数器+1，引用失效时-1，为0时就可以删除掉了。但是它不能解决循环引用的问题，所以一般使用的都是后一种算法。  </li>
-<li>可达性分析法<br>可达性分析法的基本思路就是通过一系列名为GC Roots的对象作为起始点，从这些节点开始向下搜索，搜索所走过的路径称为引用链(Reference Chain)，当一个对象到GC Roots没有任何引用链相连时，则证明此对象是不可用的，那就可以回收掉了。<br>GC Roots一般都是些堆外指向堆内的引用，例如：<br>JVM栈中引用的对象<br>方法区中静态属性引用的对象<br>方法区中常量引用的对象<br>本地方法栈中引用的对象   </li>
-</ol>
-<p>参考链接：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/jpfss/p/8618297.html">https://www.cnblogs.com/jpfss/p/8618297.html</a>  </p>
-<h3 id="java-xx参数介绍及调优总结"><a href="#java-xx参数介绍及调优总结" class="headerlink" title="java-xx参数介绍及调优总结"></a>java-xx参数介绍及调优总结</h3><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_39407066/article/details/84582380">https://blog.csdn.net/weixin_39407066/article/details/84582380</a></p>
-<h3 id="实战-通过gc比较String-replace性能差异"><a href="#实战-通过gc比较String-replace性能差异" class="headerlink" title="实战:通过gc比较String.replace性能差异"></a>实战:通过gc比较String.replace性能差异</h3><ol>
-<li>代码  <div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">public class TestStringReplace &#123;
-
-    private static String replace(String src, String pattern, String replacement) &#123;
-        int i &#x3D; src.indexOf(pattern);
-        if (i &gt;&#x3D; 0) &#123;
-            int ptnLen &#x3D; pattern.length();
-            StringBuilder sb &#x3D; new StringBuilder(src.length());
-            sb.append(src, 0, i).append(replacement);
-            i +&#x3D; ptnLen;
-            for (;;) &#123;
-                int j &#x3D; src.indexOf(pattern, i);
-                if (j &gt;&#x3D; 0) &#123;
-                    sb.append(src, i, j).append(replacement);
-                    i &#x3D; j + ptnLen;
-                &#125; else &#123;
-                    return sb.append(src, i, src.length()).toString();
-                &#125;
-            &#125;
-        &#125; else &#123;
-            return src;
-        &#125;
-    &#125;
-
-    private static final int LOOPS &#x3D; 100 * 10000;
-    private static final String SRC &#x3D; &quot;asdfasdfassdd2edsdfasdfasdfasdfasdfasdfasdsdfasdfasdfasdfasdfasdfasdsdfasdfasdfasdfsd&quot;;
-    private static final String PATTERN &#x3D; &quot;sdf&quot;;
-    private static final String REP &#x3D; &quot;ijkk2eeew;&quot;;
-
-    public static void main(String[] args) &#123;
-        System.out.println(replace(SRC, PATTERN, REP));
-        System.out.println(replace(SRC, PATTERN, REP).equals(SRC.replace(PATTERN, REP)));
-
-        System.out.println(&quot;test replace1---------------------------------------&quot;);
-        timeit(() -&gt; &#123;
-            for (int i &#x3D; 0; i &lt; LOOPS; i++) &#123;
-                replace(SRC, PATTERN, REP);
-            &#125;
-        &#125;, 6);
-
-        System.out.println(&quot;test string.replace-------------------------------------&quot;);
-        timeit(() -&gt; &#123;
-            for (int i &#x3D; 0; i &lt; LOOPS; i++) &#123;
-                SRC.replace(PATTERN, REP);
-            &#125;
-        &#125;, 6);
-    &#125;
-
-    private static void timeit(Runnable r, int times) &#123;
-        long total &#x3D; 0;
-        for (int i &#x3D; 0; i &lt; times; i++) &#123;
-            long start &#x3D; System.currentTimeMillis();
-            r.run();
-            long end &#x3D; System.currentTimeMillis();
-            total +&#x3D; end - start;
-            System.out.println(end - start);
-        &#125;
-        System.out.println(&quot;AVG &quot; + total &#x2F; times);
-    &#125;
-
-&#125;
-&#96;&#96;&#96;  
-2. 执行命令运行TestStringReplace  
-time java -XX:+UseG1GC -Xmx4G -Xms4G -XX:+PrintGC TestStringReplace  <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
-true<br>test replace1—————————————<br>[GC pause (G1 Evacuation Pause) (young) 204M-&gt;608K(4096M), 0.0016481 secs]<br>[GC pause (G1 Evacuation Pause) (young) 236M-&gt;709K(4096M), 0.0017248 secs]<br>1333<br>[GC pause (G1 Evacuation Pause) (young) 2454M-&gt;750K(4096M), 0.0036411 secs]<br>1239<br>688<br>[GC pause (G1 Evacuation Pause) (young) 2454M-&gt;684K(4096M), 0.0019600 secs]<br>593<br>[GC pause (G1 Evacuation Pause) (young) 2454M-&gt;666K(4096M), 0.0023456 secs]<br>579<br>572<br>AVG 834<br>test string.replace————————————-<br>[GC pause (G1 Evacuation Pause) (young) 2454M-&gt;662K(4096M), 0.0020937 secs]<br>[GC pause (G1 Evacuation Pause) (young) 2454M-&gt;689K(4096M), 0.0025844 secs]<br>1857<br>[GC pause (G1 Evacuation Pause) (young) 2454M-&gt;729K(4096M), 0.0022971 secs]<br>1789<br>[GC pause (G1 Evacuation Pause) (young) 2454M-&gt;708K(4096M), 0.0021608 secs]<br>1792<br>[GC pause (G1 Evacuation Pause) (young) 2454M-&gt;710K(4096M), 0.0023275 secs]<br>1781<br>[GC pause (G1 Evacuation Pause) (young) 2454M-&gt;661K(4096M), 0.0022797 secs]<br>1809<br>[GC pause (G1 Evacuation Pause) (young) 2454M-&gt;662K(4096M), 0.0020625 secs]<br>[GC pause (G1 Evacuation Pause) (young) 2454M-&gt;778K(4096M), 0.0023225 secs]<br>1787<br>AVG 1802<br>java -XX:+UseG1GC -Xmx4G -Xms4G -XX:+PrintGC TestStringReplace  15.63s user 1.02s system 102% cpu 16.233 total<div class="code-wrapper"><pre><code>总结：主要是节省了官方实现通过Regex这一步，虽然性能差距不大，但是这并非是对性能的吹毛求疵，而是一眼看过去的直觉就感觉不是很舒服。  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-</code></pre></div>
+              <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>其实是被名吸引读了读，然后发现这七步多少有点道理，但是也感觉自己掉进了一个陷阱：对一本书产生认同感的时候既要开心大家的思路是一样的，又要小心自己只看到自己认同的观点，而对不同的观点视而不见。另一个，这种流行书之所以流行，更多的可能是迎合了大众的观点，流行书之所有成为流行而不是著作，更多的是它所描述的并不是真理，而是迎合大众而写出的‘伪真理’，初一读感觉非常认同，细思一下，你从这本书获得了多少呢？它的理念再过5年、10年、50年，甚至更久之后的将来，是否也能如常青树般存在呢？</p>
+<p>最后，劝告大家不要过分追求认同不经实践得来的观点，它只是一种假想，一种作者认为该是这样、或者作者认为这样写会对读者好，更甚至–作者本身就是因为提高销量而故意如此表达的观点。小心自己的观点，更要小心别人的观点侵蚀。所谓取其精华、去其糟粕，愿你我能独立思考，共勉之。</p>
+<h2 id="能力迁移"><a href="#能力迁移" class="headerlink" title="能力迁移"></a>能力迁移</h2><h3 id="我们应该分析一下，是什么让他们能够获得满意的薪水，还有这些技巧如何能广为他用，造福所有的求职者呢？下面是关于成功技巧的总结，一共分为七步。"><a href="#我们应该分析一下，是什么让他们能够获得满意的薪水，还有这些技巧如何能广为他用，造福所有的求职者呢？下面是关于成功技巧的总结，一共分为七步。" class="headerlink" title="我们应该分析一下，是什么让他们能够获得满意的薪水，还有这些技巧如何能广为他用，造福所有的求职者呢？下面是关于成功技巧的总结，一共分为七步。"></a>我们应该分析一下，是什么让他们能够获得满意的薪水，还有这些技巧如何能广为他用，造福所有的求职者呢？下面是关于成功技巧的总结，一共分为七步。</h3><ol>
+<li><p>第一步，尽早开始 毕业后的第一年，不要过于挑剔，抓住一切工作机会，以此来丰富自己的工作经历。</p>
+<p>只要你累积了一定的工作经验，你琐碎的经历就会集结成熠熠闪光的专业技能，惊艳众人。</p>
+</li>
+<li><p>第二步，抓住机会 这是所有步骤中最重要的一步。当你发现越来越多人赏识你的才能时，就要开始学会拒绝，对工作机会做出明智的选择。专注于能为你的事业增光添彩的商业合伙人们，因为他们可能会给你开出最满意的薪酬，或者是看好你的工作能力。要是他们是你工作领域最尖端的人士则最好，如果是你的直接上司也不错。</p>
+</li>
+<li><p>第三步，让自己增值。实际上，你可以瞬间成为这些领域的专家，而这都要感谢你入职初期自己的探索和学习。</p>
+</li>
+<li><p>第四步，巧妙应对薪酬不公 对大多数人来说，向老板提涨工资的事是很尴尬的。我们努力相信老板们慧眼识珠，在工资方面无须多言就能做出正确的决策。但到头来令人难受的是，这种想法经常只适用于大学教授给学生打分的时候。</p>
+<p>你可以给出同事对自己勤奋工作的评价，点明你的薪资和行业标准薪资的差距。先忘记自己待遇问题上的苦楚（至少暂时先忘记），找些方法把自己、你的主管和企业描绘成一个团结和谐的集体，互相激励，以获取最大效益。 还有另外两点。第一，不要等真正觉得有必要涨薪时才提出请求，要早些提出来。研究表明，男女薪酬差距的部分原因是男性提出涨薪的频率更高，方式也更直接。</p>
+<p>第二点就是，鼓起最大的勇气。如果老板处处提防你，并且面对他的审视实在难以承受，那就想象一下自己今天在家，躺在舒适的椅子上读着一本书。与老板谈判的人只是你的替身，手持一些文件努力证明为什么你值得更多的薪水。让这个想象中的替身为你受累。他/她是拥护你的人，只有一个目的，那就是捍卫你的独特、你的勤奋和你的成绩。</p>
+</li>
+<li><p>第五步：成为管理层 如果你在一个发展日新月异的行业工作，那么管理层的选任不会过分倚重资历。努力工作，与同事和睦相处，晋升机会就离你不远了。在交谈中提一些合理的点子，让公司运转更好，这样你就会成为下一个晋升的热门人选。</p>
+<p>即使你认为自己不是一块做领导的料，只要你有引领工作节奏的能力，就应该相信自己可以做得更好，值得有更好的职位。丰富的经验和准确的判断力足以让你成为优秀的领导，无须逼着自己变成一个和自己的性格完全不一样的人。</p>
+</li>
+<li><p>第六步：做一个伯乐 奥莱利媒体的创始人蒂姆·奥莱利给那些自身影响力逐渐扩大的职员分享了一个很好的经验：利用你的影响力创造更大的价值。随着你不断晋升，你会习惯性地蓄力来保住自己的位置，或者谋划着如何在新情况下占据优势。还是把这些伎俩留给那些蹑手蹑脚的人吧！而你要不忘初心，保持开放的思维，这样你还会有上升空间。结识一些青年才俊，把他们拉进自己的团队。在组织中你的地位越高，你的成功就越取决于你独具的慧眼，以及培养新领导者的能力。抓住分享工作经验的机会，无论是通过会议、教学还是写博客，这样你的名气会越来越大，也会越来越受到大家的爱戴。在这个过程中，你就拥有了自己的同盟圈子，朋友圈不断扩大，新的机遇就会更多。</p>
+<p>众人对你的好评会让你在更换工作的过程中更加顺利，就算时下环境很艰难，你也能越走越好。 良好的人际关系还有另一个好处。随着你的名气越来越大，你会开始收到也许是未来雇主的工作邀请，希望你的干劲能为他们的企业增光添彩。</p>
+<p>虽说从长远来看，每半年就威胁着要辞职实在不是一个明智之举，但是在事业的道路上，每个人都值得拥有能够另寻高就的机会。告诉你的老板（或董事会）你非常愿意留下来，但是现在公司的一个主要竞争对手愿意给你开出比现在多20%的薪资，你因此有些心动。通常你得到的回应是：“怎样能让你留下来？”一旦问出这个问题，短短几小时后你应该会工资大涨，继而皆大欢喜。</p>
+</li>
+<li><p>第七步，关注新的行业趋势。</p>
+<p>不要放弃寻找创新的机会。记住，大多数人是渴望循规蹈矩的，他们愿意忍受着零零星星的机会和缓慢的提薪过程，继续做着自己熟悉的事情，日复一日，年复一年。而创新的好习惯不仅能敦促你，让你坐到更高的位置，还意味着你能提前洞察下一波潮流、另立潮头、占据高地、先声夺人。 我了解的成功的记者、银行家、历史学家和企业家们都会定期问问自己：“如果今天是我第一天工作，我会做些什么？”通常这种另辟蹊径的机会都会在两种不同做事风格中出现。老员工们少了些灵活性，发现不了新的做事方法。新员工们是时候一试身手啦！抓住机会！十年之后，成效会彰显，人们都会好奇地问：“你到底是怎么想出来的？”</p>
+<p>要想学习和娱乐兼得，没有什么能比得过TED演讲了。TED演讲者都很优秀，演讲节奏毫不拖沓，制作也很精良。视频内容会涉及个人主要的研究成果，或是畅销作家的理念，通常不会超过18分钟。因此，这些演讲视频的观看人数通常比演讲者的著作销量还要多三十倍。</p>
 </li>
 </ol>
 
@@ -420,10 +283,23 @@ true<br>test replace1—————————————<br>[GC pause (G1 Ev
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/blog/">blog</a>
+                      <a class="hover-with-bg" href="/categories/100-%E5%AD%A6%E4%B9%A0%E7%B1%BB/">100 学习类</a>
+                    
+                      <a class="hover-with-bg" href="/categories/100-%E5%AD%A6%E4%B9%A0%E7%B1%BB/120-%E9%98%85%E8%AF%BB/">120 阅读</a>
+                    
+                      <a class="hover-with-bg" href="/categories/100-%E5%AD%A6%E4%B9%A0%E7%B1%BB/120-%E9%98%85%E8%AF%BB/121-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">121 读书笔记</a>
                     
                   </div>
                 
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E8%BF%87%E5%8E%BB/">过去</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a>
+                    
+                  </div>
                 
               </div>
               
@@ -438,18 +314,12 @@ true<br>test replace1—————————————<br>[GC pause (G1 Ev
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2020/01/07/2020/2020-03-12-goodThing/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">但行好事，莫问前程</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2020/01/07/2020/2020-03-12-topExperience/">
-                        <span class="hidden-mobile">在一个领域达到顶尖水平是怎样的体验</span>
+                      <a href="/2021/05/14/2021/05/mysqlprocedure/">
+                        <span class="hidden-mobile">存储过程介绍</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
