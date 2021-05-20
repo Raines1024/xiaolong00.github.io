@@ -32,7 +32,7 @@ category:
 public static int[] bubbleSort(int[] arr){
     //外层循环控制排序趟数
     for (int i = 0; i < arr.length - 1; i++) {
-        //内层循环控制每一趟排序多少次
+        //内层循环控制每一趟排序多少次。每一趟都把数组中最大的数据交换到最后面
         for (int j = 0; j < arr.length - 1 - i; j++) {
             //比较当前数据和下一个数据的大小，如果当前数据大于下一个数据的大小，就交换二者的位置，这样重复进行判断，直至排序完成返回排序后的数组。
             if (arr[j] > arr[j+1]){
