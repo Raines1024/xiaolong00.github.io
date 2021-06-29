@@ -14,11 +14,11 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#2f4154">
-  <meta name="description" content="乱七八糟">
+  <meta name="description" content="nginx报错导致无法访问接口">
   <meta name="author" content="Raines">
   <meta name="keywords" content="">
   
-  <title>JVM相关 - 小龙的跋涉</title>
+  <title>nginx报错：nginx读取响应时过早关闭连接 - 小龙的跋涉</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
@@ -183,7 +183,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="JVM相关">
+            <span class="h2" id="subtitle" title="nginx报错：nginx读取响应时过早关闭连接">
               
             </span>
 
@@ -193,8 +193,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2020-01-07 13:50" pubdate>
-        2020年1月7日 下午
+      <time datetime="2021-06-29 21:27" pubdate>
+        2021年6月29日 晚上
       </time>
     </span>
   
@@ -205,7 +205,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.5k 字
+      167 字
     </span>
   
 
@@ -215,7 +215,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      21
+      2
        分钟
     </span>
   
@@ -245,172 +245,13 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">JVM相关</h1>
+            <h1 style="display: none">nginx报错：nginx读取响应时过早关闭连接</h1>
             
             <div class="markdown-body">
-              <h2 id="JVM相关"><a href="#JVM相关" class="headerlink" title="JVM相关"></a>JVM相关</h2><h3 id="打印GC相关的信息并分析"><a href="#打印GC相关的信息并分析" class="headerlink" title="打印GC相关的信息并分析"></a>打印GC相关的信息并分析</h3><p>JVM提供了大量命令行参数,打印信息,供调试使用.主要有以下一些:<br>java -verbose:gc hash  或  java -XX:+PrintGC hash<br>输出形式:<br>[GC 118250K-&gt;113543K(130112K), 0.0094143 secs]<br>[Full GC 121376K-&gt;10414K(130112K), 0.0650971 secs]  </p>
-<p>-XX:+PrintGCDetails<br>输出形式:<br>[GC [DefNew: 8614K-&gt;781K(9088K), 0.0123035 secs] 118250K-&gt;113543K(130112K), 0.0124633 secs]<br>[GC [DefNew: 8614K-&gt;8614K(9088K), 0.0000665 secs][Tenured: 112761K-&gt;10414K(121024K), 0.0433488 secs] 121376K-&gt;10414K(130112K), 0.0436268 secs]  </p>
-<p>以其中一行为例来解读下日志信息：<br>[GC (Allocation Failure) [ParNew: 367523K-&gt;1293K(410432K), 0.0023988 secs] 522739K-&gt;156516K(1322496K), 0.0025301 secs] [Times: user=0.04 sys=0.00, real=0.01 secs]  </p>
-<ul>
-<li>GC：<br>表明进行了一次垃圾回收，前面没有Full修饰，表明这是一次Minor GC ,注意它不表示只GC新生代，并且现有的不管是新生代还是老年代都会STW。  </li>
-<li>Allocation Failure：<br>表明本次引起GC的原因是因为在年轻代中没有足够的空间能够存储新的数据了。   </li>
-<li>ParNew：<br>表明本次GC发生在年轻代并且使用的是ParNew垃圾收集器。ParNew是一个Serial收集器的多线程版本，会使用多个CPU和线程完成垃圾收集工作（默认使用的线程数和CPU数相同，可以使用-XX：ParallelGCThreads参数限制）。该收集器采用复制算法回收内存，期间会停止其他工作线程，即Stop The World。  </li>
-<li>367523K-&gt;1293K(410432K)：<br>单位是KB  </li>
-</ul>
-<p>三个参数分别为：GC前该内存区域(这里是年轻代)使用容量，GC后该内存区域使用容量，该内存区域总容量。  </p>
-<ul>
-<li>0.0023988 secs：<br>该内存区域GC耗时，单位是秒  </li>
-<li>522739K-&gt;156516K(1322496K)：<br>三个参数分别为：堆区垃圾回收前的大小，堆区垃圾回收后的大小，堆区总大小。  </li>
-<li>0.0025301 secs：<br>该内存区域GC耗时，单位是秒  </li>
-<li>[Times: user=0.04 sys=0.00, real=0.01 secs]：<br>分别表示用户态耗时，内核态耗时和总耗时</li>
-</ul>
-<h4 id="分析下可以得出结论："><a href="#分析下可以得出结论：" class="headerlink" title="分析下可以得出结论："></a>分析下可以得出结论：</h4><p>该次GC新生代减少了367523-1293=366239K<br>Heap区总共减少了522739-156516=366223K<br>366239 – 366223 =16K，说明该次共有16K内存从年轻代移到了老年代，可以看出来数量并不多，说明都是生命周期短的对象，只是这种对象有很多。<br>我们需要的是尽量避免Full GC的发生，让对象尽可能的在年轻代就回收掉，所以这里可以稍微增加一点年轻代的大小，让那16K的数据也保存在年轻代中。  </p>
-<h4 id="GC时，用什么方法判断哪些对象是需要回收："><a href="#GC时，用什么方法判断哪些对象是需要回收：" class="headerlink" title="GC时，用什么方法判断哪些对象是需要回收："></a>GC时，用什么方法判断哪些对象是需要回收：</h4><ol>
-<li>引用计数法(已经不用了)<br>简而言之就是给对象添加一个引用计数器，有其他地方引用时这个计数器+1，引用失效时-1，为0时就可以删除掉了。但是它不能解决循环引用的问题，所以一般使用的都是后一种算法。  </li>
-<li>可达性分析法<br>可达性分析法的基本思路就是通过一系列名为GC Roots的对象作为起始点，从这些节点开始向下搜索，搜索所走过的路径称为引用链(Reference Chain)，当一个对象到GC Roots没有任何引用链相连时，则证明此对象是不可用的，那就可以回收掉了。<br>GC Roots一般都是些堆外指向堆内的引用，例如：<br>JVM栈中引用的对象<br>方法区中静态属性引用的对象<br>方法区中常量引用的对象<br>本地方法栈中引用的对象   </li>
-</ol>
-<p>参考链接：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/jpfss/p/8618297.html">https://www.cnblogs.com/jpfss/p/8618297.html</a>  </p>
-<h3 id="java-xx参数介绍及调优总结"><a href="#java-xx参数介绍及调优总结" class="headerlink" title="java-xx参数介绍及调优总结"></a>java-xx参数介绍及调优总结</h3><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_39407066/article/details/84582380">https://blog.csdn.net/weixin_39407066/article/details/84582380</a></p>
-<h3 id="实战-通过gc比较String-replace性能差异"><a href="#实战-通过gc比较String-replace性能差异" class="headerlink" title="实战:通过gc比较String.replace性能差异"></a>实战:通过gc比较String.replace性能差异</h3><ol>
-<li>代码  <div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">public class TestStringReplace &#123;
-
-    private static String replace(String src, String pattern, String replacement) &#123;
-        int i &#x3D; src.indexOf(pattern);
-        if (i &gt;&#x3D; 0) &#123;
-            int ptnLen &#x3D; pattern.length();
-            StringBuilder sb &#x3D; new StringBuilder(src.length());
-            sb.append(src, 0, i).append(replacement);
-            i +&#x3D; ptnLen;
-            for (;;) &#123;
-                int j &#x3D; src.indexOf(pattern, i);
-                if (j &gt;&#x3D; 0) &#123;
-                    sb.append(src, i, j).append(replacement);
-                    i &#x3D; j + ptnLen;
-                &#125; else &#123;
-                    return sb.append(src, i, src.length()).toString();
-                &#125;
-            &#125;
-        &#125; else &#123;
-            return src;
-        &#125;
-    &#125;
-
-    private static final int LOOPS &#x3D; 100 * 10000;
-    private static final String SRC &#x3D; &quot;asdfasdfassdd2edsdfasdfasdfasdfasdfasdfasdsdfasdfasdfasdfasdfasdfasdsdfasdfasdfasdfsd&quot;;
-    private static final String PATTERN &#x3D; &quot;sdf&quot;;
-    private static final String REP &#x3D; &quot;ijkk2eeew;&quot;;
-
-    public static void main(String[] args) &#123;
-        System.out.println(replace(SRC, PATTERN, REP));
-        System.out.println(replace(SRC, PATTERN, REP).equals(SRC.replace(PATTERN, REP)));
-
-        System.out.println(&quot;test replace1---------------------------------------&quot;);
-        timeit(() -&gt; &#123;
-            for (int i &#x3D; 0; i &lt; LOOPS; i++) &#123;
-                replace(SRC, PATTERN, REP);
-            &#125;
-        &#125;, 6);
-
-        System.out.println(&quot;test string.replace-------------------------------------&quot;);
-        timeit(() -&gt; &#123;
-            for (int i &#x3D; 0; i &lt; LOOPS; i++) &#123;
-                SRC.replace(PATTERN, REP);
-            &#125;
-        &#125;, 6);
-    &#125;
-
-    private static void timeit(Runnable r, int times) &#123;
-        long total &#x3D; 0;
-        for (int i &#x3D; 0; i &lt; times; i++) &#123;
-            long start &#x3D; System.currentTimeMillis();
-            r.run();
-            long end &#x3D; System.currentTimeMillis();
-            total +&#x3D; end - start;
-            System.out.println(end - start);
-        &#125;
-        System.out.println(&quot;AVG &quot; + total &#x2F; times);
-    &#125;
-
-&#125;
-&#96;&#96;&#96;  
-2. 执行命令运行TestStringReplace  
-time java -XX:+UseG1GC -Xmx4G -Xms4G -XX:+PrintGC TestStringReplace  <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
-true<br>test replace1—————————————<br>[GC pause (G1 Evacuation Pause) (young) 204M-&gt;608K(4096M), 0.0016481 secs]<br>[GC pause (G1 Evacuation Pause) (young) 236M-&gt;709K(4096M), 0.0017248 secs]<br>1333<br>[GC pause (G1 Evacuation Pause) (young) 2454M-&gt;750K(4096M), 0.0036411 secs]<br>1239<br>688<br>[GC pause (G1 Evacuation Pause) (young) 2454M-&gt;684K(4096M), 0.0019600 secs]<br>593<br>[GC pause (G1 Evacuation Pause) (young) 2454M-&gt;666K(4096M), 0.0023456 secs]<br>579<br>572<br>AVG 834<br>test string.replace————————————-<br>[GC pause (G1 Evacuation Pause) (young) 2454M-&gt;662K(4096M), 0.0020937 secs]<br>[GC pause (G1 Evacuation Pause) (young) 2454M-&gt;689K(4096M), 0.0025844 secs]<br>1857<br>[GC pause (G1 Evacuation Pause) (young) 2454M-&gt;729K(4096M), 0.0022971 secs]<br>1789<br>[GC pause (G1 Evacuation Pause) (young) 2454M-&gt;708K(4096M), 0.0021608 secs]<br>1792<br>[GC pause (G1 Evacuation Pause) (young) 2454M-&gt;710K(4096M), 0.0023275 secs]<br>1781<br>[GC pause (G1 Evacuation Pause) (young) 2454M-&gt;661K(4096M), 0.0022797 secs]<br>1809<br>[GC pause (G1 Evacuation Pause) (young) 2454M-&gt;662K(4096M), 0.0020625 secs]<br>[GC pause (G1 Evacuation Pause) (young) 2454M-&gt;778K(4096M), 0.0023225 secs]<br>1787<br>AVG 1802<br>java -XX:+UseG1GC -Xmx4G -Xms4G -XX:+PrintGC TestStringReplace  15.63s user 1.02s system 102% cpu 16.233 total<div class="code-wrapper"><pre><code>总结：主要是节省了官方实现通过Regex这一步，虽然性能差距不大，但是这并非是对性能的吹毛求疵，而是一眼看过去的直觉就感觉不是很舒服。  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-</code></pre></div>
-</li>
-</ol>
+              <h2 id="nginx报错无法访问接口"><a href="#nginx报错无法访问接口" class="headerlink" title="nginx报错无法访问接口"></a>nginx报错无法访问接口</h2><h3 id="报错信息"><a href="#报错信息" class="headerlink" title="报错信息"></a>报错信息</h3><div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">2021&#x2F;06&#x2F;23 15:25:38 [error] 10902#0: *1779657 upstream prematurely closed connection while reading response header from upstream, client: 172.16.70.181, server: 172.16.70.12, request: &quot;POST &#x2F;farm&#x2F;api&#x2F;farmmenu&#x2F;menuTreeListByRole HTTP&#x2F;1.0&quot;, upstream: &quot;http:&#x2F;&#x2F;172.16.70.12:8091&#x2F;farm&#x2F;api&#x2F;farmmenu&#x2F;menuTreeListByRole&quot;, host: &quot;172.16.70.12&quot;, referrer: &quot;http:&#x2F;&#x2F;ifarming.xxx.com:8081&#x2F;farm&#x2F;&quot;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div>
+<h3 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h3><p>nginx.conf文件中server代码块添加以下内容<br>        proxy_read_timeout 600s;<br>        proxy_connect_timeout 90s;</p>
+<h4 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h4><p>添加时需要把源nginx服务配置文件及目的nginx服务配置文件同步修改</p>
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><p><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/36488688/nginx-upstream-prematurely-closed-connection-while-reading-response-header-from">stackoverflow：nginx读取响应时过早关闭连接</a></p>
 
             </div>
             <hr>
@@ -420,10 +261,23 @@ true<br>test replace1—————————————<br>[GC pause (G1 Ev
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/blog/">blog</a>
+                      <a class="hover-with-bg" href="/categories/100-%E5%AD%A6%E4%B9%A0%E7%B1%BB/">100 学习类</a>
+                    
+                      <a class="hover-with-bg" href="/categories/100-%E5%AD%A6%E4%B9%A0%E7%B1%BB/110-%E7%BC%96%E7%A8%8B/">110 编程</a>
+                    
+                      <a class="hover-with-bg" href="/categories/100-%E5%AD%A6%E4%B9%A0%E7%B1%BB/110-%E7%BC%96%E7%A8%8B/111-Java/">111 Java</a>
                     
                   </div>
                 
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E8%BF%87%E5%8E%BB/">过去</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E7%BC%96%E7%A8%8B/">编程</a>
+                    
+                  </div>
                 
               </div>
               
@@ -438,18 +292,12 @@ true<br>test replace1—————————————<br>[GC pause (G1 Ev
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2020/01/07/2020/2020-03-12-goodThing/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">但行好事，莫问前程</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2020/01/07/2020/2020-03-12-topExperience/">
-                        <span class="hidden-mobile">在一个领域达到顶尖水平是怎样的体验</span>
+                      <a href="/2021/06/29/2021/06/realHappiness/">
+                        <span class="hidden-mobile">《真实的幸福》读书笔记</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
