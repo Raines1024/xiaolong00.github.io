@@ -1,5 +1,5 @@
 ---
-title: 
+title: 走向财务自由之路
 date: 2021-07-09 19:01:39
 description: 
 tags: [思维怪圈, 过去]
