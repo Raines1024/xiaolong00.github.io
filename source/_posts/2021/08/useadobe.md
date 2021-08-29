@@ -16,11 +16,11 @@ category:
 记一下看看这个兴趣能持续多久。
 
 ## PS、AI、AE、PR、AU功能介绍
-![ps](https://cdn.jsdelivr.net/gh/Xiaolong00/raines-photo@master/20210713/ps.61q57ge0jvk0.jpg =500x600)
-![ai](https://cdn.jsdelivr.net/gh/Xiaolong00/raines-photo@master/20210713/ai.5u7kcyo14hc0.jpg =500x600)
-![ae](https://cdn.jsdelivr.net/gh/Xiaolong00/raines-photo@master/20210713/ae.5wn75a81xjw0.jpg =500x600)
-![pr](https://cdn.jsdelivr.net/gh/Xiaolong00/raines-photo@master/20210713/pr.2n4ldz4mdvs0.jpg =500x600)
-![au](https://cdn.jsdelivr.net/gh/Xiaolong00/raines-photo@master/20210713/au.svaxhh811ds.jpg =500x600)
+![ps](https://cdn.jsdelivr.net/gh/Xiaolong00/raines-photo@master/20210713/ps.61q57ge0jvk0.jpg)
+![ai](https://cdn.jsdelivr.net/gh/Xiaolong00/raines-photo@master/20210713/ai.5u7kcyo14hc0.jpg)
+![ae](https://cdn.jsdelivr.net/gh/Xiaolong00/raines-photo@master/20210713/ae.5wn75a81xjw0.jpg)
+![pr](https://cdn.jsdelivr.net/gh/Xiaolong00/raines-photo@master/20210713/pr.2n4ldz4mdvs0.jpg)
+![au](https://cdn.jsdelivr.net/gh/Xiaolong00/raines-photo@master/20210713/au.svaxhh811ds.jpg)
 通常建议的学习顺序是：PS→AI→AE→PR→AU
 
 ## Adobe Acrobat功能介绍
