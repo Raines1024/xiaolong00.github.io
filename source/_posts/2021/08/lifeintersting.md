@@ -1,7 +1,7 @@
 ---
 title: 《生活蒙太奇》读书笔记
 date: 2021-08-29 21:50:39
-description: 
+description: 生活并不缺少美，只是缺少发现美的眼睛。
 tags: [读书笔记, 过去]
 category:
     - 100 学习类
