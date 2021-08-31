@@ -146,6 +146,8 @@ public class RedissonAutoConfiguration {
 
 spring.factories文件添加如下key、value
 
+关于为什么要写spring.factories文件请看附录讲解
+
 ```yaml
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
   com.raines.redisstarter.RedissonAutoConfiguration
@@ -211,6 +213,34 @@ public class RedisDemoController {
 ### 调用localhost/redissonDemo/raines进行测试
 
 至此，一个简单的starter完成。
+
+## 附录
+
+### 为什么要写spring.factories文件？
+
+让我们带着问题寻找答案：明明自动配置的类已经打上了@Configuration的注解，为什么还要写spring.factories文件？
+
+先从@SpringBootApplication注解说起，这个注解有两个重要的注解：@EnableAutoConfiguration和@ComponentScan
+
+#### @ComponentScan
+
+@ComponentScan注解的作用是扫描@SpringBootApplication所在的Application类（即spring-boot项目的入口类）所在的包（basepackage）下所有的@component注解（或拓展了@component的注解）标记的bean，并注册到spring容器中。
+
+那么，在spring-boot项目中pom文件里面添加的依赖中的bean（spring-boot项目外的bean）是如何注册到spring-boot项目的spring容器中的呢？这就需要讨论下一个注解了。
+
+#### @EnableAutoConfiguration
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
