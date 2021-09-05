@@ -17,7 +17,7 @@ category:
 
 上班为了下班，下班为了第二天上班，日复一日慌慌张张也不过是为了碎银几两，可偏偏这碎银几两，压断了世人肩膀，这就是生活。 很喜欢这么一段话“生活各自不易，个人所求不同，各自立场不同，勿在别人心中修行自己，勿在自己心中强求别人。” 《把生活过成你想要的样子》
 
-<img src = "https://cdn.jsdelivr.net/gh/Xiaolong00/raines-photo@master/blog/WechatIMG30.6ha7hfz8m1c0.jpeg" width = "50%" height = "50%" alt="封面" align=left>
+![封面](https://cdn.jsdelivr.net/gh/Xiaolong00/raines-photo@master/blog/WechatIMG30.6ha7hfz8m1c0.jpeg)
 
 
 
@@ -33,5 +33,5 @@ category:
 
 如同攀岩，专注于一个又一个的小目标，
 
-<img src = "https://cdn.jsdelivr.net/gh/Xiaolong00/raines-photo@master/blog/311630843335_.sx6a2lgj028.jpg" width = "50%" height = "50%" alt="封面" align=left>
+![22](https://cdn.jsdelivr.net/gh/Xiaolong00/raines-photo@master/blog/311630843335_.sx6a2lgj028.jpg)
 
