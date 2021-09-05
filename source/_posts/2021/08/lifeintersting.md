@@ -47,6 +47,6 @@ category:
 
 这俩页插画是我在看的过程中唯一笑出来的点。生活气息浓郁，人还是需要陪伴的，孑然一身的人把动物当作陪伴实在是再合适不过。不过我之前养过猫，虽然很负责的养它，不过心里还是不喜欢照顾活物的，可能是因为懒，也可能是因为洁癖太严重，还有可能是因为它并不是一个良好的沟通伙伴。倘或机器人足够智能，不需要打扫、时刻保持洁净、能满足日常沟通需求，我想，我大概会为这样一个产品买单，这个还是挺有意思的。
 
-<img src = "https://cdn.jsdelivr.net/gh/Xiaolong00/raines-photo@master/20210713/3.2hi90ri5ft20.jpeg" width = "50%" height = "50%" alt="让人发笑的猫1" align=left>
+<img src = "https://cdn.jsdelivr.net/gh/Xiaolong00/raines-photo@master/20210713/3.2hi90ri5ft20.jpeg" width = "50%" height = "50%" alt="让人发笑的猫1">
 
-<img src = "https://cdn.jsdelivr.net/gh/Xiaolong00/raines-photo@master/20210713/4.3omqddk6og40.jpeg" width = "50%" height = "50%" alt="让人发笑的猫2" align=right>
+<img src = "https://cdn.jsdelivr.net/gh/Xiaolong00/raines-photo@master/20210713/4.3omqddk6og40.jpeg" width = "50%" height = "50%" alt="让人发笑的猫2">
