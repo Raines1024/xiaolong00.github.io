@@ -29,17 +29,25 @@ category:
 
 ## 插图
 
-### 在你想达成某个目标时，请想好要走的每一小步
+### 22:在你想达成某个目标时，请想好要走的每一小步
 
 如同攀岩，专注于一个又一个的小目标，用完成一个个富有成熟感的小目标去拼凑起似乎遥不可及的大目标。
 
 ![22](https://cdn.jsdelivr.net/gh/Xiaolong00/raines-photo@master/blog/311630843335_.sx6a2lgj028.jpg)
 
+### 23-28:恋爱中的分分合合
+
+23:生命中的第一次，你想另一个人袒露自己的一切。
+
+28:临别时，他送了你一罐自制的黑莓酱。
+
+偶尔还会想起初恋，也分分合合数次。
+
+### 29:有一件事你还没学会：周六晚上独自在家，请不要暗自神伤
 
 
 
-
-
+![29](https://cdn.jsdelivr.net/gh/Xiaolong00/raines-photo@master/blog/WechatIMG32.2tev49pnhou0.jpeg)
 
 
 
