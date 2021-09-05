@@ -29,7 +29,9 @@ category:
 
 ## 插图
 
+### 在你想达成某个目标时，请想好要走的每一小步
 
+如同攀岩，专注于一个又一个的小目标，
 
 <img src = "https://cdn.jsdelivr.net/gh/Xiaolong00/raines-photo@master/blog/311630843335_.sx6a2lgj028.jpg" width = "50%" height = "50%" alt="封面" align=left>
 

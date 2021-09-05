@@ -23,9 +23,9 @@ category:
 
 封面图片当作第一次租书的纪念吧
 
-<img src = "https://cdn.jsdelivr.net/gh/Xiaolong00/raines-photo@master/20210713/1.2dtf7r22wlq8.jpeg" width = "50%" height = "50%" alt="封面" align=left>
+<img src = "https://cdn.jsdelivr.net/gh/Xiaolong00/raines-photo@master/20210713/1.2dtf7r22wlq8.jpeg" width = "50%" height = "50%" alt="封面">
 
-<hr>
+
 
 ## 本书收获
 
@@ -39,7 +39,7 @@ category:
 
 这种桌子设计很喜欢，不了解是否是日式风格，蜡笔小新家里客厅也有同款桌子，吃饭和看电视甚至短暂躺一下都是OK的。盲想了一下，吃饭感觉不太合适，地毯的桌布会弄脏难以清洁，不过喝茶看书小憩，搭配一个懒人靠背，却、该是再舒服不过吧。
 
-<img src = "https://cdn.jsdelivr.net/gh/Xiaolong00/raines-photo@master/20210713/2.2mk7muaxz4q0.jpeg" width = "50%" height = "50%" alt="蜡笔小新同款桌子" align=left>
+<img src = "https://cdn.jsdelivr.net/gh/Xiaolong00/raines-photo@master/20210713/2.2mk7muaxz4q0.jpeg" width = "50%" height = "50%" alt="蜡笔小新同款桌子" >
 
 <hr>
 
