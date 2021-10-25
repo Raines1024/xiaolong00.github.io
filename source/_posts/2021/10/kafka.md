@@ -1,6 +1,6 @@
 ---
-title: Kafka如何进10行集群的组织与管理？
-date: 2021-09-03 21:28:39
+title: Kafka如何进行集群的组织与管理
+date: 2021-10-15 21:28:39
 description: 
 tags: [编程, 过去]
 category:
