@@ -205,7 +205,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.2k 字
+      1.3k 字
     </span>
   
 
@@ -215,7 +215,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      13
+      15
        分钟
     </span>
   
@@ -278,8 +278,8 @@
 <h2 id="分库分表"><a href="#分库分表" class="headerlink" title="分库分表"></a>分库分表</h2><ul>
 <li>使用MyCat对Mysql进行分库分表</li>
 </ul>
-<h2 id="寻找问题：Mysql"><a href="#寻找问题：Mysql" class="headerlink" title="寻找问题：Mysql"></a>寻找问题：Mysql</h2><h3 id="show-processlist"><a href="#show-processlist" class="headerlink" title="show processlist"></a>show processlist</h3><p>show full processlist 返回的结果是实时变化的，是对mysql链接执行的现场快照，所以用来处理突发事件非常有用。<br>一般用到 show processlist 或 show full processlist 都是为了查看当前 mysql 是否有压力，都在跑什么语句，当前语句耗时多久了，有没有什么慢 SQL 正在执行之类的<br>可以看到总共有多少链接数，哪些线程有问题(time是执行秒数，时间长的就应该多注意了)，然后可以把有问题的线程 kill 掉，这样可以临时解决一些突发性的问题。<br>有时候一个快照可能看不出什么问题，那么可以频发的刷新试试</p>
-<h4 id="下面针对每列做下介绍："><a href="#下面针对每列做下介绍：" class="headerlink" title="下面针对每列做下介绍："></a>下面针对每列做下介绍：</h4><div class="code-wrapper"><pre><code> Id：链接mysql 服务器线程的唯一标识，可以通过kill来终止此线程的链接。
+<h2 id="寻找问题：Mysql"><a href="#寻找问题：Mysql" class="headerlink" title="寻找问题：Mysql"></a>寻找问题：Mysql</h2><h3 id="show-processlist"><a href="#show-processlist" class="headerlink" title="show processlist"></a>show processlist</h3><p>使用 show processlist 命令查看当前所有连接信息。<br>processlist命令的输出结果显示了有哪些线程在运行，可以查看当前所有的连接数、查看当前的连接状态、帮助识别出有问题的查询语句等。<br>如果是root帐号，能看到所有用户的当前连接。如果是其他普通帐号，则只能看到自己占用的连接。Show processlist只能列出当前100条。如果想全部列出，可以使用SHOW FULL PROCESSLIST命令<br>show full processlist 返回的结果是实时变化的，是对mysql链接执行的现场快照，所以用来处理突发事件非常有用。<br>一般用到 show processlist 或 show full processlist 都是为了查看当前 mysql 是否有压力，都在跑什么语句，当前语句耗时多久了，有没有什么慢 SQL 正在执行之类的<br>可以看到总共有多少链接数，哪些线程有问题(time是执行秒数，时间长的就应该多注意了)，然后可以把有问题的线程 kill 掉，这样可以临时解决一些突发性的问题。<br>有时候一个快照可能看不出什么问题，那么可以频发的刷新试试</p>
+<h4 id="下面针对每列做下介绍："><a href="#下面针对每列做下介绍：" class="headerlink" title="下面针对每列做下介绍："></a>下面针对每列做下介绍：</h4><div class="code-wrapper"><pre><code> Id：链接mysql服务器线程的唯一标识，可以使用函数connection_id()查看，可以通过kill来终止此线程的链接。
 
  User：当前线程链接数据库的用户
 
@@ -289,7 +289,7 @@
 
  Command: 显示当前连接的执行的命令，一般就是休眠或空闲（sleep），查询（query），连接（connect）
 
- Time: 线程处在当前状态的时间，单位是秒
+ Time: 线程处在当前状态持续的时间，单位是秒
 
  State：显示使用当前连接的sql语句的状态，很重要的列，后续会有所有的状态的描述，请注意，state只是语句执行中的某一个状态，一个 sql语句，已查询为例，可能需要经过copying to tmp table，Sorting result，Sending data等状态才可以完成
 
